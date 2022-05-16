@@ -1,0 +1,408 @@
+/*
+Custom Css
+*/
+@import url("https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&family=Montserrat:ital,wght@0,500;1,400;1,500&display=swap");
+
+h2 {
+  font-weight: 700;
+}
+
+h4 {
+  font-weight: 700;
+}
+.block {
+  display: none;
+}
+
+.image-size {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+}
+
+/* custome btn dark light */
+.checkbox {
+  opacity: 0;
+  position: absolute;
+}
+
+.label {
+  background-color: #111;
+  border-radius: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+  position: relative;
+  height: 22px;
+  width: 40px;
+  transform: scale(1.5);
+}
+
+.label .ball {
+  background-color: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  height: 18px;
+  width: 18px;
+  transform: translateX(0px);
+  transition: transform 0.2s linear;
+}
+
+.checkbox:checked + .label .ball {
+  transform: translateX(20px);
+}
+
+/* Set dark light attribute */
+
+:root {
+  --primary-background: #edf2fc;
+  --secondary-color: #212121;
+}
+.back-dark {
+  --primary-background: #082032;
+  --secondary-color: #fff;
+}
+
+.back-light {
+  background-color: var(--primary-background);
+}
+
+.fa-moon {
+  color: #f1c40f;
+  font-size: 0.8rem;
+}
+
+.fa-sun {
+  color: #f39c12;
+  font-size: 0.8rem;
+}
+
+.text-color {
+  color: var(--secondary-color);
+}
+
+/* End dark light */
+
+@media screen and (max-width: 575px) {
+  .product-item {
+    width: auto;
+    align-items: center;
+  }
+
+  .image-size {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+  }
+}
+
+.cart-main {
+  margin: 2rem;
+  /* background-color: rgba(0, 0, 0, 0.03); */
+}
+
+.status {
+  font-size: 1.5rem;
+  font-family: serif;
+  font-weight: 700;
+}
+.price {
+  font-size: 1.3rem;
+  font-weight: 600;
+  font-family: serif;
+}
+
+.puchesh {
+  background: rgb(246, 245, 245);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* add to cart */
+.btn-add-to-cart {
+  transform: scale(1);
+}
+/* header section */
+#header {
+  background-color: #fff;
+}
+
+/* profile section */
+
+.dropdown:hover > .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu {
+  position: absolute;
+  left: -160px;
+}
+
+.dropdown > .dropdown-toggle:active {
+  /*Without this, clicking will make it sticky*/
+  pointer-events: none;
+}
+
+.img-profile {
+  width: 25%;
+  object-fit: cover;
+  height: 40px;
+}
+
+.img-profile1 {
+  width: 35%;
+  object-fit: cover;
+  height: 100px;
+}
+.email {
+  font-size: 0.8rem;
+  margin-left: 20px;
+}
+
+/* input spinner */
+.qty .count {
+  color: #000;
+  display: inline-block;
+  vertical-align: top;
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 30px;
+  padding: 0 2px;
+  min-width: 35px;
+  text-align: center;
+}
+.qty .plus {
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: top;
+  color: white;
+  width: 30px;
+  height: 30px;
+  font: 30px/1 Arial, sans-serif;
+  text-align: center;
+  border-radius: 50%;
+}
+.qty .minus {
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: top;
+  color: white;
+  width: 30px;
+  height: 30px;
+  font: 30px/1 Arial, sans-serif;
+  text-align: center;
+  border-radius: 50%;
+  background-clip: padding-box;
+}
+/* div {
+  text-align: center;
+} */
+.minus:hover {
+  background-color: #717fe0 !important;
+}
+.plus:hover {
+  background-color: #717fe0 !important;
+}
+/*Prevent text selection*/
+.spinner {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+input {
+  border: 0;
+  width: 2%;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input:disabled {
+  background-color: white;
+}
+
+.sec-border {
+  border: 1px solid #bcc0c4;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.border-shadow {
+  box-shadow: 0 0.2rem 0.9rem rgb(0 0 0 / 10%);
+  border: 1px solid #acacacac;
+}
+
+.fw-bold {
+  font-weight: 600;
+}
+
+.price-single {
+  font-size: 5rem;
+  padding: 2rem;
+}
+
+/* dropdown-search */
+
+.dropbtn {
+  background-color: #04aa6d;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropbtn:hover,
+.dropbtn:focus {
+  background-color: #3e8e41;
+}
+
+#myInput {
+  box-sizing: border-box;
+  background-position: 14px 12px;
+  background-repeat: no-repeat;
+  font-size: 16px;
+  width: 100%;
+  padding: 14px 20px 12px 45px;
+  border: none;
+  border-bottom: 1px solid #ddd;
+}
+
+#myInput:focus {
+  outline: 3px solid #ddd;
+}
+
+.dropdown {
+  position: relative;
+  /* width: 100%; */
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: block;
+  position: absolute;
+  background-color: #f6f6f6;
+  min-width: 100%;
+  overflow: auto;
+  border: 1px solid #ddd;
+  z-index: 1;
+}
+
+.back_btn:hover {
+  transform: scale(1.1);
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 10px 16px;
+  text-decoration: none;
+  display: none;
+}
+
+.dropdown a:hover {
+  background-color: #ddd;
+}
+
+.show {
+  display: initial;
+}
+
+/* preloading */
+.loader {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-image: url(https://icon-library.com/images/loading-icon-transparent-background/loading-icon-transparent-background-12.jpg);
+  background-position: top center;
+  background-color: #edf2fc;
+  background-repeat: no-repeat;
+  background-size: 5%;
+}
+.loading {
+  position: relative;
+}
+.paypal-btn {
+  display: none;
+}
+
+/* Profile Custom */
+.pic-file {
+  position: absolute;
+  top: -10px;
+  left: 42%;
+  width: 150px;
+  height: 150px;
+  /* border: 1px solid #ccc; */
+  border-radius: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.iput_upload {
+  width: 100px;
+  height: 100px;
+  opacity: 0;
+  cursor: pointer;
+  border-radius: 100%;
+  position: relative;
+}
+.profile_user {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  opacity: 1;
+  cursor: pointer;
+  position: relative;
+  border-radius: 100%;
+}
+.profile_user:hover {
+  transform: scale(1.1);
+  transition: transform 0.5s ease;
+}
+.icon-upload {
+  font-size: 30px;
+  position: absolute;
+  opacity: 0;
+  /* opacity: 0; */
+  top: 30px;
+  left: 35px;
+  /* opacity: 0; */
+}
+.icon-upload:hover {
+  opacity: 1;
+}
+.image-profile {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 0px;
+  left: 0;
+  border-radius: 100%;
+}
+/*  */
+.categories_img {
+  width: 260px;
+  height: 260px;
+  object-fit: cover;
+}
+#map {
+  height: 100%;
+}
+
+/* animation swup */
+
+.transition-fade {
+  opacity: 1;
+  transition: 0.4s;
+}
+html.is-animating .transition-fade {
+  opacity: 0;
+  transform: translateX(-100px);
+}
