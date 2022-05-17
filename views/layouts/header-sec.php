@@ -24,7 +24,7 @@ AppAsset::register($this);
     <?php $this->head() ?>
 </head>
 
-<body data-spy="scroll" data-target="#navbar" data-offset="72" class="position-relative">
+<body data-spy="scroll" data-target="#navbar" data-offset="72" class="position-relative back-light">
     <?php $this->beginBody() ?>
     <header class="fixed-top page-header">
         <?= $this->render("top_nav", ['base_url' => $base_url]) ?>

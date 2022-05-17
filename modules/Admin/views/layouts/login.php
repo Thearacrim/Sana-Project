@@ -12,6 +12,8 @@ use yii\bootstrap4\NavBar;
 use yii\helpers\Url;
 
 LoginAsset::register($this);
+$url_web = Yii::getAlias('@web');
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -20,6 +22,7 @@ LoginAsset::register($this);
 <head>
   <meta charset="<?= Yii::$app->charset ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" href="<?= $url_web ?>/frontend/template/img/output-onlinepngtools1.png" />
   <?php $this->registerCsrfMetaTags() ?>
   <title><?= Html::encode($this->title) ?></title>
   <?php $this->head() ?>

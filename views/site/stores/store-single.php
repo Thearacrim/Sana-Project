@@ -19,8 +19,8 @@ Yii::$app->params['og_url']['content'] = '/new/url';
 Yii::$app->params['og_image']['content'] = $products->image_url;
 ?>
 <!-- Open Content -->
-<div class="loader">
-</div>
+<!-- <div class="loader">
+</div> -->
 <div class="loading">
     <section class="back-light">
         <div class="container pb-5">

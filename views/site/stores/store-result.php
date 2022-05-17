@@ -15,8 +15,8 @@ $base_url = Yii::getAlias("@web");
 ?>
 
 <!-- Start Content -->
-<div class="loader">
-</div>
+<!-- <div class="loader">
+</div> -->
 <div class="container loading py-5">
     <!-- cart-section -->
     <div class="row">
@@ -53,7 +53,7 @@ $base_url = Yii::getAlias("@web");
         'summary' => '<b>{begin}</b>-<b>{end}</b> of <b>{totalCount}</b>.',
         'itemOptions' => [
             // 'tag' => false
-            'class' => "col-md-3 product-item"
+            'class' => "col-lg-3 col-md-4 col-sm-4 product-item"
         ],
         'pager' => [
             'firstPageLabel' => 'First',
@@ -77,11 +77,11 @@ $base_url = Yii::getAlias("@web");
     ]) ?>
 </div>
 <!-- Start Brands -->
-<section class="bg-light py-5">
+<section class="back-light py-5">
     <div class="container my-4">
         <div class="row text-center py-3">
             <div class="col-lg-6 m-auto">
-                <h1 class="h1">Our Brands</h1>
+                <h1 class="h1 text-color">Our Brands</h1>
                 <?php
                 Modal::begin([
                     'title' => 'Login',
@@ -91,7 +91,7 @@ $base_url = Yii::getAlias("@web");
                 echo "<div id='modalContent'></div>";
                 Modal::end();
                 ?>
-                <p>
+                <p class="text-color">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                     Lorem ipsum dolor sit amet.
                 </p>

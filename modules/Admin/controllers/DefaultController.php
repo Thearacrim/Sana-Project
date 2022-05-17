@@ -47,6 +47,7 @@ class DefaultController extends Controller
     }
     public function beforeAction($action)
     {
+        Yii::$app->setHomeUrl(Yii::getAlias("@web/admin/default"));
         if ($action->id == 'error') {
             $this->layout = 'error';
         }
@@ -54,6 +55,8 @@ class DefaultController extends Controller
     }
     public function actionLogin()
     {
+        // set this to use default
+        Yii::$app->setHomeUrl(Yii::getAlias("@web/admin/default"));
         $this->layout = 'login';
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
@@ -79,8 +82,9 @@ class DefaultController extends Controller
 
     public function actionLogout()
     {
+        // Set to default url
+        Yii::$app->setHomeUrl(Yii::getAlias("@web/admin/default/login"));
         Yii::$app->user->logout();
-
         return $this->goHome();
     }
 }

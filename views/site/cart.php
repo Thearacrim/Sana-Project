@@ -5,10 +5,6 @@ use yii\bootstrap4\Html;
 use yii\helpers\Url;
 
 $base_url = Yii::getAlias("@web");
-// $carts = Cart::find()->where(['user_id' => Yii::$app->user->id])->all();
-// foreach ($carts as $cart) {
-//     echo ($cart->product->price * $cart->quantity) . "<br/>";
-// }
 
 ?>
 <?php
@@ -35,8 +31,8 @@ Yii::$app->params['og_image']['content'] = 'image.jpg';
         <?php endif; ?>
         <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-12">
-                <div class="loader">
-                </div>
+                <!-- <div class="loader">
+                </div> -->
                 <div class="loading">
                     <div class="card-header border">
                         <h2 class="text-color">Items</h2>
@@ -52,10 +48,10 @@ Yii::$app->params['og_image']['content'] = 'image.jpg';
                         <?php foreach ($relatedProduct as $key => $product) { ?>
                             <div class="sec-border row_item_<?= $product['cart_id'] ?> rounded-0 hover p-3">
                                 <div class="row ">
-                                    <div class="col-3">
+                                    <div class="col-md-3 col-sm-3">
                                         <a href="<?= Url::to(['site/store-single?id=' . $product['id']]) ?>"><img src="<?= $base_url . '/frontend/' . $product['image_url'] ?>" style="width:110px"></a>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-lg-6">
                                         <span class="status text-color"> <?= $product['status'] ?>
                                         </span><br>
                                         <div class="d-flex justify-content-start">
@@ -121,7 +117,7 @@ Yii::$app->params['og_image']['content'] = 'image.jpg';
                                             ]
                                         ) ?>
                                     </div>
-                                    <div class="qty col-3 center d-inline py-5">
+                                    <div class="qty col-lg-3 col-md-8 col-sm-12 center d-inline py-5">
                                         <span class="minus bg-dark spinner item-quantity" data-product_id="<?= $product['id'] ?>" data-id=<?= $product['cart_id'] ?>>-</span>
                                         <input type="number" min='1' id="item-quantity_<?= $product['cart_id'] ?>" class="count item-quantity" name="qty" value="<?= $product['quantity'] ?>">
                                         <span class="plus bg-dark spinner item-quantity" data-product_id="<?= $product['id'] ?>" data-id=<?= $product['cart_id'] ?>>+</span>
@@ -157,19 +153,17 @@ Yii::$app->params['og_image']['content'] = 'image.jpg';
                     </div>
                 </div>
             </div>
-            <div class="col-4 rounded h-auto">
-                <div class="row ">
-                    <div class="card-header border w-100 mb-3">
-                        <h2 class="text-color">Price Detail</h2>
-                    </div>
-                    <div class="card-body border">
-                        <h4 class="text-color">Subtotal(<span id="amount-item"><?= $totalCart ?></span>): </h4>
-                        <h4 class="text-color"><span style="font-size:2.5rem">$</span> <span id='amount-price' style="font-size:2.5rem"><?= $totalPrice ?></span></h4>
-                        <hr>
-                        <a href="<?= Url::to(['site/checkout']) ?>"><button class="btn btn-primary rounded-0 btn-lg w-100 mt-3">CheckOut</button></a>
-                    </div>
-                </div><br>
-            </div>
+            <div class="col-4 rounded price-section">
+                <div class="card-header border mb-3">
+                    <h2 class="text-color">Price Detail</h2>
+                </div>
+                <div class="card-body border">
+                    <h4 class="text-color">Subtotal(<span id="amount-item"><?= $totalCart ?></span>): </h4>
+                    <h4 class="text-color"><span style="font-size:2.5rem">$</span> <span id='amount-price' style="font-size:2.5rem"><?= $totalPrice ?></span></h4>
+                    <hr>
+                    <a href="<?= Url::to(['site/checkout']) ?>"><button class="btn btn-primary rounded-0 btn-lg w-100 mt-3">CheckOut</button></a>
+                </div>
+            </div><br>
         </div>
     </div>
     <div class="row text-left p-2 pb-3 d-flex justify-content-between">

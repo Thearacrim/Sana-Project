@@ -9,8 +9,8 @@ $base_url = Yii::getAlias('@web');
 <div class="container">
     <div class="row mb-5">
         <div class="col-lg-7 col-md-7 col-sm-12 pt-5">
-            <div class="loader">
-            </div>
+            <!-- <div class="loader">
+            </div> -->
             <div class="loading">
                 <h2 class=" mb-5 text-color">CheckOut</h2>
                 <p class="text-color">Billing Information</p>

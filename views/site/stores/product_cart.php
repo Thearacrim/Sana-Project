@@ -4,13 +4,11 @@ use yii\bootstrap4\Modal;
 use yii\helpers\Url;
 
 $base_url = Yii::getAlias("@web");
-/*@var \yii\data\ActiveDataProvider $dataProvider*/
-
 ?>
 <!-- data-aos="zoom-in-down" data-aos-duration="2000" -->
 <div class="card mb-4 product-wap rounded-0 block">
     <div class="card rounded-0">
-        <img class="card-img rounded-0 image-size" src="<?= $base_url . '/frontend/' . $model->image_url ?>" />
+        <img class="card-img-top rounded-0 image-size" src="<?= $base_url . '/frontend/' . $model->image_url ?>" />
         <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
             <ul class="list-unstyled">
                 <li>

@@ -711,8 +711,6 @@ class SiteController extends Controller
 
     public function actionSuccess()
     {
-        $this->layout = 'header-sec';
-
         return $this->render('success');
     }
 
