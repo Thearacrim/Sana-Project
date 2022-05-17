@@ -293,7 +293,7 @@ $script = <<< JS
                                     $("#amount-price").text(data['totalPrice_in_de_remove']);
                                     $("#cart-quantity").text(data['totalCart']);
                                 }else{
-                                    alert(data['message']);
+                                    // alert(data['message']);
                                 }
                             },
                             error: function(err){
@@ -325,7 +325,7 @@ $script = <<< JS
                                     $("#amount-price").text(data['totalPrice_in_de_remove']);
                                     $("#cart-quantity").text(data['totalCart']);
                                 }else{
-                                    alert(data['message']);
+                                    // alert(data[' ']);
                                 }
                             },
                             error: function(err){

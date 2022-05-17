@@ -207,9 +207,6 @@ class SiteController extends Controller
             if ($this->request->post('action') == 'item-quantity') {
                 $id = $this->request->post('id');
                 $type = $this->request->post('type');
-
-                return 1;
-                exit;
                 $current_user = Yii::$app->user->identity->id;
                 $cart = Cart::find()->where(['product_id' => $id, 'user_id' => $current_user])
                     ->one();
@@ -217,7 +214,11 @@ class SiteController extends Controller
                     if ($type == 'add') {
                         $cart->quantity++;
                     } else {
-                        $cart->quantity--;
+                        if ($cart->quantity == 1) {
+                            $cart->quantity = 1;
+                        } else {
+                            $cart->quantity--;
+                        }
                     }
 
                     if ($cart->save()) {
@@ -702,7 +703,8 @@ class SiteController extends Controller
                     $invoices->status = "Paid";
                     if ($invoices->save()) {
                         Cart::deleteAll(['id' => ArrayHelper::getColumn($carts, 'id')]);
-                        return $this->redirect(['site/success']);
+                        Yii::$app->session->setFlash('success', 'Profile updated successfully');
+                        return $this->goHome();
                     }
                 }
             }
@@ -711,7 +713,10 @@ class SiteController extends Controller
 
     public function actionSuccess()
     {
-        return $this->render('success');
+        // if () {
+        //     return $this->render('success');
+        // }
+        return $this->goHome();
     }
 
     public function actionProfile()

@@ -20,7 +20,9 @@ Yii::$app->params['og_image']['content'] = 'image.jpg';
 // print_r($shoes);
 ?>
 <!-- Start Categories of The Month -->
-
+<?php
+$payment = Yii::$app->session->hasFlash('success') ? 1 : 0;
+?>
 <section class="container py-5">
     <div class="row text-center pt-3">
         <div class="col-lg-6 m-auto">
@@ -148,3 +150,29 @@ Yii::$app->params['og_image']['content'] = 'image.jpg';
     </div>
 </section>
 <!-- End Featured Product -->
+
+<?php
+$script = <<< JS
+    if($payment)
+    {
+        const Toast = Swal.mixin({
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 6000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+        })
+
+        Toast.fire({
+        icon: 'success',
+        title: 'You purchas successfully'
+        })
+    }
+    JS;
+$this->registerJs($script);
+
+?>
