@@ -67,37 +67,35 @@ $this->params['breadcrumbs'][] = $this->title;
 </style>
 <div class="banner-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1 class="text-color"><?= Html::encode($this->title) ?></h1>
     <p>
         <?= Html::a('Create Banner', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <div class="card">
-        <div class="cart-body m-5">
+    <div class="cart-body m-5">
 
-            <?php // echo $this->render('_search', ['model' => $searchModel]); 
-            ?>
-            <div class="row row_gallery">
-                <?php foreach ($banners as $banner) { ?>
-                    <input style="position: absolute; z-index: -999; opacity: 0;" id="url_hidden_<?= $banner->id ?>" value="<?= $banner->image_banner ?>">
-                    <div class="col-lg-4">
-                        <div class="card" style="width: 18rem;">
-                            <div class="gallery-image">
-                                <img src="<?= $base_url_frontend ?>/<?= $banner->image_banner ?>" class="card-img-top" alt="...">
-                                <div class="carousel-caption">
-                                    <button type="button" data-bs-toggle="tooltip" title="Copy URL" data-bs-placement="bottom" data-id="<?= $banner->id ?>" class=" btn btn-secondary btn-icon linkToCopy rounded-circle action_copy_<?= $banner->id ?>" id="action_copy"><i class="fas fa-link"></i></button>
-                                    <a href="<?= $base_url ?>/admin/banner/update?id=<?= $banner->id ?>" data-bs-toggle="tooltip" title="Update" data-bs-placement="bottom" data-title="Update gallery image: <?= $banner->title ?>" value="" class="btn rounded-circle btn-secondary btn-icon modalButton"><i class="fa-regular fa-pen-to-square"></i></a>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title"><?= $banner->title ?></h5>
-                                <p class="card-text"><?= $banner->sort_description ?></p>
-                                <p class="card-text"><?= $banner->description ?></p>
-                                <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+        <?php // echo $this->render('_search', ['model' => $searchModel]); 
+        ?>
+        <div class="row row_gallery">
+            <?php foreach ($banners as $banner) { ?>
+                <input style="position: absolute; z-index: -999; opacity: 0;" id="url_hidden_<?= $banner->id ?>" value="<?= $banner->image_banner ?>">
+                <div class="col-lg-4">
+                    <div class="card h-100 text-color back-light">
+                        <div class="gallery-image">
+                            <img src="<?= $base_url_frontend ?>/<?= $banner->image_banner ?>" style="height:200px;padding:20px">
+                            <div class="carousel-caption">
+                                <button type="button" data-bs-toggle="tooltip" title="Copy URL" data-bs-placement="bottom" data-id="<?= $banner->id ?>" class=" btn btn-secondary btn-icon linkToCopy rounded-circle action_copy_<?= $banner->id ?>" id="action_copy"><i class="fas fa-link"></i></button>
+                                <a href="<?= $base_url ?>/admin/banner/update?id=<?= $banner->id ?>" data-bs-toggle="tooltip" title="Update" data-bs-placement="bottom" data-title="Update gallery image: <?= $banner->title ?>" value="" class="btn rounded-circle btn-secondary btn-icon modalButton"><i class="fa-regular fa-pen-to-square"></i></a>
                             </div>
                         </div>
+                        <div class="card-body">
+                            <h5 class="card-title"><?= $banner->title ?></h5>
+                            <p class="card-text"><?= $banner->sort_description ?></p>
+                            <p class="card-text"><?= $banner->description ?></p>
+                            <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                        </div>
                     </div>
-                <?php } ?>
-            </div>
+                </div>
+            <?php } ?>
             <!-- <?= GridView::widget([
                         'dataProvider' => $dataProvider,
                         // 'filterModel' => $searchModel,

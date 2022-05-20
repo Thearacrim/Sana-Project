@@ -7,3 +7,76 @@
   height: 200px;
   object-fit: cover;
 }
+
+.image_banner {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* custome btn dark light */
+.checkbox {
+  opacity: 0;
+  position: absolute;
+}
+
+.label {
+  background-color: #111;
+  border-radius: 50px;
+  top: 28px;
+  margin: 0 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+  position: relative;
+  height: 15px;
+  width: 35px;
+  transform: scale(1.5);
+}
+
+.label .ball {
+  background-color: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 1px;
+  left: 2px;
+  height: 13px;
+  width: 13px;
+  transform: translateX(0px);
+  transition: transform 0.2s linear;
+}
+
+.checkbox:checked + .label .ball {
+  transform: translateX(20px);
+}
+
+/* Set dark light attribute */
+
+:root {
+  --primary-background: #edf2fc;
+  --secondary-color: #212121;
+}
+.back-dark {
+  --primary-background: #082032;
+  --secondary-color: #fff;
+}
+
+.back-light {
+  background-color: var(--primary-background);
+}
+
+.fa-moon {
+  color: #f1c40f;
+  font-size: 0.5rem;
+}
+
+.fa-sun {
+  color: #f39c12;
+  font-size: 0.5rem;
+}
+
+.text-color {
+  color: var(--secondary-color);
+}

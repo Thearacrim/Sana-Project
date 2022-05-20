@@ -21,7 +21,7 @@
         ?>
         <div class="product-index">
 
-            <h1><?= Html::encode($this->title) ?></h1>
+            <h1 class="text-color"><?= Html::encode($this->title) ?></h1>
             <?php
             Modal::begin([
                 'title' => 'Create new Product',
@@ -33,12 +33,12 @@
             ?>
             <?php echo $this->render('_search', ['model' => $searchModel, 'class' => 'form-control inp rounded-0']); ?>
             <div class="card">
-                <div class="card-body">
+                <div class="card-body back-light">
                     <?= GridView::widget([
                         'dataProvider' => $dataProvider,
                         'id' => 'grid',
                         'tableOptions' => [
-                            'class' => 'table table-hover text-dark',
+                            'class' => 'table table-hover text-color',
                             'cellspacing' => '0',
                             'width' => '100%',
                         ],
@@ -54,7 +54,7 @@
                     <hr>
                     <div class='row'>
                         <div class='col-md-6'>
-                            {summary}
+                            
                         </div>
                         <div class='col-md-6'>
                             {pager}
@@ -93,14 +93,45 @@
                                     return $model->getTypeTemp();
                                 }
                             ],
+                            // [
+                            //     'class' => ActionColumn::class,
+                            //     'urlCreator' => function ($action, $model, $key, $index, $column) {
+                            //         return Url::toRoute([$action, 'id' => $model->id]);
+                            //     },
+                            //     'header' => 'action',
+                            //     'headerOptions' => ['class' => 'text-center'],
+                            //     'contentOptions' => ['class' => 'text-center'],
+                            // ],
                             [
-                                'class' => ActionColumn::class,
-                                'urlCreator' => function ($action, $model, $key, $index, $column) {
-                                    return Url::toRoute([$action, 'id' => $model->id]);
-                                },
+                                'class' => 'yii\grid\ActionColumn',
+                                'template' => '{PDF}{view} {update} {delete}',
+                                'visible' => Yii::$app->user->isGuest ? false : true,
+                                'buttons' => [
+                                    // 'PDF' => function ($url, $model) {
+                                    //     return Html::a('<i class="fa-solid fa-file-pdf"></i>', ['/admin/invoices/create-pdf', 'id' => $model->id], [
+                                    //         'class' => 'btn btn-outline-info rounded-circle btn-sm',
+                                    //         'style' => 'margin-right: 5px;padding:5px 10px',
+                                    //         'target' => '_blank',
+                                    //         'data-toggle' => 'tooltip',
+                                    //         'title' => 'Will open the generated PDF file in a new window'
+                                    //     ]);
+                                    // },
+                                    'view' => function ($url) {
+                                        return Html::a('<i class="fa-solid fa-eye"></i>', $url, ['class' => 'btn btn-outline-info rounded-circle btn-sm custom_button']);
+                                    },
+                                    'update' => function ($url) {
+                                        return Html::a('<i class="fa-solid fa-pen-fancy"></i>', $url, ['class' => 'btn btn-outline-info rounded-circle btn-sm custom_button']);
+                                    },
+                                    'delete' => function ($url, $model) {
+                                        return Html::a('<i class="fa-solid fa-trash-can"></i>', $url, [
+                                            'title' => Yii::t('app', 'Delete'),
+                                            'data-confirm' => 'Are you sure you want to delete this item?',
+                                            'data-method' => 'POST',
+                                            'class' => 'glyphicon glyphicon-pencil btn btn-outline-info rounded-circle btn-sm button_delete'
+                                        ]);
+                                    }
+                                ],
                                 'header' => 'action',
-                                'headerOptions' => ['class' => 'text-center'],
-                                'contentOptions' => ['class' => 'text-center'],
                             ],
                             // [
                             //     'class' => 'yii\grid\ActionColumn',

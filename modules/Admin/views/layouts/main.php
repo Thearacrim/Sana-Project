@@ -5,12 +5,7 @@
 $url_web = Yii::getAlias('@web');
 
 use app\assets\AdminAsset;
-use common\widgets\Alert;
-use yii\bootstrap4\Breadcrumbs;
 use yii\bootstrap4\Html;
-use yii\bootstrap4\Nav;
-use yii\bootstrap4\NavBar;
-use yii\helpers\Url;
 
 AdminAsset::register($this);
 ?>
@@ -27,7 +22,7 @@ AdminAsset::register($this);
     <?php $this->head() ?>
 </head>
 
-<body id="page-top">
+<body id="themeMode">
     <?php $this->beginBody() ?>
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -35,7 +30,7 @@ AdminAsset::register($this);
         <?= $this->render('sidebar') ?>
 
         <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+        <div class="d-flex flex-column back-light w-100">
 
             <!-- Main Content -->
             <div id="content">

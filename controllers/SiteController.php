@@ -87,32 +87,32 @@ class SiteController extends Controller
         return parent::beforeAction($action);
     }
 
-    // public function actionLanguage()
-    // {
-    //     $language = Yii::$app->request->post('language');
-    //     Yii::$app->language = $language;
+    public function actionLanguage()
+    {
+        $language = Yii::$app->request->post('language');
+        Yii::$app->language = $language;
 
-    //     $languageCookie = new Cookie([
-    //         'name' => 'language',
-    //         'value' => $language,
-    //         'expire' => time() + 60 * 60 * 24 * 30, // 30 days
-    //     ]);
-    //     Yii::$app->response->cookies->add($languageCookie);
+        $languageCookie = new Cookie([
+            'name' => 'lang',
+            'value' => $language,
+            'expire' => time() + 60 * 60 * 24 * 30, // 30 days
+        ]);
+        Yii::$app->response->cookies->add($languageCookie);
 
-    //     $localeCookie = new yii\web\Cookie([
-    //         'name' => 'locale',
-    //         'value' => Yii::$app->params['formattedLanguages'][$language]['locale'],
-    //         'expire' => time() + 60 * 60 * 24 * 30, // 30 days
-    //     ]);
-    //     Yii::$app->response->cookies->add($localeCookie);
+        $localeCookie = new yii\web\Cookie([
+            'name' => 'locale',
+            'value' => 'Kh-KM',
+            'expire' => time() + 60 * 60 * 24 * 30, // 30 days
+        ]);
+        Yii::$app->response->cookies->add($localeCookie);
 
-    //     $calendarCookie = new yii\web\Cookie([
-    //         'name' => 'calendar',
-    //         'value' => Yii::$app->params['formattedLanguages'][$language]['calendar'],
-    //         'expire' => time() + 60 * 60 * 24 * 30, // 30 days
-    //     ]);
-    //     Yii::$app->response->cookies->add($calendarCookie);
-    // }
+        $calendarCookie = new yii\web\Cookie([
+            'name' => 'calendar',
+            'value' => 'en-US',
+            'expire' => time() + 60 * 60 * 24 * 30, // 30 days
+        ]);
+        Yii::$app->response->cookies->add($calendarCookie);
+    }
     /**
      * Displays homepage.
      *
@@ -713,10 +713,8 @@ class SiteController extends Controller
 
     public function actionSuccess()
     {
-        // if () {
-        //     return $this->render('success');
-        // }
-        return $this->goHome();
+        return $this->render('success');
+        // return $this->goHome();
     }
 
     public function actionProfile()

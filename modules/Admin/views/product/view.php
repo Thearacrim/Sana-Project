@@ -30,8 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
     <div class="card border-secondary rounded-0" style="width: 20rem;">
-        <img src="<?= $frontend_url ?>/frontend/<?= $model->image_url ?>" class="card-img-top">
-        <div class="card-body">
+        <img src="<?= $frontend_url ?>/frontend/<?= $model->image_url ?>" class="card-img-top" style="height:300px;padding:20px">
+        <div class="card-body back-light text-color">
             <h5 class="card-title"><?= $model->status ?></h5>
             <p class="card-text"><?= $model->description ?></p>
             <h4 class="fw-bold text-dark">$<?= $model->price ?></h4>

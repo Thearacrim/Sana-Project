@@ -9,7 +9,13 @@ use yii\helpers\Url;
 $model = User::findOne(Yii::$app->user->id);
 
 $base_url = Yii::getAlias("@web");
+// $cookies = Yii::$app->response->cookies;
 
+// // add a new cookie to the response to be sent
+// $cookies->add(new \yii\web\Cookie([
+//   'name' => 'lang',
+//   'value' => 'kh-KM',
+// ]));
 
 if (\Yii::$app->user->isGuest) {
   $totalCart = 0;
@@ -70,8 +76,34 @@ if (\Yii::$app->user->isGuest) {
           <!-- <span id="icon">
             <i class="fas fa-moon"></i>
           </span> -->
+          <!-- <div class="dropdown">
+            <button class="btn btn-white dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa-solid fa-globe"></i>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="#"><img class="lang-image" src="https://www.erasmustrainingcourses.com/uploads/6/5/6/3/65630323/flag-of-england-english-flag-pictures-clipart-best-vr0swm-clipart_21.png" alt=""></a></li>
+              <li><a class="dropdown-item" href="#"><img class="lang-image" src="https://cdn.countryflags.com/thumbs/cambodia/flag-400.png" alt=""></a></li>
+            </ul>
+          </div> -->
         <?php
         }
+        $language = Yii::$app->language;
+        if ($language == 'en-US') { ?>
+          <form id="lang-form" action="/Zay/site/language" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="_csrf" value="V53vWUVNd-NefwfinKxGFU3IetycNr1mfZv2msWI25sa8JsOdBcbgTwSctHM9QpQHbsf6utX9ioYyJncitCjrw==">
+            <select name="language" id="lang">
+              <option value="en-US" selected>English</option>
+              <option value="kh-KM">Khmer</option>
+            </select>
+          </form>
+        <?php } else { ?>
+          <form id="lang-form" action="/Zay/site/language" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="_csrf" value="V53vWUVNd-NefwfinKxGFU3IetycNr1mfZv2msWI25sa8JsOdBcbgTwSctHM9QpQHbsf6utX9ioYyJncitCjrw=="> <select name="language">
+              <option value="en-US">English</option>
+              <option value="kh-KM" selected>Khmer</option>
+            </select>
+          </form>
+        <?php }
         ?>
         <?php
         if (Yii::$app->user->isGuest) {
@@ -110,12 +142,12 @@ if (\Yii::$app->user->isGuest) {
         <?php
         }
         ?>
-        <input type="checkbox" class="checkbox" onclick="darkLight()" id="chk" />
+        <!-- <input type="checkbox" class="checkbox" onclick="darkLight()" id="chk" />
         <label class="label" for="chk">
           <i class="fas fa-moon"></i>
           <i class="fas fa-sun"></i>
           <div class="ball"></div>
-        </label>
+        </label> -->
       </div>
     </div>
 
@@ -144,8 +176,24 @@ $script = <<< JS
           });
           return false;
         });
-        // $("#main").change(function () {
-          
+            // $("#main").change(function () {
+              $("form#lang-form").change(function () {
+            var form = $(this);
+            // submit form
+            $.ajax({
+                url: form.attr("action"),
+                type: "post",
+                data: form.serialize(),
+                success: function (response) {
+                    // reload the page after selecting a language
+                    location.reload();
+                },
+                error: function () {
+                    console.log("Ajax: internal server error");
+                }
+            });
+            return false;
+        });
 
 
         JS;

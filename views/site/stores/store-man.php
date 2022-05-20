@@ -28,37 +28,37 @@ $base_url = Yii::getAlias("@web");
         <?php endif; ?>
 
         <div class="col-lg-3">
-            <h1 class="h2 pb-4">Categories</h1>
+            <h1 class="h2 pb-4 text-color">Categories</h1>
             <ul class="list-unstyled templatemo-accordion">
                 <li class="pb-3">
-                    <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
+                    <a class="collapsed d-flex justify-content-between h3 text-decoration-none text-color" href="#">
                         Gender
                         <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
                     </a>
                     <ul class="collapse show list-unstyled pl-3">
-                        <li><a class="text-decoration-none" href="<?= Url::to(['site/store-man']) ?>">Men</a></li>
-                        <li><a class="text-decoration-none" href="<?= Url::to(['site/store-women']) ?>">Women</a></li>
+                        <li><a class="text-decoration-none text-color" href="<?= Url::to(['site/store-man']) ?>">Men</a></li>
+                        <li><a class="text-decoration-none text-color" href="<?= Url::to(['site/store-women']) ?>">Women</a></li>
                     </ul>
                 </li>
                 <li class="pb-3">
-                    <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
+                    <a class="collapsed d-flex justify-content-between h3 text-decoration-none text-color" href="#">
                         Sale
                         <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
                     </a>
                     <ul id="collapseTwo" class="collapse list-unstyled pl-3">
-                        <li><a class="text-decoration-none" href="<?= Url::to(['site/store-sport']) ?>">Sport</a></li>
-                        <li><a class="text-decoration-none" href="<?= Url::to(['site/store-gym']) ?>">Gym</a></li>
+                        <li><a class="text-decoration-none text-color" href="<?= Url::to(['site/store-sport']) ?>">Sport</a></li>
+                        <li><a class="text-decoration-none text-color" href="<?= Url::to(['site/store-gym']) ?>">Gym</a></li>
                     </ul>
                 </li>
                 <li class="pb-3">
-                    <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
+                    <a class="collapsed d-flex justify-content-between h3 text-decoration-none text-color" href="#">
                         Product
                         <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
                     </a>
                     <ul id="collapseThree" class="collapse list-unstyled pl-3">
-                        <li><a class="text-decoration-none" href="<?= Url::to(['site/store-watch']) ?>">Watch</a></li>
-                        <li><a class="text-decoration-none" href="<?= Url::to(['site/store-shoes']) ?>">Shoes</a></li>
-                        <li><a class="text-decoration-none" href="<?= Url::to(['site/store-glasses']) ?>">Sunglass</a></li>
+                        <li><a class="text-decoration-none text-color" href="<?= Url::to(['site/store-watch']) ?>">Watch</a></li>
+                        <li><a class="text-decoration-none text-color" href="<?= Url::to(['site/store-shoes']) ?>">Shoes</a></li>
+                        <li><a class="text-decoration-none text-color" href="<?= Url::to(['site/store-glasses']) ?>">Sunglass</a></li>
                     </ul>
         </div>
         <!-- cart-section -->
@@ -67,13 +67,13 @@ $base_url = Yii::getAlias("@web");
                 <div class="col-md-6">
                     <ul class="list-inline shop-top-menu pb-3 pt-1">
                         <li class="list-inline-item">
-                            <a class="h3 text-dark text-decoration-none mr-3" href="<?= Url::to(['site/add-cart']) ?>">All</a>
+                            <a class="h3 text-decoration-none text-color mr-3" href="<?= Url::to(['site/add-cart']) ?>">All</a>
                         </li>
                         <li class="list-inline-item">
-                            <a class="h3 text-dark text-decoration-none mr-3" href="<?= Url::to(['site/store-man']) ?>">Men's</a>
+                            <a class="h3 text-decoration-none text-color mr-3" href="<?= Url::to(['site/store-man']) ?>">Men's</a>
                         </li>
                         <li class="list-inline-item">
-                            <a class="h3 text-dark text-decoration-none" href="<?= Url::to(['site/store-women']) ?>">Women's</a>
+                            <a class="h3 text-decoration-none text-color" href="<?= Url::to(['site/store-women']) ?>">Women's</a>
                         </li>
                     </ul>
                 </div>
@@ -108,7 +108,7 @@ $base_url = Yii::getAlias("@web");
                 '
             ]) ?>
             <div class="text-center">
-                <button id="load_more" class="btn btn-outline-primary rounded-0">Load More</button>
+                <button id="load_more" class="btn btn-outline-primary rounded-0 text-color">Load More</button>
             </div>
         </div>
         <!-- End Cart -->
@@ -117,12 +117,12 @@ $base_url = Yii::getAlias("@web");
 
 </div>
 <!-- Start Brands -->
-<section class="bg-light py-5">
+<section class="back-light py-5">
     <div class="container my-4">
         <div class="row text-center py-3">
             <div class="col-lg-6 m-auto">
-                <h1 class="h1">Our Brands</h1>
-                <p>
+                <h1 class="h1 text-color">Our Brands</h1>
+                <p class="text-color">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                     Lorem ipsum dolor sit amet.
                 </p>

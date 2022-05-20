@@ -8,7 +8,7 @@ $base_url = Yii::getAlias("@web");
 <!-- data-aos="zoom-in-down" data-aos-duration="2000" -->
 <div class="card mb-4 product-wap rounded-0 block">
     <div class="card rounded-0">
-        <img class="card-img-top rounded-0 image-size" src="<?= $base_url . '/frontend/' . $model->image_url ?>" />
+        <img class="card-img-top rounded-0 w-100" src="<?= $base_url . '/frontend/' . $model->image_url ?>" style="height:350px;object-fit: cover;" />
         <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
             <ul class="list-unstyled">
                 <li>

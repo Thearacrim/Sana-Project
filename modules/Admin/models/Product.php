@@ -103,6 +103,6 @@ class Product extends \yii\db\ActiveRecord
         if (!$this->image_url) {
             return $base_url_frontend . '/uploads/placeholder.jpg';
         }
-        return $base_url_frontend . '/' . $this->image_url;
+        return $base_url_frontend . '/frontend/' . $this->image_url;
     }
 }

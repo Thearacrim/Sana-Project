@@ -1,6 +1,7 @@
 <?php
 
 use backend\models\Invoices;
+use yii\bootstrap4\LinkPager;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -21,17 +22,22 @@ $this->params['breadcrumbs'][] = $this->title;
                 <!-- <?= Html::a('Create Invoices', ['create'], ['class' => 'btn btn-success']) ?> -->
             </p>
             <div class="card border-secodary">
-                <div class="card-body">
-                    <h1><?= Html::encode($this->title) ?></h1>
+                <div class="card-body back-light">
+                    <h1 class="text-color"><?= Html::encode($this->title) ?></h1>
                     <?php echo $this->render('_search', ['model' => $searchModel]);
                     ?>
 
                     <?= GridView::widget([
                         'dataProvider' => $dataProvider,
                         'tableOptions' => [
-                            'class' => 'table table-hover text-dark',
+                            'class' => 'table table-hover text-color',
                             'cellspacing' => '0',
                             'width' => '100%',
+                        ],
+                        'pager' => [
+                            'firstPageLabel' => 'First',
+                            'lastPageLabel'  => 'Last',
+                            'class' => LinkPager::class,
                         ],
                         'layout' => "
                     <div class='table-responsive'>
@@ -40,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <hr>
                     <div class='row'>
                         <div class='col-md-6'>
-                            {summary}
+                        
                         </div>
                         <div class='col-md-6'>
                             {pager}

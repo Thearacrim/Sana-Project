@@ -44,6 +44,7 @@ class AdminAsset extends AssetBundle
         'https://cdn.jsdelivr.net/momentjs/latest/moment.min.js',
         '//cdn.jsdelivr.net/npm/sweetalert2@11',
         'backend/js/overiddingAlert.js',
+        'backend/js/custom.js',
         'https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js',
     ];
     public $depends = [

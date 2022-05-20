@@ -17,9 +17,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="order-index">
     <div class="table-me mr-5 ml-5">
-        <h1><?= Html::encode($this->title) ?></h1>
+        <h1 class="text-color"><?= Html::encode($this->title) ?></h1>
         <div class="card">
-            <div class="card-body">
+            <div class="card-body back-light">
 
                 <!-- <p>
             <?= Html::a('Create Order', ['create'], ['class' => 'btn btn-success']) ?>
@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= GridView::widget([
                     'dataProvider' => $dataProvider,
                     'tableOptions' => [
-                        'class' => 'table table-hover text-dark',
+                        'class' => 'table table-hover text-color',
                         'cellspacing' => '0',
                         'width' => '100%',
                     ],
@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <hr>
                     <div class='row'>
                         <div class='col-md-6'>
-                            {summary}
+                
                         </div>
                         <div class='col-md-6'>
                             {pager}
@@ -59,15 +59,6 @@ $this->params['breadcrumbs'][] = $this->title;
                             'attribute' => 'customer_id',
                             'value' => 'order.name'
                         ],
-                        // [
-                        //     'attribute' => 'sub_total',
-                        //     'format' => ['currency'],
-                        //     'contentOptions' => [
-                        //         'style' => 'width:100px;'
-                        //     ]
-                        // ],
-                        //'discount',
-                        // 'grand_total',
                         [
                             'attribute' => 'status',
                             'format' => 'raw',
@@ -81,14 +72,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return Yii::$app->formater->timeAgoKH($model->created_date);
                             }
                         ],
-                        //'created_by',
-                        // [
-                        //     'class' => ActionColumn::className(),
-                        //     'urlCreator' => function ($action, Order $model, $key, $index, $column) {
-                        //         return Url::toRoute([$action, 'id' => $model->id]);
-                        //     },
-                        //     'header' => 'action',
-                        // ],
                         [
                             'class' => 'yii\grid\ActionColumn',
                             // 'contentOptions' => ['style' => 'width: 7%'],

@@ -10,11 +10,17 @@ use yii\helpers\Html;
 $this->title = $name;
 Yii::$app->setHomeUrl(Yii::getAlias("@web/admin/default"));
 ?>
-<div class="site-error d-flex justify-content-center" style="padding-top:5rem">
-    <div>
-        <img class="img-fluid" src="<?= Yii::getAlias("@web") ?>/frontend/template/img/img-2.svg" alt="" style="max-width: 320px">
-        <h3 class="state-header"> <?= Html::encode($this->title) ?> </h3>
-        <p class="state-description lead"> <?= nl2br(Html::encode($message)) ?></p>
-        <a href="<?= Yii::$app->homeUrl; ?>" class="btn btn-lg btn-danger"><i class="fa fa-angle-right"></i> Go Home</a>
+<div class="container text-center p-5 p-md-0">
+    <div class="row mb-4">
+        <div class="col-md-4 m-auto">
+            <figure>
+                <img class="img-fluid" src="https://vetra.laborasyon.com/assets/svg/404.svg" alt="image">
+            </figure>
+        </div>
+    </div>
+    <h2 class="display-6"><?= Html::encode($this->title) ?></h2>
+    <p class="text-muted my-4"><?= nl2br(Html::encode($message)) ?></p>
+    <div class="d-flex gap-3 justify-content-center">
+        <a href="<?= Yii::$app->homeUrl; ?>" class="btn btn-primary">Home Page</a>
     </div>
 </div>

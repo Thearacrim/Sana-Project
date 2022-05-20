@@ -41,9 +41,9 @@ class Banner extends \yii\db\ActiveRecord
     {
         $base_url = Yii::getAlias('@web');
         if (!$this->image_banner) {
-            return $base_url . '/frontend/uploads/placeholder.jpg';
+            return $base_url . '/uploads/placeholder.jpg';
         }
-        return $base_url . '/frontend/' . $this->image_banner;
+        return $base_url . '/' . $this->image_banner;
     }
 
     /**

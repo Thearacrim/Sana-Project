@@ -13,11 +13,8 @@ Yii::$app->params['og_title']['content'] = 'Set title';
 Yii::$app->params['og_description']['content'] = 'custom desc';
 Yii::$app->params['og_url']['content'] = '/new/url';
 Yii::$app->params['og_image']['content'] = 'image.jpg';
-
 ?>
 <?php (new Request)->getBaseUrl();
-// echo "<pre>";
-// print_r($shoes);
 ?>
 <!-- Start Categories of The Month -->
 <?php
@@ -26,8 +23,8 @@ $payment = Yii::$app->session->hasFlash('success') ? 1 : 0;
 <section class="container py-5">
     <div class="row text-center pt-3">
         <div class="col-lg-6 m-auto">
-            <h1 class="text-color"><?= \Yii::t('app', 'Categories');
-                                    ?> of The Month</h1>
+            <h1 class="text-color"><?= \Yii::t('app', 'categories of The Month');
+                                    ?></h1>
             <p class="text-color">
                 Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
                 deserunt mollit anim id est laborum.
@@ -166,7 +163,6 @@ $script = <<< JS
             toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
         })
-
         Toast.fire({
         icon: 'success',
         title: 'You purchas successfully'

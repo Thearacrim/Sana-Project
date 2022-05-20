@@ -6,8 +6,19 @@ $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 $baseUrl = str_replace('/web', '', (new Request)->getBaseUrl());
 
+$language = 'en-US';
+if (isset($_COOKIE['lang'])) {
+    if (strpos($_COOKIE['lang'], 'kh-KM') !== false) {
+        $language = 'kh-KM';
+    } else {
+        $language = 'en-US';
+    }
+}
+
 $config = [
     'id' => 'zay-web',
+    'language' => $language,
+    'sourceLanguage' => 'en-US',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'modules' => [
@@ -34,7 +45,6 @@ $config = [
     ],
     'components' => [
         'request' => [
-            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'p3no0Lph70zk0CfgiOQ69zIycMyhbImD',
             'baseUrl' => $baseUrl,
         ],
@@ -69,6 +79,20 @@ $config = [
             ],
         ],
         'db' => $db,
+
+        'i18n' => [
+            'class' => 'app\components\NewI18N',
+            'translations' => [
+                'app' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@app/languages',
+                    'fileMap' => [
+                        'app' => 'app.php',
+                        'app/error' => 'error.php',
+                    ]
+                ]
+            ]
+        ],
 
         'urlManager' => [
             'baseUrl' => $baseUrl,

@@ -28,12 +28,12 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p> -->
-    <div class="card rounded-0">
+    <div class="card rounded-0 back-light">
         <div class="card-header bg-primary rounded-0">
-            <h3 class="text-white">Invoices</h3>
+            <h3 class="text-color">Invoices</h3>
         </div>
         <div class="row pt-5 pb-5">
-            <div class="col-lg-6 pl-5 fw-bold text-dark">
+            <div class="col-lg-6 pl-5 fw-bold text-color">
                 <p lang="kh"><ins>ឈ្មោះអតិថជន </ins>: <?= $customer["name"] ?></p>
                 <p><ins>Client Address </ins>: <?= $customer['address'] ?></p>
                 <p><ins>Invoices ID </ins>: <?= $order->code ?></p>
@@ -44,11 +44,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 <h1> $ <?= $order_item["total_price"] ?></h1>
             </div>
         </div>
-        <div class="card-body">
+        <div class="card-body back-light">
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
                 'tableOptions' => [
-                    'class' => 'table table-hover text-dark',
+                    'class' => 'table table-hover text-color',
                     'cellspacing' => '0',
                     'width' => '100%',
                 ],
@@ -117,7 +117,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     $<?= $order_item["total_price"] ?>
                 </div>
             </div>
-            <div class="row pt-5 pb-5">
+            <div class="row pt-5 pb-5 text-color">
                 <div class="col-lg-6">
                     <h5>Notes</h5>
                     <p>Thanks for your business.</p>

@@ -20,6 +20,24 @@ h4 {
   object-fit: cover;
 }
 
+.lang-image {
+  width: 50px;
+  height: 20px;
+  object-fit: cover;
+}
+select {
+  border: 2px solid rgb(235, 234, 234);
+  border-radius: 5px;
+  padding: 5px;
+}
+select#gender option[value="kh-KM"] {
+  padding: 10px;
+}
+select#lang option[value="en-US"] {
+  padding: 10px;
+  /* background-image: url(https://www.erasmustrainingcourses.com/uploads/6/5/6/3/65630323/flag-of-england-english-flag-pictures-clipart-best-vr0swm-clipart_21.png); */
+}
+
 .cart-gif {
   width: 100%;
   z-index: -1;

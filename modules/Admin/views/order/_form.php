@@ -11,7 +11,7 @@ use yii\widgets\ActiveForm;
 <div class="order-form">
     <div class="row">
         <div class="col-lg-6">
-            <div class="card p-5">
+            <div class="card p-5 back-light">
                 <?php $form = ActiveForm::begin(); ?>
                 <?= $form->field($model, 'code')->textInput(['maxlength' => true]) ?>
 

@@ -88,6 +88,7 @@ class InvoicesController extends Controller
     {
         $searchModel = new SearchInvoices();
         $dataProvider = $searchModel->search($this->request->queryParams);
+        $dataProvider->setPagination(['pageSize' => 5]);
         $invoice = Invoices::find()->one();
 
         return $this->render('index', [

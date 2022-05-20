@@ -16,7 +16,7 @@ AdminAsset::register($this);
 <html lang="<?= Yii::$app->language ?>">
 
 <head>
-    <link rel="icon" type="image/png" href="<?= Yii::getAlias('@web') ?>/img/fav.svg" />
+    <link rel="icon" type="image/png" href="https://www.freeiconspng.com/thumbs/error-icon/error-icon-32.png" />
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,7 +30,7 @@ AdminAsset::register($this);
     <?php $this->beginBody() ?>
 
     <main class="empty-state empty-state-fullpage bg-black">
-        <div class="empty-state-container">
+        <div class="empty-state-container mt-5">
             <?= $content ?>
         </div>
     </main>

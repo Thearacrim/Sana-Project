@@ -23,13 +23,13 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= Html::a('Create Order Item', ['create'], ['class' => 'btn btn-success']) ?>
         </p> -->
         <div class="card">
-            <div class="card-body">
+            <div class="card-body back-light">
                 <?php echo $this->render('_search', ['model' => $searchModel, 'class' => 'form-control inp rounded-0']); ?>
 
                 <?= GridView::widget([
                     'dataProvider' => $dataProvider,
                     'tableOptions' => [
-                        'class' => 'table table-hover text-dark',
+                        'class' => 'table table-hover text-color',
                         'cellspacing' => '0',
                         'width' => '100%',
                     ],
@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <hr>
                     <div class='row'>
                         <div class='col-md-6'>
-                            {summary}
+                            
                         </div>
                         <div class='col-md-6'>
                             {pager}

@@ -4,7 +4,6 @@ use yii\helpers\Url;
 
 $base_url = Yii::getAlias("@web");
 Yii::$app->setHomeUrl(Yii::getAlias("@web/admin/default"));
-
 ?>
 
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">

@@ -3,7 +3,7 @@
 use backend\models\Product;
 ?>
 <!-- Topbar -->
-<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+<nav class="navbar navbar-expand navbar-light back-light topbar mb-4 static-top shadow">
 
   <!-- Sidebar Toggle (Topbar) -->
   <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -154,7 +154,17 @@ use backend\models\Product;
       </div>
     </li>
 
-    <div class="topbar-divider d-none d-sm-block"></div>
+    <!-- Dropdown - Messages -->
+    <input type="checkbox" class="checkbox" onclick="darkLight()" id="chk" />
+    <label class="label" for="chk">
+      <i class="fas fa-moon"></i>
+      <i class="fas fa-sun"></i>
+      <div class="ball"></div>
+    </label>
+
+    <div class="topbar-divider d-none d-sm-block">
+
+    </div>
 
     <!-- Nav Item - User Information -->
     <li class="nav-item dropdown no-arrow">
@@ -183,7 +193,6 @@ use backend\models\Product;
         </a>
       </div>
     </li>
-
   </ul>
 
 </nav>
