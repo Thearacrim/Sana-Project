@@ -3,8 +3,8 @@
 return [
     'class' => 'yii\db\Connection',
     'dsn' => 'mysql:host=localhost;dbname=zay-store',
-    'username' => 'root',
-    'password' => '',
+    'username' => 'serey',
+    'password' => 'Serey@123',
     'charset' => 'utf8',
 
     // Schema cache options (for production environment)
