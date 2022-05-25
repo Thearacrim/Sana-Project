@@ -150,7 +150,7 @@ class ProductController extends Controller
                 }
                 $model->image_url->saveAs($upload_path . $imagename . '.' . $model->image_url->extension);
                 // echo $model->image_url;
-                // exit;
+                // exit;sdfa
                 //save file uploaded to db
                 $model->image_url = 'uploads/' . $imagename . '.' . $model->image_url->extension;
                 // print_r($model->image_url);
