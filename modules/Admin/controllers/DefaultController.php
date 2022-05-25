@@ -7,6 +7,7 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
+use yii\web\Cookie;
 
 /**
  * Default controller for the `admin` module
@@ -40,6 +41,32 @@ class DefaultController extends Controller
             ],
         ];
     }
+    public function actionLanguage()
+    {
+        $language = Yii::$app->request->post('language');
+        Yii::$app->language = $language;
+
+        $languageCookie = new Cookie([
+            'name' => 'lang',
+            'value' => $language,
+            'expire' => time() + 60 * 60 * 24 * 30, // 30 days
+        ]);
+        Yii::$app->response->cookies->add($languageCookie);
+
+        $localeCookie = new yii\web\Cookie([
+            'name' => 'locale',
+            'value' => 'Kh-KM',
+            'expire' => time() + 60 * 60 * 24 * 30, // 30 days
+        ]);
+        Yii::$app->response->cookies->add($localeCookie);
+
+        $calendarCookie = new yii\web\Cookie([
+            'name' => 'calendar',
+            'value' => 'en-US',
+            'expire' => time() + 60 * 60 * 24 * 30, // 30 days
+        ]);
+        Yii::$app->response->cookies->add($calendarCookie);
+    }
 
     public function actionIndex()
     {
@@ -47,7 +74,7 @@ class DefaultController extends Controller
     }
     public function beforeAction($action)
     {
-        Yii::$app->setHomeUrl(Yii::getAlias("@web/admin/default"));
+        Yii::$app->setHomeUrl(Yii::getAlias("@web/index.php?r=admin/default"));
         if ($action->id == 'error') {
             $this->layout = 'error';
         }
@@ -56,7 +83,7 @@ class DefaultController extends Controller
     public function actionLogin()
     {
         // set this to use default
-        Yii::$app->setHomeUrl(Yii::getAlias("@web/admin/default"));
+        Yii::$app->setHomeUrl(Yii::getAlias("@web/index.php?r=admin/default"));
         $this->layout = 'login';
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
@@ -83,7 +110,7 @@ class DefaultController extends Controller
     public function actionLogout()
     {
         // Set to default url
-        Yii::$app->setHomeUrl(Yii::getAlias("@web/admin/default/login"));
+        Yii::$app->setHomeUrl(Yii::getAlias("@web/index.php?r=admin/default/login"));
         Yii::$app->user->logout();
         return $this->goHome();
     }

@@ -2,6 +2,8 @@
 
 /** @var yii\web\View $this */
 
+use app\models\Product;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\web\Request;
 
@@ -34,23 +36,23 @@ $payment = Yii::$app->session->hasFlash('success') ? 1 : 0;
     <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-12 p-5 mt-3">
             <div class="text-center">
-                <a href="<?= Url::to(['site/store-watch']) ?>"><img src="<?= $base_url ?>/frontend/<?= $watch->image_url ?>" class="rounded-circle border categories_img"></a>
+                <a href="<?= Url::to(['site/store-watch']) ?>"><img src="<?= $base_url ?>/<?= $watch->image_url ?>" class="rounded-circle border categories_img"></a>
             </div>
-            <h5 class="text-center mt-3 mb-3 text-color">Watches</h5>
+            <h5 class="text-center mt-3 mb-3 text-color"><?= \Yii::t('app', 'watches') ?></h5>
             <p class="text-center"><a href="<?= Url::to(['site/store-watch']) ?>" class=" btn btn-success">Go Shop</a></p>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12 p-5 mt-3">
             <div class="text-center">
-                <a href="<?= Url::to(['site/store-shoes']) ?>"><img src="<?= $base_url ?>/frontend/<?= $shoes->image_url ?>" class="rounded-circle border categories_img"></a>
+                <a href="<?= Url::to(['site/store-shoes']) ?>"><img src="<?= $base_url ?>/<?= $shoes->image_url ?>" class="rounded-circle border categories_img"></a>
             </div>
-            <h2 class="h5 text-center mt-3 mb-3 text-color">Shoes</h2>
+            <h2 class="h5 text-center mt-3 mb-3 text-color"><?= \Yii::t('app', 'shoes') ?></h2>
             <p class="text-center"><a href="<?= Url::to(['site/store-shoes']) ?>" class=" btn btn-success">Go Shop</a></p>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12 p-5 mt-3">
             <div class="text-center">
-                <a href="<?= Url::to(['site/store-glasses']) ?>"><img src="<?= $base_url ?>/frontend/<?= $glasses->image_url ?>" class="rounded-circle border categories_img"></a>
+                <a href="<?= Url::to(['site/store-glasses']) ?>"><img src="<?= $base_url ?>/<?= $glasses->image_url ?>" class="rounded-circle border categories_img"></a>
             </div>
-            <h2 class="h5 text-center mt-3 mb-3 text-color">Accessories</h2>
+            <h2 class="h5 text-center mt-3 mb-3 text-color"><?= \Yii::t('app', 'accessories') ?></h2>
             <p class="text-center"><a href="<?= Url::to(['site/store-glasses']) ?>" class="btn btn-success">Go Shop</a></p>
         </div>
     </div>
@@ -63,7 +65,7 @@ $payment = Yii::$app->session->hasFlash('success') ? 1 : 0;
     <div class="container py-5">
         <div class="row text-center py-3">
             <div class="col-lg-6 m-auto">
-                <h1 class="h1 text-color">Featured Product</h1>
+                <h1 class="text-color"><?= \Yii::t('app', 'featured product') ?></h1>
                 <p class="text-color">
                     Reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                     Excepteur sint occaecat cupidatat non proident.
@@ -74,7 +76,7 @@ $payment = Yii::$app->session->hasFlash('success') ? 1 : 0;
             <div class="col-12 col-md-4 mb-4">
                 <div class="card h-100">
                     <a href="<?= Url::to(['site/store']) ?>">
-                        <img src="<?= $base_url ?>/frontend/template/img/feature_prod_01.jpg" class="card-img-top" alt="...">
+                        <img src="<?= $base_url ?>/template/img/feature_prod_01.jpg" class="card-img-top" alt="...">
                     </a>
                     <div class="card-body back-light">
                         <ul class="list-unstyled d-flex justify-content-between">
@@ -98,7 +100,7 @@ $payment = Yii::$app->session->hasFlash('success') ? 1 : 0;
             <div class="col-12 col-md-4 mb-4">
                 <div class="card h-100">
                     <a href="<?= Url::to(['site/store']) ?>">
-                        <img src="<?= $base_url ?>/frontend/template/img/feature_prod_02.jpg" class="card-img-top" alt="...">
+                        <img src="<?= $base_url ?>/template/img/feature_prod_02.jpg" class="card-img-top" alt="...">
                     </a>
                     <div class="card-body back-light">
                         <ul class="list-unstyled d-flex justify-content-between">
@@ -122,7 +124,7 @@ $payment = Yii::$app->session->hasFlash('success') ? 1 : 0;
             <div class="col-12 col-md-4 mb-4">
                 <div class="card h-100">
                     <a href="<?= Url::to(['site/store']) ?>">
-                        <img src="<?= $base_url ?>/frontend/template/img/feature_prod_03.jpg" class="card-img-top" alt="...">
+                        <img src="<?= $base_url ?>/template/img/feature_prod_03.jpg" class="card-img-top" alt="...">
                     </a>
                     <div class="card-body back-light">
                         <ul class="list-unstyled d-flex justify-content-between">

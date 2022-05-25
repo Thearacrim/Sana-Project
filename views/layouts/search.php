@@ -12,7 +12,7 @@ $products = Product::find()->all();
       <button id="clickbtn" class="btn btn-primary rounded-0 pr-5 pl-5"><i class="fa-solid fa-magnifying-glass"></i></button>
     </div>
     <?php foreach ($products as $product) { ?>
-      <a class="search_link" href="<?= Url::to(['site/store-single?id=' . $product->id]) ?>"><?= $product->status ?></a>
+      <a class="search_link" href="<?= Url::to(['site/store-single', 'id' => $product->id]) ?>"><?= $product->status ?></a>
     <?php } ?>
   </div>
 </div>

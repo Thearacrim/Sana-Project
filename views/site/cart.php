@@ -49,7 +49,7 @@ Yii::$app->params['og_image']['content'] = 'image.jpg';
                             <div class="sec-border row_item_<?= $product['cart_id'] ?> rounded-0 hover p-3">
                                 <div class="row ">
                                     <div class="col-md-3 col-sm-3">
-                                        <a href="<?= Url::to(['site/store-single?id=' . $product['id']]) ?>"><img src="<?= $base_url . '/frontend/' . $product['image_url'] ?>" style="width:110px"></a>
+                                        <a href="<?= Url::to(['site/store-single?id=' . $product['id']]) ?>"><img src="<?= $base_url . '/' . $product['image_url'] ?>" style="width:110px"></a>
                                     </div>
                                     <div class="col-lg-6">
                                         <span class="status text-color"> <?= $product['status'] ?>
@@ -135,7 +135,7 @@ Yii::$app->params['og_image']['content'] = 'image.jpg';
                             <div class="sec-border rounded-0 hover p-3 row_item_<?= $product['id'] ?>">
                                 <div class="row ">
                                     <div class="col-2">
-                                        <a href="<?= Url::to(['site/store-single?id=' . $product['id']]) ?>"><img src="<?= $base_url . '/frontend/' . $product['image_url'] ?>" style="width:50px"></a>
+                                        <a href="<?= Url::to(['site/store-single?id=' . $product['id']]) ?>"><img src="<?= $base_url . '/' . $product['image_url'] ?>" style="width:50px"></a>
                                     </div>
                                     <div class="col-6">
                                         <span class="status text-color"> <?= $product['status'] ?>
@@ -186,7 +186,7 @@ Yii::$app->params['og_image']['content'] = 'image.jpg';
 
             <div class="card mb-4 product-wap rounded-0">
                 <div class="card rounded-0">
-                    <img class="card-img rounded-0 image-size" src="<?= $base_url . '/frontend/' . $model->image_url ?>" />
+                    <img class="card-img rounded-0 image-size" src="<?= $base_url . '/' . $model->image_url ?>" />
                     <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                         <ul class="list-unstyled">
                             <li>
@@ -409,7 +409,7 @@ $script = <<< JS
                         section += `<div class="sec-border rounded-0 hover p-3 row_item_\${data.id}">
                             <div class="row ">
                                 <div class="col-2">
-                                    <a href=""><img src="$base_url/frontend/\${data.url}" style="width:50px"></a>
+                                    <a href=""><img src="$base_url/\${data.url}" style="width:50px"></a>
                                 </div>
                                 <div class="col-6">
                                     <span class="status"> \${data.status}

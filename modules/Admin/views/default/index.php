@@ -7,6 +7,7 @@ use yii\web\Request;
 $this->title = 'My Yii Application';
 ?>
 <!-- Content Row -->
+
 <div class="row">
 
     <!-- Earnings (Monthly) Card Example -->

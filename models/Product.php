@@ -33,8 +33,7 @@ class Product extends \yii\db\ActiveRecord
         return [
             [['category_id', 'description', 'price', 'status'], 'required'],
             [['category_id'], 'integer'],
-            [['image_url'], 'file'],
-            // [['image_url'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
+            [['image_url'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, gif'],
             [['rate'], 'number'],
             [['status', 'image_url', 'description'], 'string', 'max' => 255],
             [['price', 'type_item'], 'string', 'max' => 100],
@@ -95,14 +94,14 @@ class Product extends \yii\db\ActiveRecord
 
     public function getImageUrl()
     {
-        return str_replace("app", 'frontend', Yii::$app->request->baseUrl) . "/" . $this->image_url;
+        return str_replace("app", '', Yii::$app->request->baseUrl) . "/" . $this->image_url;
     }
     public function getThumbUploadUrl()
     {
-        $base_url_frontend = str_replace("app", 'frontend', Yii::$app->request->baseUrl);
+        $base_url = Yii::getAlias('@web');
         if (!$this->image_url) {
-            return $base_url_frontend . '/uploads/placeholder.jpg';
+            return $base_url . '/uploads/placeholder.jpg';
         }
-        return $base_url_frontend . '/' . $this->image_url;
+        return $base_url . '/' . $this->image_url;
     }
 }

@@ -1,6 +1,5 @@
 <?php
 
-use yii\base\Model;
 use app\modules\Admin\models\User;
 use app\modules\Admin\models\Cart;
 use yii\bootstrap4\Html;
@@ -9,17 +8,9 @@ use yii\helpers\Url;
 $model = User::findOne(Yii::$app->user->id);
 
 $base_url = Yii::getAlias("@web");
-// $cookies = Yii::$app->response->cookies;
-
-// // add a new cookie to the response to be sent
-// $cookies->add(new \yii\web\Cookie([
-//   'name' => 'lang',
-//   'value' => 'kh-KM',
-// ]));
 
 if (\Yii::$app->user->isGuest) {
   $totalCart = 0;
-  // $totalCart = $totalCart->quantity;
 } else {
   $userId = Yii::$app->user->id;
   $totalCart = Cart::find()->select(['SUM(quantity) quantity'])->where(['user_id' => $userId])->one();
@@ -73,18 +64,6 @@ if (\Yii::$app->user->isGuest) {
             <i class="fa fa-fw fa-cart-arrow-down text-color mr-1"></i>
             <span id="cart-quantity" class="position-absolute top-0 left-100 translate-middle badge rounded-pill badge badge-danger"><?= $totalCart ?></span>
           </a>
-          <!-- <span id="icon">
-            <i class="fas fa-moon"></i>
-          </span> -->
-          <!-- <div class="dropdown">
-            <button class="btn btn-white dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fa-solid fa-globe"></i>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item" href="#"><img class="lang-image" src="https://www.erasmustrainingcourses.com/uploads/6/5/6/3/65630323/flag-of-england-english-flag-pictures-clipart-best-vr0swm-clipart_21.png" alt=""></a></li>
-              <li><a class="dropdown-item" href="#"><img class="lang-image" src="https://cdn.countryflags.com/thumbs/cambodia/flag-400.png" alt=""></a></li>
-            </ul>
-          </div> -->
         <?php
         }
         $language = Yii::$app->language;
@@ -142,12 +121,6 @@ if (\Yii::$app->user->isGuest) {
         <?php
         }
         ?>
-        <!-- <input type="checkbox" class="checkbox" onclick="darkLight()" id="chk" />
-        <label class="label" for="chk">
-          <i class="fas fa-moon"></i>
-          <i class="fas fa-sun"></i>
-          <div class="ball"></div>
-        </label> -->
       </div>
     </div>
 
@@ -157,31 +130,14 @@ if (\Yii::$app->user->isGuest) {
 
 <?php
 $add_cart_url = Url::to(['site/change-quantity']);
+$base_url = Url::to(['language']);
 $script = <<< JS
-        $("form#lang-form").submit(function () {
-          var base_url = "$add_cart_url";
-          var form = $(this);
-          // submit form
-          $.ajax({
-            url: "$base_url",
-            type: "post",
-            data: form.serialize(),
-            success: function (response) {
-              // reload the page after selecting a language
-              location.reload();
-            },
-            error: function () {
-              console.log("Ajax: internal server error");
-            },
-          });
-          return false;
-        });
             // $("#main").change(function () {
               $("form#lang-form").change(function () {
             var form = $(this);
             // submit form
             $.ajax({
-                url: form.attr("action"),
+                url: '$base_url',
                 type: "post",
                 data: form.serialize(),
                 success: function (response) {

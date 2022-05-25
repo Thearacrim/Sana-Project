@@ -7,20 +7,19 @@ use yii\data\ActiveDataProvider;
 use app\models\Product;
 
 /**
- * ProductSearch represents the model behind the search form of `app\models\Product`.
+ * ProductSearch represents the model behind the search form of `frontend\models\Product`.
  */
 class ProductSearch extends Product
 {
+    public $title;
     /**
      * {@inheritdoc}
      */
-    public $globalSearch, $from_date, $to_date;
     public function rules()
     {
         return [
-            [['id', 'category_id', 'created_by', 'created_date', 'updated_date'], 'integer'],
-            [['status', 'price', 'image_url', 'description', 'created_date', 'updated_date'], 'safe'],
-            [['globalSearch', 'from_date', 'to_date'], 'safe'],
+            [['id', 'category_id'], 'integer'],
+            [['status', 'price', 'image_url', 'description', 'type_item', 'title'], 'safe'],
             [['rate'], 'number'],
         ];
     }
@@ -49,8 +48,6 @@ class ProductSearch extends Product
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort' => ['defaultOrder' => ['created_date' => SORT_DESC]]
-
         ]);
 
         $this->load($params);
@@ -67,18 +64,12 @@ class ProductSearch extends Product
             'category_id' => $this->category_id,
             'rate' => $this->rate,
         ]);
-        $query->andFilterWhere(['between', 'DATE(created_date)', $this->from_date, $this->to_date])
-            ->andFilterWhere([
-                'OR',
-                ['like', 'status', $this->globalSearch],
-                ['like', 'price', $this->globalSearch],
-                ['like', 'created_date', $this->globalSearch],
 
-            ]);
-        // $query->orFilterWhere(['like', 'status', $this->globalSearch])
-        //     ->orFilterWhere(['like', 'price', $this->globalSearch])
-        //     ->orFilterWhere(['like', '', $this->globalSearch])
-        //     ->orFilterWhere(['like', 'description', $this->globalSearch]);
+        $query->andFilterWhere(['like', 'status', $this->title])
+            ->andFilterWhere(['like', 'price', $this->price])
+            ->andFilterWhere(['like', 'image_url', $this->image_url])
+            ->andFilterWhere(['like', 'description', $this->description])
+            ->andFilterWhere(['like', 'type_item', $this->type_item]);
 
         return $dataProvider;
     }

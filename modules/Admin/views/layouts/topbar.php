@@ -1,6 +1,8 @@
 <?php $base_url = Yii::getAlias("@web");
 
 use backend\models\Product;
+use yii\helpers\Url;
+
 ?>
 <!-- Topbar -->
 <nav class="navbar navbar-expand navbar-light back-light topbar mb-4 static-top shadow">
@@ -108,7 +110,7 @@ use backend\models\Product;
         </h6>
         <a class="dropdown-item d-flex align-items-center" href="#">
           <div class="dropdown-list-image mr-3">
-            <img class="rounded-circle" src="<?= $base_url ?>/backend/img/undraw_profile_1.svg" alt="...">
+            <img class="rounded-circle" src="<?= $base_url ?>/img/undraw_profile_1.svg" alt="...">
             <div class="status-indicator bg-success"></div>
           </div>
           <div class="font-weight-bold">
@@ -119,7 +121,7 @@ use backend\models\Product;
         </a>
         <a class="dropdown-item d-flex align-items-center" href="#">
           <div class="dropdown-list-image mr-3">
-            <img class="rounded-circle" src="<?= $base_url ?>/backend/img/undraw_profile_2.svg" alt="...">
+            <img class="rounded-circle" src="<?= $base_url ?>/img/undraw_profile_2.svg" alt="...">
             <div class="status-indicator"></div>
           </div>
           <div>
@@ -130,7 +132,7 @@ use backend\models\Product;
         </a>
         <a class="dropdown-item d-flex align-items-center" href="#">
           <div class="dropdown-list-image mr-3">
-            <img class="rounded-circle" src="<?= $base_url ?>/backend/img/undraw_profile_3.svg" alt="...">
+            <img class="rounded-circle" src="<?= $base_url ?>/img/undraw_profile_3.svg" alt="...">
             <div class="status-indicator bg-warning"></div>
           </div>
           <div>
@@ -161,6 +163,28 @@ use backend\models\Product;
       <i class="fas fa-sun"></i>
       <div class="ball"></div>
     </label>
+    <div class="languages">
+      <?php
+      $language = Yii::$app->language;
+      if ($language == 'en-US') { ?>
+        <form id="lang-form" action="/Zay/admin/default/language" method="post" enctype="multipart/form-data">
+          <input type="hidden" name="_csrf" value="V53vWUVNd-NefwfinKxGFU3IetycNr1mfZv2msWI25sa8JsOdBcbgTwSctHM9QpQHbsf6utX9ioYyJncitCjrw==">
+          <select class="select-lang" name="language" id="lang">
+            <option value="en-US" selected>English</option>
+            <option value="kh-KM">Khmer</option>
+          </select>
+        </form>
+      <?php } else { ?>
+        <form id="lang-form" action="/Zay/admin/default/language" method="post" enctype="multipart/form-data">
+          <input type="hidden" name="_csrf" value="V53vWUVNd-NefwfinKxGFU3IetycNr1mfZv2msWI25sa8JsOdBcbgTwSctHM9QpQHbsf6utX9ioYyJncitCjrw==">
+          <select class="select-lang" name="language">
+            <option value="en-US">English</option>
+            <option value="kh-KM" selected>Khmer</option>
+          </select>
+        </form>
+      <?php }
+      ?>
+    </div>
 
     <div class="topbar-divider d-none d-sm-block">
 
@@ -197,3 +221,27 @@ use backend\models\Product;
 
 </nav>
 <!-- End of Topbar -->
+<?php
+$base_url = Yii::getAlias('@web/index.php?r=admin/default');
+$script = <<< JS
+  $("form#lang-form").change(function () {
+            var form = $(this);
+            // submit form
+            $.ajax({
+                url: '$base_url/language',
+                type: "post",
+                data: form.serialize(),
+                success: function (response) {
+                    // reload the page after selecting a language
+                    location.reload();
+                },
+                error: function () {
+                    console.log("Ajax: internal server error");
+                }
+            });
+            return false;
+        });
+  JS;
+$this->registerJs($script);
+
+?>

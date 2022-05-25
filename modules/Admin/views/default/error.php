@@ -8,7 +8,7 @@
 use yii\helpers\Html;
 
 $this->title = $name;
-Yii::$app->setHomeUrl(Yii::getAlias("@web/admin/default"));
+Yii::$app->setHomeUrl(Yii::getAlias("@web/index.php?r=admin/default"));
 ?>
 <div class="container text-center p-5 p-md-0">
     <div class="row mb-4">

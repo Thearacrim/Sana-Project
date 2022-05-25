@@ -4,7 +4,7 @@ use yii\web\Request;
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
-$baseUrl = str_replace('/web', '', (new Request)->getBaseUrl());
+// $baseUrl = str_replace('/web', '', (new Request)->getBaseUrl());
 
 $language = 'en-US';
 if (isset($_COOKIE['lang'])) {
@@ -46,7 +46,7 @@ $config = [
     'components' => [
         'request' => [
             'cookieValidationKey' => 'p3no0Lph70zk0CfgiOQ69zIycMyhbImD',
-            'baseUrl' => $baseUrl,
+            // 'baseUrl' => $baseUrl,
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -94,32 +94,32 @@ $config = [
             ]
         ],
 
-        'urlManager' => [
-            'baseUrl' => $baseUrl,
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-                '<controller:\w+>/<id:\d+>' => '<controller>/view',
-                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
-                '<controller:\w+>/<action:^a-zZ-A>' => '<controller>/<action>',
+        //     'urlManager' => [
+        //         'baseUrl' => $baseUrl,
+        //         'enablePrettyUrl' => true,
+        //         'showScriptName' => false,
+        //         'rules' => [
+        //             '<controller:\w+>/<id:\d+>' => '<controller>/view',
+        //             '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+        //             '<controller:\w+>/<action:^a-zZ-A>' => '<controller>/<action>',
 
-                [
-                    'pattern' => 'zay',
-                    'route' => 'zay/index',
-                    'suffix' => '',
-                ],
-                [
-                    'pattern' => 'zay/<category:[^/.]*>',
-                    'route' => 'zay/index',
-                    'suffix' => '',
-                ],
-                [
-                    'pattern' => 'zay/<category:[^/.]*>/<slug:[^.]*>',
-                    'route' => 'zay/view',
-                    'suffix' => '',
-                ],
-            ],
-        ],
+        //             [
+        //                 'pattern' => 'zay',
+        //                 'route' => 'zay/index',
+        //                 'suffix' => '',
+        //             ],
+        //             [
+        //                 'pattern' => 'zay/<category:[^/.]*>',
+        //                 'route' => 'zay/index',
+        //                 'suffix' => '',
+        //             ],
+        //             [
+        //                 'pattern' => 'zay/<category:[^/.]*>/<slug:[^.]*>',
+        //                 'route' => 'zay/view',
+        //                 'suffix' => '',
+        //             ],
+        //         ],
+        //     ],
 
     ],
     'params' => $params,

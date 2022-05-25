@@ -33,7 +33,7 @@ class Product extends \yii\db\ActiveRecord
         return [
             [['category_id', 'description', 'price', 'status'], 'required'],
             [['category_id'], 'integer'],
-            [['image_url'], 'file'],
+            [['image_url'], 'file', 'extensions' => 'png, jpg, gif'],
             // [['image_url'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
             [['rate'], 'number'],
             [['status', 'image_url', 'description'], 'string', 'max' => 255],
@@ -49,10 +49,10 @@ class Product extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'status' => 'Title',
+            'status' => Yii::t('app', 'title'),
             'category_id' => 'Category ID',
-            'price' => 'Price',
-            'created_by' => 'Created By',
+            'price' => Yii::t('app', 'price'),
+            'created_by' => Yii::t('app', 'created_date'),
             'type_item' => 'Type Item',
             'image_url' => 'Image Url',
             'description' => 'Description',
@@ -95,14 +95,14 @@ class Product extends \yii\db\ActiveRecord
 
     public function getImageUrl()
     {
-        return str_replace("app", 'frontend', Yii::$app->request->baseUrl) . "/" . $this->image_url;
+        return str_replace("app", '', Yii::$app->request->baseUrl) . "/" . $this->image_url;
     }
     public function getThumbUploadUrl()
     {
-        $base_url_frontend = str_replace("app", 'frontend', Yii::$app->request->baseUrl);
+        $base_url = str_replace("app", '', Yii::$app->request->baseUrl);
         if (!$this->image_url) {
-            return $base_url_frontend . '/uploads/placeholder.jpg';
+            return $base_url . '/uploads/placeholder.jpg';
         }
-        return $base_url_frontend . '/frontend/' . $this->image_url;
+        return $base_url . '/' . $this->image_url;
     }
 }

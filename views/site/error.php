@@ -6,6 +6,7 @@
 /* @var $exception Exception */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 $this->title = $name;
 Yii::$app->setHomeUrl(Yii::getAlias("@web"));
@@ -25,7 +26,7 @@ Yii::$app->setHomeUrl(Yii::getAlias("@web"));
                 <p class="state-description lead text-light"> <?= nl2br(Html::encode($message)) ?></p>
                 <p class="text-danger">Please contact us if you think this is a server error. Thank you.</p>
                 <div class="state-action">
-                    <a href="<?= Yii::$app->homeUrl; ?>" class="btn btn-lg btn-light"><i class="fa fa-angle-right"></i> Go Home</a>
+                    <a href="<?= Url::to(['/site']) ?>" class="btn btn-lg btn-light"><i class="fa fa-angle-right"></i> Go Home</a>
                 </div>
             </div>
         </div>

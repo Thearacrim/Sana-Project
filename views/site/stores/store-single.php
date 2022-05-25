@@ -27,7 +27,7 @@ Yii::$app->params['og_image']['content'] = $products->image_url;
             <div class="row product-item" data-key="<?= $products->id ?>">
                 <div class="col-lg-5 mt-5">
                     <div class="card mb-3">
-                        <img class="card-img" src="<?= $base_url ?>/frontend/<?= $products->image_url ?>" alt="Card image cap" id="product-detail">
+                        <img class="card-img" src="<?= $base_url ?>/<?= $products->image_url ?>" alt="Card image cap" id="product-detail">
                     </div>
                     <div class="row">
                         <!--Start Controls-->
@@ -48,17 +48,17 @@ Yii::$app->params['og_image']['content'] = $products->image_url;
                                     <div class="row">
                                         <div class="col-4">
                                             <a href="#">
-                                                <img class="card-img" src="<?= $base_url ?>/frontend/template/img/product_single_01.jpg" alt="Product Image 1">
+                                                <img class="card-img" src="<?= $base_url ?>/template/img/product_single_01.jpg" alt="Product Image 1">
                                             </a>
                                         </div>
                                         <div class="col-4">
                                             <a href="#">
-                                                <img class="card-img" src="<?= $base_url ?>/frontend/template/img/product_single_02.jpg" alt="Product Image 2">
+                                                <img class="card-img" src="<?= $base_url ?>/template/img/product_single_02.jpg" alt="Product Image 2">
                                             </a>
                                         </div>
                                         <div class="col-4">
                                             <a href="#">
-                                                <img class="card-img" src="<?= $base_url ?>/frontend/template/img/product_single_03.jpg" alt="Product Image 3">
+                                                <img class="card-img" src="<?= $base_url ?>/template/img/product_single_03.jpg" alt="Product Image 3">
                                             </a>
                                         </div>
                                     </div>
@@ -70,17 +70,17 @@ Yii::$app->params['og_image']['content'] = $products->image_url;
                                     <div class="row">
                                         <div class="col-4">
                                             <a href="#">
-                                                <img class="card-img" src="<?= $base_url ?>/frontend/template/img/product_single_04.jpg" alt="Product Image 4">
+                                                <img class="card-img" src="<?= $base_url ?>/template/img/product_single_04.jpg" alt="Product Image 4">
                                             </a>
                                         </div>
                                         <div class="col-4">
                                             <a href="#">
-                                                <img class="card-img" src="<?= $base_url ?>/frontend/template/img/product_single_05.jpg" alt="Product Image 5">
+                                                <img class="card-img" src="<?= $base_url ?>/template/img/product_single_05.jpg" alt="Product Image 5">
                                             </a>
                                         </div>
                                         <div class="col-4">
                                             <a href="#">
-                                                <img class="card-img" src="<?= $base_url ?>/frontend/template/img/product_single_06.jpg" alt="Product Image 6">
+                                                <img class="card-img" src="<?= $base_url ?>/template/img/product_single_06.jpg" alt="Product Image 6">
                                             </a>
                                         </div>
                                     </div>
@@ -92,17 +92,17 @@ Yii::$app->params['og_image']['content'] = $products->image_url;
                                     <div class="row">
                                         <div class="col-4">
                                             <a href="#">
-                                                <img class="card-img" src="<?= $base_url ?>/frontend/template/img/product_single_07.jpg" alt="Product Image 7">
+                                                <img class="card-img" src="<?= $base_url ?>/template/img/product_single_07.jpg" alt="Product Image 7">
                                             </a>
                                         </div>
                                         <div class="col-4">
                                             <a href="#">
-                                                <img class="card-img" src="<?= $base_url ?>/frontend/template/img/product_single_08.jpg" alt="Product Image 8">
+                                                <img class="card-img" src="<?= $base_url ?>/template/img/product_single_08.jpg" alt="Product Image 8">
                                             </a>
                                         </div>
                                         <div class="col-4">
                                             <a href="#">
-                                                <img class="card-img" src="<?= $base_url ?>/frontend/template/img/product_single_09.jpg" alt="Product Image 9">
+                                                <img class="card-img" src="<?= $base_url ?>/template/img/product_single_09.jpg" alt="Product Image 9">
                                             </a>
                                         </div>
                                     </div>
@@ -247,7 +247,7 @@ Yii::$app->params['og_image']['content'] = $products->image_url;
 
                     <div class="card mb-4 product-wap rounded-0">
                         <div class="card rounded-0">
-                            <img class="card-img rounded-0 image-size" src="<?= $base_url . '/frontend/' . $model->image_url ?>" />
+                            <img class="card-img rounded-0 image-size" src="<?= $base_url . '/' . $model->image_url ?>" />
                             <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                 <ul class="list-unstyled">
                                     <li>
@@ -273,7 +273,7 @@ Yii::$app->params['og_image']['content'] = $products->image_url;
 <!-- End Article -->
 
 <?php
-$add_cart_url = Url::to(['site/store-single?id=' . $model->id]);
+$add_cart_url = Url::to(['site/store-single', 'id' => $model->id]);
 
 $script = <<< JS
             $(document).on("click",".trigggerModal",function(){
@@ -282,7 +282,6 @@ $script = <<< JS
             $(function(){
                 $('#variant-color > div').click(function(){
                     var val = $(this).attr('data-value');
-                    console.log(val);
                     $('#variantColor').attr('name', val);
                     $('#variantColor').val(val);
                 });

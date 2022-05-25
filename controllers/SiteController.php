@@ -120,6 +120,9 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        if (Yii::$app->request->get('ProductSearch')) {
+            return $this->redirect(['site/search', 'ProductSearch' => Yii::$app->request->get('ProductSearch')]);
+        }
         $this->layout = 'home';
         $dataProvider = new ActiveDataProvider([
             'query' => Product::find()->all(),

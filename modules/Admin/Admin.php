@@ -15,7 +15,7 @@ class Admin extends \yii\base\Module
     public $controllerNamespace = 'app\modules\Admin\controllers';
     // Set Default Layout to seperate page
     public $layout = 'main';
-    public $defaultRoute = 'default/index';
+    public $defaultRoute = 'index.php?r=admin/default/index';
     /**
      * {@inheritdoc}
      */

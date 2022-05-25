@@ -84,7 +84,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             <img src="<?= $base_url_frontend ?>/<?= $banner->image_banner ?>" style="height:200px;padding:20px">
                             <div class="carousel-caption">
                                 <button type="button" data-bs-toggle="tooltip" title="Copy URL" data-bs-placement="bottom" data-id="<?= $banner->id ?>" class=" btn btn-secondary btn-icon linkToCopy rounded-circle action_copy_<?= $banner->id ?>" id="action_copy"><i class="fas fa-link"></i></button>
-                                <a href="<?= $base_url ?>/admin/banner/update?id=<?= $banner->id ?>" data-bs-toggle="tooltip" title="Update" data-bs-placement="bottom" data-title="Update gallery image: <?= $banner->title ?>" value="" class="btn rounded-circle btn-secondary btn-icon modalButton"><i class="fa-regular fa-pen-to-square"></i></a>
+                                <a href="<?= Url::to(['/admin/banner/update', 'id' => $banner->id]) ?>" data-bs-toggle="tooltip" title="Update" data-bs-placement="bottom" data-title="Update gallery image: <?= $banner->title ?>" value="" class="btn rounded-circle btn-secondary btn-icon modalButton"><i class="fa-regular fa-pen-to-square"></i></a>
                             </div>
                         </div>
                         <div class="card-body">

@@ -61,7 +61,7 @@ $base_url = Yii::getAlias('@web');
                                         var payer_id = orderData.id;
                                         var id = $('.sec-border').data("id");
                                         $.ajax({
-                                            url: '<?= Url::to('payment') ?>',
+                                            url: '<?= Url::to(['payment']) ?>',
                                             method: 'POST',
                                             data: {
                                                 payer_id: payer_id,
@@ -69,11 +69,7 @@ $base_url = Yii::getAlias('@web');
                                             },
                                             success: function(res) {
                                                 var data = JSON.parse(res);
-                                                console.log([data]);
-                                                // if (data['status'] == 'success') {
-                                                //     $(".row_item_" + id).remove();
-                                                //     $("#cart-quantity").text(data['totalCart']);
-                                                // }
+                                                console.log(data);
                                             },
                                             error: function(err) {
                                                 console.log(err);
@@ -96,7 +92,7 @@ $base_url = Yii::getAlias('@web');
                         <div class="sec-border rounded-0 hover row_item_<?= $product['cart_id'] ?>" data-id=<?= $product['cart_id'] ?>>
                             <div class="row ">
                                 <div class="col-4">
-                                    <img src="<?= $base_url . '/frontend/' . $product['image_url'] ?>" style="width:100px">
+                                    <img src="<?= $base_url . '/' . $product['image_url'] ?>" style="width:100px">
                                 </div>
                                 <div class="col-4 text-left py-5">
                                     <span class="fw-bold text-color"> <?= $product['status'] ?>

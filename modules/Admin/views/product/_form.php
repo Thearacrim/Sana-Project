@@ -8,6 +8,8 @@ use dosamigos\ckeditor\CKEditor;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Product */
 /* @var $form yii\widgets\ActiveForm */
+// $base_url = str_replace("app", '', Yii::$app->request->baseUrl);
+
 ?>
 
 <div class="product-form">
@@ -64,24 +66,6 @@ $script = <<< JS
             preview.style.display = "block";
         }
     });
-    $("#btn_save").click(function(){
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-            })
-
-            Toast.fire({
-            icon: 'success',
-            title: 'Signed in successfully'
-            })
-    })
     JS;
 $this->registerJs($script);
 

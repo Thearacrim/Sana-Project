@@ -13,8 +13,9 @@
         /* @var $this yii\web\View */
         /* @var $searchModel backend\models\ProductSearch */
         /* @var $dataProvider yii\data\ActiveDataProvider */
-
-        $this->title = 'Products';
+        ?>
+        <?php $this->title = Yii::t('app', 'product'); ?>
+        <?php
         $this->params['breadcrumbs'][] = $this->title;
 
 
@@ -79,7 +80,7 @@
                                 ]
                             ],
                             [
-                                'attribute' => 'created_date',
+                                'attribute' => Yii::t('app', 'created_date'),
                                 'headerOptions' => ['class' => 'text-center'],
                                 'contentOptions' => ['class' => 'text-center'],
                                 'value' => function ($model) {
@@ -87,7 +88,7 @@
                                 }
                             ],
                             [
-                                'attribute' => 'type',
+                                'attribute' => Yii::t('app', 'type'),
                                 'format' => 'raw',
                                 'value' => function ($model) {
                                     return $model->getTypeTemp();
@@ -131,29 +132,8 @@
                                         ]);
                                     }
                                 ],
-                                'header' => 'action',
+                                'header' => Yii::t('app', 'action')
                             ],
-                            // [
-                            //     'class' => 'yii\grid\ActionColumn',
-                            //     // 'contentOptions' => ['style' => 'width: 7%'],
-                            //     'visible' => Yii::$app->user->isGuest ? false : true,
-                            //     'buttons' => [
-                            //         'view' => function ($url) {
-                            //             return Html::a('<i class="fa-solid fa-eye"></i>', $url, ['class' => 'glyphicon glyphicon-eye-open btn btn-outline-info btn-sm rounded-circle btn-xs custom_button']);
-                            //         },
-                            //         'update' => function ($url) {
-                            //             return Html::a('<i class="fa-solid fa-pen-fancy"></i>', $url, ['class' => 'glyphicon glyphicon-pencil btn btn-outline-info btn-sm rounded-circle btn-xs custom_button']);
-                            //         },
-                            //         'delete' => function ($url) {
-                            //             return Html::a('<i class="fa-solid fa-trash-can"></i>', $url, [
-                            //                 'title' => Yii::t('app', 'Delete'),
-                            //                 'data-confirm' => Yii::t('yii', 'Are you sure you want to delete?'),
-                            //                 'data-method' => 'post', 'data-pjax' => '0',
-                            //                 'class' => 'glyphicon glyphicon-pencil btn btn-outline-info btn-sm rounded-circle btn-xs button_delete'
-                            //             ]);
-                            //         }
-                            //     ],
-                            // ],
                         ],
                     ]); ?>
                 </div>
