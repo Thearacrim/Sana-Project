@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\admin\Admin;
+namespace app\modules\Admin\Admin;
 
 use Yii;
 
@@ -12,7 +12,7 @@ class Admin extends \yii\base\Module
     /**
      * {@inheritdoc}
      */
-    public $controllerNamespace = 'app\modules\admin\Admin\controllers';
+    public $controllerNamespace = 'app\modules\Admin\Admin\controllers';
     // Set Default Layout to seperate page
     public $layout = 'main';
     public $defaultRoute = 'index.php?r=admin/default/index';
