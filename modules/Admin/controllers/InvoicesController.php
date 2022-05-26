@@ -2,12 +2,12 @@
 
 namespace app\modules\Admin\controllers;
 
-use app\modules\admin\models\Customer;
-use app\modules\admin\models\Invoices;
-use app\modules\admin\models\Order;
-use app\modules\admin\models\OrderItem;
-use app\modules\admin\models\Product;
-use app\modules\admin\models\SearchInvoices;
+use app\modules\Admin\models\Customer;
+use app\modules\Admin\models\Invoices;
+use app\modules\Admin\models\Order;
+use app\modules\Admin\models\OrderItem;
+use app\modules\Admin\models\Product;
+use app\modules\Admin\models\SearchInvoices;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;

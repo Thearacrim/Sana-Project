@@ -2,8 +2,8 @@
 
 namespace app\modules\Admin\controllers;
 
-use app\modules\admin\models\Order;
-use app\modules\admin\models\OrderSearch;
+use app\modules\Admin\models\Order;
+use app\modules\Admin\models\OrderSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

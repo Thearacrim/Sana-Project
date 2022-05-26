@@ -2,9 +2,9 @@
 
 namespace app\modules\Admin\controllers;
 
-use app\modules\admin\models\Banner;
+use app\modules\Admin\models\Banner;
 use yii;
-use app\modules\admin\models\BannerSearch;
+use app\modules\Admin\models\BannerSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
