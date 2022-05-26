@@ -53,13 +53,13 @@ class OrderItemSearch extends OrderItem
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
             return $dataProvider;
         }
-        $query->andFilterWhere(['between', 'DATE(created_date)', $this->from_date, $this->to_date]);
-        $query->andFilterWhere(['like', 'product_id', $this->globalSearch]);
-
+        $query->andFilterWhere(['between', 'DATE(created_date)', $this->from_date, $this->to_date])
+            ->andFilterWhere([
+                'OR',
+                ['like', 'product_id', $this->globalSearch],
+            ]);
         return $dataProvider;
     }
 }

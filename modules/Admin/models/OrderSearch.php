@@ -57,29 +57,10 @@ class OrderSearch extends Order
             // $query->where('0=1');
             return $dataProvider;
         }
+        $query->andFilterWhere(['between', 'DATE(created_date)', $this->from_date, $this->to_date]);
 
-        // grid filtering conditions
-        // $query->andFilterWhere([
-        //     'id' => $this->id,
-        //     'customer_id' => $this->customer_id,
-        //     'sub_total' => $this->sub_total,
-        //     'discount' => $this->discount,
-        //     'grand_total' => $this->grand_total,
-        //     'status' => $this->status,
-        //     'created_date' => $this->created_date,
-        //     'created_by' => $this->created_by,
-        // ]);
-        $query->andFilterWhere(['between', 'DATE(created_date)', $this->from_date, $this->to_date])
-            ->andFilterWhere([
-                'OR',
-                ['like', 'customer_id', $this->globalSearch],
-                // ['like', 'price', $this->globalSearch],
-                // ['like', 'created_date', $this->globalSearch],
-
-            ]);
-
-        // $query->andFilterWhere(['like', 'code', $this->code])
-        //     ->andFilterWhere(['like', 'note', $this->note]);
+        $query->FilterWhere(['like', 'code', $this->globalSearch])
+            ->orFilterWhere(['like', 'customer_id', $this->globalSearch]);
 
         return $dataProvider;
     }

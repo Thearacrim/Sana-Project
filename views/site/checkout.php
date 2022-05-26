@@ -42,7 +42,6 @@ $base_url = Yii::getAlias('@web');
                                         purchase_units: [{
                                             "amount": {
                                                 "currency_code": "USD",
-                                                // "value": <?= $totalPrice ?>,
                                                 "value": 0.1
                                             }
                                         }]
@@ -202,7 +201,7 @@ $base_url = Yii::getAlias('@web');
                         <h6 class="text-color">Original Price (<?= $totalCart ?>)</h6>
                     </div>
                     <div class="col-6 text-right mb-0">
-                        <h6 class="text-color"><?php echo Yii::$app->formatter->asCurrency($totalPrice) ?></h6>
+                        <h6 class="text-color">$ <?php echo $totalPrice['price'] ?></h6>
                     </div>
                 </div>
                 <div class="row pt-3">
@@ -210,7 +209,7 @@ $base_url = Yii::getAlias('@web');
                         <h6 class="fw-bold text-color">Total :</h6>
                     </div>
                     <div class="col-6 text-right">
-                        <h6 class="fw-bold text-color"><?php echo Yii::$app->formatter->asCurrency($totalPrice) ?></h5>
+                        <h6 class="fw-bold text-color">$ <?php echo $totalPrice['price'] ?></h5>
                     </div>
                 </div>
                 <span class=" text-right text-color" style="font-size:13px; "> Zay is required by law to collect applicable transaction taxes for purchases made in certain tax jurisdictions.</span>
