@@ -209,7 +209,7 @@ $base_url = Yii::getAlias('@web');
                         <h6 class="fw-bold text-color">Total :</h6>
                     </div>
                     <div class="col-6 text-right">
-                        <h6 class="fw-bold text-color">$ <?php echo $totalPrice['price'] ?></h5>
+                        <h6 class="fw-bold text-color">$ <?php echo $totalPrice['total_price'] ?></h5>
                     </div>
                 </div>
                 <span class=" text-right text-color" style="font-size:13px; "> Zay is required by law to collect applicable transaction taxes for purchases made in certain tax jurisdictions.</span>
