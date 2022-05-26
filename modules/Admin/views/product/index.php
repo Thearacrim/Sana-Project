@@ -74,7 +74,10 @@
                             'status',
                             [
                                 'attribute' => 'price',
-                                'format' => ['currency'],
+                                // 'format' => ['currency'],
+                                'value' => function ($model) {
+                                    return '$ ' . $model->price;
+                                },
                                 'contentOptions' => [
                                     'style' => 'width:100px;'
                                 ]

@@ -85,25 +85,22 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                         [
                             'attribute' => 'price',
-                            'format' => ['currency'],
+                            'value' => function ($model) {
+                                return '$ ' . $model->price;
+                            },
                             'contentOptions' => [
                                 'style' => 'width:100px;'
                             ]
                         ],
                         [
                             'attribute' => 'total',
-                            'format' => ['currency'],
+                            'value' => function ($model) {
+                                return '$ ' . $model->total;
+                            },
                             'contentOptions' => [
                                 'style' => 'width:100px;'
                             ]
                         ],
-                        // [
-                        //     'class' => ActionColumn::className(),
-                        //     'urlCreator' => function ($action, OrderItem $model, $key, $index, $column) {
-                        //         return Url::toRoute([$action, 'id' => $model->id]);
-                        //     },
-                        //     'header' => 'action',
-                        // ],
                         [
                             'class' => 'yii\grid\ActionColumn',
                             // 'contentOptions' => ['style' => 'width: 7%'],

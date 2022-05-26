@@ -59,11 +59,15 @@ $updated = Yii::$app->session->hasFlash('success') ? 1 : 0;
             ],
             [
                 'attribute' => 'price',
-                'format' => ['currency'],
+                'value' => function ($model) {
+                    return '$ ' . $model->price;
+                },
             ],
             [
                 'attribute' => 'total',
-                'format' => ['currency'],
+                'value' => function ($model) {
+                    return '$ ' . $model->total;
+                },
             ],
         ],
     ]) ?>

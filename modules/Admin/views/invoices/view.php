@@ -95,14 +95,18 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     [
                         'attribute' => 'price',
-                        'format' => ['currency'],
+                        'value' => function ($model) {
+                            return '$ ' . $model->price;
+                        },
                         'contentOptions' => [
                             'style' => 'width:100px;'
                         ]
                     ],
                     [
                         'attribute' => 'total',
-                        'format' => ['currency'],
+                        'value' => function ($model) {
+                            return '$ ' . $model->price;
+                        },
                         'contentOptions' => [
                             'style' => 'width:100px;'
                         ]
