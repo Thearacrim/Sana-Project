@@ -1,10 +1,10 @@
 <?php
 
-namespace app\modules\admin\models;
+namespace app\modules\Admin\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\admin\models\OrderItem;
+use app\modules\Admin\models\OrderItem;
 
 /**
  * OrderItemSearch represents the model behind the search form of `app\modules\admin\models\OrderItem`.

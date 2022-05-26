@@ -2,8 +2,8 @@
 
 namespace app\modules\Admin\controllers;
 
-use app\modules\admin\models\OrderItem;
-use app\modules\admin\models\OrderItemSearch;
+use app\modules\Admin\models\OrderItem;
+use app\modules\Admin\models\OrderItemSearch;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
