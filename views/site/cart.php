@@ -100,14 +100,7 @@ Yii::$app->params['og_image']['content'] = 'image.jpg';
                                                 <li class="list-inline-item"><span class="btn btn-dark btn-sm rounded-circle text-color"> <?= $product['size'] ?></span></li>
                                             </ul>
                                         </span>
-                                        <?php echo Html::a(
-                                            'Save for later',
-                                            ['save', 'id' => $product['cart_id']],
-                                            [
-                                                'class' => 'btn btn-outline-warning btn-sm rounded-0 btn-save-for-later',
-                                                'date-method' => 'POST', 'data-id' => $product['cart_id'], 'data-save' => $product['id']
-                                            ]
-                                        ) ?>
+                                        <a data-id=<?= $product['cart_id'] ?> data-save=<?= $product['id'] ?> href="<?= Url::to(['store-single', 'id' => $product['cart_id']]) ?>" class="btn btn-outline-warning btn-sm rounded-0 btn-save-for-later">Save for later</a>
                                         <?php echo Html::a(
                                             'Remove',
                                             ['remove', 'id' => $product['cart_id']],
@@ -145,7 +138,7 @@ Yii::$app->params['og_image']['content'] = 'image.jpg';
                                         </div>
                                     </div>
                                     <div class="col-4">
-                                        <a class="btn btn-outline-secondary btn-sm rounded-0 btn-move-to-cart" data-save="<?= $product['id'] ?>" href="<?= Url::to(['site/store-single?id=' . $product['id']]) ?>">Move to cart</a>
+                                        <a class="btn btn-outline-secondary btn-sm rounded-0 btn-move-to-cart" data-save="<?= $product['id'] ?>" href="<?= Url::to(['site/store-single', 'id' => $product['id']]) ?>">Move to cart</a>
                                     </div>
                                 </div>
                             </div>
