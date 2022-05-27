@@ -88,8 +88,9 @@
   margin: 0 50px;
 }
 .select-lang {
-  border: 2px solid rgb(235, 234, 234);
+  border: 2px solid #e2e2e2ac;
   border-radius: 5px;
+  background-color: #f8f9fc;
   position: absolute;
   top: 20px;
   right: 2px;

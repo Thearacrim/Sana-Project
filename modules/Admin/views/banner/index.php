@@ -66,13 +66,15 @@ $this->params['breadcrumbs'][] = $this->title;
     }
 </style>
 <div class="banner-index">
-
-    <h1 class="text-color"><?= Html::encode($this->title) ?></h1>
-    <p>
-        <?= Html::a('Create Banner', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-    <div class="cart-body m-5">
-
+    <div class="cart-body mr-5 ml-5">
+        <div class="row" style="margin:3rem 0">
+            <div class="col-lg-6">
+                <h1 class="text-color"><?= Html::encode($this->title) ?></h1>
+            </div>
+            <div class="col-lg-6">
+                <a type="button" href="<?= Url::to(['banner/create']) ?>" class="btn btn-primary float-right btn1 rounded-circle action trigggerModal"><i class="fas fa-plus"></i></a>
+            </div>
+        </div>
         <?php // echo $this->render('_search', ['model' => $searchModel]); 
         ?>
         <div class="row row_gallery">

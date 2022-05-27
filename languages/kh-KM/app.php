@@ -20,5 +20,8 @@ return [
     'type' => 'ប្រភេទ',
     'action' => 'មុខងារ',
     'created_date' => 'ថ្ងៃ បង្កើត',
+    'code' => 'កូដ',
+    'customer' => 'អតិជន',
+    'status' => 'ពិនិត្យ',
 
 ];

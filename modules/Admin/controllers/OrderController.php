@@ -2,8 +2,13 @@
 
 namespace app\modules\Admin\controllers;
 
+use app\modules\Admin\models\Invoices;
 use app\modules\Admin\models\Order;
+use app\modules\Admin\models\OrderItem;
 use app\modules\Admin\models\OrderSearch;
+use kartik\mpdf\Pdf;
+use Yii;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -36,6 +41,46 @@ class OrderController extends Controller
      *
      * @return string
      */
+    public function actionCreatePdf($id)
+    {
+        $dataProvider = new ActiveDataProvider([
+            'query' => OrderItem::find()->where(['order_id' => $id]),
+        ]);
+        $order_item = Yii::$app->db->createCommand("SELECT SUM(total) as total_price FROM `order_item` 
+            where order_id = :id")
+            ->bindParam("id", $id)
+            ->queryOne();
+        $order = Order::find()->one();
+        $customer = Yii::$app->db->createCommand("SELECT customer.name as name, customer.address as address FROM `order` 
+            INNER JOIN customer on customer.id = order.customer_id
+            where customer.id = order.customer_id")
+            ->queryOne();
+        Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+        $pdf = new Pdf([
+            'mode' => Pdf::MODE_CORE, // leaner size using standard fonts
+            'destination' => Pdf::DEST_BROWSER,
+            'content' => $this->renderPartial('view', [
+                'model' => $this->findModel($id),
+                'dataProvider' => $dataProvider,
+                'order_item' => $order_item,
+                'order' => $order,
+                'customer' => $customer
+            ]),
+            'options' => [
+                // any mpdf options you wish to set
+            ],
+            'methods' => [
+                'SetTitle' => 'Zay Online Invoices',
+                'SetHeader' => ['Zay Online Invoices||Generated On: ' . date("r")],
+                'SetFooter' => ['|Page {PAGENO}|'],
+                'SetAuthor' => 'Kartik Visweswaran',
+                'SetCreator' => 'Kartik Visweswaran',
+                'SetKeywords' => 'Zay, Yii2, Export, PDF, MPDF, Output, Privacy, Policy, yii2-mpdf',
+            ]
+        ]);
+        return $pdf->render();
+    }
+
     public function actionIndex()
     {
         $searchModel = new OrderSearch();
@@ -56,8 +101,30 @@ class OrderController extends Controller
      */
     public function actionView($id)
     {
+        $dataProvider = new ActiveDataProvider([
+            'query' => OrderItem::find()->where(['order_id' => $id]),
+        ]);
+        $order_item = Yii::$app->db->createCommand("SELECT SUM(total) as total_price FROM `order_item` 
+            where order_id = :id")
+            ->bindParam("id", $id)
+            ->queryOne();
+        $order = Order::find()->one();
+        $customer = Yii::$app->db->createCommand("SELECT
+            customer.name,
+            customer.address
+            FROM invoices
+            INNER JOIN customer ON customer.id = invoices.Customer
+            WHERE invoices.id = :id")
+            ->bindParam("id", $id)
+            ->queryOne();
+        $invoice = Invoices::find()->one();
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'dataProvider' => $dataProvider,
+            'order_item' => $order_item,
+            'order' => $order,
+            'invoice' => $invoice,
+            'customer' => $customer
         ]);
     }
 

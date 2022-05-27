@@ -20,7 +20,7 @@ AdminAsset::register($this);
     <div class="row">
         <div class="col-lg-5">
             <label>Date Range</label>
-            <div id="order__date__range" style="cursor: pointer;" class="form-control">
+            <div id="order__date__range" style="cursor: pointer;background-color: #f8f9fc;" class="form-control">
                 <i class="fas fa-calendar text-muted"></i>&nbsp;
                 <span></span> <i class="fa fa-caret-down text-muted float-right"></i>
             </div>
@@ -32,8 +32,7 @@ AdminAsset::register($this);
             <?= $form->field($model, 'globalSearch')->textInput([
                 'placeholder' => 'Search...', 'aria-label' => 'Search', 'type' => 'search',
                 'class' => 'form-control form-control-navbar',
-                // 'style' => 'border-top-right-radius: 0;
-                //     border-bottom-right-radius: 0;'
+                'style' => 'background-color: #f8f9fc;'
             ])->label(false) ?>
         </div>
         <div class="col-lg-2">

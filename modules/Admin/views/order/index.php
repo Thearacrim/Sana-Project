@@ -11,8 +11,8 @@ use yii\grid\GridView;
 /* @var $searchModel backend\models\OrderSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Orders';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = Yii::t('app', 'order');
+// $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="order-index">
@@ -74,9 +74,18 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                         [
                             'class' => 'yii\grid\ActionColumn',
-                            // 'contentOptions' => ['style' => 'width: 7%'],
+                            'template' => '{PDF}{view}',
                             'visible' => Yii::$app->user->isGuest ? false : true,
                             'buttons' => [
+                                'PDF' => function ($url, $model) {
+                                    return Html::a('<i class="fa-solid fa-file-pdf"></i>', ['/admin/invoices/create-pdf', 'id' => $model->id], [
+                                        'class' => 'btn btn-outline-info rounded-circle btn-sm',
+                                        'style' => 'margin-right: 5px;padding:5px 10px',
+                                        'target' => '_blank',
+                                        'data-toggle' => 'tooltip',
+                                        'title' => 'Will open the generated PDF file in a new window'
+                                    ]);
+                                },
                                 'view' => function ($url) {
                                     return Html::a('<i class="fa-solid fa-eye"></i>', $url, ['class' => 'glyphicon glyphicon-eye-open btn btn-outline-info btn-sm rounded-circle btn-xs custom_button']);
                                 },
@@ -97,7 +106,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]);
                 // echo Yii::$app->user->isGuest ? "yes" : "no";
                 ?>
-
 
             </div>
         </div>

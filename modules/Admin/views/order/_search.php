@@ -19,7 +19,7 @@ use yii\widgets\ActiveForm;
     <div class="row">
         <div class="col-lg-6">
             <label>Date Range</label>
-            <div id="order__date__range" style="cursor: pointer;" class="form-control">
+            <div id="order__date__range" style="cursor: pointer;background-color: #f8f9fc;" class="form-control">
                 <i class="fas fa-calendar text-muted"></i>&nbsp;
                 <span></span> <i class="fa fa-caret-down text-muted float-right"></i>
             </div>
@@ -31,6 +31,8 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'globalSearch')->textInput([
                 'placeholder' => 'Search...', 'aria-label' => 'Search', 'type' => 'search',
                 'class' => 'form-control form-control-navbar',
+                'style' => 'background-color: #f8f9fc;',
+
                 // 'style' => 'border-top-right-radius: 0;
                 //     border-bottom-right-radius: 0;'
             ])->label(false) ?>

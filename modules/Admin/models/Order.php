@@ -49,14 +49,14 @@ class Order extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'code' => 'Code',
-            'customer_id' => 'Customer ID',
+            'code' => Yii::t('app', 'code'),
+            'customer_id' => Yii::t('app', 'customer'),
             'note' => 'Note',
             'sub_total' => 'Sub Total',
             'discount' => 'Discount',
             'grand_total' => 'Grand Total',
-            'status' => 'Status',
-            'created_date' => 'Created Date',
+            'status' => Yii::t('app', 'status'),
+            'created_date' => Yii::t('app', 'created_date'),
             'created_by' => 'Created By',
         ];
     }

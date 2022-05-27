@@ -26,46 +26,32 @@ Yii::$app->setHomeUrl(Yii::getAlias("@web/index.php?r=admin/default"));
       <span>Dashboard</span></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="false" aria-controls="collapseTwo">
       <i class="fas fa-fw fa-cog"></i>
-      <span><?= \Yii::t('app', 'invoices') ?></span>
+      <span><?= \Yii::t('app', 'home') ?></span>
     </a>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar" style="">
+    <div id="collapseUtilities" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar" style="">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Element Components:</h6>
-        <a class="collapse-item" href="<?= Url::to(['/admin/invoices']) ?>"><?= \Yii::t('app', 'invoices manage') ?></a>
-        <a class="collapse-item" href="cards.html">Cards</a>
+        <a class="collapse-item" href="<?= Url::to(['/admin/banner']) ?>"><?= \Yii::t('app', 'banner') ?></a>
       </div>
     </div>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-      <i class="fas fa-fw fa-cog"></i>
-      <span><?= \Yii::t('app', 'home') ?></span>
-    </a>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar" style="">
-      <div class="bg-white py-2 collapse-inner rounded">
-        <h6 class="collapse-header">Element Components:</h6>
-        <a class="collapse-item" href="<?= Url::to(['/admin/banner']) ?>"><?= \Yii::t('app', 'banner') ?></a>
-        <a class="collapse-item" href="cards.html"><?= \Yii::t('app', 'carts') ?></a>
-      </div>
-    </div>
-  </li>
-  <li class="nav-item active">
     <a class="nav-link" href="<?= Url::to(['/admin/product']) ?>">
       <i class="fas fa-balance-scale-right"></i>
       <span><?= \Yii::t('app', 'product') ?></span></a>
   </li>
-  <li class="nav-item active">
+  <li class="nav-item">
     <a class="nav-link" href="<?= Url::to(['/admin/order']) ?>">
       <i class="fas fa-book"></i>
       <span><?= \Yii::t('app', 'order') ?></span></a>
   </li>
-  <li class="nav-item active">
+  <!-- <li class="nav-item active">
     <a class="nav-link" href="<?= Url::to(['/admin/order-item']) ?>">
       <i class="fas fa-credit-card"></i>
       <span><?= \Yii::t('app', 'order item') ?></span></a>
-  </li>
+  </li> -->
 
   <!-- Divider -->
   <hr class="sidebar-divider d-none d-md-block">
