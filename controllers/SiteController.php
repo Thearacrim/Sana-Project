@@ -629,7 +629,7 @@ class SiteController extends Controller
         if ($totalCart) {
             $userId = Yii::$app->user->id;
             $totalPrice = Yii::$app->db->createCommand("SELECT 
-                SUM(cart.quantity * product.price) as total_price, product.price as price
+                SUM(cart.quantity * product.price) as total_price
                 FROM cart
                 INNER JOIN product ON product.id = cart.product_id
                 WHERE user_id = :userId

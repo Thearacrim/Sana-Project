@@ -201,7 +201,7 @@ $base_url = Yii::getAlias('@web');
                         <h6 class="text-color">Original Price (<?= $totalCart ?>)</h6>
                     </div>
                     <div class="col-6 text-right mb-0">
-                        <h6 class="text-color">$ <?= $totalPrice['price'] ?></h6>
+                        <h6 class="text-color"></h6>
                     </div>
                 </div>
                 <div class="row pt-3">
