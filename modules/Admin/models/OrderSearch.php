@@ -42,7 +42,7 @@ class OrderSearch extends Order
      */
     public function search($params)
     {
-        $query = Order::find();
+        $query = Order::find()->joinwith('order');
 
         // add conditions that should always apply here
 
@@ -60,7 +60,7 @@ class OrderSearch extends Order
         $query->andFilterWhere(['between', 'DATE(created_date)', $this->from_date, $this->to_date]);
 
         $query->FilterWhere(['like', 'code', $this->globalSearch])
-            ->orFilterWhere(['like', 'customer_id', $this->globalSearch]);
+            ->orFilterWhere(['like', 'customer.name', $this->globalSearch]);
 
         return $dataProvider;
     }

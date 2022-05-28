@@ -60,6 +60,24 @@ $this->title = Yii::t('app', 'order');
                             'value' => 'order.name'
                         ],
                         [
+                            'attribute' => 'sub_total',
+                            'value' => function ($model) {
+                                return '$ ' . $model->sub_total;
+                            }
+                        ],
+                        [
+                            'attribute' => 'discount',
+                            'value' => function ($model) {
+                                return $model->discount . '%';
+                            }
+                        ],
+                        [
+                            'attribute' => 'grand_total',
+                            'value' => function ($model) {
+                                return '$' . $model->grand_total;
+                            }
+                        ],
+                        [
                             'attribute' => 'status',
                             'format' => 'raw',
                             'value' => function ($model) {

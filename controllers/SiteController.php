@@ -669,12 +669,22 @@ class SiteController extends Controller
             $payer_id = $this->request->post('payer_id');
             $carts = Cart::find()->where(['user_id' => $userId])->all();
             $customer = Customer::find()->where(['name' => $profile])->one();
-            $product = Yii::$app->db->createCommand("SELECT 
-                product.price as sub_total
-                FROM cart
-                INNER JOIN product ON product.id = cart.product_id
-                WHERE product.id = cart.product_id
+            // $TotalPrice = Yii::$app->db->createCommand("SELECT 
+            //     SUM(product.price) as sub_total
+            //     FROM cart
+            //     INNER JOIN product ON product.id = cart.product_id
+            //     WHERE product.id = cart.product_id
+            // ")
+            // ->queryOne();
+            $product = Yii::$app->db->createCommand("SELECT
+                SUM( product.price * cart.quantity ) AS sub_total 
+            FROM
+                cart
+                INNER JOIN product ON product.id = cart.product_id 
+            WHERE
+                cart.user_id = :userId
             ")
+                ->bindParam('userId', $userId)
                 ->queryOne();
 
             if (!$customer) {
@@ -687,6 +697,7 @@ class SiteController extends Controller
             $order->code = $payer_id;
             $order->customer_id = $customer->id;
             $order->sub_total = $product['sub_total'];
+            $order->grand_total = $product['sub_total'] - $order->discount;
             $order->created_date = date('Y-m-d H:i:s');
             $order->created_by = Yii::$app->user->identity->id;
             if ($order->save()) {
