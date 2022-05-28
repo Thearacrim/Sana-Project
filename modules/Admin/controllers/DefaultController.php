@@ -92,7 +92,6 @@ class DefaultController extends Controller
             ")
             ->queryOne();
         $findPrice = Yii::$app->db->createCommand("SELECT
-            MONTHNAME(created_date) as Month,
                 SUM(qty * price) as Total
             FROM
                 order_item 
