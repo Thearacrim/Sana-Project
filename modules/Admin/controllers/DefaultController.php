@@ -88,8 +88,7 @@ class DefaultController extends Controller
         $totalCustomer =
             Yii::$app->db->createCommand("SELECT
             COUNT(id) as totalCustomer
-            FROM Customer
-            
+            FROM customer
             ")
             ->queryOne();
         $findPrice = Yii::$app->db->createCommand("SELECT
