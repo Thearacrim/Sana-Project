@@ -3,6 +3,7 @@
 namespace app\modules\Admin\controllers;
 
 use app\modules\Admin\models\LoginForm;
+use app\modules\Admin\models\User;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -70,7 +71,50 @@ class DefaultController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index');
+        $totalUser =
+            Yii::$app->db->createCommand("SELECT
+            COUNT(id) as totalUser
+            FROM user
+            
+            ")
+            ->queryOne();
+        $totalProduct =
+            Yii::$app->db->createCommand("SELECT
+            COUNT(id) as totalProduct
+            FROM product
+            
+            ")
+            ->queryOne();
+        $totalCustomer =
+            Yii::$app->db->createCommand("SELECT
+            COUNT(id) as totalCustomer
+            FROM Customer
+            
+            ")
+            ->queryOne();
+        $findPrice = Yii::$app->db->createCommand("SELECT
+            MONTHNAME(created_date) as Month,
+                SUM(qty * price) as Total
+            FROM
+                order_item 
+            GROUP BY
+                MONTH(created_date)
+            ")
+            ->queryOne();
+        $findAnnualPrice =
+            Yii::$app->db->createCommand("SELECT
+                SUM(qty * price) as TotalAnnual
+            FROM
+                order_item 
+            ")
+            ->queryOne();
+        return $this->render('index', [
+            'findPrice' => $findPrice,
+            'findAnnualPrice' => $findAnnualPrice,
+            'totalUser' => $totalUser,
+            'totalProduct' => $totalProduct,
+            'totalCustomer' => $totalCustomer,
+        ]);
     }
     public function beforeAction($action)
     {
