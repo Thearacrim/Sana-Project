@@ -97,29 +97,11 @@
                                     return $model->getTypeTemp();
                                 }
                             ],
-                            // [
-                            //     'class' => ActionColumn::class,
-                            //     'urlCreator' => function ($action, $model, $key, $index, $column) {
-                            //         return Url::toRoute([$action, 'id' => $model->id]);
-                            //     },
-                            //     'header' => 'action',
-                            //     'headerOptions' => ['class' => 'text-center'],
-                            //     'contentOptions' => ['class' => 'text-center'],
-                            // ],
                             [
                                 'class' => 'yii\grid\ActionColumn',
                                 'template' => '{PDF}{view} {update} {delete}',
                                 'visible' => Yii::$app->user->isGuest ? false : true,
                                 'buttons' => [
-                                    // 'PDF' => function ($url, $model) {
-                                    //     return Html::a('<i class="fa-solid fa-file-pdf"></i>', ['/admin/invoices/create-pdf', 'id' => $model->id], [
-                                    //         'class' => 'btn btn-outline-info rounded-circle btn-sm',
-                                    //         'style' => 'margin-right: 5px;padding:5px 10px',
-                                    //         'target' => '_blank',
-                                    //         'data-toggle' => 'tooltip',
-                                    //         'title' => 'Will open the generated PDF file in a new window'
-                                    //     ]);
-                                    // },
                                     'view' => function ($url) {
                                         return Html::a('<i class="fa-solid fa-eye"></i>', $url, ['class' => 'btn btn-outline-info rounded-circle btn-sm custom_button']);
                                     },

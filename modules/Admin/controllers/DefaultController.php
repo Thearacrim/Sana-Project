@@ -69,6 +69,21 @@ class DefaultController extends Controller
         Yii::$app->response->cookies->add($calendarCookie);
     }
 
+    private function GetMonth($month)
+    {
+        $total =  Yii::$app->db->createCommand("SELECT
+            sum( qty * price ) AS Total
+        FROM
+            order_item 
+        WHERE
+            MONTH ( created_date ) = $month
+        GROUP BY
+            MONTH ( created_date )
+            ")
+            ->queryScalar();
+        return $total ? $total : 0;
+    }
+
     public function actionIndex()
     {
         $totalUser =
@@ -78,6 +93,7 @@ class DefaultController extends Controller
             
             ")
             ->queryOne();
+
         $totalProduct =
             Yii::$app->db->createCommand("SELECT
             COUNT(id) as totalProduct
@@ -91,23 +107,25 @@ class DefaultController extends Controller
             FROM customer
             ")
             ->queryOne();
-        $findPrice = Yii::$app->db->createCommand("SELECT
-                SUM(qty * price) as Total
-            FROM
-                order_item 
-            GROUP BY
-                MONTH(created_date)
-            ")
-            ->queryOne();
+
+        $findPriceApril = $this->GetMonth(4);
+        $findPriceMay = $this->GetMonth(5);
+        $findPriceJune = $this->GetMonth(6);
+        $findPriceJuly = $this->GetMonth(7);
+        $findPriceAugust = $this->GetMonth(8);
         $findAnnualPrice =
             Yii::$app->db->createCommand("SELECT
                 SUM(qty * price) as TotalAnnual
             FROM
                 order_item 
             ")
-            ->queryOne();
+            ->queryScalar();
         return $this->render('index', [
-            'findPrice' => $findPrice,
+            'findPriceApril' => $findPriceApril,
+            'findPriceMay' => $findPriceMay,
+            'findPriceJune' => $findPriceJune,
+            'findPriceJuly' => $findPriceJuly,
+            'findPriceAugust' => $findPriceAugust,
             'findAnnualPrice' => $findAnnualPrice,
             'totalUser' => $totalUser,
             'totalProduct' => $totalProduct,

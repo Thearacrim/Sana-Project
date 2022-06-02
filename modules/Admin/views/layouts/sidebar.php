@@ -13,7 +13,7 @@ Yii::$app->setHomeUrl(Yii::getAlias("@web/index.php?r=admin/default"));
     <div class="sidebar-brand-icon rotate-n-15">
       <i class="fas fa-laugh-wink"></i>
     </div>
-    <div class="sidebar-brand-text mx-3">CD Admin <sup>2</sup></div>
+    <div class="sidebar-brand-text mx-3">Zay Admin <sup>+</sup></div>
   </a>
 
   <!-- Divider -->
@@ -26,11 +26,11 @@ Yii::$app->setHomeUrl(Yii::getAlias("@web/index.php?r=admin/default"));
       <span>Dashboard</span></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="false" aria-controls="collapseTwo">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsed" aria-expanded="false" aria-controls="collapseTwo">
       <i class="fas fa-fw fa-cog"></i>
       <span><?= \Yii::t('app', 'home') ?></span>
     </a>
-    <div id="collapseUtilities" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar" style="">
+    <div id="collapsed" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar" style="">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Element Components:</h6>
         <a class="collapse-item" href="<?= Url::to(['/admin/banner']) ?>"><?= \Yii::t('app', 'banner') ?></a>
@@ -54,6 +54,18 @@ Yii::$app->setHomeUrl(Yii::getAlias("@web/index.php?r=admin/default"));
   </li> -->
 
   <!-- Divider -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="false" aria-controls="collapseTwo">
+      <i class="fas fa-fw fa-cog"></i>
+      <span><?= \Yii::t('app', 'report') ?></span>
+    </a>
+    <div id="collapseUtilities" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar" style="">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <h6 class="collapse-header">Managements:</h6>
+        <a class="collapse-item" href="<?= Url::to(['/admin/report']) ?>"><?= \Yii::t('app', 'product rank') ?></a>
+      </div>
+    </div>
+  </li>
   <hr class="sidebar-divider d-none d-md-block">
 
   <!-- Sidebar Toggler (Sidebar) -->

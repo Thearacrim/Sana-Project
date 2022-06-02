@@ -18,7 +18,16 @@ $this->title = 'My Yii Application';
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                             Earnings (Monthly)</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">$ <?= $findPrice['Total'] ?></div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">$ <?php if (date('m') == 05) {
+                                                                                    echo $findPriceMay;
+                                                                                } else if (date('m') == 06) {
+                                                                                    echo $findPriceJune;
+                                                                                } else if (date('m') == 07) {
+                                                                                    echo $findPriceJuly;
+                                                                                } else {
+                                                                                    echo $findPriceAugust;
+                                                                                }
+                                                                                ?></div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -36,7 +45,8 @@ $this->title = 'My Yii Application';
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                             Earnings (Annual)</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">$<?= $findAnnualPrice['TotalAnnual'] ?></div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">$<?= $findAnnualPrice
+                                                                                ?></div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -175,8 +185,12 @@ $this->title = 'My Yii Application';
         </div>
     </div>
 </div>
+<?php
+$findPriceJune;
+$findPriceAugust;
+$findPriceJuly
+?>
 
-<?php $totalPriceMonthly = $findPrice['Total']; ?>
 <?php
 $script = <<< JS
     $(function() {
@@ -252,7 +266,11 @@ $script = <<< JS
 
             // Area Chart Example
             var ctx = document.getElementById("myAreaChart");
-            var totalPriceMonth = '$totalPriceMonthly';
+            var findPriceMay = '$findPriceMay';
+            var findPriceApril = '$findPriceApril';
+            var findPriceJune = '$findPriceJune';
+            var findPriceJuly = '$findPriceJuly';
+            var findPriceAugust = '$findPriceAugust';
             var myLineChart = new Chart(ctx, {
             type: "line",
             data: {
@@ -285,7 +303,7 @@ $script = <<< JS
                     pointHitRadius: 10,
                     pointBorderWidth: 2,
                     data: [
-                    0, 0, 0, 0, totalPriceMonth, 0, 0, 0, 0,
+                    0, 0, 0, findPriceApril, findPriceMay, findPriceJune, findPriceAugust, 0, 0,
                     0,0, 0
                     ],
                 },

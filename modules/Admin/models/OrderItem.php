@@ -22,6 +22,9 @@ class OrderItem extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+
+    public $status;
+    public $Championship = "https://w7.pngwing.com/pngs/300/259/png-transparent-computer-icons-award-medal-symbol-quality-assurance-culture-text-medal-thumbnail.png";
     public static function tableName()
     {
         return 'order_item';
@@ -34,6 +37,7 @@ class OrderItem extends \yii\db\ActiveRecord
     {
         return [
             [['order_id', 'product_id', 'color', 'qty', 'size'], 'integer'],
+            [['status'], 'string'],
             [['price', 'discount', 'total'], 'number'],
         ];
     }
@@ -48,6 +52,7 @@ class OrderItem extends \yii\db\ActiveRecord
             'order_id' => 'Order ID',
             'product_id' => 'Product ID',
             'color' => 'Color',
+            'status' => 'Name',
             'qty' => 'Qty',
             'price' => 'Price',
             'discount' => 'Discount',
