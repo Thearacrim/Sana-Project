@@ -146,7 +146,7 @@ Yii::$app->params['og_image']['content'] = 'image.jpg';
                     </div>
                 </div>
             </div>
-            <div class="col-4 rounded price-section">
+            <div class="col-lg-4 rounded price-section">
                 <div class="card-header border mb-3">
                     <h2 class="text-color">Price Detail</h2>
                 </div>

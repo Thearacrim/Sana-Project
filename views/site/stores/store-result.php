@@ -53,7 +53,7 @@ $base_url = Yii::getAlias("@web");
         'summary' => '<b>{begin}</b>-<b>{end}</b> of <b>{totalCount}</b>.',
         'itemOptions' => [
             // 'tag' => false
-            'class' => "col-lg-3 col-md-4 col-sm-4 product-item"
+            'class' => "col-lg-3 col-md-4 col-6 product-item"
         ],
         'pager' => [
             'firstPageLabel' => 'First',

@@ -255,6 +255,7 @@ input:disabled {
 .sec-border {
   border: 1px solid #bcc0c4;
   width: 100%;
+  height: 100px;
   background-color: rgba(0, 0, 0, 0.03);
 }
 

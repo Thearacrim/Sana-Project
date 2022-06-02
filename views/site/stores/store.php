@@ -92,7 +92,7 @@ Yii::$app->params['og_image']['content'] = $model->image_url;
                 'dataProvider' => $dataProvider,
                 'itemView' => 'product_cart',
                 'itemOptions' => [
-                    'class' => "col-lg-4 col-md-4 col-sm-6 product-item block"
+                    'class' => "col-lg-4 col-md-4 col-6 product-item block"
                 ],
                 'layout' => '
                     <div class="row">

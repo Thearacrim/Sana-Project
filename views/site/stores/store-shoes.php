@@ -93,7 +93,7 @@ $base_url = Yii::getAlias("@web");
                 'itemView' => 'product_cart',
                 'itemOptions' => [
                     // 'tag' => false
-                    'class' => "col-md-4 product-item block"
+                    'class' => "col-md-4 col-6 product-item block"
                 ],
                 // 'pager' => [
                 //     'firstPageLabel' => 'First',

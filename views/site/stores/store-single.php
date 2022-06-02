@@ -210,13 +210,19 @@ Yii::$app->params['og_image']['content'] = $products->image_url;
                                 </div>
                             </div>
                         </div>
-                        <div class="btn-qty d-flex pr-5 pl-5 justify-content-between pb-5">
+                        <div class="btn-qty pr-5 pl-5 pb-5">
                             <?php if (Yii::$app->user->isGuest) { ?>
                                 <a href="#" class="btn btn-primary btn-sm btn-buy-now rounded-0 trigggerModal" value="<?= Url::to(['/site/login']) ?>"><i class="fa-solid fa-cart-shopping"></i> Buy Now</a>
                                 <a class="btn btn-primary btn-sm btn-add-to-cart rounded-0 trigggerModal" value="<?= Url::to(['/site/login']) ?>"><i class="fa-solid fa-cart-shopping"></i> Add To Cart</a>
                             <?php } else { ?>
-                                <a href="#" class="btn btn-primary btn-sm btn-buy-now rounded-0l"><i class="fa-solid fa-cart-shopping"></i> Buy Now</a>
-                                <a class="btn btn-primary btn-sm btn-add-to-cart rounded-0l"><i class="fa-solid fa-cart-shopping"></i> Add To Cart</a>
+                                <div class="row">
+                                    <div class="col-lg-6 col ">
+                                        <a href="#" class="btn btn-primary btn-sm btn-buy-now rounded-0"><i class="fa-solid fa-cart-shopping"></i> Buy Now</a>
+                                    </div>
+                                    <div class="col-lg-6 col text-right">
+                                        <a class="btn btn-primary btn-sm btn-add-to-cart rounded-0"><i class="fa-solid fa-cart-shopping"></i> Add To Cart</a>
+                                    </div>
+                                </div>
                             <?php } ?>
                         </div>
                     </div>
