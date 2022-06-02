@@ -88,13 +88,15 @@ $base_url = Yii::getAlias('@web');
                 <h2 class="fw-bold p-3 text-color">Order Details</h2>
                 <div class="pb-5">
                     <?php foreach ($relatedProduct as $key => $product) { ?>
-                        <div class="sec-border rounded-0 hover row_item_<?= $product['cart_id'] ?>" data-id=<?= $product['cart_id'] ?>>
+                        <div class="sec-border-checkout rounded-0 hover row_item_<?= $product['cart_id'] ?>" data-id=<?= $product['cart_id'] ?>>
                             <div class="row ">
                                 <div class="col-4">
                                     <img src="<?= $base_url . '/' . $product['image_url'] ?>" style="width:73px">
                                 </div>
-                                <div class="col-4 p-3">
+                                <div class="col-4 py-5">
                                     <span class="fw-bold text-color"> <?= $product['status'] ?>
+                                </div>
+                                <!-- <div class="col-4 my-5">
                                     </span>
                                     <div class="color">
                                         <?php if ($product['color'] == 'Blue') { ?>
@@ -175,7 +177,7 @@ $base_url = Yii::getAlias('@web');
                                             <?php } ?>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="col-4 py-5">
                                     <span class="fw-bold text-color"> $<?php
                                                                         if ($product['quantity'] == 1) {
