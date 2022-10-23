@@ -63,6 +63,7 @@ Yii::$app->setHomeUrl(Yii::getAlias("@web/index.php?r=admin/default"));
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Managements:</h6>
         <a class="collapse-item" href="<?= Url::to(['/admin/report']) ?>"><?= \Yii::t('app', 'product rank') ?></a>
+        <a class="collapse-item" href="<?= Url::to(['/admin/coupon']) ?>"><?= \Yii::t('app', 'coupon') ?></a>
       </div>
     </div>
   </li>

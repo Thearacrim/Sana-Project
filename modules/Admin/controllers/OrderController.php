@@ -109,12 +109,12 @@ class OrderController extends Controller
             ->bindParam("id", $id)
             ->queryOne();
         $order = Order::find()->one();
-        $customer = Yii::$app->db->createCommand("SELECT
-            customer.name,
-            customer.address
-            FROM invoices
-            INNER JOIN customer ON customer.id = invoices.Customer
-            WHERE invoices.id = :id")
+        $customer = Yii::$app->db->createCommand("SELECT 
+         customer.name,
+         customer.address 
+         FROM `zay-store`.invoices
+            INNER JOIN customer on invoices.Customer = customer.id  
+            where invoices.id = :id")
             ->bindParam("id", $id)
             ->queryOne();
         $invoice = Invoices::find()->one();

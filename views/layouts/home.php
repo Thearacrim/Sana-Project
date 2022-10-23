@@ -40,6 +40,8 @@ Modal::end();
 <body class="back-light" id="themeMode">
   <?php $this->beginBody() ?>
 
+  <?= $this->render("promotion", ['base_url' => $base_url]) ?>
+
   <?= $this->render("top_nav", ['base_url' => $base_url]) ?>
 
   <?= $this->render("header", ['base_url' => $base_url]) ?>

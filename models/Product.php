@@ -55,6 +55,7 @@ class Product extends \yii\db\ActiveRecord
             'type_item' => 'Type Item',
             'image_url' => 'Image Url',
             'description' => 'Description',
+            
             'rate' => 'Rate',
             'updated_date' => 'Updated Date',
             'created_date' => 'Created At'

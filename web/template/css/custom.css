@@ -275,7 +275,7 @@ input:disabled {
 
 .price-single {
   font-size: 5rem;
-  padding: 2rem;
+  padding: 0.4rem;
 }
 
 /* dropdown-search */
@@ -437,4 +437,48 @@ input:disabled {
 html.is-animating .transition-fade {
   opacity: 0;
   transform: translateX(-100px);
+}
+
+.ribbon-wrapper {
+  width: 88px;
+  height: 88px;
+  overflow: hidden;
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  z-index: 1;
+}
+.ribbon-tag {
+  text-align: center;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  position: relative;
+  padding: 2px 0;
+  left: -4px;
+  top: 15px;
+  width: 120px;
+  color: #ffffff;
+  -webkit-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+  text-shadow: rgba(255, 255, 255, 0.5) 0px 1px 0px;
+  background: #be1717;
+}
+
+.ribbon-tag:before,
+.ribbon-tag:after {
+  content: "";
+  border-top: 3px solid #50504f;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  position: absolute;
+  bottom: -3px;
+}
+.ribbon-tag:before {
+  left: 0;
+}
+.ribbon-tag:after {
+  right: 0;
 }

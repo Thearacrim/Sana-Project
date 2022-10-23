@@ -46,6 +46,7 @@ class AdminAsset extends AssetBundle
         'js/overiddingAlert.js',
         'js/custom.js',
         'https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js',
+        'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

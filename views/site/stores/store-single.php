@@ -10,6 +10,15 @@ $this->title = $products->status;
 $this->params['breadcrumbs'][] = $this->title;
 
 $base_url = Yii::getAlias("@web");
+$discount = Yii::$app->db->createCommand("SELECT
+        discount
+    FROM
+        `coupon` 
+    WHERE
+    CURDATE() < expire_date
+            ")
+    ->queryScalar();
+$discountCal = $products->price * ($discount / 100);
 
 ?>
 <?php
@@ -27,6 +36,14 @@ Yii::$app->params['og_image']['content'] = $products->image_url;
             <div class="row product-item" data-key="<?= $products->id ?>">
                 <div class="col-lg-5 mt-5">
                     <div class="card mb-3">
+                        <?php if ($discount) {
+                        ?>
+                            <div class="ribbon-wrapper">
+                                <div class="ribbon-tag">Hot Deals</div>
+                            </div>
+                        <?php
+                        } else {
+                        } ?>
                         <img class="card-img" src="<?= $base_url ?>/<?= $products->image_url ?>" alt="Card image cap" id="product-detail">
                     </div>
                     <div class="row">
@@ -126,8 +143,14 @@ Yii::$app->params['og_image']['content'] = $products->image_url;
                 <div class="col-lg-7 col-sm-12 mt-5">
                     <div class="card">
                         <div class="card-body">
-                            <h1 class="h2"><?= $products->status ?></h1>
-                            <h1 class="price-single">$<?= $products->price ?>.00</h1>
+                            <span class="h2"><?= $products->status ?></span>
+                            <h6 class="price-single h2" style="text-decoration: line-through; font-size:1.2rem; font-weight:700;">$<?= $products->price ?>.00</h6>
+                            <?php if ($discount) {
+                            ?>
+                                <span style="font-size:3rem; font-weight:700;">$<?= $products->price - $discountCal ?></span>
+                            <?php
+                            } else {
+                            } ?>
                             <p class="py-2">
                                 <i class="fa fa-star text-warning"></i>
                                 <i class="fa fa-star text-warning"></i>
@@ -253,6 +276,14 @@ Yii::$app->params['og_image']['content'] = $products->image_url;
 
                     <div class="card mb-4 product-wap rounded-0">
                         <div class="card rounded-0">
+                            <?php if ($discount) {
+                            ?>
+                                <div class="ribbon-wrapper">
+                                    <div class="ribbon-tag">Hot Deals</div>
+                                </div>
+                            <?php
+                            } else {
+                            } ?>
                             <img class="card-img rounded-0 image-size" src="<?= $base_url . '/' . $model->image_url ?>" />
                             <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                 <ul class="list-unstyled">

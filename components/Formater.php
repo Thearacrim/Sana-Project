@@ -33,7 +33,7 @@ class Formater extends \yii\web\Request
     }
   }
 
-  public function date($value, $format = "d F Y")
+  public function date($value, $format = "d/F/Y")
   {
     return date($format, strtotime($value));
   }

@@ -1,44 +1,70 @@
     <div class="table-me mr-5 ml-5">
-
         <?php
 
+        use app\modules\Admin\models\Coupon;
+        use yii\bootstrap4\ActiveForm;
         use yii\bootstrap4\LinkPager;
-        use yii\bootstrap4\Modal;
         use yii\helpers\Html;
         use yii\helpers\Url;
         use yii\grid\ActionColumn;
         use yii\grid\GridView;
-        use yii\widgets\LinkPager as WidgetsLinkPager;
 
         /* @var $this yii\web\View */
-        /* @var $searchModel backend\models\ProductSearch */
+        /* @var $searchModel app\modules\admin\models\CouponSearch */
         /* @var $dataProvider yii\data\ActiveDataProvider */
-        ?>
-        <?php $this->title = Yii::t('app', 'product'); ?>
-        <?php
+
+        $this->title = 'Coupons';
         $this->params['breadcrumbs'][] = $this->title;
-
-
         ?>
-        <div class="card back-light p-5" style="box-shadow: 0 0.125rem 0.5rem 0 rgb(0 0 0 / 16%);">
-            <div class="product-index">
-                <div class="card-header back-light">
-                    <h1 class="text-color"><?= Html::encode($this->title) ?></h1>
+        <div class="coupon-index">
+
+            <h1><?= Html::encode($this->title) ?></h1>
+            <!-- 
+            <p>
+                <?= Html::a('Create Coupon', ['create'], ['class' => 'btn btn-success']) ?>
+            </p> -->
+
+            <?php echo $this->render('_search', ['model' => $searchModel]);
+            ?>
+            <div class="ml-3">
+                <p>
+                    <button class="btn btn-primary float-right btn1 rounded-circle action" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="fas fa-plus"></i></button>
+                <div class="offcanvas offcanvas-end back-light" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                    <div class="offcanvas-header">
+                        <h5 id="offcanvasRightLabel">Offcanvas right</h5>
+                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body back-light">
+                        <?php $form = ActiveForm::begin(['action' => ['/admin/coupon/create'], 'method' => 'POST']); ?>
+                        <?= $form->field($model, 'coupon_title')->textInput(['maxlength' => true, 'placeholder' => 'Title']) ?>
+
+                        <?= $form->field($model, 'coupon_code')->textInput(['maxlength' => true, 'placeholder' => 'Code']) ?>
+
+                        <?= $form->field($model, 'discount')->textInput(['maxlength' => true, 'placeholder' => 'Discount']) ?>
+
+                        <?= $form->field($model, 'discount_on')->dropDownList(['all product' => 'All product', 'clothes' => 'Clothes', 'shoes' => 'Shoes', '' => '',], ['prompt' => 'Discount On']) ?>
+
+                        <?= $form->field($model, 'coupon_type')->dropDownList(['percentage' => 'Percentage', 'amount' => 'Amount',], ['prompt' => 'Coupon Type']) ?>
+
+                        <div class="form-group">
+                            <label for="expire_date">Expire Date</label>
+                            <input type="hidden" class="form-control flatpickr flatpickr-input" id="expire_date" name="Coupon[expire_date]" placeholder="Expire Date" required="">
+                        </div>
+
+                        <?= $form->field($model, 'status')->dropDownList(['public' => 'Public', 'draft' => 'Draft',], ['prompt' => 'Status']) ?>
+
+                        <div class="form-group text-center">
+                            <?= Html::submitButton('Save', ['class' => 'btn btn-primary rounded-0 w-75']) ?>
+                        </div>
+                        <?php ActiveForm::end(); ?>
+                    </div>
                 </div>
-                <?php
-                Modal::begin([
-                    'title' => 'Create new Product',
-                    'id' => 'modal',
-                    'size' => 'modal-lg',
-                ]);
-                echo "<div id='modalContent'></div>";
-                Modal::end();
-                ?>
-                <?php echo $this->render('_search', ['model' => $searchModel, 'class' => 'form-control inp rounded-0']); ?>
+                </p>
+            </div>
+            <div class="card">
                 <div class="card-body back-light">
                     <?= GridView::widget([
                         'dataProvider' => $dataProvider,
-                        'id' => 'grid',
                         'tableOptions' => [
                             'class' => 'table table-hover text-color',
                             'cellspacing' => '0',
@@ -64,43 +90,33 @@
                     </div>
                 ",
                         'columns' => [
+                            ['class' => 'yii\grid\SerialColumn'],
+                            'coupon_code',
                             [
-                                'class' => 'yii\grid\SerialColumn',
-                                'headerOptions' => ['class' => 'text-center'],
-                                'contentOptions' => ['class' => 'text-center'],
-                                'contentOptions' => [
-                                    'style' => 'width:60px;'
-                                ]
-                            ],
-                            'status',
-                            [
-                                'attribute' => 'price',
-                                // 'format' => ['currency'],
+                                'attribute' => 'discount',
                                 'value' => function ($model) {
-                                    return '$ ' . $model->price;
-                                },
-                                'contentOptions' => [
-                                    'style' => 'width:100px;'
-                                ]
+                                    return $model->discount . "%";
+                                }
                             ],
+                            'discount_on',
                             [
-                                'attribute' => Yii::t('app', 'created_date'),
+                                'attribute' => Yii::t('app', 'expire_date'),
                                 'headerOptions' => ['class' => 'text-center'],
                                 'contentOptions' => ['class' => 'text-center'],
                                 'value' => function ($model) {
-                                    return Yii::$app->formater->timeAgoKH($model->created_date);
+                                    return Yii::$app->formater->date($model->expire_date);
                                 }
                             ],
                             [
-                                'attribute' => Yii::t('app', 'type'),
+                                'attribute' => 'status',
                                 'format' => 'raw',
                                 'value' => function ($model) {
-                                    return $model->getTypeTemp();
+                                    return $model->getTypeStatus();
                                 }
                             ],
                             [
                                 'class' => 'yii\grid\ActionColumn',
-                                'template' => '{PDF}{view} {update} {delete}',
+                                'template' => '{update} {delete}',
                                 'visible' => Yii::$app->user->isGuest ? false : true,
                                 'buttons' => [
                                     'view' => function ($url) {
@@ -124,6 +140,7 @@
                     ]); ?>
                 </div>
             </div>
-        </div>
 
+
+        </div>
     </div>

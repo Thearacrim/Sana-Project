@@ -7,7 +7,7 @@ use yii\web\AssetBundle;
 /**
  * Main application asset bundle.
  */
-class FlatpickrAsset extends AssetBundle
+class FlatepickrAsset extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';

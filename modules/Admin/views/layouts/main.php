@@ -4,6 +4,7 @@
 /** @var string $content */
 $url_web = Yii::getAlias('@web');
 
+use app\assets\FlatepickrAsset;
 use app\assets\AdminAsset;
 use yii\bootstrap4\Html;
 

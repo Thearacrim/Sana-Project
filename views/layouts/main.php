@@ -47,6 +47,9 @@ Modal::end();
 
 <body data-spy="scroll" data-target="#navbar" data-offset="72" class="position-relative back-light" id="themeMode">
     <?php $this->beginBody() ?>
+
+    <?= $this->render("promotion", ['base_url' => $base_url]) ?>
+
     <?= $this->render("top_nav", ['base_url' => $base_url]) ?>
     <header id="header">
         <?= $this->render("header", ['base_url' => $base_url]) ?>
