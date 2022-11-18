@@ -385,8 +385,8 @@ class SiteController extends Controller
             WHERE
             CURDATE() < expire_date "
         )->queryScalar();
-
-        $totalPrice = Yii::$app->db->createCommand("SELECT 
+        if($coupon){
+            $totalPrice = Yii::$app->db->createCommand("SELECT 
                SUM( cart.quantity * (product.price - (product.price * (coupon.discount / 100)))) as total_price
                 FROM cart
                 INNER JOIN product ON product.id = cart.product_id
@@ -395,6 +395,16 @@ class SiteController extends Controller
             ")
             ->bindParam('coupon', $coupon)
             ->queryScalar();
+        }else{
+            $totalPrice = Yii::$app->db->createCommand("SELECT 
+               SUM( cart.quantity * (product.price)) as total_price
+                FROM cart
+                INNER JOIN product ON product.id = cart.product_id
+                WHERE cart.user_id = :userId
+            ")
+            ->bindParam('userId', $userId)
+            ->queryScalar();
+        }
         $products = Product::find()->all();
         return $this->render(
             'cart',
@@ -687,7 +697,8 @@ class SiteController extends Controller
                         WHERE
                         CURDATE() < expire_date "
             )->queryScalar();
-            $totalPrice = Yii::$app->db->createCommand("SELECT 
+            if ($coupon) {
+                $totalPrice = Yii::$app->db->createCommand("SELECT 
                SUM( cart.quantity * (product.price - (product.price * (coupon.discount / 100)))) as total_price
                 FROM cart
                 INNER JOIN product ON product.id = cart.product_id
@@ -696,6 +707,16 @@ class SiteController extends Controller
             ")
                 ->bindParam('coupon', $coupon)
                 ->queryScalar();
+            } else {
+                $totalPrice = Yii::$app->db->createCommand("SELECT 
+               SUM( cart.quantity * (product.price)) as total_price
+                FROM cart
+                INNER JOIN product ON product.id = cart.product_id
+                WHERE cart.user_id = :userId
+            ")
+                ->bindParam('userId', $userId)
+                ->queryScalar();
+            }
             $userId = Yii::$app->user->id;
             $relatedProduct = Yii::$app->db->createCommand(
                 "SELECT product.*,cart.color_id, cart.size_id, cart.quantity, cart.id AS cart_id, variant_size.size, variant_color.color  FROM cart

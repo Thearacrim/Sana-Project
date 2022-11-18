@@ -144,7 +144,17 @@ Yii::$app->params['og_image']['content'] = $products->image_url;
                     <div class="card">
                         <div class="card-body">
                             <span class="h2"><?= $products->status ?></span>
-                            <h6 class="price-single h2" style="text-decoration: line-through; font-size:1.2rem; font-weight:700;">$<?= $products->price ?>.00</h6>
+                            <?php
+                            if ($discount) {
+                            ?>
+                                <h6 class="price-single h2" style="text-decoration: line-through; font-size:1.2rem; font-weight:700;">$<?= $products->price ?>.00</h6>
+                            <?php
+                            } else {
+                            ?>
+                                <h6 class="price-single h2" style="font-size:1.2rem; font-weight:700;">$<?= $products->price ?>.00</h6>
+                            <?php
+                            }
+                            ?>
                             <?php if ($discount) {
                             ?>
                                 <span style="font-size:3rem; font-weight:700;">$<?= $products->price - $discountCal ?></span>
