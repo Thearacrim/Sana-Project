@@ -201,7 +201,7 @@ Yii::$app->params['og_image']['content'] = 'image.jpg';
                                 <a class="btn btn-success text-white" href="<?= Url::to('store-single') ?>"><i class="far fa-heart"></i></a>
                             </li>
                             <li>
-                                <a class="btn btn-success text-white mt-2" href="<?= Url::to('store-single?id=' . $model->id) ?>"><i class="far fa-eye"></i></a>
+                                <a class="btn btn-success text-white mt-2" href="<?= Url::to(['store-single', 'id' => $model->id]) ?>"><i class="far fa-eye"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -272,6 +272,7 @@ $script = <<< JS
                             success: function(res){
                                 var data = JSON.parse(res);
                                 if(data['status'] == 'success'){
+                                    console.log(data['totalCart']);
                                     $("#amount-price").text(data['totalPrice_in_de_remove']);
                                     $("#cart-quantity").text(data['totalCart']);
                                 }else{

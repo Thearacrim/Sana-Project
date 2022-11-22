@@ -301,7 +301,7 @@ Yii::$app->params['og_image']['content'] = $products->image_url;
                                         <a class="btn btn-success text-white" href="#"><i class="far fa-heart"></i></a>
                                     </li>
                                     <li>
-                                        <a class="btn btn-success text-white mt-2" href="<?= Url::to('store-single?id=' . $model->id) ?>"><i class="far fa-eye"></i></a>
+                                        <a class="btn btn-success text-white mt-2" href="<?= Url::to(['store-single', 'id' => $model->id]) ?>"><i class="far fa-eye"></i></a>
                                     </li>
                                 </ul>
                             </div>

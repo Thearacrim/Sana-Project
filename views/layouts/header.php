@@ -50,6 +50,9 @@ if (\Yii::$app->user->isGuest) {
         <a class="nav-icon d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
           <i class="fa fa-fw fa-search mr-2 text-color"></i>
         </a>
+        <a class="nav-icon d-lg-inline icon-hearth" href="#">
+          <i class="far fa-heart mr-2 text-color"></i>
+        </a>
         <?php
         if (Yii::$app->user->isGuest) {
         ?>
