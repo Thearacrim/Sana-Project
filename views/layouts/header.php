@@ -150,8 +150,6 @@ $script = <<< JS
             });
             return false;
         });
-
-
         JS;
 $this->registerJs($script);
 

@@ -32,6 +32,8 @@ use yii\helpers\Inflector;
 use yii\web\Cookie;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
+use app\components\AuthHandler;
+use yii\bootstrap4\ActiveForm;
 
 class SiteController extends Controller
 {
@@ -78,8 +80,15 @@ class SiteController extends Controller
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
+
+            'auth' => [
+                'class' => 'yii\authclient\AuthAction',
+                'successCallback' => [$this, 'onAuthSuccess'],
+            ],
+
         ];
     }
+
     public function beforeAction($action)
     {
         if ($action->id == 'error') {
@@ -144,24 +153,24 @@ class SiteController extends Controller
      *
      * @return mixed
      */
+
     public function actionLogin()
     {
+        //Action Login
+        $model = new LoginForm();
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->login()) {
+                // Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
+                return $this->goBack();
+            }
         }
-
-        $model->password = '';
-
         return $this->renderAjax('login', [
             'model' => $model,
         ]);
     }
-
     /**
      * Logs out the current user.
      *
@@ -170,10 +179,8 @@ class SiteController extends Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
-
         return $this->goHome();
     }
-
     /**
      * Displays contact page.
      *
@@ -658,14 +665,17 @@ class SiteController extends Controller
      *
      * @return mixed
      */
+    //action Signup
     public function actionSign()
     {
         $model = new SignupForm();
-        if ($model->load(Yii::$app->request->post()) && $model->signup()) {
-            Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
-            return $this->goHome();
-        }
+        if ($model->load(Yii::$app->request->post())) {
+            // Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
+            if ($user = $model->signup()) {
 
+                return $this->goHome();
+            }
+        }
         return $this->renderAjax('signup', [
             'model' => $model,
         ]);

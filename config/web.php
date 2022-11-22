@@ -14,6 +14,8 @@ if (isset($_COOKIE['lang'])) {
         $language = 'en-US';
     }
 }
+$baseUrl = str_replace('/web', '', (new Request)->getBaseUrl());
+
 
 $config = [
     'id' => 'zay-web',
@@ -43,6 +45,7 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+
     'components' => [
         'request' => [
             'cookieValidationKey' => 'p3no0Lph70zk0CfgiOQ69zIycMyhbImD',

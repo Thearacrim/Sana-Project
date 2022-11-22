@@ -17,8 +17,6 @@
         <?php $this->title = Yii::t('app', 'product'); ?>
         <?php
         $this->params['breadcrumbs'][] = $this->title;
-
-
         ?>
         <div class="card back-light p-5" style="box-shadow: 0 0.125rem 0.5rem 0 rgb(0 0 0 / 16%);">
             <div class="product-index">

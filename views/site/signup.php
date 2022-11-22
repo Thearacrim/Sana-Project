@@ -12,8 +12,18 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-signup">
     <div class="container">
+        //Signup User
         <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
         <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <?= $form->field($model, 'first_name') ?>
+            </div>
+            <div class="col-lg-6">
+                <?= $form->field($model, 'last_name') ?>
+            </div>
+        </div>
 
         <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
 

@@ -27,7 +27,8 @@
     "mohorev/yii2-upload-behavior": "*",
     "yiisoft/yii2-imagine": "^2.3",
     "kartik-v/yii2-mpdf": "dev-master",
-    "2amigos/yii2-ckeditor-widget": "2.1.0"
+    "2amigos/yii2-ckeditor-widget": "2.1.0",
+    "yiisoft/yii2-authclient": "^2.2"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "~2.1.0",

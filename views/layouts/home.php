@@ -63,10 +63,10 @@ Modal::end();
 <?php
 
 $script = <<< JS
-        $(document).on("click",".trigggerModal",function(){
-        $("#modal").modal("show").find("#modalContent").load($(this).attr("value"));
-        });
-        JS;
+$(document).on("click",".trigggerModal",function(){
+  $("#modal").modal("show").find("#modalContent").load($(this).attr("value"));
+});
+JS;
 $this->registerJs($script);
 
 ?>
