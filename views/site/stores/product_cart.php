@@ -32,10 +32,10 @@ $discountCal = $model->price * ($discount / 100);
         <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
             <ul class="list-unstyled">
                 <li>
-                    <a class="btn btn-success text-white" href="<?= Url::toRoute('store-single') ?>"><i class="far fa-heart"></i></a>
+                    <a class="btn btn-danger text-white" href="<?= Url::toRoute('store-single') ?>"><i class="far fa-heart"></i></a>
                 </li>
                 <li>
-                    <a class="btn btn-success text-white mt-2" href="<?= Url::to(['store-single', 'id' => $model->id]) ?>"><i class="far fa-eye"></i></a>
+                    <a class="btn btn-danger text-white mt-2" href="<?= Url::to(['store-single', 'id' => $model->id]) ?>"><i class="far fa-eye"></i></a>
                 </li>
             </ul>
         </div>

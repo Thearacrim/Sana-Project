@@ -246,17 +246,28 @@ class SiteController extends Controller
                             ->where(['user_id' => $current_user])
                             ->one();
                         $totalCart = $totalCart->quantity;
-                        $totalPrice_in_de_remove = Yii::$app->db->createCommand(
-                            "SELECT 
+                        if($coupon){
+                            $totalPrice_in_de_remove = Yii::$app->db->createCommand(
+                                "SELECT 
                         SUM( cart.quantity * (product.price - (product.price * (coupon.discount / 100)))) as total_price
                             FROM cart
                             INNER JOIN product ON product.id = cart.product_id
                             INNER JOIN coupon ON coupon.id = cart.coupon_id 
                             WHERE cart.coupon_id = :coupon AND coupon.expire_date > CURDATE()
                         "
-                        )
-                            ->bindParam('coupon', $coupon)
-                            ->queryScalar();
+                            )
+                                ->bindParam('coupon', $coupon)
+                                ->queryScalar();
+                        }else{
+                            $totalPrice_in_de_remove = Yii::$app->db->createCommand("SELECT 
+                        SUM( cart.quantity * (product.price)) as total_price
+                            FROM cart
+                            INNER JOIN product ON product.id = cart.product_id
+                            WHERE cart.user_id = :userId
+                        ")
+                            ->bindParam('userId', $current_user)
+                                ->queryScalar();
+                        }
                         return json_encode(['status' => 'success', 'totalCart' => $totalCart, 'totalPrice_in_de_remove' => $totalPrice_in_de_remove]);
                     } else {
                         return json_encode(['status' => 'error', 'message' => "something went wrong."]);;
@@ -287,6 +298,7 @@ class SiteController extends Controller
                     CURDATE() < expire_date "
                     )->queryScalar();
                     $totalItem = Cart::find()->select(['user_id'])->where(['user_id' => $current_user])->count();
+                    if($coupon){
                     $totalPrice_in_de_remove = Yii::$app->db->createCommand(
                         "SELECT 
                     SUM( cart.quantity * (product.price - (product.price * (coupon.discount / 100)))) as total_price
@@ -298,6 +310,16 @@ class SiteController extends Controller
                     )
                         ->bindParam('coupon', $coupon)
                         ->queryScalar();
+                    }else{
+                        $totalPrice_in_de_remove = Yii::$app->db->createCommand("SELECT 
+                    SUM( cart.quantity * (product.price)) as total_price
+                        FROM cart
+                        INNER JOIN product ON product.id = cart.product_id
+                        WHERE cart.user_id = :userId
+                    ")
+                            ->bindParam('userId', $current_user)
+                            ->queryScalar();
+                    }
                     $available_item = "There are no items available";
                     return json_encode(['status' => 'success', 'totalCart' => $totalCart, 'totalItem' => $totalItem, 'totalPrice_in_de_remove' => $totalPrice_in_de_remove, 'available_item' => $available_item]);
                 }
@@ -392,8 +414,8 @@ class SiteController extends Controller
             WHERE
             CURDATE() < expire_date "
         )->queryScalar();
-
-        $totalPrice = Yii::$app->db->createCommand("SELECT 
+        if($coupon){
+            $totalPrice = Yii::$app->db->createCommand("SELECT 
                SUM( cart.quantity * (product.price - (product.price * (coupon.discount / 100)))) as total_price
                 FROM cart
                 INNER JOIN product ON product.id = cart.product_id
@@ -402,6 +424,16 @@ class SiteController extends Controller
             ")
             ->bindParam('coupon', $coupon)
             ->queryScalar();
+        }else{
+            $totalPrice = Yii::$app->db->createCommand("SELECT 
+               SUM( cart.quantity * (product.price)) as total_price
+                FROM cart
+                INNER JOIN product ON product.id = cart.product_id
+                WHERE cart.user_id = :userId
+            ")
+            ->bindParam('userId', $userId)
+            ->queryScalar();
+        }
         $products = Product::find()->all();
         return $this->render(
             'cart',
@@ -697,7 +729,8 @@ class SiteController extends Controller
                         WHERE
                         CURDATE() < expire_date "
             )->queryScalar();
-            $totalPrice = Yii::$app->db->createCommand("SELECT 
+            if ($coupon) {
+                $totalPrice = Yii::$app->db->createCommand("SELECT 
                SUM( cart.quantity * (product.price - (product.price * (coupon.discount / 100)))) as total_price
                 FROM cart
                 INNER JOIN product ON product.id = cart.product_id
@@ -706,6 +739,16 @@ class SiteController extends Controller
             ")
                 ->bindParam('coupon', $coupon)
                 ->queryScalar();
+            } else {
+                $totalPrice = Yii::$app->db->createCommand("SELECT 
+               SUM( cart.quantity * (product.price)) as total_price
+                FROM cart
+                INNER JOIN product ON product.id = cart.product_id
+                WHERE cart.user_id = :userId
+            ")
+                ->bindParam('userId', $userId)
+                ->queryScalar();
+            }
             $userId = Yii::$app->user->id;
             $relatedProduct = Yii::$app->db->createCommand(
                 "SELECT product.*,cart.color_id, cart.size_id, cart.quantity, cart.id AS cart_id, variant_size.size, variant_color.color  FROM cart

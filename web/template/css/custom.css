@@ -100,6 +100,16 @@ select#lang option[value="en-US"] {
 .back-light {
   background-color: var(--primary-background);
 }
+.icon-hearth{
+  margin: 0 10px;
+  padding: 3px 5px;
+}
+.icon-hearth:hover{
+    background: #acacac;
+    opacity:0.7;
+    border-radius: 50%;
+    padding: 3px 5px;
+}
 
 .fa-moon {
   color: #f1c40f;
