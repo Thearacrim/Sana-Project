@@ -22,7 +22,7 @@ if (\Yii::$app->user->isGuest) {
   <div class="container d-flex justify-content-between align-items-center">
 
     <a class="navbar-brand align-self-center " href="<?= Url::to(['/site']) ?>">
-     <img class="img-fluid" src="<?= $base_url ?>/template/img/logo.png" alt="Brand Logo" style="width:135px";>
+     <img class="img-fluid" src="<?= $base_url ?>/template/img/log.png" alt="Brand Logo" style="width:135px";>
     </a>
 
     <button class="navbar-toggler text-color text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="templatemo_main_nav" aria-expanded="false" aria-label="Toggle navigation">
