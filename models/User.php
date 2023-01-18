@@ -55,13 +55,28 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * {@inheritdoc}
      */
-    // public function rules()
-    // {
-    //     return [
-    //         ['status', 'default', 'value' => self::STATUS_INACTIVE],
-    //         ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
-    //     ];
-    // }
+    public function rules()
+    {
+        return [
+            ['image_url', 'image', 'extensions' => 'jpg, jpeg, gif, png', 'on' => ['default']],
+
+            ['first_name', 'required'],
+            ['last_name', 'required'],
+
+            ['username', 'trim'],
+            ['username', 'required'],
+            ['username', 'unique', 'targetClass' => '\app\models\User', 'message' => 'This username has already been taken.'],
+            ['username', 'string', 'min' => 2, 'max' => 255],
+
+            ['email', 'trim'],
+            ['email', 'required'],
+            ['email', 'email'],
+            ['email', 'string', 'max' => 255],
+            ['email', 'unique', 'targetClass' => '\app\models\User', 'message' => 'This email address has already been taken.'],
+
+
+        ];
+    }
 
     /**
      * {@inheritdoc}

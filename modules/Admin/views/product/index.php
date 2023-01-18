@@ -98,21 +98,21 @@
                             ],
                             [
                                 'class' => 'yii\grid\ActionColumn',
-                                'template' => '{PDF}{view} {update} {delete}',
+                                'template' => '{PDF} {update} {delete}',
                                 'visible' => Yii::$app->user->isGuest ? false : true,
                                 'buttons' => [
                                     'view' => function ($url) {
-                                        return Html::a('<i class="fa-solid fa-eye"></i>', $url, ['class' => 'btn btn-outline-info rounded-circle btn-sm custom_button']);
+                                        return Html::a('<i class="fa-solid fa-eye"></i>', $url, ['class' => '']);
                                     },
                                     'update' => function ($url) {
-                                        return Html::a('<i class="fa-solid fa-pen-fancy"></i>', $url, ['class' => 'btn btn-outline-info rounded-circle btn-sm custom_button']);
+                                        return Html::a('<i class="fas fa-pen"></i>', $url, ['class' => 'glyphicon glyphicon-pencil btn btn-sm btn-secondary rounded-circle']);
                                     },
                                     'delete' => function ($url, $model) {
-                                        return Html::a('<i class="fa-solid fa-trash-can"></i>', $url, [
+                                        return Html::a('<i class="fas fa-trash"></i>', $url, [
                                             'title' => Yii::t('app', 'Delete'),
                                             'data-confirm' => 'Are you sure you want to delete this item?',
                                             'data-method' => 'POST',
-                                            'class' => 'glyphicon glyphicon-pencil btn btn-outline-info rounded-circle btn-sm button_delete'
+                                            'class' => 'glyphicon glyphicon-pencil btn btn-sm btn-secondary rounded-circle button_delete'
                                         ]);
                                     }
                                 ],

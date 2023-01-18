@@ -21,8 +21,8 @@ if (\Yii::$app->user->isGuest) {
 <nav class="navbar navbar-expand-lg back-light shadow">
   <div class="container d-flex justify-content-between align-items-center">
 
-    <a class="navbar-brand text-success logo h1 align-self-center" href="<?= Url::to(['/site']) ?>">
-      Zay
+    <a class="navbar-brand align-self-center " href="<?= Url::to(['/site']) ?>">
+     <img class="img-fluid" src="<?= $base_url ?>/template/img/logo.png" alt="Brand Logo" style="width:135px";>
     </a>
 
     <button class="navbar-toggler text-color text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="templatemo_main_nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,7 +51,7 @@ if (\Yii::$app->user->isGuest) {
           <i class="fa fa-fw fa-search mr-2 text-color"></i>
         </a>
         <a class="nav-icon d-lg-inline icon-hearth" href="#">
-          <i class="far fa-heart mr-2 text-color"></i>
+          <i class="far fa-heart  text-color"></i>
         </a>
         <?php
         if (Yii::$app->user->isGuest) {

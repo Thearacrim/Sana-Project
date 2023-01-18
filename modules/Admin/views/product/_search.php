@@ -18,7 +18,7 @@ AdminAsset::register($this);
     ]); ?>
 
     <div class="row">
-        <div class="col-lg-5">
+        <div class="col-lg-4">
             <label>Date Range</label>
             <div id="order__date__range" style="cursor: pointer;background-color: #f8f9fc;" class="form-control">
                 <i class="fas fa-calendar text-muted"></i>&nbsp;
@@ -27,7 +27,7 @@ AdminAsset::register($this);
             <?= $form->field($model, 'from_date')->hiddenInput()->label(false) ?>
             <?= $form->field($model, 'to_date')->hiddenInput()->label(false) ?>
         </div>
-        <div class="col-lg-5">
+        <div class="col-lg-4">
             <label>Search</label>
             <?= $form->field($model, 'globalSearch')->textInput([
                 'placeholder' => 'Search...', 'aria-label' => 'Search', 'type' => 'search',
@@ -35,11 +35,10 @@ AdminAsset::register($this);
                 'style' => 'background-color: #f8f9fc;'
             ])->label(false) ?>
         </div>
-        <div class="col-lg-2">
-            <p>
-                <a type="button" href="<?= Url::to(['product/create']) ?>" class="btn btn-primary float-right btn1 rounded-circle action trigggerModal"><i class="fas fa-plus"></i></a>
-            </p>
+        <div class="col-lg">
+                <a type="button" href="<?= Url::to(['product/create']) ?>" class="btn btn-primary float-right btn1 rounded-circle action trigggerModal clearfix" style="margin:30px";><i class="fas fa-plus"></i></a>
         </div>
+        
     </div>
 
     <?php ActiveForm::end(); ?>

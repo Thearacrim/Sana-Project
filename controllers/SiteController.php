@@ -33,7 +33,10 @@ use yii\web\Cookie;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
 use app\components\AuthHandler;
+use Imagine\Filter\Basic\Save;
+use Imagine\Image\Profile;
 use yii\bootstrap4\ActiveForm;
+use yii\web\UserEvent;
 
 class SiteController extends Controller
 {
@@ -163,7 +166,7 @@ class SiteController extends Controller
         }
         if ($model->load(Yii::$app->request->post())) {
             if ($model->login()) {
-                // Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
+               
                 return $this->goBack();
             }
         }
@@ -246,7 +249,7 @@ class SiteController extends Controller
                             ->where(['user_id' => $current_user])
                             ->one();
                         $totalCart = $totalCart->quantity;
-                        if($coupon){
+                        if ($coupon) {
                             $totalPrice_in_de_remove = Yii::$app->db->createCommand(
                                 "SELECT 
                         SUM( cart.quantity * (product.price - (product.price * (coupon.discount / 100)))) as total_price
@@ -258,14 +261,14 @@ class SiteController extends Controller
                             )
                                 ->bindParam('coupon', $coupon)
                                 ->queryScalar();
-                        }else{
+                        } else {
                             $totalPrice_in_de_remove = Yii::$app->db->createCommand("SELECT 
                         SUM( cart.quantity * (product.price)) as total_price
                             FROM cart
                             INNER JOIN product ON product.id = cart.product_id
                             WHERE cart.user_id = :userId
                         ")
-                            ->bindParam('userId', $current_user)
+                                ->bindParam('userId', $current_user)
                                 ->queryScalar();
                         }
                         return json_encode(['status' => 'success', 'totalCart' => $totalCart, 'totalPrice_in_de_remove' => $totalPrice_in_de_remove]);
@@ -298,19 +301,19 @@ class SiteController extends Controller
                     CURDATE() < expire_date "
                     )->queryScalar();
                     $totalItem = Cart::find()->select(['user_id'])->where(['user_id' => $current_user])->count();
-                    if($coupon){
-                    $totalPrice_in_de_remove = Yii::$app->db->createCommand(
-                        "SELECT 
+                    if ($coupon) {
+                        $totalPrice_in_de_remove = Yii::$app->db->createCommand(
+                            "SELECT 
                     SUM( cart.quantity * (product.price - (product.price * (coupon.discount / 100)))) as total_price
                         FROM cart
                         INNER JOIN product ON product.id = cart.product_id
                         INNER JOIN coupon ON coupon.id = cart.coupon_id 
                         WHERE cart.coupon_id = :coupon AND coupon.expire_date > CURDATE()
                     "
-                    )
-                        ->bindParam('coupon', $coupon)
-                        ->queryScalar();
-                    }else{
+                        )
+                            ->bindParam('coupon', $coupon)
+                            ->queryScalar();
+                    } else {
                         $totalPrice_in_de_remove = Yii::$app->db->createCommand("SELECT 
                     SUM( cart.quantity * (product.price)) as total_price
                         FROM cart
@@ -414,7 +417,7 @@ class SiteController extends Controller
             WHERE
             CURDATE() < expire_date "
         )->queryScalar();
-        if($coupon){
+        if ($coupon) {
             $totalPrice = Yii::$app->db->createCommand("SELECT 
                SUM( cart.quantity * (product.price - (product.price * (coupon.discount / 100)))) as total_price
                 FROM cart
@@ -422,17 +425,17 @@ class SiteController extends Controller
                 INNER JOIN coupon ON coupon.id = cart.coupon_id 
                 WHERE cart.coupon_id = :coupon AND coupon.expire_date > CURDATE()
             ")
-            ->bindParam('coupon', $coupon)
-            ->queryScalar();
-        }else{
+                ->bindParam('coupon', $coupon)
+                ->queryScalar();
+        } else {
             $totalPrice = Yii::$app->db->createCommand("SELECT 
                SUM( cart.quantity * (product.price)) as total_price
                 FROM cart
                 INNER JOIN product ON product.id = cart.product_id
                 WHERE cart.user_id = :userId
             ")
-            ->bindParam('userId', $userId)
-            ->queryScalar();
+                ->bindParam('userId', $userId)
+                ->queryScalar();
         }
         $products = Product::find()->all();
         return $this->render(
@@ -737,8 +740,8 @@ class SiteController extends Controller
                 INNER JOIN coupon ON coupon.id = cart.coupon_id 
                 WHERE cart.coupon_id = :coupon AND coupon.expire_date > CURDATE()
             ")
-                ->bindParam('coupon', $coupon)
-                ->queryScalar();
+                    ->bindParam('coupon', $coupon)
+                    ->queryScalar();
             } else {
                 $totalPrice = Yii::$app->db->createCommand("SELECT 
                SUM( cart.quantity * (product.price)) as total_price
@@ -746,8 +749,8 @@ class SiteController extends Controller
                 INNER JOIN product ON product.id = cart.product_id
                 WHERE cart.user_id = :userId
             ")
-                ->bindParam('userId', $userId)
-                ->queryScalar();
+                    ->bindParam('userId', $userId)
+                    ->queryScalar();
             }
             $userId = Yii::$app->user->id;
             $relatedProduct = Yii::$app->db->createCommand(
@@ -836,37 +839,55 @@ class SiteController extends Controller
         if (Yii::$app->user->isGuest) {
             return $this->redirect(['site/login']);
         }
-
         $model = User::findOne(Yii::$app->user->id);
-        if ($this->request->isPost && $model->load($this->request->post())) {
-            $imagename = Inflector::slug($model->status) . '-' . time();
-            $model->image_url = UploadedFile::getInstance($model, 'image_url');
-            $upload_path = ("profile/uploads/");
-            if (!empty($model->image_url)) {
-                if (!is_dir($upload_path)) {
-                    mkdir($upload_path, 0777, true);
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post())) {
+                $imagename = Inflector::slug($model->status) . '-' . time();
+                $model->image_url = UploadedFile::getInstance($model, 'image_url');
+                $upload_path = ("profile/uploads/");
+
+                if (!empty($model->image_url)) {
+                    if (!is_dir($upload_path)) {
+                        mkdir($upload_path, 0777, true);
+                    }
+                    $model->image_url->saveAs($upload_path . $imagename . '.' . $model->image_url->extension);
+                    //save file uploaded to db
+                    $model->image_url = $imagename . '.' . $model->image_url->extension;
                 }
-                $model->image_url->saveAs($upload_path . $imagename . '.' . $model->image_url->extension);
-                //save file uploaded to db
-                $model->image_url = $imagename . '.' . $model->image_url->extension;
-            }
-            $userId = Yii::$app->user->id;
-            // if ($model->image_url == null) {
-            //     Yii::$app->session->setFlash('alert', 'Profile user must edit some changed');
-            // } else {
-            if ($model->save()) {
-                Yii::$app->session->setFlash('success', 'Profile updated successfully');
-            } else {
-                Yii::$app->session->setFlash('error', 'Failed to update profile');
+                // $model->save();
+
+
+
+
+
+                // echo "<pre>";
+                // print_r($imagename);
+                // echo "</pre>";
+
+                // echo "<pre>";
+                // print_r($this->request->post());
+                // echo "</pre>";
+
+
+
+                // echo "<pre>";
+                // print_r($model);
+                // echo "</pre>";
+
+                // exit;
+                $userId = Yii::$app->user->id;
+                if ($model->save()) {
+                    Yii::$app->session->setFlash('success', 'Profile updated successfully');
+                } else {
+                    Yii::$app->session->setFlash('error', 'Failed to update profile');
+                }
             }
 
             return $this->redirect(["site/profile"]);
         }
         return $this->render(
             'profile',
-            [
-                'model' => $model,
-            ]
+            ['model' => $model,]
         );
     }
 

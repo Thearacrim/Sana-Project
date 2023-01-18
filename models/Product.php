@@ -31,6 +31,7 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+
             [['category_id', 'description', 'price', 'status'], 'required'],
             [['category_id'], 'integer'],
             [['image_url'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, gif'],
@@ -55,7 +56,7 @@ class Product extends \yii\db\ActiveRecord
             'type_item' => 'Type Item',
             'image_url' => 'Image Url',
             'description' => 'Description',
-            
+
             'rate' => 'Rate',
             'updated_date' => 'Updated Date',
             'created_date' => 'Created At'
