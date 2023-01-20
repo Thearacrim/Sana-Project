@@ -45,14 +45,12 @@ $discountCal = $model->price * ($discount / 100);
         <?php if ($discount) {
         ?>
             <span class="" style="font-size:1.2rem; font-weight:700;text-decoration: line-through;">$<?= $model->price ?></span><br>
-        <?php
-        } else {
-        } ?>
-        <?php if ($discount) {
-        ?>
             <span class="" style="font-size:1.5rem; font-weight:700;">$<?= $model->price - $discountCal ?></span>
         <?php
         } else {
+            ?>
+            <span class="" style="font-size:1.2rem; font-weight:700">$<?= $model->price ?></span><br>
+            <?php
         } ?>
     </div>
 </div>

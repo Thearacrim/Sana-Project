@@ -21,28 +21,21 @@ if (\Yii::$app->user->isGuest) {
 <nav class="navbar navbar-expand-lg back-light shadow">
   <div class="container d-flex justify-content-between align-items-center">
 
-    <a class="navbar-brand text-success logo h1 align-self-center" href="<?= Url::to(['/site']) ?>">
-      Zay
+    <a class="navbar-brand" href="<?= Url::to(['site/add-cart']) ?>">
+    <img class="" src="<?= $base_url ?>/template/img/logo2.png" style="width:8rem";height="8rem">
     </a>
-
     <button class="navbar-toggler text-color text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="templatemo_main_nav" aria-expanded="false" aria-label="Toggle navigation">
       <i class="fa-solid fa-bars text-color"></i>
     </button>
 
-    <div class="align-self-center collapse navbar-collapse justify-content-lg-between" id="templatemo_main_nav">
+    <div class="align-self-center collapse navbar-collapse justify-content-lg-between mt-3" id="templatemo_main_nav">
       <div class="flex-fill">
-        <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
-          <li class="nav-item">
-            <a class="nav-link text-color" href="<?= Url::to(['/site']) ?>">Home</a>
+        <ul class="nav navbar-nav d-flex justify-content-start mx-lg-auto">
+          <li class="nav-item text-color">
+            <a class="link-brand" href="<?= Url::to(['site/store-man']) ?>">Man</a>
           </li>
           <li class="nav-item text-color">
-            <a class="nav-link" href="<?= Url::to(['site/about']) ?>">About</a>
-          </li>
-          <li class="nav-item text-color">
-            <a class="nav-link" href="<?= Url::to(['site/add-cart']) ?>">Shop</a>
-          </li>
-          <li class="nav-item text-color">
-            <a class="nav-link" href="<?= Url::to(['site/contact']) ?>">Contact</a>
+            <a class="link-brand" href="<?= Url::to(['site/store-women']) ?>">Women</a>
           </li>
         </ul>
       </div>

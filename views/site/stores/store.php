@@ -22,48 +22,24 @@ Yii::$app->params['og_image']['content'] = $model->image_url;
 ?>
 
 <!-- Start Content -->
+<?= $this->render("banner", ['base_url' => $base_url]) ?>
 <div class="container py-5">
-    <div class="row">
 
-        <div class="col-lg-3">
-            <h1 class="h2 pb-4 text-color">Categories</h1>
-            <ul class="list-unstyled templatemo-accordion">
-                <li class="pb-3">
-                    <a class="collapsed d-flex justify-content-between h3 text-decoration-none text-color" href="#">
-                        Gender
-                        <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
-                    </a>
-                    <ul class="collapse show list-unstyled pl-3">
-                        <li><a class="text-decoration-none text-color" href="<?= Url::to(['site/store-man']) ?>">Men</a></li>
-                        <li><a class="text-decoration-none text-color" href="<?= Url::to(['site/store-women']) ?>">Women</a></li>
-                    </ul>
-                </li>
-                <li class="pb-3">
-                    <a class="collapsed text-color d-flex justify-content-between h3 text-decoration-none" href="#">
-                        Sale
-                        <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
-                    </a>
-                    <ul id="collapseTwo" class="collapse list-unstyled pl-3">
-                        <li><a class="text-decoration-none text-color" href="<?= Url::to(['site/store-sport']) ?>">Sport</a></li>
-                        <li><a class="text-decoration-none text-color" href="<?= Url::to(['site/store-gym']) ?>">Gym</a></li>
-                    </ul>
-                </li>
-                <li class="pb-3">
-                    <a class="collapsed d-flex text-color justify-content-between h3 text-decoration-none" href="#">
-                        Product
-                        <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
-                    </a>
-                    <ul id="collapseThree" class="collapse list-unstyled pl-3">
-                        <li><a class="text-decoration-none text-color text-color" href="<?= Url::to(['site/store-bag']) ?>">Bag</a></li>
-                        <li><a class="text-decoration-none text-color text-color" href="<?= Url::to(['site/store-man']) ?>">Sweather</a></li>
-                        <li><a class="text-decoration-none text-color text-color" href="<?= Url::to(['site/store-man']) ?>">Sunglass</a></li>
-                    </ul>
-                </li>
-            </ul>
+    <!-- Brand Collection -->
+    <div class="row p-5">
+        <div class="col-lg-4" style="margin: auto;">
+            <hr>
         </div>
-        <!-- cart-section -->
-        <div class="col-lg-9">
-            <div class="row">
+        <div class="col-lg-4 text-center" style="padding=1rem">
+            <h3 class="Collection-brand">New Collection</h3>
+        </div>
+        <div class="col-lg-4" style="margin: auto">
+            <hr>
+        </div>
+    </div>
+
+    <!-- cart-section -->
+    <!-- <div class="row">
                 <div class="col-md-6">
                     <ul class="list-inline shop-top-menu pb-3 pt-1">
                         <li class="list-inline-item">
@@ -86,9 +62,9 @@ Yii::$app->params['og_image']['content'] = $model->image_url;
                         </select>
                     </div>
                 </div>
-            </div>
-            <!-- section-cart -->
-            <?php echo ListView::widget([
+            </div> -->
+    <!-- section-cart -->
+    <?php echo ListView::widget([
                 'dataProvider' => $dataProvider,
                 'itemView' => 'product_cart',
                 'itemOptions' => [
@@ -100,15 +76,46 @@ Yii::$app->params['og_image']['content'] = $model->image_url;
                     </div>
                 '
             ]) ?>
-            <div class="text-center">
+    <!-- <div class="text-center">
                 <button id="load_more" class="btn btn-outline-primary rounded-0">Load More</button>
-            </div>
+            </div> -->
+    <div class="row p-5">
+        <div class="col-lg-3" style="margin: auto;">
+            <hr>
         </div>
-        <!-- End Cart -->
+        <div class="col-lg-6 text-center" style="padding=1rem">
+            <h3 class="Collection-brand">THIS WEEK'S HIGHLIGHTS</h3>
+        </div>
+        <div class="col-lg-3" style="margin: auto">
+            <hr>
+        </div>
     </div>
-    <!-- End Content -->
-
+    <div class="row">
+        <a href="#" class="columnCollect col-lg-6" id="zoomIn1">
+            <figure><img
+                    src="https://cdn.shopify.com/s/files/1/0082/0356/7215/files/banner_men_shirts_1080x800-min_720x.jpg?v=1614301857">
+            </figure>
+        </a>
+        <a href="#" class="columnCollect col-lg-6" id="zoomIn1">
+            <figure><img
+                    src="https://cdn.shopify.com/s/files/1/0082/0356/7215/files/banner_men_jeans_1080x800-min_720x.jpg?v=1614301857">
+            </figure>
+        </a>
+    </div>
+    <div class="row p-5">
+        <div class="col-lg-4" style="margin: auto;">
+            <hr>
+        </div>
+        <div class="col-lg-4 text-center" style="padding=1rem">
+            <h3 class="Collection-brand">BEST SELLERS</h3>
+        </div>
+        <div class="col-lg-4" style="margin: auto">
+            <hr>
+        </div>
+    </div>
 </div>
+<!-- End Cart -->
+<!-- End Content -->
 <!-- Start Brands -->
 <section class="back-light py-5">
     <div class="container my-4">
@@ -141,7 +148,8 @@ Yii::$app->params['og_image']['content'] = $model->image_url;
 
                     <!--Carousel Wrapper-->
                     <div class="col">
-                        <div class="carousel slide carousel-multi-item pt-2 pt-md-0" id="multi-item-example" data-bs-ride="carousel">
+                        <div class="carousel slide carousel-multi-item pt-2 pt-md-0" id="multi-item-example"
+                            data-bs-ride="carousel">
                             <!--Slides-->
                             <div class="carousel-inner product-links-wap" role="listbox">
 
@@ -149,36 +157,51 @@ Yii::$app->params['og_image']['content'] = $model->image_url;
                                 <div class="carousel-item active">
                                     <div class="row">
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_01.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_01.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_02.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_02.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_03.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_03.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_04.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_04.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                     </div>
                                 </div>
                                 <!--End First slide-->
-
-
+                                <img src="" alt="">
                                 <!--Second slide-->
                                 <div class="carousel-item">
                                     <div class="row">
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_01.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_01.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_02.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_02.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_03.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_03.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_04.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_04.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                     </div>
                                 </div>
@@ -188,16 +211,24 @@ Yii::$app->params['og_image']['content'] = $model->image_url;
                                 <div class="carousel-item">
                                     <div class="row">
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_01.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_01.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_02.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_02.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_03.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_03.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_04.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_04.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                     </div>
                                 </div>
