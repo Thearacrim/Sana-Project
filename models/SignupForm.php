@@ -5,7 +5,7 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use app\models\User;
-
+use yii\web\NotFoundHttpException;
 
 /**
  * Signup form
@@ -25,6 +25,7 @@ class SignupForm extends Model
     public function rules()
     {
         return [
+
             ['first_name', 'required'],
             ['last_name', 'required'],
             ['username', 'trim'],
@@ -64,6 +65,15 @@ class SignupForm extends Model
 
         //return null;
         // return $user->save() && $this->sendEmail($user);
+    }
+
+    public static function findModel($id)
+    {
+        if (($model = User::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
     }
 
     /**

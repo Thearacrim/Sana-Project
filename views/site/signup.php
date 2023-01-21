@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-signup">
     <div class="container">
-        //Signup User
+
         <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
         <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
 
