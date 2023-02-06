@@ -1,3 +1,32 @@
+<style>
+    #login-form{
+    margin:auto;
+    width:350px;
+    }
+    .sign{
+        width:100%;
+    }
+    .foget_pass{
+        display:contents;
+    }
+    .form-control{
+        background:#EDF2FC;
+    }
+    hr{
+        border:none;
+        height:2px;
+        background:#dddddd;
+    }
+    .img{
+        width:100%;
+    }
+    /* @media screen and (max-width: 600px) {
+        .respon {
+        width: 100%;
+        }
+    } */
+ 
+</style>
 <?php
 
 /** @var yii\web\View $this */
@@ -7,59 +36,56 @@
 use yii\authclient\ClientInterface;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\ActiveForm;
+use yii\helpers\Url;
 
-$this->title = 'Login';
+$this->title = 'SIGN IN';
+
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+    <div style="text-align:center;margin-top: 80px;">
+        <h1>WELCOME BACK</h1>
+    </div>
 
 <div class="site-login">
-    <div class="container">
-        <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
-        //Login User
-        <?php $form = ActiveForm::begin([
-            'id' => 'login-form',
-            'enableAjaxValidation' => false,
-            'enableClientValidation' => true,
-            // 'validateOnBlur' => false,
-            // 'validateOnType' => false,
-            // 'validateOnChange' => false,
+    <div class="container w-100">
+        <hr>
+        <div class="row">
+            <div class="col respon">
+                <br>
+                <h2 class="text-center"><?= Html::encode($this->title) ?></h2>
+                <!-- Login User -->
+                <?php $form = ActiveForm::begin([
+                    'id' => 'login-form',
+                    'enableAjaxValidation' => false,
+                    'enableClientValidation' => true,
+                ]) ?>
+                <?= $form->field($model, 'username') ?>
 
-        ]) ?>
-        <?= $form->field($model, 'username') ?>
+                <?= $form->field($model, 'password')->passwordInput() ?>
 
-        <?= $form->field($model, 'password')->passwordInput() ?>
-
-        <?= $form->field($model, 'rememberMe')->checkbox() ?>
-
-        <div class="text-center" style="color:#999;margin:1em 0">
-            If you forgot your password you can <?= Html::a('reset it', ['site/request-password-reset']) ?>.
-            <br>
-            Need new verification email? <?= Html::a('Resend', ['site/resend-verification-email']) ?>
-        </div>
-        <div class="form-group text-center">
-            <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button', "id" => "btn-login"]) ?>
+                <?= $form->field($model, 'rememberMe')->checkbox() ?>
+                <div class="form-group text-center">
+                    <?= Html::submitButton('SIGN IN WITH USER', ['class' => 'btn btn-dark', 'name' => 'login-button', "id" => "btn-login"]) ?>
+                </div>
+                 <div class="text-center" style="color:#999;margin:1em 0">
+                    <?= Html::a('Forget your password?', ['site/request-password-reset'],['class' => 'foget_pass text-secondary']) ?>
+                    <br>
+                </div>
+               
+            </div>
+                 <div class="col sign ">
+                <img class="img" src="img/clark-street-mercantile-qnKhZJPKFD8-unsplash.jpg" alt="">
+            </div>
         </div>
         <?php ActiveForm::end(); ?>
+        <hr>
+        </div>
+        
     </div>
+   
 </div>
-
-<?php
-$script = <<< JS
-//Login User
-$('#login-form').on('beforeSubmit', function(e)
-{
-    var \$form = $(this);
-    $.post(
-        \$form.attr("action"), //serialize yii2 form
-        \$form.serialize()
-    )
-        .done(function(result) {
-            if(result.password == null) {   
-            alert('Incorrect username or password.');
-        }
-        });
-        return false;
-}); 
-JS;
-$this->registerJs($script);
-?>
+<br>
+    <div style="text-align:center;margin-bottom: 150px">
+        <h4 >NEW TO LEVEL SROTE 89</h4>
+        <a style="cursor:poiter" href="<?= Url::to(['/site/sign']) ?>" class="btn btn-dark">CREATE ACCOUNT</a>
+    </div>

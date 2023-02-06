@@ -34,7 +34,7 @@ use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
 use app\components\AuthHandler;
 use yii\bootstrap4\ActiveForm;
-
+use app\components\AuthHandles;
 class SiteController extends Controller
 {
     /**
@@ -167,7 +167,7 @@ class SiteController extends Controller
                 return $this->goBack();
             }
         }
-        return $this->renderAjax('login', [
+        return $this->render('login', [
             'model' => $model,
         ]);
     }
@@ -702,13 +702,11 @@ class SiteController extends Controller
     {
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
-            // Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
             if ($user = $model->signup()) {
-
-                return $this->goHome();
+            return $this->redirect(['site/login']);
             }
         }
-        return $this->renderAjax('signup', [
+        return $this->render('signup', [
             'model' => $model,
         ]);
     }

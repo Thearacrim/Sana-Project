@@ -1,10 +1,15 @@
 <?php
 
 return [
+   
+    'user.passwordMinLength' => 8,
     'adminEmail' => 'admin@example.com',
+    'supportEmail' => 'support@example.com',
     'senderEmail' => 'noreply@example.com',
     'senderName' => 'Example.com mailer',
-    'user.passwordMinLength' => 8,
+    'user.passwordResetTokenExpire' => 3600,
+    
+    
     'og_title' => ['property' => 'og:title', 'content' => ' '],
     'og_description' => ['property' => 'og:description', 'content' => ''],
     'og_url' => ['property' => 'og:url', 'content' => '/'],

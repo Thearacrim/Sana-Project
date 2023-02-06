@@ -3,6 +3,7 @@
 /** @var yii\web\View $this */
 /** @var yii\bootstrap4\ActiveForm $form */
 /** @var \common\models\LoginForm $model */
+use yii\helpers\Url;
 
 use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
@@ -24,5 +25,5 @@ $this->title = 'Login';
     <a class="small" href="forgot-password.html">Forgot Password?</a>
 </div>
 <div class="text-center">
-    <a class="small" href="register.html">Create an Account!</a>
+    <!-- <a class="small" href="">Create an Account!</a> -->
 </div>

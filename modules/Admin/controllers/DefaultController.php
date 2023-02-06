@@ -160,7 +160,6 @@ class DefaultController extends Controller
             'model' => $model,
         ]);
     }
-
     /**
      * Logout action.
      *

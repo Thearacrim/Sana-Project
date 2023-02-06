@@ -3,8 +3,8 @@
 /** @var yii\web\View $this */
 
 use yii\web\Request;
-
-$this->title = 'My Yii Application';
+  
+$this->title = 'Level Store 89';
 ?>
 <!-- Content Row -->
 

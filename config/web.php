@@ -47,6 +47,22 @@ $config = [
     ],
 
     'components' => [
+    'authClientCollection' => [
+        'class' => 'yii\authclient\Collection',
+        'clients' => [
+            'google' => [
+                'class' => 'yii\authclient\clients\Google',
+                'clientId' => 'google_client_id',
+                    'clientSecret' => 'google_client_secret',
+                ],
+                'facebook' => [
+                    'class' => 'yii\authclient\clients\Facebook',
+                    'clientId' => '1206753316714715',
+                    'clientSecret' => '16881f004686c8220be8828b7a6cd527',
+                ],
+                
+            ],
+        ],
         'request' => [
             'cookieValidationKey' => 'p3no0Lph70zk0CfgiOQ69zIycMyhbImD',
             // 'baseUrl' => $baseUrl,
@@ -69,9 +85,19 @@ $config = [
             'errorAction' => 'site/error',
         ],
         'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
+            'class' => 'yii\swiftmailer\Mailer', 
             'useFileTransport' => true,
+ 
+            // 'transport' => [
+			// 	'class' => 'Swift_SmtpTransport',
+			// 	'host' => 'smtp.hostinger.com',
+			// 	'username' => 'penghak@dernham.app',
+			// 	'password' => '3Kt3RzXF9vJPDqG@',
+			// 	'port' => '587',
+			// 	'encryption' => 'tls',
+			// ],
         ],
+
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
