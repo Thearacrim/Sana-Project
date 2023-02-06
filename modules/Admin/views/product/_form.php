@@ -39,7 +39,6 @@ use dosamigos\ckeditor\CKEditor;
                 <label for="image_upload"><i class="fas fa-image"></i> Upload Image</label>
                 <?= $form->field($model, 'image_url')->fileInput(['accept' => 'image/*', 'id' => 'image_upload'])->label(false) ?>
             </div>
-
             <?= $form->field($model, 'type_item')->dropDownList(['1' => 'Women', '2' => 'Man', '3' => 'Glasses', '4' => 'Bag', '5' => 'watch', '6' => 'Shores'], ['placeholder' => 'Type Item'])->label(false) ?>
             <div class="text-center">
                 <?= Html::submitButton('Save', ['class' => 'btn btn-primary w-50 rounded-0', 'id' => "btn_save"]) ?>

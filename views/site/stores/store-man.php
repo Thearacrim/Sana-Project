@@ -18,13 +18,13 @@ $base_url = Yii::getAlias("@web");
     <div class="row">
         <?php
         if (Yii::$app->session->hasFlash('success')) : ?>
-            <div class="alert alert-success" role="alert">
-                <?= Yii::$app->session->getFlash('success') ?>
-            </div>
+        <div class="alert alert-success" role="alert">
+            <?= Yii::$app->session->getFlash('success') ?>
+        </div>
         <?php elseif (Yii::$app->session->hasFlash('error')) : ?>
-            <div class="alert alert-danger" role="alert">
-                <?= Yii::$app->session->getFlash('error') ?>
-            </div>
+        <div class="alert alert-danger" role="alert">
+            <?= Yii::$app->session->getFlash('error') ?>
+        </div>
         <?php endif; ?>
 
         <div class="col-lg-3">
@@ -36,8 +36,10 @@ $base_url = Yii::getAlias("@web");
                         <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
                     </a>
                     <ul class="collapse show list-unstyled pl-3">
-                        <li><a class="text-decoration-none text-color" href="<?= Url::to(['site/store-man']) ?>">Men</a></li>
-                        <li><a class="text-decoration-none text-color" href="<?= Url::to(['site/store-women']) ?>">Women</a></li>
+                        <li><a class="text-decoration-none text-color" href="<?= Url::to(['site/store-man']) ?>">Men</a>
+                        </li>
+                        <li><a class="text-decoration-none text-color"
+                                href="<?= Url::to(['site/store-women']) ?>">Women</a></li>
                     </ul>
                 </li>
                 <li class="pb-3">
@@ -46,8 +48,10 @@ $base_url = Yii::getAlias("@web");
                         <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
                     </a>
                     <ul id="collapseTwo" class="collapse list-unstyled pl-3">
-                        <li><a class="text-decoration-none text-color" href="<?= Url::to(['site/store-sport']) ?>">Sport</a></li>
-                        <li><a class="text-decoration-none text-color" href="<?= Url::to(['site/store-gym']) ?>">Gym</a></li>
+                        <li><a class="text-decoration-none text-color"
+                                href="<?= Url::to(['site/store-sport']) ?>">Sport</a></li>
+                        <li><a class="text-decoration-none text-color" href="<?= Url::to(['site/store-gym']) ?>">Gym</a>
+                        </li>
                     </ul>
                 </li>
                 <li class="pb-3">
@@ -56,9 +60,12 @@ $base_url = Yii::getAlias("@web");
                         <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
                     </a>
                     <ul id="collapseThree" class="collapse list-unstyled pl-3">
-                        <li><a class="text-decoration-none text-color" href="<?= Url::to(['site/store-watch']) ?>">Watch</a></li>
-                        <li><a class="text-decoration-none text-color" href="<?= Url::to(['site/store-shoes']) ?>">Shoes</a></li>
-                        <li><a class="text-decoration-none text-color" href="<?= Url::to(['site/store-glasses']) ?>">Sunglass</a></li>
+                        <li><a class="text-decoration-none text-color"
+                                href="<?= Url::to(['site/store-watch']) ?>">Watch</a></li>
+                        <li><a class="text-decoration-none text-color"
+                                href="<?= Url::to(['site/store-shoes']) ?>">Shoes</a></li>
+                        <li><a class="text-decoration-none text-color"
+                                href="<?= Url::to(['site/store-glasses']) ?>">Sunglass</a></li>
                     </ul>
         </div>
         <!-- cart-section -->
@@ -67,13 +74,16 @@ $base_url = Yii::getAlias("@web");
                 <div class="col-md-6">
                     <ul class="list-inline shop-top-menu pb-3 pt-1">
                         <li class="list-inline-item">
-                            <a class="h3 text-decoration-none text-color mr-3" href="<?= Url::to(['site/add-cart']) ?>">All</a>
+                            <a class="h3 text-decoration-none text-color mr-3"
+                                href="<?= Url::to(['site/add-cart']) ?>">All</a>
                         </li>
                         <li class="list-inline-item">
-                            <a class="h3 text-decoration-none text-color mr-3" href="<?= Url::to(['site/store-man']) ?>">Men's</a>
+                            <a class="h3 text-decoration-none text-color mr-3"
+                                href="<?= Url::to(['site/store-man']) ?>">Men's</a>
                         </li>
                         <li class="list-inline-item">
-                            <a class="h3 text-decoration-none text-color" href="<?= Url::to(['site/store-women']) ?>">Women's</a>
+                            <a class="h3 text-decoration-none text-color"
+                                href="<?= Url::to(['site/store-women']) ?>">Women's</a>
                         </li>
                     </ul>
                 </div>
@@ -139,7 +149,8 @@ $base_url = Yii::getAlias("@web");
 
                     <!--Carousel Wrapper-->
                     <div class="col">
-                        <div class="carousel slide carousel-multi-item pt-2 pt-md-0" id="multi-item-example" data-bs-ride="carousel">
+                        <div class="carousel slide carousel-multi-item pt-2 pt-md-0" id="multi-item-example"
+                            data-bs-ride="carousel">
                             <!--Slides-->
                             <div class="carousel-inner product-links-wap" role="listbox">
 
@@ -147,16 +158,24 @@ $base_url = Yii::getAlias("@web");
                                 <div class="carousel-item active">
                                     <div class="row">
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_01.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_01.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_02.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_02.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_03.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_03.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_04.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_04.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                     </div>
                                 </div>
@@ -167,16 +186,24 @@ $base_url = Yii::getAlias("@web");
                                 <div class="carousel-item">
                                     <div class="row">
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_01.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_01.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_02.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_02.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_03.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_03.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_04.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_04.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                     </div>
                                 </div>
@@ -186,16 +213,24 @@ $base_url = Yii::getAlias("@web");
                                 <div class="carousel-item">
                                     <div class="row">
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_01.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_01.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_02.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_02.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_03.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_03.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_04.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_04.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                     </div>
                                 </div>
