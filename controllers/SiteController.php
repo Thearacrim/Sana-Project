@@ -137,13 +137,17 @@ class SiteController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => Product::find()->all(),
         ]);
+        $dataProvider1 = new ActiveDataProvider([
+            'query' => Product::find()->where(['type_item' => 2]),
+        ]);
         $shoes = Product::find()->where(['type_item' => '6'])->one();
         $watch = Product::find()->where(['type_item' => '5'])->one();
-        $glasses = Product::find()->where(['type_item' => '3'])->one();
+        $man = Product::find()->where(['type_item' => '2'])->one();
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'dataProvider1'=>$dataProvider1,
             'shoes' => $shoes,
-            'glasses' => $glasses,
+            'man' => $man,
             'watch' => $watch
         ]);
     }
@@ -486,11 +490,15 @@ class SiteController extends Controller
         }
         $model = Product::find()->one();
         $dataProvider = new ActiveDataProvider([
-            'query' => Product::find(),
+            'query' => Product::find()->where(['type_item' => 1]),
+        ]);
+        $dataProvider1 = new ActiveDataProvider([
+            'query' => Product::find()->where(['type_item' => 2]),
         ]);
 
         return $this->render('stores/store', [
             'dataProvider' => $dataProvider,
+            'dataProvider1'=> $dataProvider1,
             'model' => $model,
         ]);
 
@@ -824,7 +832,7 @@ class SiteController extends Controller
                     if ($invoices->save()) {
                         Cart::deleteAll(['id' => ArrayHelper::getColumn($carts, 'id')]);
                         Yii::$app->session->setFlash('success', 'Profile updated successfully');
-                        return $this->goHome();
+                        return $this->redirect(['site/add-cart']);
                     }
                 }
             }
@@ -850,16 +858,15 @@ class SiteController extends Controller
                 //save file uploaded to db
                 $model->image_url = $imagename . '.' . $model->image_url->extension;
             }
-            $userId = Yii::$app->user->id;
-            // if ($model->image_url == null) {
-            //     Yii::$app->session->setFlash('alert', 'Profile user must edit some changed');
-            // } else {
-            if ($model->save()) {
-                Yii::$app->session->setFlash('success', 'Profile updated successfully');
-            } else {
-                Yii::$app->session->setFlash('error', 'Failed to update profile');
+            if($model->image_url == null){
+                    Yii::$app->session->setFlash('fill_up', 'Please make any change before submit!');
+            }else{
+                if ($model->save()) {
+                    Yii::$app->session->setFlash('success', 'Profile updated successfully');
+                } else {
+                    Yii::$app->session->setFlash('error', 'Failed to update profile');
+                }
             }
-
             return $this->redirect(["site/profile"]);
         }
         return $this->render(

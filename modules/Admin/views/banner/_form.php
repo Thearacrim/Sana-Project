@@ -30,6 +30,7 @@ use yii\widgets\ActiveForm;
                 <label for="image_upload"><i class="fas fa-image"></i> Upload Image</label>
                 <?= $form->field($model, 'image')->fileInput(['accept' => 'image/*', 'id' => 'image_upload'])->label(false) ?>
             </div>
+            <?= $form->field($model, 'banner_type')->dropDownList(['1' => 'Women', '2' => 'Man'], ['placeholder' => 'Type Item'])->label(false) ?>
 
             <div class="form-group">
                 <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

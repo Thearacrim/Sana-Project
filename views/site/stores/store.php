@@ -30,40 +30,13 @@ Yii::$app->params['og_image']['content'] = $model->image_url;
         <div class="col-lg-4" style="margin: auto;">
             <hr>
         </div>
-        <div class="col-lg-4 text-center" style="padding=1rem">
+        <div class="col-lg-4 text-center" style="padding = 1rem">
             <h3 class="Collection-brand">New Collection</h3>
         </div>
         <div class="col-lg-4" style="margin: auto">
             <hr>
         </div>
     </div>
-
-    <!-- cart-section -->
-    <!-- <div class="row">
-                <div class="col-md-6">
-                    <ul class="list-inline shop-top-menu pb-3 pt-1">
-                        <li class="list-inline-item">
-                            <a class="h3 text-decoration-none text-color mr-3" href="#">All</a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a class="h3 text-decoration-none text-color mr-3" href="<?= Url::to(['site/store-man']) ?>">Men's</a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a class="h3 text-decoration-none text-color" href="<?= Url::to(['site/store-women']) ?>">Women's</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-6 pb-4">
-                    <div class="d-flex">
-                        <select class="form-control">
-                            <option class="text-color">Featured</option>
-                            <option class="text-color">A to Z</option>
-                            <option class="text-color">Item</option>
-                        </select>
-                    </div>
-                </div>
-            </div> -->
-    <!-- section-cart -->
     <?php echo ListView::widget([
                 'dataProvider' => $dataProvider,
                 'itemView' => 'product_cart',
@@ -86,7 +59,7 @@ Yii::$app->params['og_image']['content'] = $model->image_url;
         <div class="col-lg-6 text-center" style="padding=1rem">
             <h3 class="Collection-brand">THIS WEEK'S HIGHLIGHTS</h3>
         </div>
-        <div class="col-lg-3" style="margin: auto">
+        <div class="col-lg-3" style="margin:auto">
             <hr>
         </div>
     </div>
@@ -113,6 +86,21 @@ Yii::$app->params['og_image']['content'] = $model->image_url;
             <hr>
         </div>
     </div>
+    <?php echo ListView::widget([
+                'dataProvider' => $dataProvider1,
+                'itemView' => 'product_cart',
+                'itemOptions' => [
+                    'class' => "col-lg-4 col-md-4 col-6 product-item"
+                ],
+                'layout' => '
+                    <div class="row">
+                        {items}
+                    </div>
+                '
+            ]) ?>
+
+
+    <?= $this->render("banner", ['base_url' => $base_url]) ?>
 </div>
 <!-- End Cart -->
 <!-- End Content -->

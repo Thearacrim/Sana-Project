@@ -15,7 +15,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="site-login">
     <div class="container">
         <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
-        //Login User
         <?php $form = ActiveForm::begin([
             'id' => 'login-form',
             'enableAjaxValidation' => false,
