@@ -1,4 +1,5 @@
 <div class="container">
+
     <?php
     if (Yii::$app->session->hasFlash('success')) : ?>
     <div class="alert alert-success" role="alert">
@@ -19,10 +20,12 @@
     use yii\bootstrap4\Html;
 
     $base_url = Yii::getAlias("@web");
+    
 
     $form = ActiveForm::begin([
         'options' => ['enctype' => 'multipart/form-data'],
     ]); ?>
+
     <div class="row m-3">
         <div class="col-lg-2 col-md-12 col-sm-12 border border-dark">
             <div class="text-center p-3">
@@ -67,11 +70,3 @@
         </div>
     </div>
 </div>
-
-<?php
-$script = <<< JS
-    
-    JS;
-$this->registerJS($script);
-
-?>

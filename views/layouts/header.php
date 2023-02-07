@@ -52,19 +52,13 @@ if (\Yii::$app->user->isGuest) {
                 <?php
         if (Yii::$app->user->isGuest) {
         ?>
-                <a class="nav-icon position-relative text-decoration-none" value="login"
-                    href="<?= Url::to(['/site/login']) ?>">
-                    <i class="fa fa-fw fa-cart-arrow-down text-color mr-1"></i>
-                    <span id="cart-quantity"
-                        class="position-absolute top-0 left-100 translate-middle badge rounded-pill badge badge-danger"><?= $totalCart ?></span>
-                </a>
-                <a class="nav-icon position-relative text-decoration-none trigggerModal"
-                    value="<?= Url::to(['/site/login']) ?>" href="#">
-                    <i class="fa fa-fw fa-cart-arrow-down text-color mr-1"></i>
-                    <span id="cart-quantity"
-                        class="position-absolute top-0 left-100 translate-middle badge rounded-pill badge badge-danger"><?= $totalCart ?></span>
-                </a>
-                <?php
+
+          <a class="nav-icon position-relative text-decoration-none" value="login" href="<?= Url::to(['/site/login']) ?>">
+            <i class="fa fa-fw fa-cart-arrow-down text-color mr-1"></i>
+            <span id="cart-quantity" class="position-absolute top-0 left-100 translate-middle badge rounded-pill badge badge-danger"><?= $totalCart ?></span>
+          </a>
+        <?php
+
         } else {
         ?>
                 <a class="nav-icon position-relative text-decoration-none" href="<?= Url::to(['site/cart']) ?>">
@@ -98,17 +92,12 @@ if (\Yii::$app->user->isGuest) {
                 <?php
         if (Yii::$app->user->isGuest) {
         ?>
-                <a style="cursor:poiter" href="<?= Url::to(['/site/login']) ?>" class="pl-3"><i
-                        class="fas fa-user"></i></a>
-                <!-- <span class="text-dark p-3 fw-bold">|</span>
+
+          <a style="cursor:poiter" href="<?= Url::to(['/site/login']) ?>" class="pl-3"><i class="fas fa-user"></i></a>
+          <!-- <span class="text-dark p-3 fw-bold">|</span>
           <a style="cursor:poiter" value="<?= Url::to(['/site/sign']) ?>" class="trigggerModal">SignUp<i class="fas fa-sign-up-alt"></i></a> -->
-                <a style="cursor:poiter" value="<?= Url::to(['/site/login']) ?>" class="pl-3 trigggerModal">Login <i
-                        class="fas fa-sign-in-alt"></i></a>
-                <span class="text-dark p-3 fw-bold">|</span>
-                <a style="cursor:poiter" value="<?= Url::to(['/site/sign']) ?>" class="trigggerModal">SignUp<i
-                        class="fas fa-sign-up-alt"></i></a>
-                ?>
-                <?php
+        <?php
+
         } else {
         ?>
                 <?php $menuItems[] = ['label' => ''] ?>
