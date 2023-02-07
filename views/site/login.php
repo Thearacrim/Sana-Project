@@ -1,31 +1,36 @@
 <style>
-    #login-form{
-    margin:auto;
-    width:350px;
-    }
-    .sign{
-        width:100%;
-    }
-    .foget_pass{
-        display:contents;
-    }
-    .form-control{
-        background:#EDF2FC;
-    }
-    hr{
-        border:none;
-        height:2px;
-        background:#dddddd;
-    }
-    .img{
-        width:100%;
-    }
-    /* @media screen and (max-width: 600px) {
+#login-form {
+    margin: auto;
+    width: 350px;
+}
+
+.sign {
+    width: 100%;
+}
+
+.foget_pass {
+    display: contents;
+}
+
+.form-control {
+    background: #EDF2FC;
+}
+
+hr {
+    border: none;
+    height: 2px;
+    background: #dddddd;
+}
+
+.img {
+    width: 100%;
+}
+
+/* @media screen and (max-width: 600px) {
         .respon {
         width: 100%;
         }
     } */
- 
 </style>
 <?php
 
@@ -42,12 +47,11 @@ $this->title = 'SIGN IN';
 
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-    <div style="text-align:center;margin-top: 80px;">
-        <h1>WELCOME BACK</h1>
-    </div>
+<div style="text-align:center;margin-top: 80px;">
+    <h1>WELCOME BACK</h1>
+</div>
 
 <div class="site-login">
-<<<<<<< HEAD
     <div class="container w-100">
         <hr>
         <div class="row">
@@ -61,43 +65,43 @@ $this->params['breadcrumbs'][] = $this->title;
                     'enableClientValidation' => true,
                 ]) ?>
                 <?= $form->field($model, 'username') ?>
-=======
-    <div class="container">
-        <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
-        <?php $form = ActiveForm::begin([
+                <div class="container">
+                    <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
+                    <?php $form = ActiveForm::begin([
             'id' => 'login-form',
             'enableAjaxValidation' => false,
             'enableClientValidation' => true,
             // 'validateOnBlur' => false,
             // 'validateOnType' => false,
             // 'validateOnChange' => false,
->>>>>>> 275aa9806e250511e047530feffaa0a744661aaf
+        ])
+            ?>
 
-                <?= $form->field($model, 'password')->passwordInput() ?>
+                    <?= $form->field($model, 'password')->passwordInput() ?>
 
-                <?= $form->field($model, 'rememberMe')->checkbox() ?>
-                <div class="form-group text-center">
-                    <?= Html::submitButton('SIGN IN WITH USER', ['class' => 'btn btn-dark', 'name' => 'login-button', "id" => "btn-login"]) ?>
+                    <?= $form->field($model, 'rememberMe')->checkbox() ?>
+                    <div class="form-group text-center">
+                        <?= Html::submitButton('SIGN IN WITH USER', ['class' => 'btn btn-dark', 'name' => 'login-button', "id" => "btn-login"]) ?>
+                    </div>
+                    <div class="text-center" style="color:#999;margin:1em 0">
+                        <?= Html::a('Forget your password?', ['site/request-password-reset'],['class' => 'foget_pass text-secondary']) ?>
+                        <br>
+                    </div>
+
                 </div>
-                 <div class="text-center" style="color:#999;margin:1em 0">
-                    <?= Html::a('Forget your password?', ['site/request-password-reset'],['class' => 'foget_pass text-secondary']) ?>
-                    <br>
+                <div class="col sign ">
+                    <img class="img" src="img/clark-street-mercantile-qnKhZJPKFD8-unsplash.jpg" alt="">
                 </div>
-               
             </div>
-                 <div class="col sign ">
-                <img class="img" src="img/clark-street-mercantile-qnKhZJPKFD8-unsplash.jpg" alt="">
-            </div>
+            <?php ActiveForm::end(); ?>
+            <hr>
         </div>
-        <?php ActiveForm::end(); ?>
-        <hr>
-        </div>
-        
+
     </div>
-   
+
 </div>
 <br>
-    <div style="text-align:center;margin-bottom: 150px">
-        <h4 >NEW TO LEVEL SROTE 89</h4>
-        <a style="cursor:poiter" href="<?= Url::to(['/site/sign']) ?>" class="btn btn-dark">CREATE ACCOUNT</a>
-    </div>
+<div style="text-align:center;margin-bottom: 150px">
+    <h4>NEW TO LEVEL SROTE 89</h4>
+    <a style="cursor:poiter" href="<?= Url::to(['/site/sign']) ?>" class="btn btn-dark">CREATE ACCOUNT</a>
+</div>
