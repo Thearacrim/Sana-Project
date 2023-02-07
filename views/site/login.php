@@ -65,6 +65,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'enableClientValidation' => true,
                 ]) ?>
                 <?= $form->field($model, 'username') ?>
+<<<<<<< HEAD
                 <div class="container">
                     <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
                     <?php $form = ActiveForm::begin([
@@ -76,6 +77,8 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'validateOnChange' => false,
         ])
             ?>
+=======
+>>>>>>> b2fade8ed2665501f90af0898f06ca49fc5e3133
 
                     <?= $form->field($model, 'password')->passwordInput() ?>
 
