@@ -844,6 +844,7 @@ class SiteController extends Controller
         }
 
         $model = User::findOne(Yii::$app->user->id);
+
         if ($this->request->isPost && $model->load($this->request->post())) {
             $imagename = Inflector::slug($model->status) . '-' . time();
             $model->image_url = UploadedFile::getInstance($model, 'image_url');

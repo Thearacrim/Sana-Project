@@ -47,7 +47,6 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
 <div class="site-login">
-<<<<<<< HEAD
     <div class="container w-100">
         <hr>
         <div class="row">
@@ -61,17 +60,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     'enableClientValidation' => true,
                 ]) ?>
                 <?= $form->field($model, 'username') ?>
-=======
-    <div class="container">
-        <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
-        <?php $form = ActiveForm::begin([
-            'id' => 'login-form',
-            'enableAjaxValidation' => false,
-            'enableClientValidation' => true,
-            // 'validateOnBlur' => false,
-            // 'validateOnType' => false,
-            // 'validateOnChange' => false,
->>>>>>> 275aa9806e250511e047530feffaa0a744661aaf
 
                 <?= $form->field($model, 'password')->passwordInput() ?>
 
