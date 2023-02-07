@@ -25,12 +25,6 @@ hr {
 .img {
     width: 100%;
 }
-
-/* @media screen and (max-width: 600px) {
-        .respon {
-        width: 100%;
-        }
-    } */
 </style>
 <?php
 
@@ -65,7 +59,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     'enableClientValidation' => true,
                 ]) ?>
                 <?= $form->field($model, 'username') ?>
-<<<<<<< HEAD
                 <div class="container">
                     <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
                     <?php $form = ActiveForm::begin([
@@ -77,11 +70,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'validateOnChange' => false,
         ])
             ?>
-=======
->>>>>>> b2fade8ed2665501f90af0898f06ca49fc5e3133
-
                     <?= $form->field($model, 'password')->passwordInput() ?>
-
                     <?= $form->field($model, 'rememberMe')->checkbox() ?>
                     <div class="form-group text-center">
                         <?= Html::submitButton('SIGN IN WITH USER', ['class' => 'btn btn-dark', 'name' => 'login-button', "id" => "btn-login"]) ?>
@@ -90,7 +79,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?= Html::a('Forget your password?', ['site/request-password-reset'],['class' => 'foget_pass text-secondary']) ?>
                         <br>
                     </div>
-
                 </div>
                 <div class="col sign ">
                     <img class="img" src="img/clark-street-mercantile-qnKhZJPKFD8-unsplash.jpg" alt="">
