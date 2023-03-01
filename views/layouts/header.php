@@ -2,11 +2,13 @@
 
 use app\modules\Admin\models\User;
 use app\modules\Admin\models\Cart;
+use app\models\Favorites;
+
 use yii\bootstrap4\Html;
 use yii\helpers\Url;
 
-$model = User::findOne(Yii::$app->user->id);
 
+$model = User::findOne(Yii::$app->user->id);
 $base_url = Yii::getAlias("@web");
 
 if (\Yii::$app->user->isGuest) {
@@ -15,8 +17,19 @@ if (\Yii::$app->user->isGuest) {
   $userId = Yii::$app->user->id;
   $totalCart = Cart::find()->select(['SUM(quantity) quantity'])->where(['user_id' => $userId])->one();
   $totalCart = $totalCart->quantity;
-}
+};
+
+
+if (Yii::$app->user->isGuest) {
+  $favoritestotal = 0;
+} else {
+  $userId = Yii::$app->user->id;
+  $favoritestotal = Favorites::find()->select(['SUM(qty) qty'])->where(['user_id' => $userId])->one();
+  $favoritestotal = $favoritestotal->qty;
+};
+
 ?>
+
 <!-- Header -->
 <nav class="navbar navbar-expand-lg back-light shadow">
     <div class="container d-flex justify-content-between align-items-center">
@@ -46,9 +59,33 @@ if (\Yii::$app->user->isGuest) {
                 <a class="nav-icon d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
                     <i class="fa fa-fw fa-search mr-2 text-color"></i>
                 </a>
-                <a class="nav-icon d-lg-inline icon-hearth" href="#">
-                    <i class="far fa-heart mr-2 text-color"></i>
+                <!-- add-fav -->    
+                 <!-- <a class="nav-icon position-relative text-decoration-none" value="login" href="<?= Url::to(['site/favorites']) ?>">
+                    <i class="far fa-heart fa-cart-arrow-down text-color mr-1"></i>
+                    <span id="favortie-quantity" class="position-absolute top-0 left-100 translate-middle badge rounded-pill badge badge-danger"><?= $favoritestotal?></span>
+                </a> -->
+        <?php 
+
+            if(Yii::$app->user->isGuest){
+                ?>
+                    <a class="nav-icon position-relative text-decoration-none" value="login" href="<?= Url::to(['site/login']) ?>">
+                    <i class="far fa-heart fa-cart-arrow-down text-color mr-1"></i>
+                    <span id="favortie-quantity" class="position-absolute top-0 left-100 translate-middle badge rounded-pill badge badge-danger"><?= $favoritestotal?></span>
                 </a>
+
+                <?php
+            }else{
+                ?>
+                    <a class="nav-icon position-relative text-decoration-none" value="login" href="<?= Url::to(['/site/favorites']) ?>">
+                    <i class="far fa-heart fa-cart-arrow-down text-color mr-1"></i>
+                    <span id="favortie-quantity" class="position-absolute top-0 left-100 translate-middle badge rounded-pill badge badge-danger"><?= $favoritestotal?></span>
+                    </a>
+
+
+                <?php
+            }
+        
+        ?>
                 <?php
         if (Yii::$app->user->isGuest) {
         ?>
