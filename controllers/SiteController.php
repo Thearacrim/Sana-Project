@@ -168,7 +168,7 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if ($model->login()) {
                 // Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
-                return $this->goBack();
+                return $this->redirect(['site/add-cart']);
             }
         }
         return $this->render('login', [
@@ -183,7 +183,7 @@ class SiteController extends Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
-        return $this->goHome();
+        return $this->redirect(['site/add-cart']);
     }
     /**
      * Displays contact page.
@@ -518,6 +518,10 @@ class SiteController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
+
+    //////////////////////
+    //////////////////////Man
+
     public function actionStoreMan()
     {
         if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
@@ -548,6 +552,7 @@ class SiteController extends Controller
         }
         $dataProvider = new ActiveDataProvider([
             'query' => Product::find()->where(['type_item' => 2]),
+            'pagination' => array('pageSize' => 9),
         ]);
 
         return $this->render('stores/store-man', [
@@ -556,6 +561,49 @@ class SiteController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    /////////////////////////////////////////////////////////////Category-Top//////////////////////////////////
+
+    public function actionStoreTopTshirtMan()
+    {
+        $dataProvider = new ActiveDataProvider([
+            'query' => Product::find()->where(['type_item' => 2]),
+            'pagination' => array('pageSize' => 9),
+        ]);
+        return $this->render('stores/man/top-man/tshirt', [
+            'dataProvider' => $dataProvider
+        ]);
+    }
+
+
+    ////////////////////////////////////////////////////////////Category-Bottoms/////////////////////////////////
+    public function actionStoreBottomsJeanMan()
+    {
+        $dataProvider = new ActiveDataProvider([
+            'query' => Product::find()->where(['type_item' => 3]),
+            'pagination' => array('pageSize' => 9),
+        ]);
+        return $this->render('stores/man/category-bottoms-man/jean', [
+            'dataProvider' => $dataProvider
+        ]);
+    }
+
+    /////////////////////////////////////////////////////////////Category-Accessories///////////////////////////////
+
+    public function actionStoreAccessoriesHatMan()
+    {
+        $dataProvider = new ActiveDataProvider([
+            'query' => Product::find()->where(['type_item' => 3]),
+            'pagination' => array('pageSize' => 9),
+        ]);
+        return $this->render('stores/man/accessories-man/hat', [
+            'dataProvider' => $dataProvider
+        ]);
+    }
+
+
+    ///////////////////////////
+    ////////////////////////////Woman
 
     public function actionStoreWomen()
     {
@@ -589,6 +637,7 @@ class SiteController extends Controller
         }
         $dataProvider = new ActiveDataProvider([
             'query' => Product::find()->where(['type_item' => 1]),
+            'pagination' => array('pageSize' => 9),
         ]);
 
         return $this->render('stores/store-women', [
@@ -598,24 +647,31 @@ class SiteController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    public function actionStoreGlasses()
+    /////////////////////////////////////////Top-Woman///////////////////////////////
+    public function actionStoreTopTshirtWoman()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Product::find()->where(['type_item' => 3]),
+            'query' => Product::find()->where(['type_item' => 2]),
+            'pagination' => array('pageSize' => 9),
         ]);
-        return $this->render('stores/store-glasses', [
+        return $this->render('stores/woman/top-woman/tshirt', [
             'dataProvider' => $dataProvider
         ]);
     }
-    public function actionStoreShoes()
+
+    /////////////////////////////////////////Bottoms-Woman//////////////////////////////
+
+    public function actionStoreBottomsJeanWoman()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Product::find()->where(['type_item' => 6]),
+            'query' => Product::find()->where(['type_item' => 2]),
+            'pagination' => array('pageSize' => 9),
         ]);
-        return $this->render('stores/store-shoes', [
+        return $this->render('stores/woman/bottoms-woman/jeans', [
             'dataProvider' => $dataProvider
         ]);
     }
+
 
     public function actionStoreSingle($id)
     {
