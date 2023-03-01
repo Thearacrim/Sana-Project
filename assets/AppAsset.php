@@ -24,11 +24,12 @@ class AppAsset extends AssetBundle
         'template/css/templatemo.css',
         'template/css/custom.css',
         'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css',
-        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css',
+        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css',
         'owlcarousel/assets/owl.carousel.min.css',
         'owlcarousel/assets/owl.theme.default.min.css',
         'https://unpkg.com/aos@2.3.1/dist/aos.css',
         'template/css/variant.css',
+        'template/css/price-rang.css',
     ];
     public $js = [
         'template/js/jquery-migrate-1.2.1.min.js',
@@ -46,6 +47,7 @@ class AppAsset extends AssetBundle
         'https://polyfill.io/v3/polyfill.min.js?features=default',
         'swup/dist/swup.min.js',
         'template/js/lang.js',
+        'template/js/price-rang.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
