@@ -2,7 +2,7 @@
 
 use app\modules\Admin\models\User;
 use app\modules\Admin\models\Cart;
-use app\models\Favorites;
+use app\models\Favorite;
 
 use yii\bootstrap4\Html;
 use yii\helpers\Url;
@@ -24,7 +24,7 @@ if (Yii::$app->user->isGuest) {
   $favoritestotal = 0;
 } else {
   $userId = Yii::$app->user->id;
-  $favoritestotal = Favorites::find()->select(['SUM(qty) qty'])->where(['user_id' => $userId])->one();
+  $favoritestotal = Favorite::find()->select(['SUM(qty) qty'])->where(['user_id' => $userId])->one();
   $favoritestotal = $favoritestotal->qty;
 };
 

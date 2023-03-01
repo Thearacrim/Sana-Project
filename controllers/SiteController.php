@@ -11,7 +11,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\Cart;
-use app\models\Favorites;
+use app\models\Favorite;
 use app\models\ResendVerificationEmailForm;
 use app\models\VerifyEmailForm;
 use Yii;
@@ -498,12 +498,12 @@ class SiteController extends Controller
         $userId = Yii::$app->user->id;
         $product_id = $this->request->post('id');
         
-        $model = new Favorites();
+        $model = new Favorite();
         if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
-            $ifExist = Favorites::findOne(['product_id'=> $product_id]);
+            $ifExist = Favorite::findOne(['product_id'=> $product_id]);
             if(!empty($ifExist)){ // if fav product already have record in table
-                Favorites::deleteAll(['product_id'=> $product_id]);
-                $favoritestotal = Favorites::find()->where(['user_id' => $userId])->count();
+                Favorite::deleteAll(['product_id'=> $product_id]);
+                $favoritestotal = Favorite::find()->where(['user_id' => $userId])->count();
                 return json_encode(['type'=>'remove','status' => 'success', 'favoritestotal' => $favoritestotal]);
             }else{
                 $model->user_id = Yii::$app->user->id;
@@ -513,7 +513,7 @@ class SiteController extends Controller
                 $model->created_at = date('Y-m-d H:i:s');
             
                 if ($model->save()) {
-                    $favoritestotal = Favorites::find()->select(['SUM(qty) qty'])->where(['user_id' => $userId])->one();
+                    $favoritestotal = Favorite::find()->select(['SUM(qty) qty'])->where(['user_id' => $userId])->one();
                     $favoritestotal = $favoritestotal->qty;
                     return json_encode(['type'=>'add','status' => 'success', 'favoritestotal' => $favoritestotal]);
                 } else {
@@ -526,9 +526,9 @@ class SiteController extends Controller
         $favorites = Yii::$app->db->createCommand("
             SELECT product.id,product.price,product.image_url,product.status
             FROM product
-            INNER JOIN favorites 
-            ON product.id = favorites.product_id
-            WHERE favorites.user_id = :userId
+            INNER JOIN favorite 
+            ON product.id = favorite.product_id
+            WHERE favorite.user_id = :userId
             GROUP BY id"
             )
             ->bindParam('userId', $userId)
