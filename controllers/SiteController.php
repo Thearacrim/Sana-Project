@@ -4,12 +4,14 @@ namespace app\controllers;
 
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use app\models\Invoices;
+
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\Cart;
-use app\models\Invoices;
+use app\models\Favorite;
 use app\models\ResendVerificationEmailForm;
 use app\models\VerifyEmailForm;
 use Yii;
@@ -461,6 +463,86 @@ class SiteController extends Controller
         ]);
     }
 
+    public function actionRemoveFav() 
+    {
+        if ($this->request->isAjax) {
+            if ($this->request->post('action') == 'remove_fav_item') {
+                $userId = Yii::$app->user->id;
+                $product_id = $this->request->post('id');
+                $model = Favorites::findOne($id);
+
+                if (!$model->delete()) {
+                    return json_encode(['success' => false, 'message' => 'Unable to remove fav item']);
+                }
+                $totalfav = Favorites::find(['user_id' => $userId])->count();
+                return json_encode([
+                    'success' => true,
+                    'totalfav' => $totalfav
+                ]);
+            }
+        }    
+        
+    }
+
+    public function actionFavorites()
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(['site/login']);
+        }
+        $products = Product::find()->limit (12)->all();
+            
+        // echo'<pre>';
+        // print_r($products);
+        // echo'<pre>';
+        // exit;
+        $userId = Yii::$app->user->id;
+        $product_id = $this->request->post('id');
+        
+        $model = new Favorite();
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
+            $ifExist = Favorite::findOne(['product_id'=> $product_id]);
+            if(!empty($ifExist)){ // if fav product already have record in table
+                Favorite::deleteAll(['product_id'=> $product_id]);
+                $favoritestotal = Favorite::find()->where(['user_id' => $userId])->count();
+                return json_encode(['type'=>'remove','status' => 'success', 'favoritestotal' => $favoritestotal]);
+            }else{
+                $model->user_id = Yii::$app->user->id;
+                $model->product_id = $product_id;
+                $model->customer_id = Yii::$app->user->id;
+                $model->qty = 1;
+                $model->created_at = date('Y-m-d H:i:s');
+            
+                if ($model->save()) {
+                    $favoritestotal = Favorite::find()->select(['SUM(qty) qty'])->where(['user_id' => $userId])->one();
+                    $favoritestotal = $favoritestotal->qty;
+                    return json_encode(['type'=>'add','status' => 'success', 'favoritestotal' => $favoritestotal]);
+                } else {
+                    return json_encode(['status' => 'error', 'message' => "something went wrong."]);;
+                }
+                return json_encode(['status' => true]);   
+            }     
+        }
+
+        $favorites = Yii::$app->db->createCommand("
+            SELECT product.id,product.price,product.image_url,product.status
+            FROM product
+            INNER JOIN favorite 
+            ON product.id = favorite.product_id
+            WHERE favorite.user_id = :userId
+            GROUP BY id"
+            )
+            ->bindParam('userId', $userId)
+            ->queryAll();
+
+
+        return $this->render('favorites', [
+          'model' => $model,
+          'favorites' => $favorites,
+          'products' => $products,
+          
+        ]); 
+    }
+
     public function actionAddCart()
     {
         if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
@@ -469,6 +551,13 @@ class SiteController extends Controller
             }
             $id = $this->request->post('id');
             $userId = Yii::$app->user->id;
+            $product_id = $this->request->post('id');
+            
+            if( $model->save()){
+                    return json_encode(['success' => true]);
+            }else{
+                    return json_encode(['success' => false]);
+            };
             $cart = Cart::find()->where(['product_id' => $id, 'user_id' => $userId])->one();
             if ($cart) {
                 $cart->quantity++;
@@ -478,14 +567,15 @@ class SiteController extends Controller
                 $cart->product_id = $id;
                 $cart->quantity = 1;
             }
+              
             if ($cart->save()) {
                 $totalCart = Cart::find()->select(['SUM(quantity) quantity'])->where(['user_id' => $userId])->one();
-                $totalCart = $totalCart->quantity;
+                $totalCart = $totalCart->quantity; 
                 return json_encode(['status' => 'success', 'totalCart' => $totalCart]);
             } else {
                 return json_encode(['status' => 'error', 'message' => "something went wrong."]);;
             }
-
+            
             return json_encode(['success' => true]);
         }
         $model = Product::find()->one();
@@ -763,8 +853,8 @@ class SiteController extends Controller
             INNER JOIN variant_color ON variant_color.id = cart.color_id
             WHERE cart.user_id = :userId"
             )
-                ->bindParam('userId', $userId)
-                ->queryAll();
+            ->bindParam('userId', $userId)
+            ->queryAll();
             $totalCart = Cart::find()->select(['user_id'])->where(['user_id' => $current_user])->count();
             return $this->render(
                 'checkout',
@@ -874,6 +964,18 @@ class SiteController extends Controller
                 'model' => $model,
             ]
         );
+    }
+
+    public function actionChangebtn($id, $change_status)
+    {
+        if ($change_status == 1) {
+            $newchange_status = 0;
+        } else ($newchange_status = 1);
+
+        $model = Product::findOne($id);
+        $model->change_status = $newchange_status;
+        $model->save();
+        return $this->redirect(['site/add-cart']);
     }
 
     /**

@@ -12,7 +12,12 @@ $this->params['breadcrumbs'][] = $this->title;
 $base_url = Yii::getAlias("@web");
 
 ?>
-
+<style>
+    .isFav:hover {
+        background-color: #000;
+        color: #fff;
+    }
+</style>
 <!-- Start Content -->
 <div class="container py-5">
     <div class="row">
@@ -257,6 +262,7 @@ $base_url = Yii::getAlias("@web");
 <!--End Brands-->
 
 <?php
+$add_fav_url = Url::to(['site/favorites']);
 $add_cart_url = Url::to(['site/add-cart']);
 $script = <<<JS
     var base_url = "$base_url";
@@ -284,6 +290,38 @@ $script = <<<JS
 
 
     });
+    $(".btn-add-to-fav").click(function(e){
+        e.preventDefault();
+        var id = $(this).data("id");
+        // console.log("http://localhost:8080$add_fav_url")
+        $.ajax({
+            url: "http://localhost:8080$add_fav_url",
+            method: 'POST',
+            data: {
+                action: 'btn-add-to-fav',
+                id: id,
+            },
+            success: function(res){
+                var data = JSON.parse(res);
+                console.log(data)
+                if(data['status'] == 'success'){
+
+                    $("#favortie-quantity").text(data['favoritestotal']);
+                    if (data['type'] == 'remove'){
+                        $(".btn-add-to-fav[data-id='"+id+"']").removeClass("isFav");
+                    }else {
+                        $(".btn-add-to-fav[data-id='"+id+"']").addClass("isFav");
+                    }
+                    
+                }else{
+                    alert(data['message']);
+                }
+            },
+            error: function(err){
+                console.log(err);
+            }
+        });
+    });
     $(document).ready(function () {
             $(".block").slice(0, 12).show();
             if ($(".block:hidden").length != 0) {
@@ -298,10 +336,6 @@ $script = <<<JS
                 }
             });
         })
-
 JS;
-
 $this->registerJs($script);
-
-
 ?>

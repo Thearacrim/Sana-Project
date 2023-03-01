@@ -50,6 +50,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?= $form->field($model, 'password')->passwordInput() ?>
 
+        <?= $form->field($model, 'password_repeat')->passwordInput() ?>
+
+
         <div class="form-group d-flex justify-content-center">
            
             <?= Html::submitButton('CREATE', ['class' => 'btn btn-dark', 'name' => 'signup-button']) ?>
