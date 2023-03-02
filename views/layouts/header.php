@@ -138,11 +138,7 @@ if (\Yii::$app->user->isGuest) {
                     data-bs-target="#templatemo_search">
                     <i class="fa fa-fw fa-search mr-2 text-color"></i>
                 </a>
-<<<<<<< HEAD
                 <a class="nav-icon d-lg-inline icon-menu" href="#">
-=======
-                <a class="nav-icon d-lg-inline icon-hearth" href="#">
->>>>>>> parent of d654843 (update_favorite)
                     <i class="far fa-heart mr-2 text-color"></i>
                 </a>
                 <?php
