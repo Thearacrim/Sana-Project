@@ -17,6 +17,7 @@ class SignupForm extends Model
     public $username;
     public $email;
     public $password;
+    public $password_repeat;
 
 
     /**
@@ -35,6 +36,9 @@ class SignupForm extends Model
             ['email', 'unique', 'targetClass' => '\app\models\User', 'message' => 'This email address has already been taken.'],
 
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
+            ['password_repeat', 'compare', 'compareAttribute'=>'password', 'skipOnEmpty' => false, 'message'=>"Error! Comfrim Passwords Not Match"],
+
+
         ];
     }
 
@@ -52,6 +56,7 @@ class SignupForm extends Model
             $user->username = $this->username;
             $user->email = $this->email;
             $user->setPassword($this->password);
+            $user->setPassword($this->password_repeat);
             $user->generateAuthKey();
             $user->save();
             return $user;
