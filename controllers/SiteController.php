@@ -4,8 +4,6 @@ namespace app\controllers;
 
 use yii\filters\AccessControl;
 use yii\web\Controller;
-use app\models\Invoices;
-
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
@@ -551,13 +549,6 @@ class SiteController extends Controller
             }
             $id = $this->request->post('id');
             $userId = Yii::$app->user->id;
-            $product_id = $this->request->post('id');
-            
-            if( $model->save()){
-                    return json_encode(['success' => true]);
-            }else{
-                    return json_encode(['success' => false]);
-            };
             $cart = Cart::find()->where(['product_id' => $id, 'user_id' => $userId])->one();
             if ($cart) {
                 $cart->quantity++;
@@ -567,15 +558,14 @@ class SiteController extends Controller
                 $cart->product_id = $id;
                 $cart->quantity = 1;
             }
-              
             if ($cart->save()) {
                 $totalCart = Cart::find()->select(['SUM(quantity) quantity'])->where(['user_id' => $userId])->one();
-                $totalCart = $totalCart->quantity; 
+                $totalCart = $totalCart->quantity;
                 return json_encode(['status' => 'success', 'totalCart' => $totalCart]);
             } else {
                 return json_encode(['status' => 'error', 'message' => "something went wrong."]);;
             }
-            
+
             return json_encode(['success' => true]);
         }
         $model = Product::find()->one();
@@ -909,8 +899,8 @@ class SiteController extends Controller
             INNER JOIN variant_color ON variant_color.id = cart.color_id
             WHERE cart.user_id = :userId"
             )
-            ->bindParam('userId', $userId)
-            ->queryAll();
+                ->bindParam('userId', $userId)
+                ->queryAll();
             $totalCart = Cart::find()->select(['user_id'])->where(['user_id' => $current_user])->count();
             return $this->render(
                 'checkout',
@@ -1020,18 +1010,6 @@ class SiteController extends Controller
                 'model' => $model,
             ]
         );
-    }
-
-    public function actionChangebtn($id, $change_status)
-    {
-        if ($change_status == 1) {
-            $newchange_status = 0;
-        } else ($newchange_status = 1);
-
-        $model = Product::findOne($id);
-        $model->change_status = $newchange_status;
-        $model->save();
-        return $this->redirect(['site/add-cart']);
     }
 
     /**

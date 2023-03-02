@@ -3,10 +3,8 @@
 use yii\bootstrap4\Modal;
 use yii\helpers\Url;
 use app\modules\Admin\models\Coupon;
-use yii\helpers\Html;
 
 $base_url = Yii::getAlias("@web");
-$isFav = !empty($model->favorite)?'isFav':'';
 ?>
 <?php $discount = Yii::$app->db->createCommand("SELECT
         discount
@@ -18,12 +16,7 @@ $isFav = !empty($model->favorite)?'isFav':'';
     ->queryScalar();
 $discountCal = $model->price * ($discount / 100);
 ?>
-<style>
-    .isFav {
-        background-color: #000;
-        color: #fff;
-    }
-</style>
+
 <!-- data-aos="zoom-in-down" data-aos-duration="2000" -->
 <div class="card mb-4 product-wap rounded-0">
     <div class="card rounded-0">
@@ -41,11 +34,15 @@ $discountCal = $model->price * ($discount / 100);
             <ul class="list-unstyled">
                 <li>
 <<<<<<< HEAD
+<<<<<<< HEAD
                     <a class="btn btn-danger text-white" href="<?= Url::toRoute('store-single') ?>"><i
                             class="far fa-heart"></i></a>
 =======
                     <a class="btn btn-danger text-white btn-add-to-fav product-item  <?= $isFav?>" href="#" data-id="<?=$model->id?>"><i class="far fa-heart"></i></a>
 >>>>>>> 687a2fec6ce16234f38526ecd137a60c67f7f9fe
+=======
+                    <a class="btn btn-danger text-white" href="<?= Url::toRoute('store-single') ?>"><i class="far fa-heart"></i></a>
+>>>>>>> parent of d654843 (update_favorite)
                 </li>
                 <li>
                     <a class="btn btn-danger text-white mt-2"
@@ -68,7 +65,13 @@ $discountCal = $model->price * ($discount / 100);
         <?php
         } ?>
     </div>
-
-
 </div>
 
+<?php
+
+$script = <<< JS
+        AOS.init();
+        JS;
+$this->registerJs($script);
+
+?>

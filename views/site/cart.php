@@ -56,7 +56,7 @@ Yii::$app->params['og_image']['content'] = 'image.jpg';
                             <div class="sec-border row_item_<?= $product['cart_id'] ?> rounded-0 hover p-3">
                                 <div class="row ">
                                     <div class="col-md-3 col-sm-3">
-                                        <a href="<?= Url::to(['site/store-single?id=' . $product['id']]) ?>"><img src="<?= $base_url . '/' . $product['image_url'] ?>" style="width:110px"></a> 
+                                        <a href="<?= Url::to(['site/store-single?id=' . $product['id']]) ?>"><img src="<?= $base_url . '/' . $product['image_url'] ?>" style="width:110px"></a>
                                     </div>
                                     <div class="col-lg-6">
                                         <span class="status text-color"> <?= $product['status'] ?>
@@ -170,6 +170,7 @@ Yii::$app->params['og_image']['content'] = 'image.jpg';
         <h4>You might also like</h4>
         <a class="nav-link text-right link-danger" href="<?= Url::to(['site/add-cart']) ?>"><i class=" fas fa-plus"></i> More</a>
     </div>
+
     <!--Start Carousel Wrapper-->
     <!-- <div class=" item"> -->
     <div class="owl-carousel owl-theme">
@@ -182,6 +183,7 @@ Yii::$app->params['og_image']['content'] = 'image.jpg';
             /*@var \yii\data\ActiveDataProvider $dataProvider*/
 
             ?>
+
             <div class="card mb-4 product-wap rounded-0">
                 <div class="card rounded-0">
                     <?php if ($discount) {
