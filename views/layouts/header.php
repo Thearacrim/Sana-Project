@@ -17,17 +17,7 @@ if (\Yii::$app->user->isGuest) {
   $userId = Yii::$app->user->id;
   $totalCart = Cart::find()->select(['SUM(quantity) quantity'])->where(['user_id' => $userId])->one();
   $totalCart = $totalCart->quantity;
-};
-
-
-if (Yii::$app->user->isGuest) {
-  $favoritestotal = 0;
-} else {
-  $userId = Yii::$app->user->id;
-  $favoritestotal = Favorite::find()->select(['SUM(qty) qty'])->where(['user_id' => $userId])->one();
-  $favoritestotal = $favoritestotal->qty;
-};
-
+}
 ?>
 
 <!-- Header -->
@@ -177,12 +167,6 @@ if (Yii::$app->user->isGuest) {
                     <i class="far fa-heart fa-cart-arrow-down text-color mr-1"></i>
                     <span id="favortie-quantity" class="position-absolute top-0 left-100 translate-middle badge rounded-pill badge badge-danger"><?= $favoritestotal?></span>
                     </a>
-
-
-                <?php
-            }
-        
-        ?>
                 <?php
         if (Yii::$app->user->isGuest) {
         ?>
