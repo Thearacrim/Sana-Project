@@ -40,12 +40,8 @@ $discountCal = $model->price * ($discount / 100);
         <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
             <ul class="list-unstyled">
                 <li>
-                    <<<<<<< HEAD <a class="btn btn-danger text-white" href="<?= Url::toRoute('store-single') ?>"><i
-                            class="far fa-heart"></i></a>
-                        =======
-                        <a class="btn btn-danger text-white btn-add-to-fav product-item  <?= $isFav?>" href="#"
-                            data-id="<?=$model->id?>"><i class="far fa-heart"></i></a>
-                        >>>>>>> 687a2fec6ce16234f38526ecd137a60c67f7f9fe
+                    <a class="btn btn-danger text-white btn-add-to-fav product-item  <?= $isFav?>" href="#"
+                        data-id="<?=$model->id?>"><i class="far fa-heart"></i></a>
                 </li>
                 <li>
                     <a class="btn btn-danger text-white mt-2"

@@ -37,6 +37,8 @@ use yii\web\UploadedFile;
 use app\components\AuthHandler;
 use yii\bootstrap4\ActiveForm;
 use app\components\AuthHandles;
+use app\models\Favorites;
+
 class SiteController extends Controller
 {
     /**
@@ -469,12 +471,12 @@ class SiteController extends Controller
             if ($this->request->post('action') == 'remove_fav_item') {
                 $userId = Yii::$app->user->id;
                 $product_id = $this->request->post('id');
-                $model = Favorites::findOne($id);
+                $model = Favorite::findOne($id);
 
                 if (!$model->delete()) {
                     return json_encode(['success' => false, 'message' => 'Unable to remove fav item']);
                 }
-                $totalfav = Favorites::find(['user_id' => $userId])->count();
+                $totalfav = Favorite::find(['user_id' => $userId])->count();
                 return json_encode([
                     'success' => true,
                     'totalfav' => $totalfav
@@ -553,11 +555,11 @@ class SiteController extends Controller
             $userId = Yii::$app->user->id;
             $product_id = $this->request->post('id');
             
-            if( $model->save()){
-                    return json_encode(['success' => true]);
-            }else{
-                    return json_encode(['success' => false]);
-            };
+            // if( $model->save()){
+            //         return json_encode(['success' => true]);
+            // }else{
+            //         return json_encode(['success' => false]);
+            // };
             $cart = Cart::find()->where(['product_id' => $id, 'user_id' => $userId])->one();
             if ($cart) {
                 $cart->quantity++;
