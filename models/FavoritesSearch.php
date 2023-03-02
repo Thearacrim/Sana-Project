@@ -4,23 +4,21 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Product;
+use app\models\Favorites;
 
 /**
- * ProductSearch represents the model behind the search form of `frontend\models\Product`.
+ * FavoritesSearch represents the model behind the search form of `app\models\Favorites`.
  */
-class ProductSearch extends Product
+class FavoritesSearch extends Favorites
 {
-    public $title;
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'category_id'], 'integer'],
-            [['status', 'price', 'image_url', 'description', 'type_item', 'title'], 'safe'],
-            [['rate'], 'number'],
+            [['id', 'customer_id', 'product_id', 'user_id', 'qty'], 'integer'],
+            [['created_at'], 'safe'],
         ];
     }
 
@@ -42,14 +40,11 @@ class ProductSearch extends Product
      */
     public function search($params)
     {
-        $query = Product::find();
-
+        $query = Favorites::find();
         // add conditions that should always apply here
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
-
         $this->load($params);
 
         if (!$this->validate()) {
@@ -57,18 +52,16 @@ class ProductSearch extends Product
             // $query->where('0=1');
             return $dataProvider;
         }
+
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'category_id' => $this->category_id,
-            'rate' => $this->rate,
+            'customer_id' => $this->customer_id,
+            'product_id' => $this->product_id,
+            'created_at' => $this->created_at,
+            'user_id' => $this->user_id,
+            'qty' => $this->qty,
         ]);
-
-        $query->andFilterWhere(['like', 'status', $this->title])
-            ->andFilterWhere(['like', 'price', $this->price])
-            ->andFilterWhere(['like', 'image_url', $this->image_url])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'type_item', $this->type_item]);
 
         return $dataProvider;
     }
