@@ -17,7 +17,6 @@ if (\Yii::$app->user->isGuest) {
   $totalCart = $totalCart->quantity;
 }
 ?>
-
 <!-- Header -->
 <nav class="navbar navbar-expand-lg back-light shadow">
     <div class="container d-flex justify-content-between align-items-center">
