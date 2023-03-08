@@ -978,31 +978,29 @@ class SiteController extends Controller
         if (Yii::$app->user->isGuest) {
             return $this->redirect(['site/login']);
         }
-
         $model = User::findOne(Yii::$app->user->id);
+        if ($model->load(Yii::$app->request->post())) {
+            
+            if(!empty(UploadedFile::getInstance($model, 'image_url')))
+            {
+                $imagename = Inflector::slug($model->status) . '-' . time();
+                $model->image_url = UploadedFile::getInstance($model, 'image_url');
 
-        if ($this->request->isPost && $model->load($this->request->post())) {
-            $imagename = Inflector::slug($model->status) . '-' . time();
-            $model->image_url = UploadedFile::getInstance($model, 'image_url');
-            $upload_path = ("profile/uploads/");
-            if (!empty($model->image_url)) {
-                if (!is_dir($upload_path)) {
-                    mkdir($upload_path, 0777, true);
-                }
+                // upload ptofile
+                $upload_path = ("profile/uploads/");
+                if (!is_dir($upload_path)) mkdir($upload_path, 0777, true); 
+
                 $model->image_url->saveAs($upload_path . $imagename . '.' . $model->image_url->extension);
-                //save file uploaded to db
                 $model->image_url = $imagename . '.' . $model->image_url->extension;
             }
-            if($model->image_url == null){
-                    Yii::$app->session->setFlash('fill_up', 'Please make any change before submit!');
-            }else{
-                if ($model->save()) {
-                    Yii::$app->session->setFlash('success', 'Profile updated successfully');
-                } else {
-                    Yii::$app->session->setFlash('error', 'Failed to update profile');
-                }
+            // echo"<pre>";
+            // print_r($model->getAttributes());
+            // exit;
+            if ($model->save()) {
+                Yii::$app->session->setFlash('success', 'Profile updated successfully');
+            } else {
+                Yii::$app->session->setFlash('error', 'Failed to update profile');
             }
-            return $this->redirect(["site/profile"]);
         }
         return $this->render(
             'profile',
@@ -1011,7 +1009,7 @@ class SiteController extends Controller
             ]
         );
     }
-
+    
     /**
      * Requests password reset.
      *
@@ -1103,5 +1101,13 @@ class SiteController extends Controller
         return $this->render('resendVerificationEmail', [
             'model' => $model
         ]);
+    }
+    protected function findModel($id)
+    {
+        if (($model = User::findOne(['id' => $id])) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }
