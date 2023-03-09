@@ -11,14 +11,14 @@ $model = User::findOne(Yii::$app->user->id);
 $base_url = Yii::getAlias("@web");
 
 if (\Yii::$app->user->isGuest) {
-  $totalCart = 0;
+  $totalCart = '';
 } else {
   $userId = Yii::$app->user->id;
   $totalCart = Cart::find()->select(['SUM(quantity) quantity'])->where(['user_id' => $userId])->one();
   $totalCart = $totalCart->quantity;
 };
 if (Yii::$app->user->isGuest) {
-  $favoritestotal = 0;
+  $favoritestotal = '';
 } else {
   $userId = Yii::$app->user->id;
   $favoritestotal = Favorite::find()->select(['SUM(qty) qty'])->where(['user_id' => $userId])->one();
@@ -26,11 +26,14 @@ if (Yii::$app->user->isGuest) {
 };
 ?>
 <style>
-.font_icon {
+.font_icon  {
   font-size: 1.5rem;
 }
 .profile_user{
   left: 28px;
+}
+.not_user{
+  font-size: 1.5rem;
 }
 </style>
 <!-- Header -->
@@ -232,7 +235,7 @@ if (Yii::$app->user->isGuest) {
         if (Yii::$app->user->isGuest) {
         ?>
 
-        <a style="cursor:poiter" href="<?= Url::to(['/site/login']) ?>" class="pl-3"><i class="fas fa-user"></i></a>
+        <a style="cursor:poiter" href="<?= Url::to(['/site/login']) ?>" class="pl-3 not_user"><i class="fas fa-user"></i></a>
         <!-- <span class="text-dark p-3 fw-bold">|</span>
           <a style="cursor:poiter" value="<?= Url::to(['/site/sign']) ?>" class="trigggerModal">SignUp<i class="fas fa-sign-up-alt"><i></a> -->
         <?php
