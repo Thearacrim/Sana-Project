@@ -29,6 +29,9 @@ if (Yii::$app->user->isGuest) {
 .font_icon {
   font-size: 1.5rem;
 }
+.profile_user{
+  left: 28px;
+}
 </style>
 <!-- Header -->
 <nav class="navbar navbar-expand-lg back-light shadow">
@@ -231,7 +234,7 @@ if (Yii::$app->user->isGuest) {
 
         <a style="cursor:poiter" href="<?= Url::to(['/site/login']) ?>" class="pl-3"><i class="fas fa-user"></i></a>
         <!-- <span class="text-dark p-3 fw-bold">|</span>
-          <a style="cursor:poiter" value="<?= Url::to(['/site/sign']) ?>" class="trigggerModal">SignUp<i class="fas fa-sign-up-alt"></i></a> -->
+          <a style="cursor:poiter" value="<?= Url::to(['/site/sign']) ?>" class="trigggerModal">SignUp<i class="fas fa-sign-up-alt"><i></a> -->
         <?php
 
         } else {
@@ -239,9 +242,10 @@ if (Yii::$app->user->isGuest) {
         <?php $menuItems[] = ['label' => ''] ?>
         <div class="btn-group pl-3">
           <div class="dropdown">
-            <a class="dropdown-toggle pr-5" href="#" id="dropdownMenuButton" data-toggle="dropdown"
-              data-bs-toggle="dropdown" data-bs-display="static" aria-haspopup="true" aria-expanded="false">
+            <a class="" href="#" id="dropdownMenuButton" data-toggle="dropdown"
+              data-bs-toggle="dropdown" data-bs-display="static" aria-haspopup="true" aria-expanded="false"style="font-size: 1.5rem;">
               <!-- <img class="rounded-circle" src="<?= $base_url ?>/profile/uploads/<?= $model->image_url ?>" style="width:40px;height:40px" alt="profile"> -->
+              <i class="fas fa-user"></i>
             </a>
             <div class=" dropdown-menu back-light" aria-labelledby="dropdownMenuButton">
 
