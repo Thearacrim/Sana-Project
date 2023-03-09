@@ -122,6 +122,17 @@ $config = [
                 ]
             ]
         ],
+        // 'urlManager' => [
+        //     'enablePrettyUrl' => true,
+        //     'showScriptName' => false,
+        //     'rules' => [
+        //         '<action>' => '/site/<action>',
+        //         '<action>' => '/admin/<action>',
+        //         '<action>' => '/admin/default',
+        //         '<action>' => '/admin/banner',
+        //         '<action>' => '/admin/report'
+        //     ],
+        // ],
 
         //     'urlManager' => [
         //         'baseUrl' => $baseUrl,
