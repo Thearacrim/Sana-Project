@@ -11,12 +11,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $base_url = Yii::getAlias("@web");
 ?>
-<style>
-    .isFav:hover {
-        background-color: #000;
-        color: #fff;
-    }
-</style>
+
 <!-- Start Content -->
 <div class="container py-5">
     <div class="row">
@@ -294,12 +289,25 @@ $script = <<<JS
 
 
     });
-    $(".btn-add-to-fav").click(function(e){
+    $(document).ready(function () {
+            $(".block").slice(0, 12).show();
+            if ($(".block:hidden").length != 0) {
+                $("#load_more").show();    
+            }
+            $("#load_more").on("click", function (e) {
+                e.preventDefault();
+                $(".block:hidden").slice(0, 12).slideDown();
+                if ($(".block:hidden").length == 0) {
+                    $("#load_more").text("No More to view")
+                        .fadOut("slow");
+                }
+            });
+        })
+        $(".btn-add-to-fav").click(function(e){
         e.preventDefault();
         var id = $(this).data("id");
-        // console.log("http://localhost:8080$add_fav_url")
         $.ajax({
-            url: "http://localhost:8080$add_fav_url",
+            url: "$add_fav_url",
             method: 'POST',
             data: {
                 action: 'btn-add-to-fav',
@@ -326,20 +334,12 @@ $script = <<<JS
             }
         });
     });
-    $(document).ready(function () {
-            $(".block").slice(0, 12).show();
-            if ($(".block:hidden").length != 0) {
-                $("#load_more").show();    
-            }
-            $("#load_more").on("click", function (e) {
-                e.preventDefault();
-                $(".block:hidden").slice(0, 12).slideDown();
-                if ($(".block:hidden").length == 0) {
-                    $("#load_more").text("No More to view")
-                        .fadOut("slow");
-                }
-            });
-        })
+
+    
+
 JS;
+
 $this->registerJs($script);
+
+
 ?>

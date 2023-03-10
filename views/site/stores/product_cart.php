@@ -35,8 +35,10 @@ $discountCal = $model->price * ($discount / 100);
         <?php
         } else {
         } ?>
-        <img class="card-img-top rounded-0 w-100" src="<?= $base_url . '/' . $model->image_url ?>"
-            style="height:350px;object-fit: cover;" />
+        <img class="card-img-top rounded-0 w-100" src="<?= $base_url . '/' . $model->image_url ?>" style="float: left;
+    width:  300px;
+    height: auto;
+    background-size: cover" />
         <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
             <ul class="list-unstyled">
                 <li>

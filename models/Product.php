@@ -55,6 +55,7 @@ class Product extends \yii\db\ActiveRecord
             'type_item' => 'Type Item',
             'image_url' => 'Image Url',
             'description' => 'Description',
+            
             'rate' => 'Rate',
             'updated_date' => 'Updated Date',
             'created_date' => 'Created At'
@@ -103,10 +104,5 @@ class Product extends \yii\db\ActiveRecord
             return $base_url . '/uploads/placeholder.jpg';
         }
         return $base_url . '/' . $this->image_url;
-    }
-
-    public function getFavorite()
-    {
-        return $this->hasOne(Favorites::class, ['product_id' => 'id']);
     }
 }
