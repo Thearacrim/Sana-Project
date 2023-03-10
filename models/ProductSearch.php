@@ -5,6 +5,7 @@ namespace app\models;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Product;
+use Yii;
 
 /**
  * ProductSearch represents the model behind the search form of `frontend\models\Product`.
@@ -42,10 +43,9 @@ class ProductSearch extends Product
      */
     public function search($params)
     {
+
         $query = Product::find();
-
         // add conditions that should always apply here
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -65,11 +65,49 @@ class ProductSearch extends Product
             'rate' => $this->rate,
         ]);
 
+        // echo '<pre>';
+        // print_r(Yii::$app->request->get('sort'));
+        // exit;
+
         $query->andFilterWhere(['like', 'status', $this->title])
             ->andFilterWhere(['like', 'price', $this->price])
             ->andFilterWhere(['like', 'image_url', $this->image_url])
             ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'type_item', $this->type_item]);
+
+        if(!empty(Yii::$app->request->get('sort'))){
+            $sort = Yii::$app->request->get('sort');
+            // echo '<pre>';
+            // print_r($sort);
+            // exit;
+            switch ($sort) {
+                case '$featured':
+                    $query->orderBy(['created_date'=>SORT_DESC]);
+                    break;
+                    case 'date_new_to_old':
+                        $query->orderBy(['created_date'=>SORT_DESC]);
+                    break;
+                    case 'date_old_to_new':
+                        $query->orderBy(['created_date'=>SORT_ASC]);
+                    break;
+                    case 'a_to_z':
+                        $query->orderBy(['status'=>SORT_ASC]);
+                    break;
+                    case 'z_to_a':
+                        $query->orderBy(['status'=>SORT_DESC]);
+                    break;
+                    case 'price_low_to_high':
+                        $query->orderBy(['price'=>SORT_ASC]);
+                    break;
+                    case 'price_high_to_low':
+                        $query->orderBy(['price'=>SORT_DESC]);
+                    break;
+                
+                default:
+                    $query->orderBy(['created_date'=>SORT_DESC]);
+                    break;
+            }
+        }
 
         return $dataProvider;
     }
