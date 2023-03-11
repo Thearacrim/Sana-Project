@@ -12,7 +12,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $base_url = Yii::getAlias("@web");
 ?>
-
+<style>
+  .pager{
+    bottom: 79px;
+  }
+</style>
 <!-- Start Content -->
 <div class="container py-5">
   <div class="row">
@@ -86,7 +90,7 @@ $base_url = Yii::getAlias("@web");
             <span class="sort-item">Sort by</span>
             <?= Html::dropDownList(
                   'dateFilter',
-                  $datetype,
+                  $sort,
                   $drowdown,
                   ['class' => 'form-select dateFilter']
               )?>
@@ -111,13 +115,13 @@ $base_url = Yii::getAlias("@web");
                 'layout' => '
                     <div class="row">
                     <div class="col-lg-6">
-                        {summary}
+                        
                     </div>
-                    <div class="col-lg-6 text-center">
+                    <div class="col-lg-6 text-center pager">
                         {pager}
                     </div>
                         {items}
-                        {pager}
+                       
                     </div>
             
                 '

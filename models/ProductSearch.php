@@ -44,10 +44,9 @@ class ProductSearch extends Product
     public function search($params)
     {
 
-        $query = Product::find()->where(['type_item' => 3]);
+        $query = Product::find();
         // add conditions that should always apply here
         $dataProvider = new ActiveDataProvider([
-            // 'query' => Product::find()->where(['type_item' => 3]),
             'query' => $query,
         ]);
 
