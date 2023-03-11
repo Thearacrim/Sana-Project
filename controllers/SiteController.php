@@ -640,7 +640,7 @@ class SiteController extends Controller
             return json_encode(['success' => true]);
         }
         $dataProvider = new ActiveDataProvider([
-            'query' => Product::find()->where(['type_item' => 2]),
+            'query' => Product::find()->where(['type_item' => [2,3,5,7,9,10,11,13]]),
             'pagination' => array('pageSize' => 9),
         ]);
 
@@ -649,6 +649,17 @@ class SiteController extends Controller
         ]);
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionStoreAllTopMan()
+    {
+        $dataProvider = new ActiveDataProvider([
+            'query' => Product::find()->where(['type_item' => [2,5,7,9,11]]),
+            'pagination' => array('pageSize' => 9),
+        ]);
+        return $this->render('stores/man/top-man/alltop', [
+            'dataProvider' => $dataProvider
+        ]);
     }
 
     /////////////////////////////////////////////////////////////Category-Top//////////////////////////////////
@@ -666,6 +677,18 @@ class SiteController extends Controller
 
 
     ////////////////////////////////////////////////////////////Category-Bottoms/////////////////////////////////
+    
+    public function actionStoreAllBottomsMan()
+    {
+        $dataProvider = new ActiveDataProvider([
+            'query' => Product::find()->where(['type_item' => [3,10,13]]),
+            'pagination' => array('pageSize' => 9),
+        ]);
+        return $this->render('stores/man/category-bottoms-man/allbottome', [
+            'dataProvider' => $dataProvider
+        ]);
+    }
+    
     public function actionStoreBottomsJeanMan()
     {
         $dataProvider = new ActiveDataProvider([
@@ -678,6 +701,18 @@ class SiteController extends Controller
     }
 
     /////////////////////////////////////////////////////////////Category-Accessories///////////////////////////////
+
+
+    public function actionStoreAllAccessoriesMan()
+    {
+        $dataProvider = new ActiveDataProvider([
+            'query' => Product::find()->where(['type_item' => [12]]),
+            'pagination' => array('pageSize' => 9),
+        ]);
+        return $this->render('stores/man/accessories-man/allaccessaries', [
+            'dataProvider' => $dataProvider
+        ]);
+    }
 
     public function actionStoreAccessoriesHatMan()
     {
@@ -987,31 +1022,29 @@ class SiteController extends Controller
         if (Yii::$app->user->isGuest) {
             return $this->redirect(['site/login']);
         }
-
         $model = User::findOne(Yii::$app->user->id);
+        if ($model->load(Yii::$app->request->post())) {
+            
+            if(!empty(UploadedFile::getInstance($model, 'image_url')))
+            {
+                $imagename = Inflector::slug($model->status) . '-' . time();
+                $model->image_url = UploadedFile::getInstance($model, 'image_url');
 
-        if ($this->request->isPost && $model->load($this->request->post())) {
-            $imagename = Inflector::slug($model->status) . '-' . time();
-            $model->image_url = UploadedFile::getInstance($model, 'image_url');
-            $upload_path = ("profile/uploads/");
-            if (!empty($model->image_url)) {
-                if (!is_dir($upload_path)) {
-                    mkdir($upload_path, 0777, true);
-                }
+                // upload ptofile
+                $upload_path = ("profile/uploads/");
+                if (!is_dir($upload_path)) mkdir($upload_path, 0777, true); 
+
                 $model->image_url->saveAs($upload_path . $imagename . '.' . $model->image_url->extension);
-                //save file uploaded to db
                 $model->image_url = $imagename . '.' . $model->image_url->extension;
             }
-            if($model->image_url == null){
-                    Yii::$app->session->setFlash('fill_up', 'Please make any change before submit!');
-            }else{
-                if ($model->save()) {
-                    Yii::$app->session->setFlash('success', 'Profile updated successfully');
-                } else {
-                    Yii::$app->session->setFlash('error', 'Failed to update profile');
-                }
+            // echo"<pre>";
+            // print_r($model->getAttributes());
+            // exit;
+            if ($model->save()) {
+                Yii::$app->session->setFlash('success', 'Profile updated successfully');
+            } else {
+                Yii::$app->session->setFlash('error', 'Failed to update profile');
             }
-            return $this->redirect(["site/profile"]);
         }
         return $this->render(
             'profile',
@@ -1020,7 +1053,7 @@ class SiteController extends Controller
             ]
         );
     }
-
+    
     /**
      * Requests password reset.
      *
@@ -1112,5 +1145,13 @@ class SiteController extends Controller
         return $this->render('resendVerificationEmail', [
             'model' => $model
         ]);
+    }
+    protected function findModel($id)
+    {
+        if (($model = User::findOne(['id' => $id])) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

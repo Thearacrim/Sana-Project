@@ -39,6 +39,21 @@ h4 {
   max-width: 80%;
 }
 
+.btn-shopnow{
+  width: 150px;
+  height: 50px;
+  background: #000;
+  font-weight: 600;
+  padding: 15px;
+  color: #ffff;
+}
+
+.btn-shopnow:hover{
+  background: #ffff;
+  border: 1px solid #000;
+  color: #000;
+}
+
 /* BannerZoomOut */
 
 .columnBanner#zoomIn img {

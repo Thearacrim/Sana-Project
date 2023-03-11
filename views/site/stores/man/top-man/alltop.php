@@ -6,7 +6,7 @@ use yii\bootstrap4\LinkPager;
 use yii\helpers\Url;
 use yii\widgets\ListView;
 
-$this->title = 'MAN';
+$this->title = 'All TOP';
 $this->params['breadcrumbs'][] = $this->title;
 
 $base_url = Yii::getAlias("@web");
@@ -53,7 +53,7 @@ $base_url = Yii::getAlias("@web");
         </div>
         <!-- cart-section -->
         <div class="col-lg-9">
-            <div class="title-man">MAN</div>
+            <div class="title-man">ALL TOP</div>
             <hr>
             <div class="side-wrapper stories">
                 <!-- <div class="side-title">STORIES</div> -->
@@ -62,23 +62,41 @@ $base_url = Yii::getAlias("@web");
                         <img src="https://images.unsplash.com/photo-1618453292459-53424b66bb6a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80"
                             alt="" class="user-img">
                     </a>
-                    <div class="username">ALL TOPS
+                    <div class="username">T-Shirt
                     </div>
                 </div>
                 <div class="user">
-                    <a href="<?= Url::to(['site/store-all-bottoms-man']) ?>">
-                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/logo-embroidered-men-track-pants-1990-moi-outfit-631797.jpg?v=1673308814"
+                    <a href="<?= Url::to(['site/store-accessories-hat-man']) ?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/casual-fit-men-hoodie-zip-2790-moi-outfit-697316_360x.jpg?v=1674615686"
                             alt="" class="user-img">
                     </a>
-                    <div class="username">ALL BOTTOME
+                    <div class="username">Hoodies && Sweaters
                     </div>
                 </div>
                 <div class="user">
-                    <a href="<?= Url::to(['site/store-all-accessories-man']) ?>">
-                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/trefoil-embroidered-men-cap-990-moi-outfit-216333_1512x.jpg?v=1673485145"
+                    <a href="<?= Url::to(['site/store-accessories-hat-man']) ?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/floral-men-short-sleeve-shirt-1450-504907_360x.jpg?v=1631650576"
                             alt="" class="user-img">
                     </a>
-                    <div class="username">ALL ACCESSORIES
+                    <div class="username">Shirts Short Sleeves
+                    </div>
+
+                </div>
+                <div class="user">
+                    <a href="<?= Url::to(['site/store-accessories-hat-man']) ?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/logo-embroidered-men-long-sleeve-shirt-2250-moi-outfit-880921_360x.jpg?v=1658997179"
+                            alt="" class="user-img">
+                    </a>
+                    <div class="username">Shirts Long Sleeves
+                    </div>
+
+                </div>
+                <div class="user">
+                    <a href="<?= Url::to(['site/store-accessories-hat-man']) ?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/logo-printed-men-sport-tank-top-1150-moi-outfit-675663_360x.jpg?v=1638296613"
+                            alt="" class="user-img">
+                    </a>
+                    <div class="username">TANK TOPS
                     </div>
 
                 </div>
@@ -268,7 +286,6 @@ $base_url = Yii::getAlias("@web");
 <!--End Brands-->
 
 <?php
-$add_fav_url = Url::to(['site/favorites']);
 $add_cart_url = Url::to(['site/add-cart']);
 $script = <<<JS
     var base_url = "$base_url";
@@ -310,39 +327,6 @@ $script = <<<JS
                 }
             });
         })
-        $(".btn-add-to-fav").click(function(e){
-        e.preventDefault();
-        var id = $(this).data("id");
-        $.ajax({
-            url: "$add_fav_url",
-            method: 'POST',
-            data: {
-                action: 'btn-add-to-fav',
-                id: id,
-            },
-            success: function(res){
-                var data = JSON.parse(res);
-                console.log(data)
-                if(data['status'] == 'success'){
-
-                    $("#favortie-quantity").text(data['favoritestotal']);
-                    if (data['type'] == 'remove'){
-                        $(".btn-add-to-fav[data-id='"+id+"']").removeClass("isFav");
-                    }else {
-                        $(".btn-add-to-fav[data-id='"+id+"']").addClass("isFav");
-                    }
-                    
-                }else{
-                    alert(data['message']);
-                }
-            },
-            error: function(err){
-                console.log(err);
-            }
-        });
-    });
-
-    
 
 JS;
 
