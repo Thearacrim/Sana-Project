@@ -17,6 +17,7 @@ use Yii;
  */
 class Product extends \yii\db\ActiveRecord
 {
+    // const TYPE_ITEM_MAN = 3;
     /**
      * {@inheritdoc}
      */

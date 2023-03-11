@@ -326,6 +326,7 @@ $script = <<<JS
     $("select[name='dateFilter']").change(function(){
         var value = $(this).val();
         var url = new URL(window.location.href);
+        
         url.searchParams.set('sort',value);
         window.location.href = url.href;
     });

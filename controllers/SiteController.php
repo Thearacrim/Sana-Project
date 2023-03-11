@@ -652,6 +652,7 @@ class SiteController extends Controller
         // ]);
         $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
+         $dataProvider->query->where(['type_item' => 2]);
         $drowdown = [
             'featured' => 'Featured',
             'date_new_to_old' => 'Date,new to old',
@@ -680,6 +681,9 @@ class SiteController extends Controller
         // ]);
         $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
+        // $dataProvider->query->where(['type_item' => Product::TYPE_ITEM_MAN]);
+        $dataProvider->query->where(['type_item' => 3]);
+
         $drowdown = [
             'featured' => 'Featured',
             'date_new_to_old' => 'Date,new to old',
@@ -708,6 +712,8 @@ class SiteController extends Controller
         // ]);
         $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
+        $dataProvider->query->where(['type_item' => 3]);
+
         $drowdown = [
             'featured' => 'Featured',
             'date_new_to_old' => 'Date,new to old',
@@ -775,12 +781,14 @@ class SiteController extends Controller
     /////////////////////////////////////////Top-Woman///////////////////////////////
     public function actionStoreTopTshirtWoman($datetype = 'featured')
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Product::find()->where(['type_item' => 2]),
-            'pagination' => array('pageSize' => 9),
-        ]);
+        // $dataProvider = new ActiveDataProvider([
+        //     'query' => Product::find()->where(['type_item' => 2]),
+        //     'pagination' => array('pageSize' => 9),
+        // ]);
         $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
+        $dataProvider->query->where(['type_item' => 2]);
+
         $drowdown = [
             'featured' => 'Featured',
             'date_new_to_old' => 'Date,new to old',
@@ -810,6 +818,8 @@ class SiteController extends Controller
         
         $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
+        $dataProvider->query->where(['type_item' => 2]);
+
         $drowdown = [
             'featured' => 'Featured',
             'date_new_to_old' => 'Date,new to old',
