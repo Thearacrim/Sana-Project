@@ -5,6 +5,7 @@
 use yii\bootstrap4\LinkPager;
 use yii\helpers\Url;
 use yii\widgets\ListView;
+use yii\bootstrap4\Html;
 
 $this->title = 'T-SHIRT';
 $this->params['breadcrumbs'][] = $this->title;
@@ -84,15 +85,12 @@ $base_url = Yii::getAlias("@web");
           <div class="d-flex">
             <span class="sort-item">Sort by</span>
 
-            <select class="form-select" aria-label=".form-select-lg example" style="border-radius: 0px;">
-              <option>Featured</option>
-              <option>Date,new to old</option>
-              <option>Date,old to new</option>
-              <option>A to Z</option>
-              <option>Z to A</option>
-              <option>Price low to high</option>
-              <option>Price high to low</option>
-            </select>
+             <?= Html::dropDownList(
+                'dateFilter',
+                $datetype,
+                $drowdown,
+                ['class' => 'form-select dateFilter']
+            )?>
 
           </div>
         </div>
@@ -312,19 +310,25 @@ $script = <<<JS
         });
     });
     $(document).ready(function () {
-            $(".block").slice(0, 12).show();
-            if ($(".block:hidden").length != 0) {
-                $("#load_more").show();    
-            }
-            $("#load_more").on("click", function (e) {
-                e.preventDefault();
-                $(".block:hidden").slice(0, 12).slideDown();
-                if ($(".block:hidden").length == 0) {
-                    $("#load_more").text("No More to view")
-                        .fadOut("slow");
-                }
-            });
-        })
+      $(".block").slice(0, 12).show();
+      if ($(".block:hidden").length != 0) {
+          $("#load_more").show();    
+      }
+      $("#load_more").on("click", function (e) {
+          e.preventDefault();
+          $(".block:hidden").slice(0, 12).slideDown();
+          if ($(".block:hidden").length == 0) {
+              $("#load_more").text("No More to view")
+                  .fadOut("slow");
+          }
+      });
+    });
+    $("select[name='dateFilter']").change(function(){
+        var value = $(this).val();
+        var url = new URL(window.location.href);
+        url.searchParams.set('sort',value);
+        window.location.href = url.href;
+    });
 
 JS;
 
