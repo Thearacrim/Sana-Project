@@ -14,7 +14,7 @@ $base_url = Yii::getAlias("@web");
 ?>
 <style>
   .pager{
-    botton:79px;
+    bottom: 79px;
   }
 </style>
 <!-- Start Content -->
