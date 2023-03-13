@@ -732,6 +732,35 @@ class SiteController extends Controller
 
     /////////////////////////////////////////////////////////////Category-Accessories///////////////////////////////
 
+    public function actionStoreAllAccessoriesMan($sort = 'featured')
+    {
+        // $dataProvider = new ActiveDataProvider([
+        //     'query' => Product::find()->where(['type_item' => 3]),
+        //     'pagination' => array('pageSize' => 9),
+        // ]);
+        $searchModel = new ProductSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+        $dataProvider->query->where(['type_item' => 12]);
+        $dataProvider->pagination = ['pageSize' => 2];
+
+        $drowdown = [
+            'featured' => 'Featured',
+            'date_new_to_old' => 'Date,new to old',
+            'date_old_to_new' => 'Date,old to new',
+            'a_to_z' => 'A to Z',
+            'z_to_a' => 'Z to A',
+            'price_low_to_high' => 'Price low to high',
+            'price_high_to_low' => 'Price high to low',
+        ];
+        return $this->render('stores/man/accessories-man/allaccessaries', [
+            'dataProvider' => $dataProvider,
+            'drowdown' => $drowdown,
+            'sort' =>  $sort,
+            'searchModel' => $searchModel
+        ]);
+       
+    }
+
     public function actionStoreAccessoriesHatMan($sort = 'featured')
     {
         // $dataProvider = new ActiveDataProvider([
@@ -740,7 +769,7 @@ class SiteController extends Controller
         // ]);
         $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
-        $dataProvider->query->where(['type_item' => 3]);
+        $dataProvider->query->where(['type_item' => 12]);
         $dataProvider->pagination = ['pageSize' => 2];
 
         $drowdown = [

@@ -13,9 +13,9 @@ $this->params['breadcrumbs'][] = $this->title;
 $base_url = Yii::getAlias("@web");
 ?>
 <style>
-  .pager{
+.pager {
     bottom: 79px;
-  }
+}
 </style>
 <!-- Start Content -->
 <div class="container py-5">
@@ -86,35 +86,17 @@ $base_url = Yii::getAlias("@web");
                     <div class="d-flex">
                         <span class="sort-item">Sort by</span>
 
-<<<<<<< HEAD
-                        <select class="form-select" aria-label=".form-select-lg example" style="border-radius: 0px;">
-                            <option>Featured</option>
-                            <option>Date,new to old</option>
-                            <option>Date,old to new</option>
-                            <option>A to Z</option>
-                            <option>Z to A</option>
-                            <option>Price low to high</option>
-                            <option>Price high to low</option>
-                        </select>
-
-                    </div>
-                </div>
-            </div>
-            <!-- section-cart -->
-            <?php echo ListView::widget([
-=======
-            <?= Html::dropDownList(
+                        <?= Html::dropDownList(
                 'dateFilter',
                 $sort,
                 $drowdown,
                 ['class' => 'form-select dateFilter']
             )?>
-          </div>
-        </div>
-      </div>
-      <!-- section-cart -->
-      <?php echo ListView::widget([
->>>>>>> 48e25203964ea6cd6f25745bbfd9e199dc75e63c
+                    </div>
+                </div>
+            </div>
+            <!-- section-cart -->
+            <?php echo ListView::widget([
                 'dataProvider' => $dataProvider,
                 'itemView' => '/site/stores/product_cart',
                 'itemOptions' => [

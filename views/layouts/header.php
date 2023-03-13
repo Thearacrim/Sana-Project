@@ -26,20 +26,12 @@ if (Yii::$app->user->isGuest) {
 };
 ?>
 <style>
-<<<<<<< HEAD
-.font_icon {
-    font-size: 1.5rem;
-=======
-.font_icon  {
-  font-size: 1.5rem;
->>>>>>> 48e25203964ea6cd6f25745bbfd9e199dc75e63c
-}
-
 .profile_user {
     left: 28px;
 }
-.not_user{
-  font-size: 1.5rem;
+
+.not_user {
+    font-size: 1.5rem;
 }
 </style>
 <!-- Header -->
@@ -178,7 +170,7 @@ if (Yii::$app->user->isGuest) {
                 ?>
                 <a class="nav-icon position-relative text-decoration-none pl-3" value="login"
                     href="<?= Url::to(['/site/favorites']) ?>">
-                    <i class="fa-regular fa-heart text-color mr-1 font_icon"></i>
+                    <i class="fa-regular fa-heart text-color mr-1 font_icon" style="font-size: 1.5rem;"></i>
                     <span id="favortie-quantity"
                         class="position-absolute top-0 left-100 translate-middle badge rounded-pill badge badge-danger"><?= $favoritestotal?></span>
                 </a>
@@ -243,62 +235,61 @@ if (Yii::$app->user->isGuest) {
         if (Yii::$app->user->isGuest) {
         ?>
 
-<<<<<<< HEAD
-                <a style="cursor:poiter" href="<?= Url::to(['/site/login']) ?>" class="pl-3"><i
+                <<<<<<< HEAD <a style="cursor:poiter" href="<?= Url::to(['/site/login']) ?>" class="pl-3"><i
                         class="fas fa-user"></i></a>
-                <!-- <span class="text-dark p-3 fw-bold">|</span>
+                    <!-- <span class="text-dark p-3 fw-bold">|</span>
 =======
         <a style="cursor:poiter" href="<?= Url::to(['/site/login']) ?>" class="pl-3 not_user"><i class="fas fa-user"></i></a>
         <!-- <span class="text-dark p-3 fw-bold">|</span>
 >>>>>>> 48e25203964ea6cd6f25745bbfd9e199dc75e63c
           <a style="cursor:poiter" value="<?= Url::to(['/site/sign']) ?>" class="trigggerModal">SignUp<i class="fas fa-sign-up-alt"><i></a> -->
-                <?php
+                    <?php
 
         } else {
         ?>
-                <?php $menuItems[] = ['label' => ''] ?>
-                <div class="btn-group pl-3">
-                    <div class="dropdown">
-                        <a class="" href="#" id="dropdownMenuButton" data-toggle="dropdown" data-bs-toggle="dropdown"
-                            data-bs-display="static" aria-haspopup="true" aria-expanded="false"
-                            style="font-size: 1.5rem;">
-                            <!-- <img class="rounded-circle" src="<?= $base_url ?>/profile/uploads/<?= $model->image_url ?>" style="width:40px;height:40px" alt="profile"> -->
-                            <i class="fas fa-user"></i>
-                        </a>
-                        <div class=" dropdown-menu back-light" aria-labelledby="dropdownMenuButton">
+                    <?php $menuItems[] = ['label' => ''] ?>
+                    <div class="btn-group pl-3">
+                        <div class="dropdown">
+                            <a class="" href="#" id="dropdownMenuButton" data-toggle="dropdown"
+                                data-bs-toggle="dropdown" data-bs-display="static" aria-haspopup="true"
+                                aria-expanded="false" style="font-size: 1.5rem;">
+                                <!-- <img class="rounded-circle" src="<?= $base_url ?>/profile/uploads/<?= $model->image_url ?>" style="width:40px;height:40px" alt="profile"> -->
+                                <i class="fas fa-user"></i>
+                            </a>
+                            <div class=" dropdown-menu back-light" aria-labelledby="dropdownMenuButton">
 
-                            <a class="dropdown-item d-flex justify-content-between"
-                                href="<?= Url::to(['site/profile']) ?>">
-                                <?php 
+                                <a class="dropdown-item d-flex justify-content-between"
+                                    href="<?= Url::to(['site/profile']) ?>">
+                                    <?php 
                     if($model->image_url == null){
                         ?>
-                                <img class="rounded-circle mr-3"
-                                    src="<?= $base_url ?>/uploads/orionthemes-placeholder-image-1.png ?> ?>"
-                                    style="width:60px;height:60px;object-fit: cover;" alt="profile">
-                                <?php }else{?>
-                                <img class="rounded-circle mr-3"
-                                    src="<?= $base_url ?>/profile/uploads/<?= $model->image_url ?>"
-                                    style="width:60px;height:60px;object-fit: cover;" alt="profile">
-                                <?php }?>
-                                <div>
-                                    <span style="font-size:1.3rem"
-                                        class="fw-bold text-dark"><?= Yii::$app->user->identity->username ?></span><br>
-                                    <span style="font-size:0.8rem"
-                                        class="fw-bold text-dark"><?= Yii::$app->user->identity->email ?></span>
-                                </div>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a class="dropdown-item text-dark" href="#">Another action</a>
-                            <a class="dropdown-item text-dark" href="#">Cart</a>
-                            <a class="dropdown-item text-dark" href="#">New Order</a>
-                            <a class="dropdown-item text-dark" href="#">Payment</a>
-                            <hr class="dropdown-divider">
-                            <a class="dropdown-item text-dark" href="<?php Url::to(['site/help']) ?>">Help</a>
-                            <?= Html::a('Logout', ['site/logout'], ['data' => ['method' => 'post'], 'class' => 'dropdown-item text-dark']) ?>
+                                    <img class="rounded-circle mr-3"
+                                        src="<?= $base_url ?>/uploads/orionthemes-placeholder-image-1.png ?> ?>"
+                                        style="width:60px;height:60px;object-fit: cover;" alt="profile">
+                                    <?php }else{?>
+                                    <img class="rounded-circle mr-3"
+                                        src="<?= $base_url ?>/profile/uploads/<?= $model->image_url ?>"
+                                        style="width:60px;height:60px;object-fit: cover;" alt="profile">
+                                    <?php }?>
+                                    <div>
+                                        <span style="font-size:1.3rem"
+                                            class="fw-bold text-dark"><?= Yii::$app->user->identity->username ?></span><br>
+                                        <span style="font-size:0.8rem"
+                                            class="fw-bold text-dark"><?= Yii::$app->user->identity->email ?></span>
+                                    </div>
+                                </a>
+                                <hr class="dropdown-divider">
+                                <a class="dropdown-item text-dark" href="#">Another action</a>
+                                <a class="dropdown-item text-dark" href="#">Cart</a>
+                                <a class="dropdown-item text-dark" href="#">New Order</a>
+                                <a class="dropdown-item text-dark" href="#">Payment</a>
+                                <hr class="dropdown-divider">
+                                <a class="dropdown-item text-dark" href="<?php Url::to(['site/help']) ?>">Help</a>
+                                <?= Html::a('Logout', ['site/logout'], ['data' => ['method' => 'post'], 'class' => 'dropdown-item text-dark']) ?>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <?php
+                    <?php
         }
         ?>
             </div>
