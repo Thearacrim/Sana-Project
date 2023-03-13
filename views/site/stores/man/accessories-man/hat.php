@@ -5,6 +5,7 @@
 use yii\bootstrap4\LinkPager;
 use yii\helpers\Url;
 use yii\widgets\ListView;
+use yii\bootstrap4\Html;
 
 $this->title = 'MAN';
 $this->params['breadcrumbs'][] = $this->title;
@@ -81,6 +82,7 @@ $base_url = Yii::getAlias("@web");
                     <div class="d-flex">
                         <span class="sort-item">Sort by</span>
 
+<<<<<<< HEAD
                         <select class="form-select" aria-label=".form-select-lg example" style="border-radius: 0px;">
                             <option>Featured</option>
                             <option>Date,new to old</option>
@@ -96,6 +98,19 @@ $base_url = Yii::getAlias("@web");
             </div>
             <!-- section-cart -->
             <?php echo ListView::widget([
+=======
+            <?= Html::dropDownList(
+                'dateFilter',
+                $datetype,
+                $drowdown,
+                ['class' => 'form-select dateFilter']
+            )?>
+          </div>
+        </div>
+      </div>
+      <!-- section-cart -->
+      <?php echo ListView::widget([
+>>>>>>> 48e25203964ea6cd6f25745bbfd9e199dc75e63c
                 'dataProvider' => $dataProvider,
                 'itemView' => '/site/stores/product_cart',
                 'itemOptions' => [
@@ -321,19 +336,26 @@ $script = <<<JS
         });
     });
     $(document).ready(function () {
-            $(".block").slice(0, 12).show();
-            if ($(".block:hidden").length != 0) {
-                $("#load_more").show();    
-            }
-            $("#load_more").on("click", function (e) {
-                e.preventDefault();
-                $(".block:hidden").slice(0, 12).slideDown();
-                if ($(".block:hidden").length == 0) {
-                    $("#load_more").text("No More to view")
-                        .fadOut("slow");
-                }
-            });
-        })
+      $(".block").slice(0, 12).show();
+      if ($(".block:hidden").length != 0) {
+          $("#load_more").show();    
+      }
+      $("#load_more").on("click", function (e) {
+          e.preventDefault();
+          $(".block:hidden").slice(0, 12).slideDown();
+          if ($(".block:hidden").length == 0) {
+              $("#load_more").text("No More to view")
+                  .fadOut("slow");
+          }
+      });
+    });
+    $("select[name='dateFilter']").change(function(){
+        var value = $(this).val();
+        var url = new URL(window.location.href);
+        url.searchParams.set('sort',value);
+        window.location.href = url.href;
+    });
+
 
 JS;
 
