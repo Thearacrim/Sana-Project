@@ -17,6 +17,9 @@ $base_url = Yii::getAlias("@web");
   background-color: #000;
   color: #fff;
 }
+.pager{
+    bottom: 79px;
+  }
 </style>
 <!-- Start Content -->
 <div class="container py-5">
@@ -92,7 +95,7 @@ $base_url = Yii::getAlias("@web");
 
            <?= Html::dropDownList(
                 'dateFilter',
-                $datetype,
+                $sort,
                 $drowdown,
                 ['class' => 'form-select dateFilter']
             )?>
@@ -117,13 +120,13 @@ $base_url = Yii::getAlias("@web");
                 'layout' => '
                     <div class="row">
                     <div class="col-lg-6">
-                        {summary}
+                        
                     </div>
-                    <div class="col-lg-6 text-center">
+                    <div class="col-lg-6 text-center pager">
                         {pager}
                     </div>
                         {items}
-                        {pager}
+                       
                     </div>
             
                 '

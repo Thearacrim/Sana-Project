@@ -7,13 +7,18 @@ use yii\bootstrap4\Html;
 
 use yii\helpers\Url;
 use yii\widgets\ListView;
+use yii\widgets\Pjax;
 
 $this->title = 'JEAN';
 $this->params['breadcrumbs'][] = $this->title;
 
 $base_url = Yii::getAlias("@web");
 ?>
-
+<style>
+  .pager{
+    bottom: 79px;
+  }
+</style>
 <!-- Start Content -->
 <div class="container py-5">
   <div class="row">
@@ -87,9 +92,9 @@ $base_url = Yii::getAlias("@web");
             <span class="sort-item">Sort by</span>
             <?= Html::dropDownList(
                 'dateFilter',
-                $datetype,
+                $sort,
                 $drowdown,
-                ['class' => 'form-select dateFilter']
+                ['class' => 'form-control dateFilter']
             )?>
           </div>
         </div>
@@ -112,20 +117,21 @@ $base_url = Yii::getAlias("@web");
                 'layout' => '
                     <div class="row">
                     <div class="col-lg-6">
-                        {summary}
+                       
                     </div>
-                    <div class="col-lg-6 text-center">
+                    <div class="col-lg-6 text-center pager">
                         {pager}
                     </div>
                         {items}
-                        {pager}
+                       
                     </div>
             
                 '
             ]) ?>
       <!-- <div class="text-center">
                 <button id="load_more" class="btn btn-outline-primary rounded-0 text-color">Load More</button>
-            </div> -->
+      </div> -->
+     
     </div>
     <!-- End Cart -->
   </div>
@@ -310,25 +316,25 @@ $script = <<<JS
         });
     });
     $(document).ready(function () {
-        $(".block").slice(0, 12).show();
-        if ($(".block:hidden").length != 0) {
-            $("#load_more").show();    
-        }
-        $("#load_more").on("click", function (e) {
-            e.preventDefault();
-            $(".block:hidden").slice(0, 12).slideDown();
-            if ($(".block:hidden").length == 0) {
-                $("#load_more").text("No More to view")
-                    .fadOut("slow");
-            }
-        });
+      $(".block").slice(0, 12).show();
+      if ($(".block:hidden").length != 0) {
+          $("#load_more").show();    
+      }
+      $("#load_more").on("click", function (e) {
+          e.preventDefault();
+          $(".block:hidden").slice(0, 12).slideDown();
+          if ($(".block:hidden").length == 0) {
+              $("#load_more").text("No More to view")
+                  .fadOut("slow");
+          }
+      });
     });
     $("select[name='dateFilter']").change(function(){
-        var value = $(this).val();
-        var url = new URL(window.location.href);
-        
-        url.searchParams.set('sort',value);
-        window.location.href = url.href;
+      var value = $(this).val();
+      var url = new URL(window.location.href);
+      
+      url.searchParams.set('sort',value);
+      window.location.href = url.href;
     });
 
 JS;

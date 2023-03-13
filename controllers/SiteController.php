@@ -644,7 +644,7 @@ class SiteController extends Controller
 
     /////////////////////////////////////////////////////////////Category-Top//////////////////////////////////
 
-    public function actionStoreTopTshirtMan($datetype = 'featured')
+    public function actionStoreTopTshirtMan($sort = 'featured')
     {
         // $dataProvider = new ActiveDataProvider([
         //     'query' => Product::find()->where(['type_item' => 2]),
@@ -652,7 +652,8 @@ class SiteController extends Controller
         // ]);
         $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
-         $dataProvider->query->where(['type_item' => 2]);
+        $dataProvider->query->where(['type_item' => 2]);
+        $dataProvider->pagination = ['pageSize' => 2];
         $drowdown = [
             'featured' => 'Featured',
             'date_new_to_old' => 'Date,new to old',
@@ -665,7 +666,7 @@ class SiteController extends Controller
         return $this->render('stores/man/top-man/tshirt', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'datetype' =>  $datetype,
+            'sort' =>  $sort,
             'searchModel' => $searchModel
         ]);
         
@@ -673,7 +674,7 @@ class SiteController extends Controller
 
 
     ////////////////////////////////////////////////////////////Category-Bottoms/////////////////////////////////
-    public function actionStoreBottomsJeanMan($datetype = 'featured')
+    public function actionStoreBottomsJeanMan($sort = 'featured')
     {
         // $dataProvider = new ActiveDataProvider([
         //     'query' => Product::find()->where(['type_item' => 3]),
@@ -681,8 +682,8 @@ class SiteController extends Controller
         // ]);
         $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
-        // $dataProvider->query->where(['type_item' => Product::TYPE_ITEM_MAN]);
         $dataProvider->query->where(['type_item' => 3]);
+        $dataProvider->pagination = ['pageSize' => 2];
 
         $drowdown = [
             'featured' => 'Featured',
@@ -696,7 +697,7 @@ class SiteController extends Controller
         return $this->render('stores/man/category-bottoms-man/jean', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'datetype' =>  $datetype,
+            'sort' =>  $sort,
             'searchModel' => $searchModel
         ]);
         
@@ -704,7 +705,7 @@ class SiteController extends Controller
 
     /////////////////////////////////////////////////////////////Category-Accessories///////////////////////////////
 
-    public function actionStoreAccessoriesHatMan($datetype = 'featured')
+    public function actionStoreAccessoriesHatMan($sort = 'featured')
     {
         // $dataProvider = new ActiveDataProvider([
         //     'query' => Product::find()->where(['type_item' => 3]),
@@ -713,6 +714,7 @@ class SiteController extends Controller
         $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
         $dataProvider->query->where(['type_item' => 3]);
+        $dataProvider->pagination = ['pageSize' => 2];
 
         $drowdown = [
             'featured' => 'Featured',
@@ -726,7 +728,7 @@ class SiteController extends Controller
         return $this->render('stores/man/accessories-man/hat', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'datetype' =>  $datetype,
+            'sort' =>  $sort,
             'searchModel' => $searchModel
         ]);
        
@@ -779,7 +781,7 @@ class SiteController extends Controller
     }
 
     /////////////////////////////////////////Top-Woman///////////////////////////////
-    public function actionStoreTopTshirtWoman($datetype = 'featured')
+    public function actionStoreTopTshirtWoman($sort = 'featured')
     {
         // $dataProvider = new ActiveDataProvider([
         //     'query' => Product::find()->where(['type_item' => 2]),
@@ -788,6 +790,7 @@ class SiteController extends Controller
         $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
         $dataProvider->query->where(['type_item' => 2]);
+        $dataProvider->pagination = ['pageSize' => 2];
 
         $drowdown = [
             'featured' => 'Featured',
@@ -801,7 +804,7 @@ class SiteController extends Controller
         return $this->render('stores/woman/top-woman/tshirt', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'datetype' =>  $datetype,
+            'sort' =>  $sort,
             'searchModel' => $searchModel
         ]);
         
@@ -809,7 +812,7 @@ class SiteController extends Controller
 
     /////////////////////////////////////////Bottoms-Woman//////////////////////////////
 
-    public function actionStoreBottomsJeanWoman($datetype = 'featured')
+    public function actionStoreBottomsJeanWoman($sort = 'featured')
     {
         // $dataProvider = new ActiveDataProvider([
         //     'query' => Product::find()->where(['type_item' => 2]),
@@ -819,6 +822,7 @@ class SiteController extends Controller
         $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
         $dataProvider->query->where(['type_item' => 2]);
+        $dataProvider->pagination = ['pageSize' => 2];
 
         $drowdown = [
             'featured' => 'Featured',
@@ -832,7 +836,7 @@ class SiteController extends Controller
         return $this->render('stores/woman/bottoms-woman/jeans', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'datetype' =>  $datetype,
+            'sort' =>  $sort,
             'searchModel' => $searchModel
         ]);
     }
