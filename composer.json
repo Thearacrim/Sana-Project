@@ -29,7 +29,8 @@
     "kartik-v/yii2-mpdf": "dev-master",
     "2amigos/yii2-ckeditor-widget": "2.1.0",
     "yiisoft/yii2-authclient": "~2.1.0",
-    "yiisoft/yii2-symfonymailer": "~3.0.0"
+    "yiisoft/yii2-symfonymailer": "~3.0.0",
+    "kartik-v/yii2-slider": "*"
 
   },
   "require-dev": {

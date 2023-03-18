@@ -17,15 +17,15 @@ $base_url = Yii::getAlias("@web");
 <div class="container py-5">
     <div class="row">
         <?php
-        if (Yii::$app->session->hasFlash('success')) : ?>
+if (Yii::$app->session->hasFlash('success')): ?>
         <div class="alert alert-success" role="alert">
-            <?= Yii::$app->session->getFlash('success') ?>
+            <?=Yii::$app->session->getFlash('success')?>
         </div>
-        <?php elseif (Yii::$app->session->hasFlash('error')) : ?>
+        <?php elseif (Yii::$app->session->hasFlash('error')): ?>
         <div class="alert alert-danger" role="alert">
-            <?= Yii::$app->session->getFlash('error') ?>
+            <?=Yii::$app->session->getFlash('error')?>
         </div>
-        <?php endif; ?>
+        <?php endif;?>
 
         <div class="col-lg-3">
             <div class="wrapper">
@@ -47,8 +47,8 @@ $base_url = Yii::getAlias("@web");
                     <div class="progress"></div>
                 </div>
                 <div class="range-input">
-                    <input type="range" class="range-min" min="0" max="300" value="0" step="1">
-                    <input type="range" class="range-max" min="0" max="300" value="233" step="1">
+                    <input type="range" id="min" class="range-min" min="0" max="300" value="0" step="1">
+                    <input type="range" id="max" class="range-min" min="0" max="300" value="233" step="1">
                 </div>
             </div>
         </div>
@@ -59,7 +59,7 @@ $base_url = Yii::getAlias("@web");
             <div class="side-wrapper stories">
                 <!-- <div class="side-title">STORIES</div> -->
                 <div class="user">
-                    <a href="<?= Url::to(['site/store-all-top-man']) ?>">
+                    <a href="<?=Url::to(['site/store-all-top-man'])?>">
                         <img src="https://images.unsplash.com/photo-1618453292459-53424b66bb6a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80"
                             alt="" class="user-img">
                     </a>
@@ -67,7 +67,7 @@ $base_url = Yii::getAlias("@web");
                     </div>
                 </div>
                 <div class="user">
-                    <a href="<?= Url::to(['site/store-all-bottoms-man']) ?>">
+                    <a href="<?=Url::to(['site/store-all-bottoms-man'])?>">
                         <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/logo-embroidered-men-track-pants-1990-moi-outfit-631797.jpg?v=1673308814"
                             alt="" class="user-img">
                     </a>
@@ -75,7 +75,7 @@ $base_url = Yii::getAlias("@web");
                     </div>
                 </div>
                 <div class="user">
-                    <a href="<?= Url::to(['site/store-all-accessories-man']) ?>">
+                    <a href="<?=Url::to(['site/store-all-accessories-man'])?>">
                         <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/trefoil-embroidered-men-cap-990-moi-outfit-216333_1512x.jpg?v=1673485145"
                             alt="" class="user-img">
                     </a>
@@ -89,30 +89,30 @@ $base_url = Yii::getAlias("@web");
                     <div class="d-flex">
                         <span class="sort-item">Sort by</span>
 
-                        <?= Html::dropDownList(
-                'dateFilter',
-                $datetype,
-                $drowdown,
-                ['class' => 'form-select dateFilter']
-            )?>
+                        <?=Html::dropDownList(
+    'dateFilter',
+    $datetype,
+    $drowdown,
+    ['class' => 'form-select dateFilter']
+)?>
                     </div>
                 </div>
             </div>
             <!-- section-cart -->
             <?php echo ListView::widget([
-                'dataProvider' => $dataProvider,
-                'itemView' => 'product_cart',
-                'itemOptions' => [
-                    // 'tag' => false
-                    'class' => "col-md-4 col-6 product-item"
-                ],
-                'pager' => [
-                    'firstPageLabel' => 'Frist',
-                    'lastPageLabel' => 'Last',
-                    'maxButtonCount' => 3,
-                    'class' => LinkPager::class,
-                ],
-                'layout' => '
+    'dataProvider' => $dataProvider,
+    'itemView' => 'product_cart',
+    'itemOptions' => [
+        // 'tag' => false
+        'class' => "col-md-4 col-6 product-item",
+    ],
+    'pager' => [
+        'firstPageLabel' => 'Frist',
+        'lastPageLabel' => 'Last',
+        'maxButtonCount' => 3,
+        'class' => LinkPager::class,
+    ],
+    'layout' => '
                     <div class="row">
                     <div class="col-lg-6">
                         {summary}
@@ -123,9 +123,9 @@ $base_url = Yii::getAlias("@web");
                         {items}
                         {pager}
                     </div>
-            
-                '
-            ]) ?>
+
+                ',
+]) ?>
             <!-- <div class="text-center">
                 <button id="load_more" class="btn btn-outline-primary rounded-0 text-color">Load More</button>
             </div> -->
@@ -167,22 +167,22 @@ $base_url = Yii::getAlias("@web");
                                     <div class="row">
                                         <div class="col-3 p-md-5">
                                             <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?= $base_url ?>/template/img/brand_01.png"
+                                                    src="<?=$base_url?>/template/img/brand_01.png"
                                                     alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
                                             <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?= $base_url ?>/template/img/brand_02.png"
+                                                    src="<?=$base_url?>/template/img/brand_02.png"
                                                     alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
                                             <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?= $base_url ?>/template/img/brand_03.png"
+                                                    src="<?=$base_url?>/template/img/brand_03.png"
                                                     alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
                                             <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?= $base_url ?>/template/img/brand_04.png"
+                                                    src="<?=$base_url?>/template/img/brand_04.png"
                                                     alt="Brand Logo"></a>
                                         </div>
                                     </div>
@@ -195,22 +195,22 @@ $base_url = Yii::getAlias("@web");
                                     <div class="row">
                                         <div class="col-3 p-md-5">
                                             <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?= $base_url ?>/template/img/brand_01.png"
+                                                    src="<?=$base_url?>/template/img/brand_01.png"
                                                     alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
                                             <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?= $base_url ?>/template/img/brand_02.png"
+                                                    src="<?=$base_url?>/template/img/brand_02.png"
                                                     alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
                                             <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?= $base_url ?>/template/img/brand_03.png"
+                                                    src="<?=$base_url?>/template/img/brand_03.png"
                                                     alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
                                             <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?= $base_url ?>/template/img/brand_04.png"
+                                                    src="<?=$base_url?>/template/img/brand_04.png"
                                                     alt="Brand Logo"></a>
                                         </div>
                                     </div>
@@ -222,22 +222,22 @@ $base_url = Yii::getAlias("@web");
                                     <div class="row">
                                         <div class="col-3 p-md-5">
                                             <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?= $base_url ?>/template/img/brand_01.png"
+                                                    src="<?=$base_url?>/template/img/brand_01.png"
                                                     alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
                                             <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?= $base_url ?>/template/img/brand_02.png"
+                                                    src="<?=$base_url?>/template/img/brand_02.png"
                                                     alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
                                             <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?= $base_url ?>/template/img/brand_03.png"
+                                                    src="<?=$base_url?>/template/img/brand_03.png"
                                                     alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
                                             <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?= $base_url ?>/template/img/brand_04.png"
+                                                    src="<?=$base_url?>/template/img/brand_04.png"
                                                     alt="Brand Logo"></a>
                                         </div>
                                     </div>
@@ -267,8 +267,11 @@ $base_url = Yii::getAlias("@web");
 <?php
 $add_fav_url = Url::to(['site/favorites']);
 $add_cart_url = Url::to(['site/add-cart']);
+$price_range_url = Url::to(['site/price-range']);
+
 $script = <<<JS
     var base_url = "$base_url";
+
     $(".btn-add-to-cart").click(function(e){
         e.preventDefault();
         var id = $(this).closest(".product-item").data("key")
@@ -293,10 +296,11 @@ $script = <<<JS
 
 
     });
+
     $(document).ready(function () {
             $(".block").slice(0, 12).show();
             if ($(".block:hidden").length != 0) {
-                $("#load_more").show();    
+                $("#load_more").show();
             }
             $("#load_more").on("click", function (e) {
                 e.preventDefault();
@@ -328,7 +332,7 @@ $script = <<<JS
                     }else {
                         $(".btn-add-to-fav[data-id='"+id+"']").addClass("isFav");
                     }
-                    
+
                 }else{
                     alert(data['message']);
                 }
@@ -345,9 +349,30 @@ $script = <<<JS
         window.location.href = url.href;
     });
 
+    $('.range-min').on('change',function(e){
+        e . preventDefault();
+        var min = $(this).val();
+        var max = $(this).val();
+            $.ajax({
+                url: '$price_range_url',
+                method: 'POST',
+                data: {
+                    url: "$price_range_url" ,
+                    action: 'price_range',
+                },
+                success: function(res){
+
+                    var data = JSON.parse(res);
+                    console.log(data);
+                },
+                error: function(err){
+                    console.log(err);
+                }
+            });
+    });
+
 JS;
 
 $this->registerJs($script);
-
 
 ?>
