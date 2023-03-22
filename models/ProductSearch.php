@@ -12,7 +12,7 @@ use yii\data\ActiveDataProvider;
  */
 class ProductSearch extends Product
 {
-    public $title;
+    public $title, $min, $max;
     /**
      * {@inheritdoc}
      */
@@ -20,7 +20,7 @@ class ProductSearch extends Product
     {
         return [
             [['id', 'category_id'], 'integer'],
-            [['status', 'price', 'image_url', 'description', 'type_item', 'title'], 'safe'],
+            [['status', 'price', 'image_url', 'description', 'type_item', 'title','max','min'], 'safe'],
             [['rate'], 'number'],
         ];
     }
@@ -68,6 +68,7 @@ class ProductSearch extends Product
         // print_r(Yii::$app->request->get('price_range'));
         // exit;
 
+        $query->andFilterWhere(['between', 'price', $this->min, $this->max]);
         $query->andFilterWhere(['like', 'status', $this->title])
             ->andFilterWhere(['like', 'price', $this->price])
             ->andFilterWhere(['like', 'image_url', $this->image_url])
@@ -85,7 +86,7 @@ class ProductSearch extends Product
                 case 'value':
                     # code...
                     break;
-                
+
                 default:
                     # code...
                     break;
@@ -93,7 +94,7 @@ class ProductSearch extends Product
         }
         if (!empty(Yii::$app->request->get('sort'))) {
             $sort = Yii::$app->request->get('sort');
-            
+
             switch ($sort) {
                 case '$featured':
                     $query->orderBy(['created_date' => SORT_DESC]);

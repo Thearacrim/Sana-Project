@@ -1138,9 +1138,7 @@ class SiteController extends Controller
                 $model->image_url->saveAs($upload_path . $imagename . '.' . $model->image_url->extension);
                 $model->image_url = $imagename . '.' . $model->image_url->extension;
             }
-            // echo"<pre>";
-            // print_r($model->getAttributes());
-            // exit;
+           
             if ($model->save()) {
                 Yii::$app->session->setFlash('success', 'Profile updated successfully');
             } else {
