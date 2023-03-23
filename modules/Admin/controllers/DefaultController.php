@@ -2,6 +2,7 @@
 
 namespace app\modules\Admin\controllers;
 
+use app\models\SignupForm;
 use app\modules\Admin\models\LoginForm;
 use app\modules\Admin\models\User;
 use Yii;
@@ -42,6 +43,7 @@ class DefaultController extends Controller
             ],
         ];
     }
+
     public function actionLanguage()
     {
         $language = Yii::$app->request->post('language');
@@ -71,10 +73,10 @@ class DefaultController extends Controller
 
     private function GetMonth($month)
     {
-        $total =  Yii::$app->db->createCommand("SELECT
+        $total = Yii::$app->db->createCommand("SELECT
             sum( qty * price ) AS Total
         FROM
-            order_item 
+            order_item
         WHERE
             MONTH ( created_date ) = $month
         GROUP BY
@@ -87,22 +89,22 @@ class DefaultController extends Controller
     public function actionIndex()
     {
         $totalUser =
-            Yii::$app->db->createCommand("SELECT
+        Yii::$app->db->createCommand("SELECT
             COUNT(id) as totalUser
             FROM user
-            
+
             ")
             ->queryOne();
 
         $totalProduct =
-            Yii::$app->db->createCommand("SELECT
+        Yii::$app->db->createCommand("SELECT
             COUNT(id) as totalProduct
             FROM product
-            
+
             ")
             ->queryOne();
         $totalCustomer =
-            Yii::$app->db->createCommand("SELECT
+        Yii::$app->db->createCommand("SELECT
             COUNT(id) as totalCustomer
             FROM customer
             ")
@@ -114,10 +116,10 @@ class DefaultController extends Controller
         $findPriceJuly = $this->GetMonth(7);
         $findPriceAugust = $this->GetMonth(8);
         $findAnnualPrice =
-            Yii::$app->db->createCommand("SELECT
+        Yii::$app->db->createCommand("SELECT
                 SUM(qty * price) as TotalAnnual
             FROM
-                order_item 
+                order_item
             ")
             ->queryScalar();
         return $this->render('index', [
@@ -132,6 +134,7 @@ class DefaultController extends Controller
             'totalCustomer' => $totalCustomer,
         ]);
     }
+
     public function beforeAction($action)
     {
         Yii::$app->setHomeUrl(Yii::getAlias("@web/index.php?r=admin/default"));
@@ -140,10 +143,10 @@ class DefaultController extends Controller
         }
         return parent::beforeAction($action);
     }
+
     public function actionLogin()
     {
         // set this to use default
-        Yii::$app->setHomeUrl(Yii::getAlias("@web/index.php?r=admin/default"));
         $this->layout = 'login';
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
@@ -159,6 +162,21 @@ class DefaultController extends Controller
         return $this->render('login', [
             'model' => $model,
         ]);
+
+    }
+
+    public function actionSignUp()
+    {
+        $model = new SignupForm();
+        if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->signup()) {
+                return $this->redirect(['site/login']);
+            }
+        }
+        return $this->render('signup', [
+            'model' => $model,
+        ]);
+
     }
     /**
      * Logout action.
