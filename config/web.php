@@ -16,7 +16,6 @@ if (isset($_COOKIE['lang'])) {
 }
 $baseUrl = str_replace('/web', '', (new Request)->getBaseUrl());
 
-
 $config = [
     'id' => 'zay-web',
     'language' => $language,
@@ -25,9 +24,10 @@ $config = [
     'bootstrap' => ['log'],
     'modules' => [
         'admin' => [
-            'class' => 'app\modules\Admin\Admin',
-            'as beforeRequest' => [  //if guest user access site so, redirect to login page.
+            'class' => 'app\modules\admin\Admin',
+            'as beforeRequest' => [ //if guest user access site so, redirect to login page.
                 'class' => 'yii\filters\AccessControl',
+
                 'rules' => [
                     [
                         'actions' => ['login', 'error'],
@@ -43,16 +43,16 @@ $config = [
     ],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
     ],
 
     'components' => [
-    'authClientCollection' => [
-        'class' => 'yii\authclient\Collection',
-        'clients' => [
-            'google' => [
-                'class' => 'yii\authclient\clients\Google',
-                'clientId' => 'google_client_id',
+        'authClientCollection' => [
+            'class' => 'yii\authclient\Collection',
+            'clients' => [
+                'google' => [
+                    'class' => 'yii\authclient\clients\Google',
+                    'clientId' => 'google_client_id',
                     'clientSecret' => 'google_client_secret',
                 ],
                 'facebook' => [
@@ -60,7 +60,7 @@ $config = [
                     'clientId' => '1206753316714715',
                     'clientSecret' => '16881f004686c8220be8828b7a6cd527',
                 ],
-                
+
             ],
         ],
         'request' => [
@@ -79,23 +79,27 @@ $config = [
         ],
         'user' => [
             'identityClass' => 'app\models\User',
+            'identityCookie' => ['name' => 'sana_web_a', 'httpOnly' => true],
             'enableAutoLogin' => true,
         ],
+        // 'session' => [
+        //     'name' => 'new-eee',
+        // ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
         'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer', 
+            'class' => 'yii\swiftmailer\Mailer',
             'useFileTransport' => true,
- 
+
             // 'transport' => [
-			// 	'class' => 'Swift_SmtpTransport',
-			// 	'host' => 'smtp.hostinger.com',
-			// 	'username' => 'penghak@dernham.app',
-			// 	'password' => '3Kt3RzXF9vJPDqG@',
-			// 	'port' => '587',
-			// 	'encryption' => 'tls',
-			// ],
+            //     'class' => 'Swift_SmtpTransport',
+            //     'host' => 'smtp.hostinger.com',
+            //     'username' => 'penghak@dernham.app',
+            //     'password' => '3Kt3RzXF9vJPDqG@',
+            //     'port' => '587',
+            //     'encryption' => 'tls',
+            // ],
         ],
 
         'log' => [
@@ -118,9 +122,9 @@ $config = [
                     'fileMap' => [
                         'app' => 'app.php',
                         'app/error' => 'error.php',
-                    ]
-                ]
-            ]
+                    ],
+                ],
+            ],
         ],
         // 'urlManager' => [
         //     'enablePrettyUrl' => true,

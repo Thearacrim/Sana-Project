@@ -24,11 +24,10 @@ use yii\web\IdentityInterface;
  * @property string $password write-only password
  */
 class User extends ActiveRecord implements IdentityInterface
-{
+{   
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
-
 
     /**
      * {@inheritdoc}
@@ -55,6 +54,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
+            // [['user_type_id'], 'integer'],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
         ];
     }
@@ -114,7 +114,9 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return static::findOne([
             'verification_token' => $token,
-            'status' => self::STATUS_INACTIVE
+            'status' => self::STATUS_INACTIVE,
+            'user_type_id' => 2,
+
         ]);
     }
 
@@ -210,5 +212,36 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    public static function getUserPermission($controller_id)
+    {
+        $user_id = Yii::$app->user->getId();
+        if ($user_id) {
+            $sql = "SELECT a.controller, a.action, a.extra_action
+                    FROM user_type_action AS a
+                    INNER JOIN user_type_permission as b ON b.action_id = a.id
+                    INNER JOIN user_type as c ON c.id = b.user_type_id
+                    WHERE a.controller = :controller_id
+                    AND c.id = :user_type_id";
+
+            $user_type_id = Yii::$app->user->identity->user_type_id;
+            $command = Yii::$app->db->createCommand($sql);
+            $command->bindParam(":user_type_id", $user_type_id);
+            $command->bindParam(":controller_id", $controller_id);
+            $list = $command->queryAll();
+
+            $array = array('signup', 'login', 'error', 'logout', 'validation', 'filter', 'dependent', 'allotment-action', 'assign-to-product', 'export', 'icon', 'ajust-markup');
+            foreach ($list as $row) {
+                array_push($array, $row["action"]);
+                $extra_actions = explode(",", $row["extra_action"]);
+                foreach ($extra_actions as $ex) {
+                    array_push($array, $ex);
+                }
+            }
+            return $array;
+        } else {
+            return array('login');
+        }
     }
 }

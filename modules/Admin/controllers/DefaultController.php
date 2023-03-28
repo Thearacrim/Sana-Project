@@ -2,8 +2,8 @@
 
 namespace app\modules\Admin\controllers;
 
-use app\models\SignupForm;
 use app\modules\Admin\models\LoginForm;
+use app\modules\Admin\models\SignupForm;
 use app\modules\Admin\models\User;
 use Yii;
 use yii\filters\AccessControl;
@@ -149,14 +149,20 @@ class DefaultController extends Controller
         // set this to use default
         $this->layout = 'login';
         if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
+            // return $this->goHome();
 
+        }
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        if ($model->load(Yii::$app->request->post())) {
+            // return $this->goHome();
+
+            // echo '<pre>';
+            // print_r($model);
+            // exit;
+
+            $model->login();
             return $this->goBack();
         }
-
         $model->password = '';
 
         return $this->render('login', [
@@ -170,7 +176,7 @@ class DefaultController extends Controller
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
-                return $this->redirect(['site/login']);
+                Yii::$app->setHomeUrl(Yii::getAlias("@web/index.php?r=admin/default/login"));
             }
         }
         return $this->render('signup', [

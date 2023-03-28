@@ -1,34 +1,68 @@
+<style>
+    #form-signup {
+        width: 400px;
+        margin: auto;
+    }
+
+    .sign {
+        background: #edf2fc;
+    }
+
+    .forget_pass {
+        display: contents;
+    }
+
+    hr {
+        border: none;
+        height: 2px;
+        background: #dddddd;
+    }
+</style>
 <?php
 
 /** @var yii\web\View $this */
 /** @var yii\bootstrap4\ActiveForm $form */
-/** @var \common\models\LoginForm $model */
+/** @var \frontend\models\SignupForm $model */
+
 use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
-use yii\helpers\Url;
 
-$this->title = 'Login';
+$this->title = 'CREATE ACCOUNT';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="text-center">
-    <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
-</div>
-<?php $form = ActiveForm::begin(['id' => 'login-form', 'options' => ['class' => 'user']]);?>
-<?=$form->field($model, 'first_name')->textInput(['class' => 'form-control form-control-user', 'placeholder' => 'Username or Email'])->label(false)?>
-<?=$form->field($model, 'last_name')->textInput(['class' => 'form-control form-control-user', 'placeholder' => 'Username or Email'])->label(false)?>
-<?=$form->field($model, 'username')->textInput(['class' => 'form-control form-control-user', 'placeholder' => 'Username or Email'])->label(false)?>
-<?=$form->field($model, 'password')->passwordInput(['class' => 'form-control form-control-user', 'placeholder' => 'Enter your password'])->label(false)?>
+<br>
+<div class="site-signup container">
+    <hr>
+    <div class="w-50 sign m-auto shadow">
 
+        <br>
+        <h2 class="text-center"><?= Html::encode($this->title) ?></h2>
 
-<?=$form->field($model, 'email')?>
-<?=$form->field($model, 'password_repeat')->passwordInput()?>
+        <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
 
-<?=Html::submitButton('Login', ['class' => 'btn btn-primary btn-user btn-block', 'name' => 'login-button'])?>
+        <?= $form->field($model, 'first_name') ?>
 
-<?php ActiveForm::end();?>
-<hr>
-<div class="text-center">
-    <a class="small" href="forgot-password.html">Create Account!</a>
-</div>
-<div class="text-center">
-    <!-- <a class="small" href="">Create an Account!</a> -->
+        <?= $form->field($model, 'last_name') ?>
+
+        <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+
+        <?= $form->field($model, 'email') ?>
+
+        <?= $form->field($model, 'password')->passwordInput() ?>
+
+        <?= $form->field($model, 'password_repeat')->passwordInput() ?>
+
+        <div class="form-group d-flex justify-content-center">
+
+            <?= Html::submitButton('Sign Up', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+        </div>
+            
+        <br>
+
+        <?php ActiveForm::end(); ?>
+    </div>
+    <hr>
+    <br>
+    <br>
+    <br>
 </div>

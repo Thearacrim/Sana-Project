@@ -6,6 +6,7 @@ use app\models\Cart;
 use app\models\ContactForm;
 use app\models\Customer;
 use app\models\Favorite;
+use app\models\Invoices;
 use app\models\LoginForm;
 use app\models\Order;
 use app\models\OrderItem;
@@ -164,7 +165,6 @@ class SiteController extends Controller
         }
         if ($model->load(Yii::$app->request->post())) {
             if ($model->login()) {
-                // Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
                 return $this->redirect(['site/add-cart']);
             }
         }
@@ -458,7 +458,7 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionRemoveFav()
+    public function actionRemoveFav($id)
     {
         if ($this->request->isAjax) {
             if ($this->request->post('action') == 'remove_fav_item') {
@@ -1138,7 +1138,7 @@ class SiteController extends Controller
                 $model->image_url->saveAs($upload_path . $imagename . '.' . $model->image_url->extension);
                 $model->image_url = $imagename . '.' . $model->image_url->extension;
             }
-           
+
             if ($model->save()) {
                 Yii::$app->session->setFlash('success', 'Profile updated successfully');
             } else {
