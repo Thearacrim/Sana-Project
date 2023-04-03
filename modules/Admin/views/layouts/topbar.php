@@ -1,7 +1,28 @@
 <?php $base_url = Yii::getAlias("@web");
+
 use backend\models\Product;
+use yii\bootstrap4\Html;
 use yii\helpers\Url;
 
+?>
+<?php
+$session = Yii::$app->session;
+
+if ($session->hasFlash('logout')) {
+  echo \dominus77\sweetalert2\Alert::widget([
+    'options' => [
+      'title' => $session->getFlash('logout'),
+      'icon' => 'success',
+      'toast' => true,
+      'position' => 'top-end',
+      'showConfirmButton' => false,
+      'animation' => true,
+      'customClass' => 'animated fadeInRight',
+      'padding' => 15,
+      'timer' => 1500,
+    ]
+  ]);
+}
 ?>
 <!-- Topbar -->
 <nav class="navbar navbar-expand navbar-light back-light topbar mb-4 static-top shadow">
@@ -100,10 +121,14 @@ use yii\helpers\Url;
           Activity Log
         </a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-          <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-          Logout
-        </a>
+        <?= Html::a('<span class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></span> ' . Yii::t('app', 'Log out'), ['#'], [
+          'class' => 'dropdown-item sign-out-user',
+          'data' => [
+            'confirm' => 'Are you sure, you want to Logout?',
+            'value' => Url::toRoute('default/logout'),
+            'method' => 'post',
+          ]
+        ]) ?>
       </div>
     </li>
   </ul>
@@ -114,23 +139,41 @@ use yii\helpers\Url;
 $base_url = Yii::getAlias('@web/index.php?r=admin/default');
 $script = <<< JS
   $("form#lang-form").change(function () {
-            var form = $(this);
-            // submit form
-            $.ajax({
-                url: '$base_url/language',
-                type: "post",
-                data: form.serialize(),
-                success: function (response) {
-                    // reload the page after selecting a language
-                    location.reload();
-                },
-                error: function () {
-                    console.log("Ajax: internal server error");
-                }
-            });
-            return false;
+    var form = $(this);
+    // submit form
+    $.ajax({
+        url: '$base_url/language',
+        type: "post",
+        data: form.serialize(),
+        success: function (response) {
+            // reload the page after selecting a language
+            location.reload();
+        },
+        error: function () {
+            console.log("Ajax: internal server error");
+        }
+    });
+    return false;
+  });
+yii.confirm = function(message, okCallback, cancelCallback) {
+  var val = $(this).data('value');
+    if ($(this).hasClass('sign-out-user')) {
+        Swal.fire({
+            title: "Warning!",
+            text: "Are you sure you want to logout?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, Logout now!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.post(val); // <--- submit form programmatically
+            }
         });
-  JS;
+      } else {
+        $.post(val);
+    }
+  };
+JS;
 $this->registerJs($script);
-
 ?>

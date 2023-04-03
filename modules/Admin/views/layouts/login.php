@@ -42,21 +42,42 @@ $url_web = Yii::getAlias('@web');
   .card {
     bottom: 22%;
   }
+
+  @media (max-width: 575.98px) {
+    .auth_header {
+      width: 100% !important;
+      height: 200px !important;
+    }
+
+    .form-control {
+      font-size: 0.9rem !important;
+    }
+
+    .background-img {
+      width: 20rem !important;
+    }
+
+    .contenet {
+      position: absolute;
+      width: 454px;
+      right: -97px;
+    }
+  }
 </style>
 
 <body class="bg-gradient-primary">
   <?php $this->beginBody() ?>
   <main>
     <header class="auth_header">
-      <img src="img/Frame_3-removebg-preview.png" width="35%" />
+      <img src="img/Frame_3-removebg-preview.png" class="background-img" width="35%" />
     </header>
 
     <div class="container">
       <div class="row d-flex justify-content-center ">
         <div class="col-sm-6">
-          <div class="card shadow-lg m-5">
+          <div class="card shadow-lg m-5 phone_screen">
             <div class="card-body p-0">
-              <div class="p-5">
+              <div class="p-5 contenet">
                 <?= $content ?>
               </div>
             </div>

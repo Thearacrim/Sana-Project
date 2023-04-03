@@ -89,7 +89,7 @@ class DefaultController extends Controller
     public function actionIndex()
     {
         $totalUser =
-        Yii::$app->db->createCommand("SELECT
+            Yii::$app->db->createCommand("SELECT
             COUNT(id) as totalUser
             FROM user
 
@@ -97,14 +97,14 @@ class DefaultController extends Controller
             ->queryOne();
 
         $totalProduct =
-        Yii::$app->db->createCommand("SELECT
+            Yii::$app->db->createCommand("SELECT
             COUNT(id) as totalProduct
             FROM product
 
             ")
             ->queryOne();
         $totalCustomer =
-        Yii::$app->db->createCommand("SELECT
+            Yii::$app->db->createCommand("SELECT
             COUNT(id) as totalCustomer
             FROM customer
             ")
@@ -116,7 +116,7 @@ class DefaultController extends Controller
         $findPriceJuly = $this->GetMonth(7);
         $findPriceAugust = $this->GetMonth(8);
         $findAnnualPrice =
-        Yii::$app->db->createCommand("SELECT
+            Yii::$app->db->createCommand("SELECT
                 SUM(qty * price) as TotalAnnual
             FROM
                 order_item
@@ -149,17 +149,10 @@ class DefaultController extends Controller
         // set this to use default
         $this->layout = 'login';
         if (!Yii::$app->user->isGuest) {
-            // return $this->goHome();
-
+            return $this->goHome();
         }
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post())) {
-            // return $this->goHome();
-
-            // echo '<pre>';
-            // print_r($model);
-            // exit;
-
             $model->login();
             return $this->goBack();
         }
@@ -168,7 +161,6 @@ class DefaultController extends Controller
         return $this->render('login', [
             'model' => $model,
         ]);
-
     }
 
     public function actionSignUp()
@@ -182,7 +174,6 @@ class DefaultController extends Controller
         return $this->render('signup', [
             'model' => $model,
         ]);
-
     }
     /**
      * Logout action.
@@ -193,6 +184,7 @@ class DefaultController extends Controller
     public function actionLogout()
     {
         // Set to default url
+        Yii::$app->session->setFlash('logout', "Logout in Successfully");
         Yii::$app->setHomeUrl(Yii::getAlias("@web/index.php?r=admin/default/login"));
         Yii::$app->user->logout();
         return $this->goHome();

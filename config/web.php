@@ -25,9 +25,9 @@ $config = [
     'modules' => [
         'admin' => [
             'class' => 'app\modules\admin\Admin',
-            'as beforeRequest' => [ //if guest user access site so, redirect to login page.
+            'as beforeRequest' => [ 
+                //if guest user access site so, redirect to login page.
                 'class' => 'yii\filters\AccessControl',
-
                 'rules' => [
                     [
                         'actions' => ['login', 'error'],
@@ -47,6 +47,10 @@ $config = [
     ],
 
     'components' => [
+        'authManager' => [
+            'class' => 'yii\rbac\PhpManager',
+            'defaultRoles' => ['admin', 'author'],
+        ],
         'authClientCollection' => [
             'class' => 'yii\authclient\Collection',
             'clients' => [
