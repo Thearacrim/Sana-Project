@@ -36,6 +36,7 @@ use app\components\AuthHandler;
 use yii\bootstrap4\ActiveForm;
 use app\components\AuthHandles;
 use app\models\Favorites;
+use app\modules\Admin\models\RelateImage;
 
 class SiteController extends Controller
 {
@@ -699,8 +700,134 @@ class SiteController extends Controller
         
     }
 
+    public function actionStoreTopHoodiesMan($sort = 'featured')
+    {
+        $searchModel = new ProductSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+        $dataProvider->query->where(['type_item' => 5]);
+        $dataProvider->pagination = ['pageSize' => 10];
+        $drowdown = [
+            'featured' => 'Featured',
+            'date_new_to_old' => 'Date,new to old',
+            'date_old_to_new' => 'Date,old to new',
+            'a_to_z' => 'A to Z',
+            'z_to_a' => 'Z to A',
+            'price_low_to_high' => 'Price low to high',
+            'price_high_to_low' => 'Price high to low',
+        ];
+        return $this->render('stores/man/top-man/hoodies', [
+            'dataProvider' => $dataProvider,
+            'drowdown' => $drowdown,
+            'sort' =>  $sort,
+            'searchModel' => $searchModel
+        ]);
+        
+    }
+
+    public function actionStoreTopShortSleevesMan($sort = 'featured')
+    {
+        $searchModel = new ProductSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+        $dataProvider->query->where(['type_item' => 5]);
+        $dataProvider->pagination = ['pageSize' => 10];
+        $drowdown = [
+            'featured' => 'Featured',
+            'date_new_to_old' => 'Date,new to old',
+            'date_old_to_new' => 'Date,old to new',
+            'a_to_z' => 'A to Z',
+            'z_to_a' => 'Z to A',
+            'price_low_to_high' => 'Price low to high',
+            'price_high_to_low' => 'Price high to low',
+        ];
+        return $this->render('stores/man/top-man/shirts-short-sleeves', [
+            'dataProvider' => $dataProvider,
+            'drowdown' => $drowdown,
+            'sort' =>  $sort,
+            'searchModel' => $searchModel
+        ]);
+        
+    }
+
+    public function actionStoreTopLongSleevesMan($sort = 'featured')
+    {
+        $searchModel = new ProductSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+        $dataProvider->query->where(['type_item' => 9]);
+        $dataProvider->pagination = ['pageSize' => 10];
+        $drowdown = [
+            'featured' => 'Featured',
+            'date_new_to_old' => 'Date,new to old',
+            'date_old_to_new' => 'Date,old to new',
+            'a_to_z' => 'A to Z',
+            'z_to_a' => 'Z to A',
+            'price_low_to_high' => 'Price low to high',
+            'price_high_to_low' => 'Price high to low',
+        ];
+        return $this->render('stores/man/top-man/shirts-long-sleeves', [
+            'dataProvider' => $dataProvider,
+            'drowdown' => $drowdown,
+            'sort' =>  $sort,
+            'searchModel' => $searchModel
+        ]);
+        
+    }
+
+    public function actionStoreTopTankTopsMan($sort = 'featured')
+    {
+        $searchModel = new ProductSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+        $dataProvider->query->where(['type_item' => 5]);
+        $dataProvider->pagination = ['pageSize' => 10];
+        $drowdown = [
+            'featured' => 'Featured',
+            'date_new_to_old' => 'Date,new to old',
+            'date_old_to_new' => 'Date,old to new',
+            'a_to_z' => 'A to Z',
+            'z_to_a' => 'Z to A',
+            'price_low_to_high' => 'Price low to high',
+            'price_high_to_low' => 'Price high to low',
+        ];
+        return $this->render('stores/man/top-man/tank-tops', [
+            'dataProvider' => $dataProvider,
+            'drowdown' => $drowdown,
+            'sort' =>  $sort,
+            'searchModel' => $searchModel
+        ]);
+        
+    }
+
 
     ////////////////////////////////////////////////////////////Category-Bottoms/////////////////////////////////
+    
+    public function actionStoreAllBottomsMan($sort = 'featured')
+    {
+        // $dataProvider = new ActiveDataProvider([
+        //     'query' => Product::find()->where(['type_item' => 3]),
+        //     'pagination' => array('pageSize' => 9),
+        // ]);
+        $searchModel = new ProductSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+        $dataProvider->query->where(['type_item' => 3]);
+        $dataProvider->pagination = ['pageSize' => 2];
+
+        $drowdown = [
+            'featured' => 'Featured',
+            'date_new_to_old' => 'Date,new to old',
+            'date_old_to_new' => 'Date,old to new',
+            'a_to_z' => 'A to Z',
+            'z_to_a' => 'Z to A',
+            'price_low_to_high' => 'Price low to high',
+            'price_high_to_low' => 'Price high to low',
+        ];
+        return $this->render('stores/man/category-bottoms-man/allbottome', [
+            'dataProvider' => $dataProvider,
+            'drowdown' => $drowdown,
+            'sort' =>  $sort,
+            'searchModel' => $searchModel
+        ]);
+        
+    }
+
     public function actionStoreBottomsJeanMan($sort = 'featured')
     {
         // $dataProvider = new ActiveDataProvider([
@@ -837,6 +964,18 @@ class SiteController extends Controller
     }
 
     /////////////////////////////////////////Top-Woman///////////////////////////////
+
+    public function actionStoreAllTopWoman()
+    {
+        $dataProvider = new ActiveDataProvider([
+            'query' => Product::find()->where(['type_item' => [2,5,7,9,11]]),
+            'pagination' => array('pageSize' => 9),
+        ]);
+        return $this->render('stores/woman/top-woman/alltop', [
+            'dataProvider' => $dataProvider
+        ]);
+    }
+
     public function actionStoreTopTshirtWoman($sort = 'featured')
     {
         // $dataProvider = new ActiveDataProvider([
@@ -868,6 +1007,35 @@ class SiteController extends Controller
 
     /////////////////////////////////////////Bottoms-Woman//////////////////////////////
 
+    public function actionStoreAllBottomsWoman($sort = 'featured')
+    {
+        // $dataProvider = new ActiveDataProvider([
+        //     'query' => Product::find()->where(['type_item' => 3]),
+        //     'pagination' => array('pageSize' => 9),
+        // ]);
+        $searchModel = new ProductSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+        $dataProvider->query->where(['type_item' => 3]);
+        $dataProvider->pagination = ['pageSize' => 2];
+
+        $drowdown = [
+            'featured' => 'Featured',
+            'date_new_to_old' => 'Date,new to old',
+            'date_old_to_new' => 'Date,old to new',
+            'a_to_z' => 'A to Z',
+            'z_to_a' => 'Z to A',
+            'price_low_to_high' => 'Price low to high',
+            'price_high_to_low' => 'Price high to low',
+        ];
+        return $this->render('stores/woman/bottoms-woman/allbottome', [
+            'dataProvider' => $dataProvider,
+            'drowdown' => $drowdown,
+            'sort' =>  $sort,
+            'searchModel' => $searchModel
+        ]);
+        
+    }
+
     public function actionStoreBottomsJeanWoman($sort = 'featured')
     {
         // $dataProvider = new ActiveDataProvider([
@@ -897,6 +1065,36 @@ class SiteController extends Controller
         ]);
     }
 
+    /////////////////////////////////////////////// Accessories Women
+
+    public function actionStoreAllAccessoriesWoman($sort = 'featured')
+    {
+        // $dataProvider = new ActiveDataProvider([
+        //     'query' => Product::find()->where(['type_item' => 3]),
+        //     'pagination' => array('pageSize' => 9),
+        // ]);
+        $searchModel = new ProductSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+        $dataProvider->query->where(['type_item' => 12]);
+        $dataProvider->pagination = ['pageSize' => 2];
+
+        $drowdown = [
+            'featured' => 'Featured',
+            'date_new_to_old' => 'Date,new to old',
+            'date_old_to_new' => 'Date,old to new',
+            'a_to_z' => 'A to Z',
+            'z_to_a' => 'Z to A',
+            'price_low_to_high' => 'Price low to high',
+            'price_high_to_low' => 'Price high to low',
+        ];
+        return $this->render('stores/woman/accessories-woman/allaccessaries', [
+            'dataProvider' => $dataProvider,
+            'drowdown' => $drowdown,
+            'sort' =>  $sort,
+            'searchModel' => $searchModel
+        ]);
+       
+    }
 
     public function actionStoreSingle($id)
     {
@@ -904,6 +1102,7 @@ class SiteController extends Controller
             'query' => Product::find(),
         ]);
         $products = Product::find()->where(['id' => $id])->one();
+
 
         if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
             if ($this->request->post('action') == 'btn-add-to-cart') {
@@ -973,10 +1172,12 @@ class SiteController extends Controller
                 return json_encode(['success' => true]);
             }
         }
+        $relateImage = RelateImage::find()->where(['product_id'=>$id])->all();
         $relatedProduct = Product::find()->all();
         return $this->render('stores/store-single', [
             'dataProvider' => $dataProvider,
             'relatedProduct' => $relatedProduct,
+            'relateImage'=> $relateImage,
             'products' => $products
         ]);
     }

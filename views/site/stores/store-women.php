@@ -6,7 +6,7 @@ use yii\bootstrap4\LinkPager;
 use yii\helpers\Url;
 use yii\widgets\ListView;
 
-$this->title = 'MAN';
+$this->title = 'WOMAN';
 $this->params['breadcrumbs'][] = $this->title;
 
 $base_url = Yii::getAlias("@web");
@@ -53,24 +53,24 @@ $base_url = Yii::getAlias("@web");
         </div>
         <!-- cart-section -->
         <div class="col-lg-9">
-            <div class="title-man">MAN</div>
+            <div class="title-man">WOMAN</div>
             <hr>
             <div class="side-wrapper stories">
                 <!-- <div class="side-title">STORIES</div> -->
                 <div class="user">
-                    <img src="https://images.unsplash.com/photo-1618453292459-53424b66bb6a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80"
+                    <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/wavy-pattern-lady-crop-top-1590-moi-outfit-955269_1512x.jpg?v=1679281281"
                         alt="" class="user-img">
                     <div class="username">ALL TOPS
                     </div>
                 </div>
                 <div class="user">
-                    <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/logo-embroidered-men-track-pants-1990-moi-outfit-631797.jpg?v=1673308814"
+                    <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/r-elastic-waist-lady-pants-1990-moi-outfit-319398_1512x.jpg?v=1679369383"
                         alt="" class="user-img">
                     <div class="username">ALL BOTTOME
                     </div>
                 </div>
                 <div class="user">
-                    <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/cuff-logo-embroidered-quarter-socks-3-pairs-890-moi-outfit-995871.jpg?v=1662791823"
+                    <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/low-cut-comfort-sock-180-247028_960x.jpg?v=1631651243"
                         alt="" class="user-img">
                     <div class="username">ALL ACCESSORIES
                     </div>

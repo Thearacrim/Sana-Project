@@ -22,7 +22,7 @@ Yii::$app->params['og_image']['content'] = $model->image_url;
 ?>
 
 <!-- Start Content -->
-<?= $this->render("banner", ['base_url' => $base_url]) ?>
+<?= $this->render("banner_men", ['base_url' => $base_url]) ?>
 <div class="container py-5">
 
     <!-- Brand Collection -->
@@ -100,7 +100,7 @@ Yii::$app->params['og_image']['content'] = $model->image_url;
             ]) ?>
 
 
-    <?= $this->render("banner", ['base_url' => $base_url]) ?>
+    <?= $this->render("banner_women", ['base_url' => $base_url]) ?>
 </div>
 <!-- End Cart -->
 <!-- End Content -->

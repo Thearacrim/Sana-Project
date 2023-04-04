@@ -17,3 +17,5 @@ if ($("#themeMode").hasClass("back-dark")) {
 } else {
   $("#chk").prop("checked", false);
 }
+
+

@@ -37,8 +37,10 @@ use dosamigos\ckeditor\CKEditor;
                     <?= Html::img($model->isNewRecord ? Yii::getAlias("@web/uploads/orionthemes-placeholder-image-1.png") : $model->getThumbUploadUrl('image_banner'), ['class' => 'img-thumbnail', 'id' => 'image_upload-preview']) ?>
                 </div>
                 <label for="image_upload"><i class="fas fa-image"></i> Upload Image</label>
-                <?= $form->field($model, 'image_url')->fileInput(['accept' => 'image/*', 'id' => 'image_upload'])->label(false) ?>
+                <?= $form->field($model, 'image_url')->fileInput(['multiple' => true,'accept' => 'image/*', 'id' => 'image_upload'])->label(false) ?>
             </div>
+            <?= $form->field($relateImage, 'image_relate[]')->fileInput(['multiple' => true,'placeholder' => 'Images','class'=>'form-control'])->label('Choose Image for Relate Image (choose 2)') ?>
+
             <?= $form->field($model, 'type_item')->dropDownList(['1' => 'T-Shirt Women', '2' => 'T-Shirt Man', '3' => 'Jeans Man', '4' => 'Jeans Woman', '5' => 'Hoodies & Sweeter Man', '6' => 'Hoodies & Sweeter Woman','7'=>'Shirts Short Sleeves Man'
             ,'8'=>'Shirts Short Sleeves Woman','9'=>'Shirts Long Sleeves Man','10'=>'Sport Man','11'=>'OXFORD Shirt','12'=>'Hat','13'=>'Joggers Man','14'=>'Joggers Women'], ['placeholder' => 'Type Item'])->label(false) ?>
             <div class="text-center">
