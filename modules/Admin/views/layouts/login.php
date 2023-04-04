@@ -4,11 +4,7 @@
 /** @var string $content */
 
 use app\assets\LoginAsset;
-use common\widgets\Alert;
-use yii\bootstrap4\Breadcrumbs;
 use yii\bootstrap4\Html;
-use yii\bootstrap4\Nav;
-use yii\bootstrap4\NavBar;
 use yii\helpers\Url;
 
 LoginAsset::register($this);
@@ -27,37 +23,69 @@ $url_web = Yii::getAlias('@web');
   <title><?= Html::encode($this->title) ?></title>
   <?php $this->head() ?>
 </head>
+<style>
+  /* body {
+    background-image: url(img/level_store.jpg);
+    background-size: 800px;
+    background-repeat: repeat-x;
+  } */
+  .auth_header {
+    position: relative;
+    padding: 2rem 1.25rem 0;
+    width: 100%;
+    background-color: #346cb0;
+    color: #fff;
+    text-align: center;
+    background-size: cover;
+  }
+
+  .card {
+    bottom: 22%;
+  }
+
+  @media (max-width: 575.98px) {
+    .auth_header {
+      width: 100% !important;
+      height: 200px !important;
+    }
+
+    .form-control {
+      font-size: 0.9rem !important;
+    }
+
+    .background-img {
+      width: 20rem !important;
+    }
+
+    .contenet {
+      position: absolute;
+      width: 454px;
+      right: -97px;
+    }
+  }
+</style>
 
 <body class="bg-gradient-primary">
   <?php $this->beginBody() ?>
-  <div class="container">
+  <main>
+    <header class="auth_header">
+      <img src="img/Frame_3-removebg-preview.png" class="background-img" width="35%" />
+    </header>
 
-    <!-- Outer Row -->
-    <div class="row justify-content-center">
-
-      <div class="col-xl-10 col-lg-12 col-md-9">
-
-        <div class="card o-hidden border-0 shadow-lg my-5">
-          <div class="card-body p-0">
-            <!-- Nested Row within Card Body -->
-            <div class="row">
-              <div class="col-lg-6 d-none d-lg-block bg-login-image">
-                <img src="https://media.istockphoto.com/photos/calling-moew-for-food-picture-id1384176394?b=1&k=20&m=1384176394&s=170667a&w=0&h=UXR3FPaMUfvz4Y_NccL7dhPzbvnIRrciGIvUFLVTB9w=" alt="">
-              </div>
-              <div class="col-lg-6">
-                <div class="p-5">
-                  <?= $content ?>
-                </div>
+    <div class="container">
+      <div class="row d-flex justify-content-center ">
+        <div class="col-sm-6">
+          <div class="card shadow-lg m-5 phone_screen">
+            <div class="card-body p-0">
+              <div class="p-5 contenet">
+                <?= $content ?>
               </div>
             </div>
           </div>
         </div>
-
       </div>
-
     </div>
-
-  </div>
+  </main>
   <?php $this->endBody() ?>
 </body>
 

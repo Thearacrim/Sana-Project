@@ -75,7 +75,10 @@ AdminAsset::register($this);
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <?= Html::a('Logout', ['default/logout'], ['class' => 'btn btn-primary', 'data' => [
+                    <?= Html::a('Logout', 
+                    ['default/logout'],
+                    ['class' => 'btn btn-primary sign-out-user',
+                    'data' => [
                         'method' => 'post',
                     ]]) ?>
                 </div>
@@ -90,10 +93,24 @@ AdminAsset::register($this);
 <?php $this->endPage();
 $script = <<<JS
 
-    yii.confirm = function (message, okCallback, cancelCallback) {
+yii.confirm = function(message, okCallback, cancelCallback) {
         var val = $(this).data('value');
-        
-        if($(this).hasClass('sign-out-user')){
+
+        if ($(this).hasClass('sign-out-user')) {
+
+            Swal.fire({
+                title: "Warning!",
+                text: "Are you sure you want to logout?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, Logout now!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.post(val); // <--- submit form programmatically
+                }
+            });
+        } else {
             $.post(val);
         }
     };

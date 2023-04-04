@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace app\modules\Admin\models;
 
 use app\models\User;
 use Yii;
@@ -24,7 +24,7 @@ class SignupForm extends Model
     public function rules()
     {
         return [
-            [['first_name', 'last_name', 'email', 'username', 'password'], 'required'],
+            [['first_name', 'last_name', 'email', 'username', 'password','password_repeat'], 'required'],
 
             ['username', 'unique', 'targetClass' => '\app\models\User', 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
@@ -53,7 +53,7 @@ class SignupForm extends Model
             $user->username = $this->username;
             $user->email = $this->email;
             $user->email = $this->email;
-            $user->user_type_id = 2;
+            $user->user_type_id = 1;
             $user->setPassword($this->password);
             $user->setPassword($this->password_repeat);
             $user->generateAuthKey();

@@ -16,6 +16,7 @@ use Yii;
  * @property float|null $rate
  */
 class Product extends \yii\db\ActiveRecord
+
 {
     /**
      * {@inheritdoc}
@@ -34,11 +35,13 @@ class Product extends \yii\db\ActiveRecord
             [['category_id', 'description', 'price', 'status'], 'required'],
             [['category_id'], 'integer'],
             [['image_url'], 'file', 'extensions' => 'png, jpg, gif'],
+            // [['image'], 'file', 'extensions' => ['png', 'jpg', 'gif'], 'maxFiles' => 0],
+
             // [['image_url'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
             [['rate'], 'number'],
             [['status', 'image_url', 'description'], 'string', 'max' => 255],
             [['price', 'type_item'], 'string', 'max' => 100],
-            [['created_date', 'created_by', 'updated_date', 'updated_by'], 'safe']
+            [['created_date', 'created_by', 'updated_date', 'updated_by'], 'safe'],
         ];
     }
 
@@ -58,7 +61,7 @@ class Product extends \yii\db\ActiveRecord
             'description' => 'Description',
             'rate' => 'Rate',
             'updated_date' => 'Updated Date',
-            'created_date' => 'Created At'
+            'created_date' => 'Created At',
         ];
     }
     public function beforeSave($insert)
