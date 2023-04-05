@@ -2,41 +2,37 @@
 
 namespace app\controllers;
 
-use yii\filters\AccessControl;
-use yii\web\Controller;
-use yii\web\Response;
-use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
 use app\models\Cart;
-use app\models\Favorite;
-use app\models\ResendVerificationEmailForm;
-use app\models\VerifyEmailForm;
-use Yii;
-use yii\base\InvalidArgumentException;
-use yii\web\BadRequestHttpException;
-use app\models\PasswordResetRequestForm;
-use app\models\ResetPasswordForm;
-use app\models\SignupForm;
+use app\models\ContactForm;
 use app\models\Customer;
+use app\models\Favorite;
+use app\models\Invoices;
+use app\models\LoginForm;
 use app\models\Order;
 use app\models\OrderItem;
+use app\models\PasswordResetRequestForm;
 use app\models\Product;
 use app\models\ProductSearch;
+use app\models\ResendVerificationEmailForm;
+use app\models\ResetPasswordForm;
 use app\models\SaveLater;
+use app\models\SignupForm;
 use app\models\User;
-use app\modules\Admin\models\Coupon;
+use app\models\VerifyEmailForm;
+use app\modules\Admin\models\RelateImage;
+use Yii;
+use yii\base\InvalidArgumentException;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Inflector;
+use yii\web\BadRequestHttpException;
+use yii\web\Controller;
 use yii\web\Cookie;
 use yii\web\NotFoundHttpException;
+use yii\web\Response;
 use yii\web\UploadedFile;
-use app\components\AuthHandler;
-use yii\bootstrap4\ActiveForm;
-use app\components\AuthHandles;
-use app\models\Favorites;
-use app\modules\Admin\models\RelateImage;
 
 class SiteController extends Controller
 {
@@ -148,10 +144,10 @@ class SiteController extends Controller
         $man = Product::find()->where(['type_item' => '2'])->one();
         return $this->render('index', [
             'dataProvider' => $dataProvider,
-            'dataProvider1'=>$dataProvider1,
+            'dataProvider1' => $dataProvider1,
             'shoes' => $shoes,
             'man' => $man,
-            'watch' => $watch
+            'watch' => $watch,
         ]);
     }
 
@@ -170,7 +166,6 @@ class SiteController extends Controller
         }
         if ($model->load(Yii::$app->request->post())) {
             if ($model->login()) {
-                // Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
                 return $this->redirect(['site/add-cart']);
             }
         }
@@ -244,7 +239,7 @@ class SiteController extends Controller
                             "SELECT
                             id
                         FROM
-                            `coupon` 
+                            `coupon`
                         WHERE
                         CURDATE() < expire_date "
                         )->queryScalar();
@@ -253,31 +248,31 @@ class SiteController extends Controller
                             ->where(['user_id' => $current_user])
                             ->one();
                         $totalCart = $totalCart->quantity;
-                        if($coupon){
+                        if ($coupon) {
                             $totalPrice_in_de_remove = Yii::$app->db->createCommand(
-                                "SELECT 
+                                "SELECT
                         SUM( cart.quantity * (product.price - (product.price * (coupon.discount / 100)))) as total_price
                             FROM cart
                             INNER JOIN product ON product.id = cart.product_id
-                            INNER JOIN coupon ON coupon.id = cart.coupon_id 
+                            INNER JOIN coupon ON coupon.id = cart.coupon_id
                             WHERE cart.coupon_id = :coupon AND coupon.expire_date > CURDATE()
                         "
                             )
                                 ->bindParam('coupon', $coupon)
                                 ->queryScalar();
-                        }else{
-                            $totalPrice_in_de_remove = Yii::$app->db->createCommand("SELECT 
+                        } else {
+                            $totalPrice_in_de_remove = Yii::$app->db->createCommand("SELECT
                         SUM( cart.quantity * (product.price)) as total_price
                             FROM cart
                             INNER JOIN product ON product.id = cart.product_id
                             WHERE cart.user_id = :userId
                         ")
-                            ->bindParam('userId', $current_user)
+                                ->bindParam('userId', $current_user)
                                 ->queryScalar();
                         }
                         return json_encode(['status' => 'success', 'totalCart' => $totalCart, 'totalPrice_in_de_remove' => $totalPrice_in_de_remove]);
                     } else {
-                        return json_encode(['status' => 'error', 'message' => "something went wrong."]);;
+                        return json_encode(['status' => 'error', 'message' => "something went wrong."]);
                     }
                 }
             }
@@ -300,25 +295,25 @@ class SiteController extends Controller
                         "SELECT
                         id
                     FROM
-                        `coupon` 
+                        `coupon`
                     WHERE
                     CURDATE() < expire_date "
                     )->queryScalar();
                     $totalItem = Cart::find()->select(['user_id'])->where(['user_id' => $current_user])->count();
-                    if($coupon){
-                    $totalPrice_in_de_remove = Yii::$app->db->createCommand(
-                        "SELECT 
+                    if ($coupon) {
+                        $totalPrice_in_de_remove = Yii::$app->db->createCommand(
+                            "SELECT
                     SUM( cart.quantity * (product.price - (product.price * (coupon.discount / 100)))) as total_price
                         FROM cart
                         INNER JOIN product ON product.id = cart.product_id
-                        INNER JOIN coupon ON coupon.id = cart.coupon_id 
+                        INNER JOIN coupon ON coupon.id = cart.coupon_id
                         WHERE cart.coupon_id = :coupon AND coupon.expire_date > CURDATE()
                     "
-                    )
-                        ->bindParam('coupon', $coupon)
-                        ->queryScalar();
-                    }else{
-                        $totalPrice_in_de_remove = Yii::$app->db->createCommand("SELECT 
+                        )
+                            ->bindParam('coupon', $coupon)
+                            ->queryScalar();
+                    } else {
+                        $totalPrice_in_de_remove = Yii::$app->db->createCommand("SELECT
                     SUM( cart.quantity * (product.price)) as total_price
                         FROM cart
                         INNER JOIN product ON product.id = cart.product_id
@@ -342,15 +337,15 @@ class SiteController extends Controller
                         "SELECT
                             id
                         FROM
-                            `coupon` 
+                            `coupon`
                         WHERE
                         CURDATE() < expire_date "
                     )->queryScalar();
-                    $totalPrice_in_de_remove = Yii::$app->db->createCommand("SELECT 
+                    $totalPrice_in_de_remove = Yii::$app->db->createCommand("SELECT
                         SUM( cart.quantity * (product.price - (product.price * (coupon.discount / 100)))) as total_price
                         FROM cart
                         INNER JOIN product ON product.id = cart.product_id
-                        INNER JOIN coupon ON coupon.id = cart.coupon_id 
+                        INNER JOIN coupon ON coupon.id = cart.coupon_id
                         WHERE user_id = :userId
                     ")
                         ->bindParam("userId", $current_user)
@@ -375,7 +370,7 @@ class SiteController extends Controller
                                 'id' => $product_save['id'],
                                 'url' => $product_save['image_url'],
                                 'status' => $product_save['status'],
-                                'price' => $product_save['price']
+                                'price' => $product_save['price'],
                             ];
                         }
                         return json_encode([
@@ -417,29 +412,29 @@ class SiteController extends Controller
             "SELECT
                 id
             FROM
-                `coupon` 
+                `coupon`
             WHERE
             CURDATE() < expire_date "
         )->queryScalar();
-        if($coupon){
-            $totalPrice = Yii::$app->db->createCommand("SELECT 
+        if ($coupon) {
+            $totalPrice = Yii::$app->db->createCommand("SELECT
                SUM( cart.quantity * (product.price - (product.price * (coupon.discount / 100)))) as total_price
                 FROM cart
                 INNER JOIN product ON product.id = cart.product_id
-                INNER JOIN coupon ON coupon.id = cart.coupon_id 
+                INNER JOIN coupon ON coupon.id = cart.coupon_id
                 WHERE cart.coupon_id = :coupon AND coupon.expire_date > CURDATE()
             ")
-            ->bindParam('coupon', $coupon)
-            ->queryScalar();
-        }else{
-            $totalPrice = Yii::$app->db->createCommand("SELECT 
+                ->bindParam('coupon', $coupon)
+                ->queryScalar();
+        } else {
+            $totalPrice = Yii::$app->db->createCommand("SELECT
                SUM( cart.quantity * (product.price)) as total_price
                 FROM cart
                 INNER JOIN product ON product.id = cart.product_id
                 WHERE cart.user_id = :userId
             ")
-            ->bindParam('userId', $userId)
-            ->queryScalar();
+                ->bindParam('userId', $userId)
+                ->queryScalar();
         }
         $products = Product::find()->all();
         return $this->render(
@@ -449,7 +444,7 @@ class SiteController extends Controller
                 'products' => $products,
                 'totalPrice' => $totalPrice,
                 'totalCart' => $totalCart,
-                'product_save_later' => $product_save_later
+                'product_save_later' => $product_save_later,
             ]
         );
     }
@@ -460,11 +455,11 @@ class SiteController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         return $this->render('stores/store-result', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider
+            'dataProvider' => $dataProvider,
         ]);
     }
 
-    public function actionRemoveFav() 
+    public function actionRemoveFav($id)
     {
         if ($this->request->isAjax) {
             if ($this->request->post('action') == 'remove_fav_item') {
@@ -478,11 +473,25 @@ class SiteController extends Controller
                 $totalfav = Favorite::find(['user_id' => $userId])->count();
                 return json_encode([
                     'success' => true,
-                    'totalfav' => $totalfav
+                    'totalfav' => $totalfav,
                 ]);
             }
-        }    
-        
+        }
+
+    }
+
+    public function actionPriceRange()
+    {
+        if ($this->request->isAjax) {
+            if ($this->request->post('action') == 'price_range') {
+                $model = Product::find()->all();
+                if ($model) {
+                    return json_encode(['success' => true]);
+                }
+            }
+        }
+        return $this->render(['model' => $model]);
+
     }
 
     public function actionFavorites()
@@ -490,58 +499,52 @@ class SiteController extends Controller
         if (Yii::$app->user->isGuest) {
             return $this->redirect(['site/login']);
         }
-        $products = Product::find()->limit (12)->all();
-            
-        // echo'<pre>';
-        // print_r($products);
-        // echo'<pre>';
-        // exit;
+        $products = Product::find()->limit(12)->all();
         $userId = Yii::$app->user->id;
         $product_id = $this->request->post('id');
-        
+
         $model = new Favorite();
         if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
-            $ifExist = Favorite::findOne(['product_id'=> $product_id]);
-            if(!empty($ifExist)){ // if fav product already have record in table
-                Favorite::deleteAll(['product_id'=> $product_id]);
+            $ifExist = Favorite::findOne(['product_id' => $product_id]);
+            if (!empty($ifExist)) { // if fav product already have record in table
+                Favorite::deleteAll(['product_id' => $product_id]);
                 $favoritestotal = Favorite::find()->where(['user_id' => $userId])->count();
-                return json_encode(['type'=>'remove','status' => 'success', 'favoritestotal' => $favoritestotal]);
-            }else{
+                return json_encode(['type' => 'remove', 'status' => 'success', 'favoritestotal' => $favoritestotal]);
+            } else {
                 $model->user_id = Yii::$app->user->id;
                 $model->product_id = $product_id;
                 $model->customer_id = Yii::$app->user->id;
                 $model->qty = 1;
                 $model->created_at = date('Y-m-d H:i:s');
-            
+
                 if ($model->save()) {
                     $favoritestotal = Favorite::find()->select(['SUM(qty) qty'])->where(['user_id' => $userId])->one();
                     $favoritestotal = $favoritestotal->qty;
-                    return json_encode(['type'=>'add','status' => 'success', 'favoritestotal' => $favoritestotal]);
+                    return json_encode(['type' => 'add', 'status' => 'success', 'favoritestotal' => $favoritestotal]);
                 } else {
-                    return json_encode(['status' => 'error', 'message' => "something went wrong."]);;
+                    return json_encode(['status' => 'error', 'message' => "something went wrong."]);
                 }
-                return json_encode(['status' => true]);   
-            }     
+                return json_encode(['status' => true]);
+            }
         }
 
         $favorites = Yii::$app->db->createCommand("
             SELECT product.id,product.price,product.image_url,product.status
             FROM product
-            INNER JOIN favorite 
+            INNER JOIN favorite
             ON product.id = favorite.product_id
             WHERE favorite.user_id = :userId
             GROUP BY id"
-            )
+        )
             ->bindParam('userId', $userId)
             ->queryAll();
 
-
         return $this->render('favorites', [
-          'model' => $model,
-          'favorites' => $favorites,
-          'products' => $products,
-          
-        ]); 
+            'model' => $model,
+            'favorites' => $favorites,
+            'products' => $products,
+
+        ]);
     }
 
     public function actionAddCart()
@@ -553,7 +556,7 @@ class SiteController extends Controller
             $id = $this->request->post('id');
             $userId = Yii::$app->user->id;
             $product_id = $this->request->post('id');
-            
+
             // if( $model->save()){
             //         return json_encode(['success' => true]);
             // }else{
@@ -573,7 +576,7 @@ class SiteController extends Controller
                 $totalCart = $totalCart->quantity;
                 return json_encode(['status' => 'success', 'totalCart' => $totalCart]);
             } else {
-                return json_encode(['status' => 'error', 'message' => "something went wrong."]);;
+                return json_encode(['status' => 'error', 'message' => "something went wrong."]);
             }
 
             return json_encode(['success' => true]);
@@ -588,7 +591,7 @@ class SiteController extends Controller
 
         return $this->render('stores/store', [
             'dataProvider' => $dataProvider,
-            'dataProvider1'=> $dataProvider1,
+            'dataProvider1' => $dataProvider1,
             'model' => $model,
         ]);
 
@@ -608,11 +611,10 @@ class SiteController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-
     //////////////////////
     //////////////////////Man
 
-    public function actionStoreMan($datetype = 'featured')
+    public function actionStoreMan($datetype = 'featured', )
     {
         if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
             if (Yii::$app->user->isGuest) {
@@ -635,14 +637,14 @@ class SiteController extends Controller
                 $totalCart = $totalCart->quantity;
                 return json_encode(['status' => 'success', 'totalCart' => $totalCart]);
             } else {
-                return json_encode(['status' => 'error', 'message' => "something went wrong."]);;
+                return json_encode(['status' => 'error', 'message' => "something went wrong."]);
             }
 
             return json_encode(['success' => true]);
         }
         $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
-         $dataProvider->query->where(['type_item' => [2,3,5,7,9,10,11,13]]);
+        $dataProvider->query->where(['type_item' => [2, 3, 5, 7, 9, 10, 11, 13]]);
         $drowdown = [
             'featured' => 'Featured',
             'date_new_to_old' => 'Date,new to old',
@@ -656,8 +658,8 @@ class SiteController extends Controller
         return $this->render('stores/store-man', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'datetype' =>  $datetype,
-            'searchModel' => $searchModel
+            'datetype' => $datetype,
+            'searchModel' => $searchModel,
         ]);
 
         throw new NotFoundHttpException('The requested page does not exist.');
@@ -666,11 +668,11 @@ class SiteController extends Controller
     public function actionStoreAllTopMan()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Product::find()->where(['type_item' => [2,5,7,9,11]]),
+            'query' => Product::find()->where(['type_item' => [2, 5, 7, 9, 11]]),
             'pagination' => array('pageSize' => 9),
         ]);
         return $this->render('stores/man/top-man/alltop', [
-            'dataProvider' => $dataProvider
+            'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -694,108 +696,11 @@ class SiteController extends Controller
         return $this->render('stores/man/top-man/tshirt', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'sort' =>  $sort,
-            'searchModel' => $searchModel
+            'sort' => $sort,
+            'searchModel' => $searchModel,
         ]);
-        
-    }
 
-    public function actionStoreTopHoodiesMan($sort = 'featured')
-    {
-        $searchModel = new ProductSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
-        $dataProvider->query->where(['type_item' => 5]);
-        $dataProvider->pagination = ['pageSize' => 10];
-        $drowdown = [
-            'featured' => 'Featured',
-            'date_new_to_old' => 'Date,new to old',
-            'date_old_to_new' => 'Date,old to new',
-            'a_to_z' => 'A to Z',
-            'z_to_a' => 'Z to A',
-            'price_low_to_high' => 'Price low to high',
-            'price_high_to_low' => 'Price high to low',
-        ];
-        return $this->render('stores/man/top-man/hoodies', [
-            'dataProvider' => $dataProvider,
-            'drowdown' => $drowdown,
-            'sort' =>  $sort,
-            'searchModel' => $searchModel
-        ]);
-        
     }
-
-    public function actionStoreTopShortSleevesMan($sort = 'featured')
-    {
-        $searchModel = new ProductSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
-        $dataProvider->query->where(['type_item' => 5]);
-        $dataProvider->pagination = ['pageSize' => 10];
-        $drowdown = [
-            'featured' => 'Featured',
-            'date_new_to_old' => 'Date,new to old',
-            'date_old_to_new' => 'Date,old to new',
-            'a_to_z' => 'A to Z',
-            'z_to_a' => 'Z to A',
-            'price_low_to_high' => 'Price low to high',
-            'price_high_to_low' => 'Price high to low',
-        ];
-        return $this->render('stores/man/top-man/shirts-short-sleeves', [
-            'dataProvider' => $dataProvider,
-            'drowdown' => $drowdown,
-            'sort' =>  $sort,
-            'searchModel' => $searchModel
-        ]);
-        
-    }
-
-    public function actionStoreTopLongSleevesMan($sort = 'featured')
-    {
-        $searchModel = new ProductSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
-        $dataProvider->query->where(['type_item' => 9]);
-        $dataProvider->pagination = ['pageSize' => 10];
-        $drowdown = [
-            'featured' => 'Featured',
-            'date_new_to_old' => 'Date,new to old',
-            'date_old_to_new' => 'Date,old to new',
-            'a_to_z' => 'A to Z',
-            'z_to_a' => 'Z to A',
-            'price_low_to_high' => 'Price low to high',
-            'price_high_to_low' => 'Price high to low',
-        ];
-        return $this->render('stores/man/top-man/shirts-long-sleeves', [
-            'dataProvider' => $dataProvider,
-            'drowdown' => $drowdown,
-            'sort' =>  $sort,
-            'searchModel' => $searchModel
-        ]);
-        
-    }
-
-    public function actionStoreTopTankTopsMan($sort = 'featured')
-    {
-        $searchModel = new ProductSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
-        $dataProvider->query->where(['type_item' => 5]);
-        $dataProvider->pagination = ['pageSize' => 10];
-        $drowdown = [
-            'featured' => 'Featured',
-            'date_new_to_old' => 'Date,new to old',
-            'date_old_to_new' => 'Date,old to new',
-            'a_to_z' => 'A to Z',
-            'z_to_a' => 'Z to A',
-            'price_low_to_high' => 'Price low to high',
-            'price_high_to_low' => 'Price high to low',
-        ];
-        return $this->render('stores/man/top-man/tank-tops', [
-            'dataProvider' => $dataProvider,
-            'drowdown' => $drowdown,
-            'sort' =>  $sort,
-            'searchModel' => $searchModel
-        ]);
-        
-    }
-
 
     ////////////////////////////////////////////////////////////Category-Bottoms/////////////////////////////////
     
@@ -851,10 +756,10 @@ class SiteController extends Controller
         return $this->render('stores/man/category-bottoms-man/jean', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'sort' =>  $sort,
-            'searchModel' => $searchModel
+            'sort' => $sort,
+            'searchModel' => $searchModel,
         ]);
-        
+
     }
 
     /////////////////////////////////////////////////////////////Category-Accessories///////////////////////////////
@@ -882,10 +787,10 @@ class SiteController extends Controller
         return $this->render('stores/man/accessories-man/allaccessaries', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'sort' =>  $sort,
-            'searchModel' => $searchModel
+            'sort' => $sort,
+            'searchModel' => $searchModel,
         ]);
-       
+
     }
 
     public function actionStoreAccessoriesHatMan($sort = 'featured')
@@ -911,12 +816,11 @@ class SiteController extends Controller
         return $this->render('stores/man/accessories-man/hat', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'sort' =>  $sort,
-            'searchModel' => $searchModel
+            'sort' => $sort,
+            'searchModel' => $searchModel,
         ]);
-       
-    }
 
+    }
 
     ///////////////////////////
     ////////////////////////////Woman
@@ -946,7 +850,7 @@ class SiteController extends Controller
                 $totalCart = $totalCart->quantity;
                 return json_encode(['status' => 'success', 'totalCart' => $totalCart]);
             } else {
-                return json_encode(['status' => 'error', 'message' => "something went wrong."]);;
+                return json_encode(['status' => 'error', 'message' => "something went wrong."]);
             }
 
             return json_encode(['success' => true]);
@@ -999,10 +903,10 @@ class SiteController extends Controller
         return $this->render('stores/woman/top-woman/tshirt', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'sort' =>  $sort,
-            'searchModel' => $searchModel
+            'sort' => $sort,
+            'searchModel' => $searchModel,
         ]);
-        
+
     }
 
     /////////////////////////////////////////Bottoms-Woman//////////////////////////////
@@ -1042,7 +946,7 @@ class SiteController extends Controller
         //     'query' => Product::find()->where(['type_item' => 2]),
         //     'pagination' => array('pageSize' => 9),
         // ]);
-        
+
         $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
         $dataProvider->query->where(['type_item' => 2]);
@@ -1060,40 +964,9 @@ class SiteController extends Controller
         return $this->render('stores/woman/bottoms-woman/jeans', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'sort' =>  $sort,
-            'searchModel' => $searchModel
+            'sort' => $sort,
+            'searchModel' => $searchModel,
         ]);
-    }
-
-    /////////////////////////////////////////////// Accessories Women
-
-    public function actionStoreAllAccessoriesWoman($sort = 'featured')
-    {
-        // $dataProvider = new ActiveDataProvider([
-        //     'query' => Product::find()->where(['type_item' => 3]),
-        //     'pagination' => array('pageSize' => 9),
-        // ]);
-        $searchModel = new ProductSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
-        $dataProvider->query->where(['type_item' => 12]);
-        $dataProvider->pagination = ['pageSize' => 2];
-
-        $drowdown = [
-            'featured' => 'Featured',
-            'date_new_to_old' => 'Date,new to old',
-            'date_old_to_new' => 'Date,old to new',
-            'a_to_z' => 'A to Z',
-            'z_to_a' => 'Z to A',
-            'price_low_to_high' => 'Price low to high',
-            'price_high_to_low' => 'Price high to low',
-        ];
-        return $this->render('stores/woman/accessories-woman/allaccessaries', [
-            'dataProvider' => $dataProvider,
-            'drowdown' => $drowdown,
-            'sort' =>  $sort,
-            'searchModel' => $searchModel
-        ]);
-       
     }
 
     public function actionStoreSingle($id)
@@ -1117,7 +990,7 @@ class SiteController extends Controller
                     "SELECT
                 id
                 FROM
-                    `coupon` 
+                    `coupon`
                 WHERE
                 CURDATE() < expire_date "
                 )->queryScalar();
@@ -1138,7 +1011,7 @@ class SiteController extends Controller
                     $totalCart = $totalCart->quantity;
                     return json_encode(['status' => 'success', 'totalCart' => $totalCart]);
                 } else {
-                    return json_encode(['status' => 'error', 'message' => "something went wrong."]);;
+                    return json_encode(['status' => 'error', 'message' => "something went wrong."]);
                 }
 
                 return json_encode(['success' => true]);
@@ -1166,7 +1039,7 @@ class SiteController extends Controller
                     $totalCart = $totalCart->quantity;
                     return $this->redirect(['site/checkout']);
                 } else {
-                    return json_encode(['status' => 'error', 'message' => "something went wrong."]);;
+                    return json_encode(['status' => 'error', 'message' => "something went wrong."]);
                 }
 
                 return json_encode(['success' => true]);
@@ -1177,8 +1050,8 @@ class SiteController extends Controller
         return $this->render('stores/store-single', [
             'dataProvider' => $dataProvider,
             'relatedProduct' => $relatedProduct,
-            'relateImage'=> $relateImage,
-            'products' => $products
+            'products' => $products,
+            'relateImage'=>$relateImage
         ]);
     }
 
@@ -1193,7 +1066,7 @@ class SiteController extends Controller
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
-            return $this->redirect(['site/login']);
+                return $this->redirect(['site/login']);
             }
         }
         return $this->render('signup', [
@@ -1213,29 +1086,29 @@ class SiteController extends Controller
                 "SELECT
                             id
                         FROM
-                            `coupon` 
+                            `coupon`
                         WHERE
                         CURDATE() < expire_date "
             )->queryScalar();
             if ($coupon) {
-                $totalPrice = Yii::$app->db->createCommand("SELECT 
+                $totalPrice = Yii::$app->db->createCommand("SELECT
                SUM( cart.quantity * (product.price - (product.price * (coupon.discount / 100)))) as total_price
                 FROM cart
                 INNER JOIN product ON product.id = cart.product_id
-                INNER JOIN coupon ON coupon.id = cart.coupon_id 
+                INNER JOIN coupon ON coupon.id = cart.coupon_id
                 WHERE cart.coupon_id = :coupon AND coupon.expire_date > CURDATE()
             ")
-                ->bindParam('coupon', $coupon)
-                ->queryScalar();
+                    ->bindParam('coupon', $coupon)
+                    ->queryScalar();
             } else {
-                $totalPrice = Yii::$app->db->createCommand("SELECT 
+                $totalPrice = Yii::$app->db->createCommand("SELECT
                SUM( cart.quantity * (product.price)) as total_price
                 FROM cart
                 INNER JOIN product ON product.id = cart.product_id
                 WHERE cart.user_id = :userId
             ")
-                ->bindParam('userId', $userId)
-                ->queryScalar();
+                    ->bindParam('userId', $userId)
+                    ->queryScalar();
             }
             $userId = Yii::$app->user->id;
             $relatedProduct = Yii::$app->db->createCommand(
@@ -1254,7 +1127,7 @@ class SiteController extends Controller
                     'model' => $model,
                     'totalPrice' => $totalPrice,
                     'totalCart' => $totalCart,
-                    'relatedProduct' => $relatedProduct
+                    'relatedProduct' => $relatedProduct,
                 ]
             );
         } else {
@@ -1271,10 +1144,10 @@ class SiteController extends Controller
             $carts = Cart::find()->where(['user_id' => $userId])->all();
             $customer = Customer::find()->where(['name' => $profile])->one();
             $product = Yii::$app->db->createCommand("SELECT
-                SUM( product.price * cart.quantity ) AS sub_total 
+                SUM( product.price * cart.quantity ) AS sub_total
             FROM
                 cart
-                INNER JOIN product ON product.id = cart.product_id 
+                INNER JOIN product ON product.id = cart.product_id
             WHERE
                 cart.user_id = :userId
             ")
@@ -1326,22 +1199,21 @@ class SiteController extends Controller
         }
         $model = User::findOne(Yii::$app->user->id);
         if ($model->load(Yii::$app->request->post())) {
-            
-            if(!empty(UploadedFile::getInstance($model, 'image_url')))
-            {
+
+            if (!empty(UploadedFile::getInstance($model, 'image_url'))) {
                 $imagename = Inflector::slug($model->status) . '-' . time();
                 $model->image_url = UploadedFile::getInstance($model, 'image_url');
 
                 // upload ptofile
                 $upload_path = ("profile/uploads/");
-                if (!is_dir($upload_path)) mkdir($upload_path, 0777, true); 
+                if (!is_dir($upload_path)) {
+                    mkdir($upload_path, 0777, true);
+                }
 
                 $model->image_url->saveAs($upload_path . $imagename . '.' . $model->image_url->extension);
                 $model->image_url = $imagename . '.' . $model->image_url->extension;
             }
-            // echo"<pre>";
-            // print_r($model->getAttributes());
-            // exit;
+
             if ($model->save()) {
                 Yii::$app->session->setFlash('success', 'Profile updated successfully');
             } else {
@@ -1355,7 +1227,7 @@ class SiteController extends Controller
             ]
         );
     }
-    
+
     /**
      * Requests password reset.
      *
@@ -1445,7 +1317,7 @@ class SiteController extends Controller
         }
 
         return $this->render('resendVerificationEmail', [
-            'model' => $model
+            'model' => $model,
         ]);
     }
     protected function findModel($id)

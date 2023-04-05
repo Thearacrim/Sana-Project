@@ -3,27 +3,22 @@
 /** @var yii\web\View $this */
 /** @var yii\bootstrap4\ActiveForm $form */
 /** @var \common\models\LoginForm $model */
-use yii\helpers\Url;
 
 use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
+use yii\helpers\Url;
 
-$this->title = 'Login';
-?>
+$this->title = 'Login'; ?>
 <div class="text-center">
-    <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+</div> 
+<?php $form = ActiveForm::begin(['id' => 'login-form', 'options' => ['class' => 'user']]); ?> 
+<?= $form->field($model, 'username')->textInput(['class' => 'form-control form-control-user', 'placeholder' => 'Username'])->label(false) ?> 
+<?= $form->field($model, 'password')->passwordInput(['class' => 'form-control form-control-user', 'placeholder' => 'Enter your password'])->label(false) ?> 
+<?= Html::submitButton('Login', ['class' => 'btn btn-primary btn-user btn-block', 'name' => 'login-button']) ?> 
+<div class="form-group text-center pt-3">
+  <div class="custom-control custom-control-inline custom-checkbox">
+    <input type="checkbox" class="custom-control-input" id="remember-me"> <label class="custom-control-label" for="remember-me">Keep me sign in</label>
+  </div>
 </div>
-<?php $form = ActiveForm::begin(['id' => 'login-form', 'options' => ['class' => 'user']]); ?>
-<?= $form->field($model, 'username')->textInput(['class' => 'form-control form-control-user', 'placeholder' => 'Username or Email'])->label(false) ?>
-<?= $form->field($model, 'password')->passwordInput(['class' => 'form-control form-control-user', 'placeholder' => 'Enter your password'])->label(false) ?>
-
-<?= Html::submitButton('Login', ['class' => 'btn btn-primary btn-user btn-block', 'name' => 'login-button']) ?>
-
 <?php ActiveForm::end(); ?>
 <hr>
-<div class="text-center">
-    <a class="small" href="forgot-password.html">Forgot Password?</a>
-</div>
-<div class="text-center">
-    <!-- <a class="small" href="">Create an Account!</a> -->
-</div>

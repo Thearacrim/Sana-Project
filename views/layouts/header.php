@@ -70,7 +70,7 @@ if (Yii::$app->user->isGuest) {
                                     <li><a href="<?= Url::to(['site/store-top-long-sleeves-man']) ?>">Shirts Long
                                             Sleeves</a></li>
                                     <li><a href="<?= Url::to(['site/store-top-tank-tops-man']) ?>">TANK TOPS</a></li>
-                                    <!-- <li><a href="#">Jackets & Raincoats</a></li> -->
+
                                 </ul>
                             </li>
                             <li class="mega-menu-column">
@@ -254,7 +254,7 @@ if (Yii::$app->user->isGuest) {
                     </select>
                 </form>
                 <?php }
-        ?> -->
+        ?> 
             <?php
         if (Yii::$app->user->isGuest) {
         ?>
@@ -270,44 +270,43 @@ if (Yii::$app->user->isGuest) {
                     <a class="" href="#" id="dropdownMenuButton" data-toggle="dropdown" data-bs-toggle="dropdown"
                         data-bs-display="static" aria-haspopup="true" aria-expanded="false">
                         <!-- <img class="rounded-circle" src="<?= $base_url ?>/profile/uploads/<?= $model->image_url ?>" style="width:40px;height:40px" alt="profile"> -->
-                        <i class="fas fa-user" style="font-size: 1.5rem; color:#000"></i>
-                    </a>
-                    <div class=" dropdown-menu back-light" aria-labelledby="dropdownMenuButton">
+            <i class="fas fa-user" style="font-size: 1.5rem; color:#000"></i>
+            </a>
+            <div class=" dropdown-menu back-light" aria-labelledby="dropdownMenuButton">
 
-                        <a class="dropdown-item d-flex justify-content-between" href="<?= Url::to(['site/profile']) ?>">
-                            <?php 
+                <a class="dropdown-item d-flex justify-content-between" href="<?= Url::to(['site/profile']) ?>">
+                    <?php 
                     if($model->image_url == null){
                         ?>
-                            <img class="rounded-circle mr-3"
-                                src="<?= $base_url ?>/uploads/orionthemes-placeholder-image-1.png ?> ?>"
-                                style="width:60px;height:60px;object-fit: cover;" alt="profile">
-                            <?php }else{?>
-                            <img class="rounded-circle mr-3"
-                                src="<?= $base_url ?>/profile/uploads/<?= $model->image_url ?>"
-                                style="width:60px;height:60px;object-fit: cover;" alt="profile">
-                            <?php }?>
-                            <div>
-                                <span style="font-size:1.3rem"
-                                    class="fw-bold text-dark"><?= Yii::$app->user->identity->username ?></span><br>
-                                <span style="font-size:0.8rem"
-                                    class="fw-bold text-dark"><?= Yii::$app->user->identity->email ?></span>
-                            </div>
-                        </a>
-                        <hr class="dropdown-divider">
-                        <a class="dropdown-item text-dark" href="#">Another action</a>
-                        <a class="dropdown-item text-dark" href="#">Cart</a>
-                        <a class="dropdown-item text-dark" href="#">New Order</a>
-                        <a class="dropdown-item text-dark" href="#">Payment</a>
-                        <hr class="dropdown-divider">
-                        <a class="dropdown-item text-dark" href="<?php Url::to(['site/help']) ?>">Help</a>
-                        <?= Html::a('Logout', ['site/logout'], ['data' => ['method' => 'post'], 'class' => 'dropdown-item text-dark']) ?>
+                    <img class="rounded-circle mr-3"
+                        src="<?= $base_url ?>/uploads/orionthemes-placeholder-image-1.png ?> ?>"
+                        style="width:60px;height:60px;object-fit: cover;" alt="profile">
+                    <?php }else{?>
+                    <img class="rounded-circle mr-3" src="<?= $base_url ?>/profile/uploads/<?= $model->image_url ?>"
+                        style="width:60px;height:60px;object-fit: cover;" alt="profile">
+                    <?php }?>
+                    <div>
+                        <span style="font-size:1.3rem"
+                            class="fw-bold text-dark"><?= Yii::$app->user->identity->username ?></span><br>
+                        <span style="font-size:0.8rem"
+                            class="fw-bold text-dark"><?= Yii::$app->user->identity->email ?></span>
                     </div>
-                </div>
+                </a>
+                <hr class="dropdown-divider">
+                <a class="dropdown-item text-dark" href="#">Another action</a>
+                <a class="dropdown-item text-dark" href="#">Cart</a>
+                <a class="dropdown-item text-dark" href="#">New Order</a>
+                <a class="dropdown-item text-dark" href="#">Payment</a>
+                <hr class="dropdown-divider">
+                <a class="dropdown-item text-dark" href="<?php Url::to(['site/help']) ?>">Help</a>
+                <?= Html::a('Logout', ['site/logout'], ['data' => ['method' => 'post'], 'class' => 'dropdown-item text-dark']) ?>
             </div>
-            <?php
+        </div>
+    </div>
+    <?php
         }
         ?>
-        </div>
+    </div>
     </div>
 </nav>
 <!-- Close Header -->
