@@ -22,16 +22,17 @@ use yii\web\IdentityInterface;
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password
- *
+ * 
  * @property Auth[] $auths
  */
 class User extends ActiveRecord implements IdentityInterface
 {
-    //status Active Auto
+    //status Active Auto 
 
     // const STATUS_DELETED = 0;
     // const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
+
 
     /**
      * {@inheritdoc}
@@ -57,8 +58,8 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['first_name', 'last_name', 'email', 'username'], 'required'],
-            ['email', 'unique', 'targetClass' => '\app\models\User', 'message' => 'This email has already been taken.'],
+            [['first_name', 'last_name', 'email','username'], 'required'],
+            ['username', 'unique', 'targetClass' => '\app\models\User', 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
@@ -217,5 +218,4 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
-
 }
