@@ -2,6 +2,7 @@
 
 /* @var $this yii\web\View */
 
+use yii\bootstrap4\Html;
 use yii\bootstrap4\LinkPager;
 use yii\helpers\Url;
 use yii\widgets\ListView;
@@ -17,13 +18,13 @@ $base_url = Yii::getAlias("@web");
     <div class="row">
         <?php
         if (Yii::$app->session->hasFlash('success')) : ?>
-        <div class="alert alert-success" role="alert">
-            <?= Yii::$app->session->getFlash('success') ?>
-        </div>
+            <div class="alert alert-success" role="alert">
+                <?= Yii::$app->session->getFlash('success') ?>
+            </div>
         <?php elseif (Yii::$app->session->hasFlash('error')) : ?>
-        <div class="alert alert-danger" role="alert">
-            <?= Yii::$app->session->getFlash('error') ?>
-        </div>
+            <div class="alert alert-danger" role="alert">
+                <?= Yii::$app->session->getFlash('error') ?>
+            </div>
         <?php endif; ?>
 
         <div class="col-lg-3">
@@ -59,24 +60,21 @@ $base_url = Yii::getAlias("@web");
                 <!-- <div class="side-title">STORIES</div> -->
                 <div class="user">
                     <a href="<?= Url::to(['site/store-bottoms-jean-man']) ?>">
-                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/casual-slim-fit-men-jeans-2490-moi-outfit-654582_360x.jpg?v=1670634366"
-                            alt="" class="user-img">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/casual-slim-fit-men-jeans-2490-moi-outfit-654582_360x.jpg?v=1670634366" alt="" class="user-img">
                     </a>
                     <div class="username">Jeans
                     </div>
                 </div>
                 <div class="user">
                     <a href="<?= Url::to(['site/store-bottoms-pants-trousers-man']) ?>">
-                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/ua-straight-leg-men-pants-2990-moi-outfit-106798_360x.jpg?v=1670359288"
-                            alt="" class="user-img">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/ua-straight-leg-men-pants-2990-moi-outfit-106798_360x.jpg?v=1670359288" alt="" class="user-img">
                     </a>
                     <div class="username">Pants & Trousers
                     </div>
                 </div>
                 <div class="user">
                     <a href="<?= Url::to(['site/store-bottoms-joggers-man']) ?>">
-                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/trefoil-vertical-logo-printed-men-joggers-1790-moi-outfit-637556_360x.jpg?v=1678116299"
-                            alt="" class="user-img">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/trefoil-vertical-logo-printed-men-joggers-1790-moi-outfit-637556_360x.jpg?v=1678116299" alt="" class="user-img">
                     </a>
                     <div class="username">Joggers
                     </div>
@@ -84,8 +82,7 @@ $base_url = Yii::getAlias("@web");
                 </div>
                 <div class="user">
                     <a href="<?= Url::to(['site/store-bottoms-short-pants-man']) ?>">
-                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/side-pocket-camo-over-printed-men-shorts-2990-moi-outfit-146632_360x.jpg?v=1676277254"
-                            alt="" class="user-img">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/side-pocket-camo-over-printed-men-shorts-2990-moi-outfit-146632_360x.jpg?v=1676277254" alt="" class="user-img">
                     </a>
                     <div class="username">Short Pants
                     </div>
@@ -93,8 +90,7 @@ $base_url = Yii::getAlias("@web");
                 </div>
                 <div class="user">
                     <a href="<?= Url::to(['site/store-bottoms-sports-man']) ?>">
-                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/elastic-men-swimwear-trunk-1450-122109_360x.jpg?v=1631650424"
-                            alt="" class="user-img">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/elastic-men-swimwear-trunk-1450-122109_360x.jpg?v=1631650424" alt="" class="user-img">
                     </a>
                     <div class="username">Sport
                     </div>
@@ -106,15 +102,12 @@ $base_url = Yii::getAlias("@web");
                     <div class="d-flex">
                         <span class="sort-item">Sort by</span>
 
-                        <select class="form-select" aria-label=".form-select-lg example" style="border-radius: 0px;">
-                            <option>Featured</option>
-                            <option>Date,new to old</option>
-                            <option>Date,old to new</option>
-                            <option>A to Z</option>
-                            <option>Z to A</option>
-                            <option>Price low to high</option>
-                            <option>Price high to low</option>
-                        </select>
+                        <?= Html::dropDownList(
+                            'dateFilter',
+                            $sort,
+                            $drowdown,
+                            ['class' => 'form-select dateFilter']
+                        ) ?>
 
                     </div>
                 </div>
@@ -178,8 +171,7 @@ $base_url = Yii::getAlias("@web");
                     <!--End Controls-->
                     <!--Carousel Wrapper-->
                     <div class="col">
-                        <div class="carousel slide carousel-multi-item pt-2 pt-md-0" id="multi-item-example"
-                            data-bs-ride="carousel">
+                        <div class="carousel slide carousel-multi-item pt-2 pt-md-0" id="multi-item-example" data-bs-ride="carousel">
                             <!--Slides-->
                             <div class="carousel-inner product-links-wap" role="listbox">
 
@@ -187,24 +179,16 @@ $base_url = Yii::getAlias("@web");
                                 <div class="carousel-item active">
                                     <div class="row">
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?= $base_url ?>/template/img/brand_01.png"
-                                                    alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_01.png" alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?= $base_url ?>/template/img/brand_02.png"
-                                                    alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_02.png" alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?= $base_url ?>/template/img/brand_03.png"
-                                                    alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_03.png" alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?= $base_url ?>/template/img/brand_04.png"
-                                                    alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_04.png" alt="Brand Logo"></a>
                                         </div>
                                     </div>
                                 </div>
@@ -215,24 +199,16 @@ $base_url = Yii::getAlias("@web");
                                 <div class="carousel-item">
                                     <div class="row">
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?= $base_url ?>/template/img/brand_01.png"
-                                                    alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_01.png" alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?= $base_url ?>/template/img/brand_02.png"
-                                                    alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_02.png" alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?= $base_url ?>/template/img/brand_03.png"
-                                                    alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_03.png" alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?= $base_url ?>/template/img/brand_04.png"
-                                                    alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_04.png" alt="Brand Logo"></a>
                                         </div>
                                     </div>
                                 </div>
@@ -242,24 +218,16 @@ $base_url = Yii::getAlias("@web");
                                 <div class="carousel-item">
                                     <div class="row">
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?= $base_url ?>/template/img/brand_01.png"
-                                                    alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_01.png" alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?= $base_url ?>/template/img/brand_02.png"
-                                                    alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_02.png" alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?= $base_url ?>/template/img/brand_03.png"
-                                                    alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_03.png" alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?= $base_url ?>/template/img/brand_04.png"
-                                                    alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_04.png" alt="Brand Logo"></a>
                                         </div>
                                     </div>
                                 </div>
@@ -312,6 +280,12 @@ $script = <<<JS
         });
 
 
+    });
+    $("select[name='dateFilter']").change(function(){
+        var value = $(this).val();
+        var url = new URL(window.location.href);
+        url.searchParams.set('sort',value);
+        window.location.href = url.href;
     });
     $(document).ready(function () {
             $(".block").slice(0, 12).show();

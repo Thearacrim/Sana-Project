@@ -36,10 +36,10 @@ $payment = Yii::$app->session->hasFlash('success') ? 1 : 0;
     <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-12 p-5 mt-3">
             <div class="text-center">
-                <a href="<?= Url::to(['site/store-watch']) ?>"><img src="<?= $base_url ?>/<?= $watch->image_url ?>" class="rounded-circle border categories_img"></a>
+                <a href="<?= Url::to(['site/store-watch']) ?>"><img src="<?= $base_url ?>/<?// $watch->image_url ?>" class="rounded-circle border categories_img"></a>
             </div>
             <h5 class="text-center mt-3 mb-3 text-color"><?= \Yii::t('app', 'watches') ?></h5>
-            <p class="text-center"><a href="<?= Url::to(['site/store-watch']) ?>" class=" btn btn-success">Go Shop</a></p>
+            <p class="text-center"><a href="<?// Url::to(['site/store-watch']) ?>" class=" btn btn-success">Go Shop</a></p>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12 p-5 mt-3">
             <div class="text-center">

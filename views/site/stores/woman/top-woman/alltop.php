@@ -2,6 +2,7 @@
 
 /* @var $this yii\web\View */
 
+use yii\bootstrap4\Html;
 use yii\bootstrap4\LinkPager;
 use yii\helpers\Url;
 use yii\widgets\ListView;
@@ -116,6 +117,19 @@ $base_url = Yii::getAlias("@web");
                             <option>Price high to low</option>
                         </select>
 
+                    </div>
+                </div>
+            </div> <div class="row Sort">
+                <div class="col-md-6 Sort-section">
+                    <div class="d-flex">
+                        <span class="sort-item">Sort by</span>
+
+                        <?= Html::dropDownList(
+                            'dateFilter',
+                            $sort,
+                            $drowdown,
+                            ['class' => 'form-select dateFilter']
+                        ) ?>
                     </div>
                 </div>
             </div>
@@ -326,7 +340,13 @@ $script = <<<JS
                         .fadOut("slow");
                 }
             });
-        })
+        });
+    $("select[name='dateFilter']").change(function(){
+        var value = $(this).val();
+        var url = new URL(window.location.href);
+        url.searchParams.set('sort',value);
+        window.location.href = url.href;
+    });
 
 JS;
 
