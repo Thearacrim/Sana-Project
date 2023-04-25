@@ -75,23 +75,14 @@ class ProductSearch extends Product
             ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'type_item', $this->type_item]);
 
-        if (!empty(Yii::$app->request->get('price_range'))) {
-            print_r(Yii::$app->request->get('price_range'));
-            exit;
-            $price_range = Yii::$app->request->get('price_range');
-            switch ($price_range) {
-                case '0':
-                    # code...
-                    break;
-                case 'value':
-                    # code...
-                    break;
-
-                default:
-                    # code...
-                    break;
+            $minprice = Yii::$app->request->get('minprice') ?? 5;
+            $maxprice = Yii::$app->request->get('maxprice') ?? 50;
+            if (!empty($minprice) && !empty($maxprice)) {
+                $minprice = floatval($minprice);
+                $maxprice = floatval($maxprice);
+                $query->andwhere("price between CONVERT($minprice, DECIMAL) AND CONVERT($maxprice, DECIMAL)");
+                // $query->andFilterWhere(['between', 'price', "CONVERT($minprice, DECIMAL)",  "CONVERT($maxprice, DECIMAL)"]);
             }
-        }
         if (!empty(Yii::$app->request->get('sort'))) {
             $sort = Yii::$app->request->get('sort');
 
