@@ -2,12 +2,16 @@
 
 /* @var $this yii\web\View */
 
+use yii\bootstrap4\Html;
 use yii\bootstrap4\LinkPager;
 use yii\helpers\Url;
 use yii\widgets\ListView;
 
 $this->title = 'All TOP';
 $this->params['breadcrumbs'][] = $this->title;
+
+$minprice = Yii::$app->request->get('minprice') ?? 5;
+$maxprice = Yii::$app->request->get('maxprice') ?? 50;
 
 $base_url = Yii::getAlias("@web");
 ?>
@@ -26,6 +30,7 @@ $base_url = Yii::getAlias("@web");
         </div>
         <?php endif; ?>
 
+       
         <div class="col-lg-3">
             <div class="wrapper">
                 <header>
@@ -34,22 +39,23 @@ $base_url = Yii::getAlias("@web");
                 <div class="price-input">
                     <div class="field">
                         <span>$</span>
-                        <input type="number" class="input-min" value="0">
+                        <input type="number" class="input-min" value="<?= $minprice ?>">
                     </div>
                     <div class="separator">To</div>
                     <div class="field">
                         <span>$</span>
-                        <input type="number" class="input-max" value="230">
+                        <input type="number" class="input-max" value="<?= $maxprice ?>">
                     </div>
                 </div>
                 <div class="slider">
                     <div class="progress"></div>
                 </div>
                 <div class="range-input">
-                    <input type="range" class="range-min" min="0" max="300" value="0" step="1">
-                    <input type="range" class="range-max" min="0" max="300" value="233" step="1">
+                    <input type="range" id="min" name="min_price" class="range-min" min="0" max="<?= $maxPriceProduct ?>" value="<?= $minprice ?>" step="1">
+                    <input type="range" id="max" name="max_price" class="range-min" min="0" max="<?= $maxPriceProduct ?>" value="<?= $maxprice ?>" step="1">
                 </div>
             </div>
+
         </div>
         <!-- cart-section -->
         <div class="col-lg-9">
@@ -116,6 +122,19 @@ $base_url = Yii::getAlias("@web");
                             <option>Price high to low</option>
                         </select>
 
+                    </div>
+                </div>
+            </div> <div class="row Sort">
+                <div class="col-md-6 Sort-section">
+                    <div class="d-flex">
+                        <span class="sort-item">Sort by</span>
+
+                        <?= Html::dropDownList(
+                            'dateFilter',
+                            $sort,
+                            $drowdown,
+                            ['class' => 'form-select dateFilter']
+                        ) ?>
                     </div>
                 </div>
             </div>
@@ -326,7 +345,13 @@ $script = <<<JS
                         .fadOut("slow");
                 }
             });
-        })
+        });
+    $("select[name='dateFilter']").change(function(){
+        var value = $(this).val();
+        var url = new URL(window.location.href);
+        url.searchParams.set('sort',value);
+        window.location.href = url.href;
+    });
 
 JS;
 

@@ -10,6 +10,9 @@ use yii\widgets\ListView;
 $this->title = 'MAN';
 $this->params['breadcrumbs'][] = $this->title;
 
+$minprice = Yii::$app->request->get('minprice') ?? 5;
+$maxprice = Yii::$app->request->get('maxprice') ?? 50;
+
 $base_url = Yii::getAlias("@web");
 ?>
 
@@ -17,15 +20,15 @@ $base_url = Yii::getAlias("@web");
 <div class="container py-5">
     <div class="row">
         <?php
-if (Yii::$app->session->hasFlash('success')): ?>
-        <div class="alert alert-success" role="alert">
-            <?=Yii::$app->session->getFlash('success')?>
-        </div>
-        <?php elseif (Yii::$app->session->hasFlash('error')): ?>
-        <div class="alert alert-danger" role="alert">
-            <?=Yii::$app->session->getFlash('error')?>
-        </div>
-        <?php endif;?>
+        if (Yii::$app->session->hasFlash('success')) : ?>
+            <div class="alert alert-success" role="alert">
+                <?= Yii::$app->session->getFlash('success') ?>
+            </div>
+        <?php elseif (Yii::$app->session->hasFlash('error')) : ?>
+            <div class="alert alert-danger" role="alert">
+                <?= Yii::$app->session->getFlash('error') ?>
+            </div>
+        <?php endif; ?>
 
         <div class="col-lg-3">
             <div class="wrapper">
@@ -35,22 +38,23 @@ if (Yii::$app->session->hasFlash('success')): ?>
                 <div class="price-input">
                     <div class="field">
                         <span>$</span>
-                        <input type="number" class="input-min" value="0">
+                        <input type="number" class="input-min" value="<?= $minprice ?>">
                     </div>
                     <div class="separator">To</div>
                     <div class="field">
                         <span>$</span>
-                        <input type="number" class="input-max" value="230">
+                        <input type="number" class="input-max" value="<?= $maxprice ?>">
                     </div>
                 </div>
                 <div class="slider">
                     <div class="progress"></div>
                 </div>
                 <div class="range-input">
-                    <input type="range" id="min" class="range-min" min="0" max="300" value="0" step="1">
-                    <input type="range" id="max" class="range-min" min="0" max="300" value="233" step="1">
+                    <input type="range" id="min" name="min_price" class="range-min" min="0" max="<?= $maxPriceProduct ?>" value="<?= $minprice ?>" step="1">
+                    <input type="range" id="max" name="max_price" class="range-min" min="0" max="<?= $maxPriceProduct ?>" value="<?= $maxprice ?>" step="1">
                 </div>
             </div>
+
         </div>
         <!-- cart-section -->
         <div class="col-lg-9">
@@ -59,25 +63,22 @@ if (Yii::$app->session->hasFlash('success')): ?>
             <div class="side-wrapper stories">
                 <!-- <div class="side-title">STORIES</div> -->
                 <div class="user">
-                    <a href="<?=Url::to(['site/store-all-top-man'])?>">
-                        <img src="https://images.unsplash.com/photo-1618453292459-53424b66bb6a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80"
-                            alt="" class="user-img">
+                    <a href="<?= Url::to(['site/store-all-top-man']) ?>">
+                        <img src="https://images.unsplash.com/photo-1618453292459-53424b66bb6a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80" alt="" class="user-img">
                     </a>
                     <div class="username">ALL TOPS
                     </div>
                 </div>
                 <div class="user">
-                    <a href="<?=Url::to(['site/store-all-bottoms-man'])?>">
-                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/logo-embroidered-men-track-pants-1990-moi-outfit-631797.jpg?v=1673308814"
-                            alt="" class="user-img">
+                    <a href="<?= Url::to(['site/store-all-bottoms-man']) ?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/logo-embroidered-men-track-pants-1990-moi-outfit-631797.jpg?v=1673308814" alt="" class="user-img">
                     </a>
                     <div class="username">ALL BOTTOME
                     </div>
                 </div>
                 <div class="user">
-                    <a href="<?=Url::to(['site/store-all-accessories-man'])?>">
-                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/trefoil-embroidered-men-cap-990-moi-outfit-216333_1512x.jpg?v=1673485145"
-                            alt="" class="user-img">
+                    <a href="<?= Url::to(['site/store-all-accessories-man']) ?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/trefoil-embroidered-men-cap-990-moi-outfit-216333_1512x.jpg?v=1673485145" alt="" class="user-img">
                     </a>
                     <div class="username">ALL ACCESSORIES
                     </div>
@@ -89,30 +90,30 @@ if (Yii::$app->session->hasFlash('success')): ?>
                     <div class="d-flex">
                         <span class="sort-item">Sort by</span>
 
-                        <?=Html::dropDownList(
-    'dateFilter',
-    $datetype,
-    $drowdown,
-    ['class' => 'form-select dateFilter']
-)?>
+                        <?= Html::dropDownList(
+                            'dateFilter',
+                            $sort,
+                            $drowdown,
+                            ['class' => 'form-select dateFilter']
+                        ) ?>
                     </div>
                 </div>
             </div>
             <!-- section-cart -->
             <?php echo ListView::widget([
-    'dataProvider' => $dataProvider,
-    'itemView' => 'product_cart',
-    'itemOptions' => [
-        // 'tag' => false
-        'class' => "col-md-4 col-6 product-item",
-    ],
-    'pager' => [
-        'firstPageLabel' => 'Frist',
-        'lastPageLabel' => 'Last',
-        'maxButtonCount' => 3,
-        'class' => LinkPager::class,
-    ],
-    'layout' => '
+                'dataProvider' => $dataProvider,
+                'itemView' => 'product_cart',
+                'itemOptions' => [
+                    // 'tag' => false
+                    'class' => "col-md-4 col-6 product-item",
+                ],
+                'pager' => [
+                    'firstPageLabel' => 'Frist',
+                    'lastPageLabel' => 'Last',
+                    'maxButtonCount' => 3,
+                    'class' => LinkPager::class,
+                ],
+                'layout' => '
                     <div class="row">
                     <div class="col-lg-6">
                         {summary}
@@ -125,7 +126,7 @@ if (Yii::$app->session->hasFlash('success')): ?>
                     </div>
 
                 ',
-]) ?>
+            ]) ?>
             <!-- <div class="text-center">
                 <button id="load_more" class="btn btn-outline-primary rounded-0 text-color">Load More</button>
             </div> -->
@@ -157,8 +158,7 @@ if (Yii::$app->session->hasFlash('success')): ?>
                     <!--End Controls-->
                     <!--Carousel Wrapper-->
                     <div class="col">
-                        <div class="carousel slide carousel-multi-item pt-2 pt-md-0" id="multi-item-example"
-                            data-bs-ride="carousel">
+                        <div class="carousel slide carousel-multi-item pt-2 pt-md-0" id="multi-item-example" data-bs-ride="carousel">
                             <!--Slides-->
                             <div class="carousel-inner product-links-wap" role="listbox">
 
@@ -166,20 +166,16 @@ if (Yii::$app->session->hasFlash('success')): ?>
                                 <div class="carousel-item active">
                                     <div class="row">
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?=$base_url?>/template/img/brand_01.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_01.png" alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?=$base_url?>/template/img/brand_02.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_02.png" alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?=$base_url?>/template/img/brand_03.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_03.png" alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?=$base_url?>/template/img/brand_04.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_04.png" alt="Brand Logo"></a>
                                         </div>
                                     </div>
                                 </div>
@@ -190,20 +186,16 @@ if (Yii::$app->session->hasFlash('success')): ?>
                                 <div class="carousel-item">
                                     <div class="row">
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?=$base_url?>/template/img/brand_01.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_01.png" alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?=$base_url?>/template/img/brand_02.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_02.png" alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?=$base_url?>/template/img/brand_03.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_03.png" alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?=$base_url?>/template/img/brand_04.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_04.png" alt="Brand Logo"></a>
                                         </div>
                                     </div>
                                 </div>
@@ -213,20 +205,16 @@ if (Yii::$app->session->hasFlash('success')): ?>
                                 <div class="carousel-item">
                                     <div class="row">
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?=$base_url?>/template/img/brand_01.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_01.png" alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?=$base_url?>/template/img/brand_02.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_02.png" alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?=$base_url?>/template/img/brand_03.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_03.png" alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?=$base_url?>/template/img/brand_04.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_04.png" alt="Brand Logo"></a>
                                         </div>
                                     </div>
                                 </div>
@@ -255,7 +243,6 @@ if (Yii::$app->session->hasFlash('success')): ?>
 <?php
 $add_fav_url = Url::to(['site/favorites']);
 $add_cart_url = Url::to(['site/add-cart']);
-$price_range_url = Url::to(['site/price-range']);
 
 $script = <<<JS
     var base_url = "$base_url";
@@ -330,6 +317,7 @@ $script = <<<JS
             }
         });
     });
+
     $("select[name='dateFilter']").change(function(){
         var value = $(this).val();
         var url = new URL(window.location.href);
@@ -337,26 +325,15 @@ $script = <<<JS
         window.location.href = url.href;
     });
 
-    $('.range-min').on('change',function(e){
-        e . preventDefault();
-        var min = $(this).val();
-        var max = $(this).val();
-            $.ajax({
-                url: '$price_range_url',
-                method: 'POST',
-                data: {
-                    url: "$price_range_url" ,
-                    action: 'price_range',
-                },
-                success: function(res){
-
-                    var data = JSON.parse(res);
-                    console.log(data);
-                },
-                error: function(err){
-                    console.log(err);
-                }
-            });
+    $("input[name='min_price'], input[name='max_price']").change(function(){
+        var min = $("input[name='min_price']").val();
+        var max = $("input[name='max_price']").val();
+        // console.log(min, max);
+        // return;
+        var url = new URL(window.location.href);
+        url.searchParams.set('minprice',min);
+        url.searchParams.set('maxprice',max);
+        window.location.href = url.href;
     });
 
 JS;

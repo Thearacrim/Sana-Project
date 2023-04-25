@@ -2,12 +2,16 @@
 
 /* @var $this yii\web\View */
 
+use yii\bootstrap4\Html;
 use yii\bootstrap4\LinkPager;
 use yii\helpers\Url;
 use yii\widgets\ListView;
 
 $this->title = 'All ACCESSARIES';
 $this->params['breadcrumbs'][] = $this->title;
+
+$minprice = Yii::$app->request->get('minprice') ?? 5;
+$maxprice = Yii::$app->request->get('maxprice') ?? 50;
 
 $base_url = Yii::getAlias("@web");
 ?>
@@ -17,15 +21,16 @@ $base_url = Yii::getAlias("@web");
     <div class="row">
         <?php
         if (Yii::$app->session->hasFlash('success')) : ?>
-        <div class="alert alert-success" role="alert">
-            <?= Yii::$app->session->getFlash('success') ?>
-        </div>
+            <div class="alert alert-success" role="alert">
+                <?= Yii::$app->session->getFlash('success') ?>
+            </div>
         <?php elseif (Yii::$app->session->hasFlash('error')) : ?>
-        <div class="alert alert-danger" role="alert">
-            <?= Yii::$app->session->getFlash('error') ?>
-        </div>
+            <div class="alert alert-danger" role="alert">
+                <?= Yii::$app->session->getFlash('error') ?>
+            </div>
         <?php endif; ?>
 
+      
         <div class="col-lg-3">
             <div class="wrapper">
                 <header>
@@ -34,22 +39,23 @@ $base_url = Yii::getAlias("@web");
                 <div class="price-input">
                     <div class="field">
                         <span>$</span>
-                        <input type="number" class="input-min" value="0">
+                        <input type="number" class="input-min" value="<?= $minprice ?>">
                     </div>
                     <div class="separator">To</div>
                     <div class="field">
                         <span>$</span>
-                        <input type="number" class="input-max" value="230">
+                        <input type="number" class="input-max" value="<?= $maxprice ?>">
                     </div>
                 </div>
                 <div class="slider">
                     <div class="progress"></div>
                 </div>
                 <div class="range-input">
-                    <input type="range" class="range-min" min="0" max="300" value="0" step="1">
-                    <input type="range" class="range-max" min="0" max="300" value="233" step="1">
+                    <input type="range" id="min" name="min_price" class="range-min" min="0" max="<?= $maxPriceProduct ?>" value="<?= $minprice ?>" step="1">
+                    <input type="range" id="max" name="max_price" class="range-min" min="0" max="<?= $maxPriceProduct ?>" value="<?= $maxprice ?>" step="1">
                 </div>
             </div>
+
         </div>
         <!-- cart-section -->
         <div class="col-lg-9">
@@ -58,17 +64,15 @@ $base_url = Yii::getAlias("@web");
             <div class="side-wrapper stories">
                 <!-- <div class="side-title">STORIES</div> -->
                 <div class="user">
-                    <a href="<?=Url::to(['site/store-all-top-man'])?>">
-                        <img src="https://images.unsplash.com/photo-1618453292459-53424b66bb6a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80"
-                            alt="" class="user-img">
+                    <a href="<?= Url::to(['site/store-all-top-man']) ?>">
+                        <img src="https://images.unsplash.com/photo-1618453292459-53424b66bb6a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80" alt="" class="user-img">
                     </a>
                     <div class="username">ALL TOPS
                     </div>
                 </div>
                 <div class="user">
-                    <a href="<?=Url::to(['site/store-all-bottoms-man'])?>">
-                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/logo-embroidered-men-track-pants-1990-moi-outfit-631797.jpg?v=1673308814"
-                            alt="" class="user-img">
+                    <a href="<?= Url::to(['site/store-all-bottoms-man']) ?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/logo-embroidered-men-track-pants-1990-moi-outfit-631797.jpg?v=1673308814" alt="" class="user-img">
                     </a>
                     <div class="username">ALL BOTTOME
                     </div>
@@ -79,15 +83,12 @@ $base_url = Yii::getAlias("@web");
                     <div class="d-flex">
                         <span class="sort-item">Sort by</span>
 
-                        <select class="form-select" aria-label=".form-select-lg example" style="border-radius: 0px;">
-                            <option>Featured</option>
-                            <option>Date,new to old</option>
-                            <option>Date,old to new</option>
-                            <option>A to Z</option>
-                            <option>Z to A</option>
-                            <option>Price low to high</option>
-                            <option>Price high to low</option>
-                        </select>
+                        <?= Html::dropDownList(
+                            'dateFilter',
+                            $sort,
+                            $drowdown,
+                            ['class' => 'form-select dateFilter']
+                        ) ?>
 
                     </div>
                 </div>
@@ -151,8 +152,7 @@ $base_url = Yii::getAlias("@web");
                     <!--End Controls-->
                     <!--Carousel Wrapper-->
                     <div class="col">
-                        <div class="carousel slide carousel-multi-item pt-2 pt-md-0" id="multi-item-example"
-                            data-bs-ride="carousel">
+                        <div class="carousel slide carousel-multi-item pt-2 pt-md-0" id="multi-item-example" data-bs-ride="carousel">
                             <!--Slides-->
                             <div class="carousel-inner product-links-wap" role="listbox">
 
@@ -160,24 +160,16 @@ $base_url = Yii::getAlias("@web");
                                 <div class="carousel-item active">
                                     <div class="row">
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?= $base_url ?>/template/img/brand_01.png"
-                                                    alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_01.png" alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?= $base_url ?>/template/img/brand_02.png"
-                                                    alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_02.png" alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?= $base_url ?>/template/img/brand_03.png"
-                                                    alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_03.png" alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?= $base_url ?>/template/img/brand_04.png"
-                                                    alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_04.png" alt="Brand Logo"></a>
                                         </div>
                                     </div>
                                 </div>
@@ -188,24 +180,16 @@ $base_url = Yii::getAlias("@web");
                                 <div class="carousel-item">
                                     <div class="row">
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?= $base_url ?>/template/img/brand_01.png"
-                                                    alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_01.png" alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?= $base_url ?>/template/img/brand_02.png"
-                                                    alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_02.png" alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?= $base_url ?>/template/img/brand_03.png"
-                                                    alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_03.png" alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?= $base_url ?>/template/img/brand_04.png"
-                                                    alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_04.png" alt="Brand Logo"></a>
                                         </div>
                                     </div>
                                 </div>
@@ -215,24 +199,16 @@ $base_url = Yii::getAlias("@web");
                                 <div class="carousel-item">
                                     <div class="row">
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?= $base_url ?>/template/img/brand_01.png"
-                                                    alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_01.png" alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?= $base_url ?>/template/img/brand_02.png"
-                                                    alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_02.png" alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?= $base_url ?>/template/img/brand_03.png"
-                                                    alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_03.png" alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?= $base_url ?>/template/img/brand_04.png"
-                                                    alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_04.png" alt="Brand Logo"></a>
                                         </div>
                                     </div>
                                 </div>
@@ -262,6 +238,18 @@ $base_url = Yii::getAlias("@web");
 $add_cart_url = Url::to(['site/add-cart']);
 $script = <<<JS
     var base_url = "$base_url";
+
+    $("input[name='min_price'], input[name='max_price']").change(function(){
+        var min = $("input[name='min_price']").val();
+        var max = $("input[name='max_price']").val();
+        // console.log(min, max);
+        // return;
+        var url = new URL(window.location.href);
+        url.searchParams.set('minprice',min);
+        url.searchParams.set('maxprice',max);
+        window.location.href = url.href;
+    });
+
     $(".btn-add-to-cart").click(function(e){
         e.preventDefault();
         var id = $(this).closest(".product-item").data("key")
@@ -285,6 +273,12 @@ $script = <<<JS
         });
 
 
+    });
+    $("select[name='dateFilter']").change(function(){
+        var value = $(this).val();
+        var url = new URL(window.location.href);
+        url.searchParams.set('sort',value);
+        window.location.href = url.href;
     });
     $(document).ready(function () {
             $(".block").slice(0, 12).show();
