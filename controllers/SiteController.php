@@ -695,7 +695,7 @@ class SiteController extends Controller
     {
         $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
-        $dataProvider->query->where(['type_item' => 5]);
+        $dataProvider->query->where(['type_item' => 2]);
         $dataProvider->pagination = ['pageSize' => 9];
         $drowdown = [
             'featured' => 'Featured',
@@ -718,7 +718,7 @@ class SiteController extends Controller
     {
         $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
-        $dataProvider->query->where(['type_item' => 2]);
+        $dataProvider->query->where(['type_item' => 5]);
         $dataProvider->pagination = ['pageSize' => 9];
         $drowdown = [
             'featured' => 'Featured',
@@ -1011,7 +1011,7 @@ class SiteController extends Controller
     ///////////////////////////
     ////////////////////////////Woman
 
-    public function actionStoreWomen($datetype = 'featured',)
+    public function actionStoreWomen()
     {
         if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
             if (Yii::$app->user->isGuest) {
@@ -1041,24 +1041,13 @@ class SiteController extends Controller
 
             return json_encode(['success' => true]);
         }
-        $searchModel = new ProductSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
-        $dataProvider->query->where(['type_item' => [2, 3, 5, 7, 9, 10, 11, 13]]);
-        $drowdown = [
-            'featured' => 'Featured',
-            'date_new_to_old' => 'Date,new to old',
-            'date_old_to_new' => 'Date,old to new',
-            'a_to_z' => 'A to Z',
-            'z_to_a' => 'Z to A',
-            'price_low_to_high' => 'Price low to high',
-            'price_high_to_low' => 'Price high to low',
-        ];
+        $dataProvider = new ActiveDataProvider([
+            'query' => Product::find()->where(['type_item' => 1]),
+            'pagination' => array('pageSize' => 9),
+        ]);
 
         return $this->render('stores/store-women', [
             'dataProvider' => $dataProvider,
-            'drowdown' => $drowdown,
-            'datetype' => $datetype,
-            'searchModel' => $searchModel,
         ]);
 
         throw new NotFoundHttpException('The requested page does not exist.');
