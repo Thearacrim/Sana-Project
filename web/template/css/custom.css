@@ -70,7 +70,7 @@ h4 {
 }
 .columnBanner#zoomIn:hover img {
   -webkit-transform: scale(1.3);
-  transform: scale(1.3);
+  transform: scale(0.9);
 }
 
 .Collection-brand {
@@ -289,6 +289,12 @@ select#lang option[value='en-US'] {
   background-color: #fff;
 }
 
+.noHover{
+  pointer-events: none;
+}
+.myFavShow{
+  display: block;
+}
 /* profile section */
 
 .dropdown:hover > .dropdown-menu {

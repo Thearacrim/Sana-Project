@@ -5,18 +5,13 @@
 use yii\bootstrap4\LinkPager;
 use yii\helpers\Url;
 use yii\widgets\ListView;
-use yii\bootstrap4\Html;
 
-$this->title = 'T-SHIRT';
+$this->title = 'WOMAN';
 $this->params['breadcrumbs'][] = $this->title;
 
 $base_url = Yii::getAlias("@web");
 ?>
-<style>
-.pager {
-    bottom: 79px;
-}
-</style>
+
 <!-- Start Content -->
 <div class="container py-5">
     <div class="row">
@@ -58,42 +53,50 @@ $base_url = Yii::getAlias("@web");
         </div>
         <!-- cart-section -->
         <div class="col-lg-9">
-            <div class="title-man">MAN'S T-SHIRT</div>
+            <div class="title-man">WOMAN ALL BOTTOMS</div>
             <hr>
             <div class="side-wrapper stories">
                 <!-- <div class="side-title">STORIES</div> -->
                 <div class="user">
-                    <a href="<?= Url::to(['site/store-top-hoodies-man']) ?>">
-                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/casual-fit-men-hoodie-zip-2790-moi-outfit-697316_360x.jpg?v=1674615686"
+                    <a href="<?= Url::to(['site/store-bottoms-pants-trousers-woman']) ?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/wide-leg-lady-pants-1590-moi-outfit-471213_360x.jpg?v=1679281288"
                             alt="" class="user-img">
                     </a>
-                    <div class="username">Hoodies && Sweaters
+                    <div class="username">Pants & Trousers
                     </div>
                 </div>
                 <div class="user">
-                    <a href="<?= Url::to(['site/store-top-short-sleeves-man']) ?>">
-                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/floral-men-short-sleeve-shirt-1450-504907_360x.jpg?v=1631650576"
+                    <a href="<?= Url::to(['site/store-bottoms-jeans-woman']) ?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/90s-lady-boyfriend-jean-1450-moi-outfit-139295_360x.jpg?v=1659703055"
                             alt="" class="user-img">
                     </a>
-                    <div class="username">Shirts Short Sleeves
+                    <div class="username">Jeans
+                    </div>
+                </div>
+                <div class="user">
+                    <a href="<?= Url::to(['site/store-bottoms-joggers-woman']) ?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/logo-vertical-printed-lady-jogger-2290-moi-outfit-771105_360x.jpg?v=1670358803"
+                            alt="" class="user-img">
+                    </a>
+                    <div class="username">Joggers
                     </div>
 
                 </div>
                 <div class="user">
-                    <a href="<?= Url::to(['site/store-top-long-sleeves-man']) ?>">
-                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/logo-embroidered-men-long-sleeve-shirt-2250-moi-outfit-880921_360x.jpg?v=1658997179"
+                    <a href="<?= Url::to(['site/store-bottoms-short-pants-woman']) ?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/candy-color-lady-short-jeans-1390-moi-outfit-283955_360x.jpg?v=1634056652"
                             alt="" class="user-img">
                     </a>
-                    <div class="username">Shirts Long Sleeves
+                    <div class="username">Short Pants
                     </div>
 
                 </div>
                 <div class="user">
-                    <a href="<?= Url::to(['site/store-top-tanks-man']) ?>">
-                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/logo-printed-men-sport-tank-top-1150-moi-outfit-675663_360x.jpg?v=1638296613"
+                    <a href="<?= Url::to(['site/store-bottoms-skirts-woman']) ?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/animal-print-lady-ruffle-skirts-1790-moi-outfit-351954_1512x.jpg?v=1662136554"
                             alt="" class="user-img">
                     </a>
-                    <div class="username">TANK TOPS
+                    <div class="username">Skirts
                     </div>
 
                 </div>
@@ -103,12 +106,15 @@ $base_url = Yii::getAlias("@web");
                     <div class="d-flex">
                         <span class="sort-item">Sort by</span>
 
-                        <?= Html::dropDownList(
-                'dateFilter',
-                $sort,
-                $drowdown,
-                ['class' => 'form-select dateFilter']
-            )?>
+                        <select class="form-select" aria-label=".form-select-lg example" style="border-radius: 0px;">
+                            <option>Featured</option>
+                            <option>Date,new to old</option>
+                            <option>Date,old to new</option>
+                            <option>A to Z</option>
+                            <option>Z to A</option>
+                            <option>Price low to high</option>
+                            <option>Price high to low</option>
+                        </select>
 
                     </div>
                 </div>
@@ -116,7 +122,7 @@ $base_url = Yii::getAlias("@web");
             <!-- section-cart -->
             <?php echo ListView::widget([
                 'dataProvider' => $dataProvider,
-                'itemView' => 'product_cart',
+                'itemView' => '/site/stores/product_cart',
                 'itemOptions' => [
                     // 'tag' => false
                     'class' => "col-md-4 col-6 product-item"
@@ -130,13 +136,13 @@ $base_url = Yii::getAlias("@web");
                 'layout' => '
                     <div class="row">
                     <div class="col-lg-6">
-                       
+                        {summary}
                     </div>
-                    <div class="col-lg-6 text-center pager">
+                    <div class="col-lg-6 text-center">
                         {pager}
                     </div>
                         {items}
-                      
+                        {pager}
                     </div>
             
                 '
@@ -308,11 +314,25 @@ $script = <<<JS
 
 
     });
-    $(".btn-add-to-fav").click(function(e){
+    $(document).ready(function () {
+            $(".block").slice(0, 12).show();
+            if ($(".block:hidden").length != 0) {
+                $("#load_more").show();    
+            }
+            $("#load_more").on("click", function (e) {
+                e.preventDefault();
+                $(".block:hidden").slice(0, 12).slideDown();
+                if ($(".block:hidden").length == 0) {
+                    $("#load_more").text("No More to view")
+                        .fadOut("slow");
+                }
+            });
+        })
+        $(".btn-add-to-fav").click(function(e){
         e.preventDefault();
         var id = $(this).data("id");
         $.ajax({
-            url: "http://localhost:8080$add_fav_url",
+            url: "$add_fav_url",
             method: 'POST',
             data: {
                 action: 'btn-add-to-fav',
@@ -339,26 +359,8 @@ $script = <<<JS
             }
         });
     });
-    $(document).ready(function () {
-      $(".block").slice(0, 12).show();
-      if ($(".block:hidden").length != 0) {
-          $("#load_more").show();    
-      }
-      $("#load_more").on("click", function (e) {
-          e.preventDefault();
-          $(".block:hidden").slice(0, 12).slideDown();
-          if ($(".block:hidden").length == 0) {
-              $("#load_more").text("No More to view")
-                  .fadOut("slow");
-          }
-      });
-    });
-    $("select[name='dateFilter']").change(function(){
-        var value = $(this).val();
-        var url = new URL(window.location.href);
-        url.searchParams.set('sort',value);
-        window.location.href = url.href;
-    });
+
+    
 
 JS;
 

@@ -167,23 +167,19 @@ if (Yii::$app->session->hasFlash('success')): ?>
                                     <div class="row">
                                         <div class="col-3 p-md-5">
                                             <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?=$base_url?>/template/img/brand_01.png"
-                                                    alt="Brand Logo"></a>
+                                                    src="<?=$base_url?>/template/img/brand_01.png" alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
                                             <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?=$base_url?>/template/img/brand_02.png"
-                                                    alt="Brand Logo"></a>
+                                                    src="<?=$base_url?>/template/img/brand_02.png" alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
                                             <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?=$base_url?>/template/img/brand_03.png"
-                                                    alt="Brand Logo"></a>
+                                                    src="<?=$base_url?>/template/img/brand_03.png" alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
                                             <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?=$base_url?>/template/img/brand_04.png"
-                                                    alt="Brand Logo"></a>
+                                                    src="<?=$base_url?>/template/img/brand_04.png" alt="Brand Logo"></a>
                                         </div>
                                     </div>
                                 </div>
@@ -195,23 +191,19 @@ if (Yii::$app->session->hasFlash('success')): ?>
                                     <div class="row">
                                         <div class="col-3 p-md-5">
                                             <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?=$base_url?>/template/img/brand_01.png"
-                                                    alt="Brand Logo"></a>
+                                                    src="<?=$base_url?>/template/img/brand_01.png" alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
                                             <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?=$base_url?>/template/img/brand_02.png"
-                                                    alt="Brand Logo"></a>
+                                                    src="<?=$base_url?>/template/img/brand_02.png" alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
                                             <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?=$base_url?>/template/img/brand_03.png"
-                                                    alt="Brand Logo"></a>
+                                                    src="<?=$base_url?>/template/img/brand_03.png" alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
                                             <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?=$base_url?>/template/img/brand_04.png"
-                                                    alt="Brand Logo"></a>
+                                                    src="<?=$base_url?>/template/img/brand_04.png" alt="Brand Logo"></a>
                                         </div>
                                     </div>
                                 </div>
@@ -222,23 +214,19 @@ if (Yii::$app->session->hasFlash('success')): ?>
                                     <div class="row">
                                         <div class="col-3 p-md-5">
                                             <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?=$base_url?>/template/img/brand_01.png"
-                                                    alt="Brand Logo"></a>
+                                                    src="<?=$base_url?>/template/img/brand_01.png" alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
                                             <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?=$base_url?>/template/img/brand_02.png"
-                                                    alt="Brand Logo"></a>
+                                                    src="<?=$base_url?>/template/img/brand_02.png" alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
                                             <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?=$base_url?>/template/img/brand_03.png"
-                                                    alt="Brand Logo"></a>
+                                                    src="<?=$base_url?>/template/img/brand_03.png" alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
                                             <a href="#"><img class="img-fluid brand-img"
-                                                    src="<?=$base_url?>/template/img/brand_04.png"
-                                                    alt="Brand Logo"></a>
+                                                    src="<?=$base_url?>/template/img/brand_04.png" alt="Brand Logo"></a>
                                         </div>
                                     </div>
                                 </div>

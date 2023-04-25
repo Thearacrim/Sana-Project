@@ -6,11 +6,10 @@ use yii\bootstrap4\LinkPager;
 use yii\helpers\Url;
 use yii\widgets\ListView;
 
-$this->title = 'About';
+$this->title = 'All ACCESSARIES';
 $this->params['breadcrumbs'][] = $this->title;
 
 $base_url = Yii::getAlias("@web");
-
 ?>
 
 <!-- Start Content -->
@@ -18,72 +17,70 @@ $base_url = Yii::getAlias("@web");
     <div class="row">
         <?php
         if (Yii::$app->session->hasFlash('success')) : ?>
-            <div class="alert alert-success" role="alert">
-                <?= Yii::$app->session->getFlash('success') ?>
-            </div>
+        <div class="alert alert-success" role="alert">
+            <?= Yii::$app->session->getFlash('success') ?>
+        </div>
         <?php elseif (Yii::$app->session->hasFlash('error')) : ?>
-            <div class="alert alert-danger" role="alert">
-                <?= Yii::$app->session->getFlash('error') ?>
-            </div>
+        <div class="alert alert-danger" role="alert">
+            <?= Yii::$app->session->getFlash('error') ?>
+        </div>
         <?php endif; ?>
 
         <div class="col-lg-3">
-            <h1 class="h2 pb-4 text-color">Categories</h1>
-            <ul class="list-unstyled templatemo-accordion">
-                <li class="pb-3">
-                    <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-                        Gender
-                        <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
-                    </a>
-                    <ul class="collapse show list-unstyled pl-3">
-                        <li><a class="text-decoration-none text-color" href="<?= Url::to(['site/store-man']) ?>">Men</a></li>
-                        <li><a class="text-decoration-none text-color" href="<?= Url::to(['site/store-women']) ?>">Women</a></li>
-                    </ul>
-                </li>
-                <li class="pb-3">
-                    <a class="collapsed d-flex text-color justify-content-between h3 text-decoration-none" href="#">
-                        Sale
-                        <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
-                    </a>
-                    <ul id="collapseTwo" class="collapse list-unstyled pl-3">
-                        <li><a class="text-decoration-none text-color" href="<?= Url::to(['site/store-sport']) ?>">Sport</a></li>
-                        <li><a class="text-decoration-none text-color" href="<?= Url::to(['site/store-gym']) ?>">Gym</a></li>
-                    </ul>
-                </li>
-                <li class="pb-3">
-                    <a class="collapsed d-flex justify-content-between h3 text-decoration-none text-color" href="#">
-                        Product
-                        <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
-                    </a>
-                    <ul id="collapseThree" class="collapse list-unstyled pl-3">
-                        <li><a class="text-decoration-none text-color" href="<?= Url::to(['site/store-watch']) ?>">Watch</a></li>
-                        <li><a class="text-decoration-none text-color" href="<?= Url::to(['site/store-shoes']) ?>">Shoes</a></li>
-                        <li><a class="text-decoration-none text-color" href="<?= Url::to(['site/store-glasses']) ?>">Sunglass</a></li>
-                    </ul>
+            <div class="wrapper">
+                <header>
+                    <h2>Price Range</h2>
+                </header>
+                <div class="price-input">
+                    <div class="field">
+                        <span>$</span>
+                        <input type="number" class="input-min" value="0">
+                    </div>
+                    <div class="separator">To</div>
+                    <div class="field">
+                        <span>$</span>
+                        <input type="number" class="input-max" value="230">
+                    </div>
+                </div>
+                <div class="slider">
+                    <div class="progress"></div>
+                </div>
+                <div class="range-input">
+                    <input type="range" class="range-min" min="0" max="300" value="0" step="1">
+                    <input type="range" class="range-max" min="0" max="300" value="233" step="1">
+                </div>
+            </div>
         </div>
         <!-- cart-section -->
         <div class="col-lg-9">
-            <div class="row">
-                <div class="col-md-6">
-                    <ul class="list-inline shop-top-menu pb-3 pt-1">
-                        <li class="list-inline-item">
-                            <a class="h3 text-color text-decoration-none text-color mr-3" href="<?= Url::to(['site/add-cart']) ?>">All</a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a class="h3 text-color text-decoration-none text-color mr-3" href="<?= Url::to(['site/store-man']) ?>">Men's</a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a class="h3 text-color text-decoration-none text-color" href="<?= Url::to(['site/store-women']) ?>">Women's</a>
-                        </li>
-                    </ul>
+            <div class="title-man">ALL ACCESSORIES WOMAN</div>
+            <hr>
+            <div class="side-wrapper stories">
+                <!-- <div class="side-title">STORIES</div> -->
+                <div class="user">
+                    <a href="<?=Url::to(['site/store-accessories-headwear-woman'])?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/ny-bling-logo-over-cap-1290-moi-outfit-749980_360x.jpg?v=1668157657"
+                            alt="" class="user-img">
+                    </a>
+                    <div class="username">HeadWear
+                    </div>
                 </div>
-                <div class="col-md-6 pb-4">
+            </div>
+            <div class="row Sort">
+                <div class="col-md-6 Sort-section">
                     <div class="d-flex">
-                        <select class="form-control">
+                        <span class="sort-item">Sort by</span>
+
+                        <select class="form-select" aria-label=".form-select-lg example" style="border-radius: 0px;">
                             <option>Featured</option>
+                            <option>Date,new to old</option>
+                            <option>Date,old to new</option>
                             <option>A to Z</option>
-                            <option>Item</option>
+                            <option>Z to A</option>
+                            <option>Price low to high</option>
+                            <option>Price high to low</option>
                         </select>
+
                     </div>
                 </div>
             </div>
@@ -93,23 +90,31 @@ $base_url = Yii::getAlias("@web");
                 'itemView' => 'product_cart',
                 'itemOptions' => [
                     // 'tag' => false
-                    'class' => "col-md-4 col-6 product-item block"
+                    'class' => "col-md-4 col-6 product-item"
                 ],
-                // 'pager' => [
-                //     'firstPageLabel' => 'First',
-                //     'lastPageLabel'  => 'Last',
-                //     'class' => LinkPager::class,
-                // ],
+                'pager' => [
+                    'firstPageLabel' => 'Frist',
+                    'lastPageLabel' => 'Last',
+                    'maxButtonCount' => 3,
+                    'class' => LinkPager::class,
+                ],
                 'layout' => '
                     <div class="row">
+                    <div class="col-lg-6">
+                        {summary}
+                    </div>
+                    <div class="col-lg-6 text-center">
+                        {pager}
+                    </div>
                         {items}
+                        {pager}
                     </div>
             
                 '
             ]) ?>
-            <div class="text-center">
+            <!-- <div class="text-center">
                 <button id="load_more" class="btn btn-outline-primary rounded-0 text-color">Load More</button>
-            </div>
+            </div> -->
         </div>
         <!-- End Cart -->
     </div>
@@ -136,10 +141,10 @@ $base_url = Yii::getAlias("@web");
                         </a>
                     </div>
                     <!--End Controls-->
-
                     <!--Carousel Wrapper-->
                     <div class="col">
-                        <div class="carousel slide carousel-multi-item pt-2 pt-md-0" id="multi-item-example" data-bs-ride="carousel">
+                        <div class="carousel slide carousel-multi-item pt-2 pt-md-0" id="multi-item-example"
+                            data-bs-ride="carousel">
                             <!--Slides-->
                             <div class="carousel-inner product-links-wap" role="listbox">
 
@@ -147,16 +152,24 @@ $base_url = Yii::getAlias("@web");
                                 <div class="carousel-item active">
                                     <div class="row">
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_01.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_01.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_02.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_02.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_03.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_03.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_04.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_04.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                     </div>
                                 </div>
@@ -167,16 +180,24 @@ $base_url = Yii::getAlias("@web");
                                 <div class="carousel-item">
                                     <div class="row">
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_01.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_01.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_02.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_02.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_03.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_03.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_04.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_04.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                     </div>
                                 </div>
@@ -186,16 +207,24 @@ $base_url = Yii::getAlias("@web");
                                 <div class="carousel-item">
                                     <div class="row">
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_01.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_01.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_02.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_02.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_03.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_03.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_04.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_04.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                     </div>
                                 </div>

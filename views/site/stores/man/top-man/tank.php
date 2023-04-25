@@ -5,18 +5,13 @@
 use yii\bootstrap4\LinkPager;
 use yii\helpers\Url;
 use yii\widgets\ListView;
-use yii\bootstrap4\Html;
 
-$this->title = 'T-SHIRT';
+$this->title = 'Tank Tops';
 $this->params['breadcrumbs'][] = $this->title;
 
 $base_url = Yii::getAlias("@web");
 ?>
-<style>
-.pager {
-    bottom: 79px;
-}
-</style>
+
 <!-- Start Content -->
 <div class="container py-5">
     <div class="row">
@@ -58,10 +53,18 @@ $base_url = Yii::getAlias("@web");
         </div>
         <!-- cart-section -->
         <div class="col-lg-9">
-            <div class="title-man">MAN'S T-SHIRT</div>
+            <div class="title-man">TANK TOPS</div>
             <hr>
             <div class="side-wrapper stories">
                 <!-- <div class="side-title">STORIES</div> -->
+                <div class="user">
+                    <a href="<?= Url::to(['site/store-top-tshirt-man']) ?>">
+                        <img src="https://images.unsplash.com/photo-1618453292459-53424b66bb6a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80"
+                            alt="" class="user-img">
+                    </a>
+                    <div class="username">T-Shirt
+                    </div>
+                </div>
                 <div class="user">
                     <a href="<?= Url::to(['site/store-top-hoodies-man']) ?>">
                         <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/casual-fit-men-hoodie-zip-2790-moi-outfit-697316_360x.jpg?v=1674615686"
@@ -88,27 +91,21 @@ $base_url = Yii::getAlias("@web");
                     </div>
 
                 </div>
-                <div class="user">
-                    <a href="<?= Url::to(['site/store-top-tanks-man']) ?>">
-                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/logo-printed-men-sport-tank-top-1150-moi-outfit-675663_360x.jpg?v=1638296613"
-                            alt="" class="user-img">
-                    </a>
-                    <div class="username">TANK TOPS
-                    </div>
-
-                </div>
             </div>
             <div class="row Sort">
                 <div class="col-md-6 Sort-section">
                     <div class="d-flex">
                         <span class="sort-item">Sort by</span>
 
-                        <?= Html::dropDownList(
-                'dateFilter',
-                $sort,
-                $drowdown,
-                ['class' => 'form-select dateFilter']
-            )?>
+                        <select class="form-select" aria-label=".form-select-lg example" style="border-radius: 0px;">
+                            <option>Featured</option>
+                            <option>Date,new to old</option>
+                            <option>Date,old to new</option>
+                            <option>A to Z</option>
+                            <option>Z to A</option>
+                            <option>Price low to high</option>
+                            <option>Price high to low</option>
+                        </select>
 
                     </div>
                 </div>
@@ -130,13 +127,13 @@ $base_url = Yii::getAlias("@web");
                 'layout' => '
                     <div class="row">
                     <div class="col-lg-6">
-                       
+                        {summary}
                     </div>
-                    <div class="col-lg-6 text-center pager">
+                    <div class="col-lg-6 text-center">
                         {pager}
                     </div>
                         {items}
-                      
+                        {pager}
                     </div>
             
                 '
@@ -280,7 +277,6 @@ $base_url = Yii::getAlias("@web");
 <!--End Brands-->
 
 <?php
-$add_fav_url = Url::to(['site/favorites']);
 $add_cart_url = Url::to(['site/add-cart']);
 $script = <<<JS
     var base_url = "$base_url";
@@ -308,57 +304,20 @@ $script = <<<JS
 
 
     });
-    $(".btn-add-to-fav").click(function(e){
-        e.preventDefault();
-        var id = $(this).data("id");
-        $.ajax({
-            url: "http://localhost:8080$add_fav_url",
-            method: 'POST',
-            data: {
-                action: 'btn-add-to-fav',
-                id: id,
-            },
-            success: function(res){
-                var data = JSON.parse(res);
-                console.log(data)
-                if(data['status'] == 'success'){
-
-                    $("#favortie-quantity").text(data['favoritestotal']);
-                    if (data['type'] == 'remove'){
-                        $(".btn-add-to-fav[data-id='"+id+"']").removeClass("isFav");
-                    }else {
-                        $(".btn-add-to-fav[data-id='"+id+"']").addClass("isFav");
-                    }
-                    
-                }else{
-                    alert(data['message']);
-                }
-            },
-            error: function(err){
-                console.log(err);
-            }
-        });
-    });
     $(document).ready(function () {
-      $(".block").slice(0, 12).show();
-      if ($(".block:hidden").length != 0) {
-          $("#load_more").show();    
-      }
-      $("#load_more").on("click", function (e) {
-          e.preventDefault();
-          $(".block:hidden").slice(0, 12).slideDown();
-          if ($(".block:hidden").length == 0) {
-              $("#load_more").text("No More to view")
-                  .fadOut("slow");
-          }
-      });
-    });
-    $("select[name='dateFilter']").change(function(){
-        var value = $(this).val();
-        var url = new URL(window.location.href);
-        url.searchParams.set('sort',value);
-        window.location.href = url.href;
-    });
+            $(".block").slice(0, 12).show();
+            if ($(".block:hidden").length != 0) {
+                $("#load_more").show();    
+            }
+            $("#load_more").on("click", function (e) {
+                e.preventDefault();
+                $(".block:hidden").slice(0, 12).slideDown();
+                if ($(".block:hidden").length == 0) {
+                    $("#load_more").text("No More to view")
+                        .fadOut("slow");
+                }
+            });
+        })
 
 JS;
 

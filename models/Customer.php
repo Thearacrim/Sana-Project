@@ -10,6 +10,8 @@ use Yii;
  * @property int $id
  * @property string|null $name
  * @property string|null $address
+ * @property string|null $city
+ * @property int|null $phone_number
  */
 class Customer extends \yii\db\ActiveRecord
 {
@@ -27,8 +29,11 @@ class Customer extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['phone_number','name','address','city'], 'required'],
+            [['phone_number'], 'integer'],
             [['name'], 'string', 'max' => 50],
             [['address'], 'string', 'max' => 100],
+            [['city'], 'string', 'max' => 255],
         ];
     }
 
@@ -41,6 +46,8 @@ class Customer extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => 'Name',
             'address' => 'Address',
+            'city' => 'City',
+            'phone_number' => 'Phone Number',
         ];
     }
 }

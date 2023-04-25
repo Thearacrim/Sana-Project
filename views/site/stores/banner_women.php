@@ -19,8 +19,7 @@ use yii\helpers\Url;
                             </div>
                         </div>
                         <div class="mx-auto col-md-8 col-lg-6 order-lg-last columnBanner" id="zoomIn">
-                            <img class="img-banner" src="<?= $base_url ?>/banner/proident-occaecat-1674895205.png"
-                                alt="">
+                            <img class="img-banner" src="<?= $base_url ?>/banner/Women_slide2.png" alt="">
                         </div>
 
                     </div>

@@ -58,11 +58,19 @@ $base_url = Yii::getAlias("@web");
             <div class="side-wrapper stories">
                 <!-- <div class="side-title">STORIES</div> -->
                 <div class="user">
-                    <a href="<?= Url::to(['site/store-all-top-man']) ?>">
-                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/trefoil-embroidered-men-cap-990-moi-outfit-216333_1512x.jpg?v=1673485145"
+                    <a href="<?=Url::to(['site/store-all-top-man'])?>">
+                        <img src="https://images.unsplash.com/photo-1618453292459-53424b66bb6a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80"
                             alt="" class="user-img">
                     </a>
-                    <div class="username">Headwear
+                    <div class="username">ALL TOPS
+                    </div>
+                </div>
+                <div class="user">
+                    <a href="<?=Url::to(['site/store-all-bottoms-man'])?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/logo-embroidered-men-track-pants-1990-moi-outfit-631797.jpg?v=1673308814"
+                            alt="" class="user-img">
+                    </a>
+                    <div class="username">ALL BOTTOME
                     </div>
                 </div>
             </div>

@@ -6,7 +6,7 @@ use yii\bootstrap4\LinkPager;
 use yii\helpers\Url;
 use yii\widgets\ListView;
 
-$this->title = 'All ACCESSARIES';
+$this->title = 'WOMAN';
 $this->params['breadcrumbs'][] = $this->title;
 
 $base_url = Yii::getAlias("@web");
@@ -53,17 +53,44 @@ $base_url = Yii::getAlias("@web");
         </div>
         <!-- cart-section -->
         <div class="col-lg-9">
-            <div class="title-man">ALL ACCESSORIES</div>
+            <div class="title-man">WOMAN TSHIRTS</div>
             <hr>
             <div class="side-wrapper stories">
                 <!-- <div class="side-title">STORIES</div> -->
                 <div class="user">
-                    <a href="<?= Url::to(['site/store-all-top-man']) ?>">
-                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/trefoil-embroidered-men-cap-990-moi-outfit-216333_1512x.jpg?v=1673485145"
+                    <a href="<?= Url::to(['site/store-top-dresses-jumpsuits-woman']) ?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/3-stripe-lady-floral-t-shirt-dress-1890-moi-outfit-937442_360x.jpg?v=1658996325"
                             alt="" class="user-img">
                     </a>
-                    <div class="username">Headwear
+                    <div class="username">Dresses && Jumpsuits
                     </div>
+                </div>
+                <div class="user">
+                    <a href="<?= Url::to(['site/store-top-hoodies-sweaters-woman']) ?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/back-logo-printed-unisex-hoodie-3990-458592_360x.jpg?v=1631649731"
+                            alt="" class="user-img">
+                    </a>
+                    <div class="username">Hoodies && Sweaters
+                    </div>
+
+                </div>
+                <div class="user">
+                    <a href="<?= Url::to(['site/store-top-shirts-tops-woman']) ?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/puff-sleeve-lady-short-sleeve-shirt-1750-974588_360x.jpg?v=1631651656"
+                            alt="" class="user-img">
+                    </a>
+                    <div class="username">Shirts & Tops
+                    </div>
+
+                </div>
+                <div class="user">
+                    <a href="<?= Url::to(['site/store-top-jackets-raincoats-woman']) ?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/basic-lady-icon-denim-jacket-1890-361255_360x.jpg?v=1631649793"
+                            alt="" class="user-img">
+                    </a>
+                    <div class="username">Jackets & Raincoats
+                    </div>
+
                 </div>
             </div>
             <div class="row Sort">
@@ -87,7 +114,7 @@ $base_url = Yii::getAlias("@web");
             <!-- section-cart -->
             <?php echo ListView::widget([
                 'dataProvider' => $dataProvider,
-                'itemView' => 'product_cart',
+                'itemView' => '/site/stores/product_cart',
                 'itemOptions' => [
                     // 'tag' => false
                     'class' => "col-md-4 col-6 product-item"
@@ -251,6 +278,7 @@ $base_url = Yii::getAlias("@web");
 <!--End Brands-->
 
 <?php
+$add_fav_url = Url::to(['site/favorites']);
 $add_cart_url = Url::to(['site/add-cart']);
 $script = <<<JS
     var base_url = "$base_url";
@@ -292,6 +320,39 @@ $script = <<<JS
                 }
             });
         })
+        $(".btn-add-to-fav").click(function(e){
+        e.preventDefault();
+        var id = $(this).data("id");
+        $.ajax({
+            url: "$add_fav_url",
+            method: 'POST',
+            data: {
+                action: 'btn-add-to-fav',
+                id: id,
+            },
+            success: function(res){
+                var data = JSON.parse(res);
+                console.log(data)
+                if(data['status'] == 'success'){
+
+                    $("#favortie-quantity").text(data['favoritestotal']);
+                    if (data['type'] == 'remove'){
+                        $(".btn-add-to-fav[data-id='"+id+"']").removeClass("isFav");
+                    }else {
+                        $(".btn-add-to-fav[data-id='"+id+"']").addClass("isFav");
+                    }
+                    
+                }else{
+                    alert(data['message']);
+                }
+            },
+            error: function(err){
+                console.log(err);
+            }
+        });
+    });
+
+    
 
 JS;
 

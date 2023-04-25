@@ -40,8 +40,19 @@ use yii\helpers\Html;
             </div>
             <?= $form->field($relateImage, 'image_relate[]')->fileInput(['multiple' => true,'placeholder' => 'Images','class'=>'form-control'])->label('Choose Image for Relate Image (choose 2)') ?>
 
-            <?= $form->field($model, 'type_item')->dropDownList(['1' => 'T-Shirt Women', '2' => 'T-Shirt Man', '3' => 'Jeans Man', '4' => 'Jeans Woman', '5' => 'Hoodies & Sweeter Man', '6' => 'Hoodies & Sweeter Woman','7'=>'Shirts Short Sleeves Man'
-            ,'8'=>'Shirts Short Sleeves Woman','9'=>'Shirts Long Sleeves Man','10'=>'Sport Man','11'=>'OXFORD Shirt','12'=>'Hat','13'=>'Joggers Man','14'=>'Joggers Women'], ['placeholder' => 'Type Item'])->label(false) ?>
+            <?= $form->field($model, 'type_item')->dropDownList(['1' => 'T-Shirt Women', '2' => 'T-Shirt Man',
+             '3' => 'Jeans Man', '4' => 'Jeans Woman', '5' => 'Hoodies & Sweeter Man', '6' => 'Hoodies & Sweeter Woman','7'=>'Shirts Short Sleeves Man'
+            ,'8'=>'Dresses
+            &
+            Jumpsuits','9'=>'Shirts Long Sleeves Man','10'=>'Sport Man','11'=>'OXFORD Shirt','12'=>'Hat Man',
+            '13'=>'Joggers Man','14'=>'Joggers Women','15'=>'Tanks',
+            '16'=>'Pants && Trousers Man','17'=>'Short Pants Man','18'=>'Sports','19'=>'Dresses
+            &
+            Jumpsuits','20'=>'Shirts & Tops Woman','21'=>'Jackets & Raincoats','22'=>'Pants &
+            Trousers Woman','23'=>'Short
+            Pants Woman','24'=>'Skirts Woman','25'=>'Shirts &Tops','26'=>'Jackets
+            &
+            Raincoats','27'=>'Headwear'], ['placeholder' => 'Type Item'])->label(false) ?>
             <div class="text-center">
                 <?=Html::submitButton('Save', ['class' => 'btn btn-primary w-50 rounded-0', 'id' => "btn_save"])?>
             </div>

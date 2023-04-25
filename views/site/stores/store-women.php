@@ -58,22 +58,29 @@ $base_url = Yii::getAlias("@web");
             <div class="side-wrapper stories">
                 <!-- <div class="side-title">STORIES</div> -->
                 <div class="user">
-                    <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/wavy-pattern-lady-crop-top-1590-moi-outfit-955269_1512x.jpg?v=1679281281"
-                        alt="" class="user-img">
+                    <a href="<?=Url::to(['site/store-all-top-woman'])?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/wavy-pattern-lady-crop-top-1590-moi-outfit-955269_1512x.jpg?v=1679281281"
+                            alt="" class="user-img">
+                    </a>
                     <div class="username">ALL TOPS
                     </div>
                 </div>
                 <div class="user">
-                    <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/r-elastic-waist-lady-pants-1990-moi-outfit-319398_1512x.jpg?v=1679369383"
-                        alt="" class="user-img">
+                    <a href="<?=Url::to(['site/store-all-bottoms-woman'])?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/r-elastic-waist-lady-pants-1990-moi-outfit-319398_1512x.jpg?v=1679369383"
+                            alt="" class="user-img">
+                    </a>
                     <div class="username">ALL BOTTOME
                     </div>
                 </div>
                 <div class="user">
-                    <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/low-cut-comfort-sock-180-247028_960x.jpg?v=1631651243"
-                        alt="" class="user-img">
+                    <a href="<?=Url::to(['site/store-all-accessories-woman'])?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/low-cut-comfort-sock-180-247028_960x.jpg?v=1631651243"
+                            alt="" class="user-img">
+                    </a>
                     <div class="username">ALL ACCESSORIES
                     </div>
+
                 </div>
             </div>
             <div class="row Sort">

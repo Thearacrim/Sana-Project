@@ -17,9 +17,10 @@ $base_url = Yii::getAlias("@web");
     background-color: #000;
     color: #fff;
 }
-.pager{
+
+.pager {
     bottom: 79px;
-  }
+}
 </style>
 <!-- Start Content -->
 <div class="container py-5">
@@ -67,22 +68,39 @@ $base_url = Yii::getAlias("@web");
             <div class="side-wrapper stories">
                 <!-- <div class="side-title">STORIES</div> -->
                 <div class="user">
-                    <img src="https://images.unsplash.com/photo-1618453292459-53424b66bb6a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80"
-                        alt="" class="user-img">
-                    <div class="username">ALL TOPS
+                    <a href="<?= Url::to(['site/store-bottoms-pants-trousers-man']) ?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/ua-straight-leg-men-pants-2990-moi-outfit-106798_360x.jpg?v=1670359288"
+                            alt="" class="user-img">
+                    </a>
+                    <div class="username">Pants & Trousers
                     </div>
                 </div>
                 <div class="user">
-                    <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/logo-embroidered-men-track-pants-1990-moi-outfit-631797.jpg?v=1673308814"
-                        alt="" class="user-img">
-                    <div class="username">ALL BOTTOME
+                    <a href="<?= Url::to(['site/store-bottoms-joggers-man']) ?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/trefoil-vertical-logo-printed-men-joggers-1790-moi-outfit-637556_360x.jpg?v=1678116299"
+                            alt="" class="user-img">
+                    </a>
+                    <div class="username">Joggers
                     </div>
+
                 </div>
                 <div class="user">
-                    <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/cuff-logo-embroidered-quarter-socks-3-pairs-890-moi-outfit-995871.jpg?v=1662791823"
-                        alt="" class="user-img">
-                    <div class="username">ALL ACCESSORIES
+                    <a href="<?= Url::to(['site/store-bottoms-short-pants-man']) ?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/side-pocket-camo-over-printed-men-shorts-2990-moi-outfit-146632_360x.jpg?v=1676277254"
+                            alt="" class="user-img">
+                    </a>
+                    <div class="username">Short Pants
                     </div>
+
+                </div>
+                <div class="user">
+                    <a href="<?= Url::to(['site/store-bottoms-sports-man']) ?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/elastic-men-swimwear-trunk-1450-122109_360x.jpg?v=1631650424"
+                            alt="" class="user-img">
+                    </a>
+                    <div class="username">Sport
+                    </div>
+
                 </div>
             </div>
             <div class="row Sort">

@@ -58,45 +58,45 @@ $base_url = Yii::getAlias("@web");
             <div class="side-wrapper stories">
                 <!-- <div class="side-title">STORIES</div> -->
                 <div class="user">
-                    <a href="<?= Url::to(['site/store-all-top-man']) ?>">
-                        <img src="https://images.unsplash.com/photo-1618453292459-53424b66bb6a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80"
+                    <a href="<?= Url::to(['site/store-top-tshirt-woman']) ?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/cozy-lady-t-shirt-790-moi-outfit-873665_360x.jpg?v=1679367361"
                             alt="" class="user-img">
                     </a>
                     <div class="username">T-Shirt
                     </div>
                 </div>
                 <div class="user">
-                    <a href="<?= Url::to(['site/store-accessories-hat-man']) ?>">
-                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/casual-fit-men-hoodie-zip-2790-moi-outfit-697316_360x.jpg?v=1674615686"
+                    <a href="<?= Url::to(['site/store-top-dresses-jumpsuits-woman']) ?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/3-stripe-lady-floral-t-shirt-dress-1890-moi-outfit-937442_360x.jpg?v=1658996325"
+                            alt="" class="user-img">
+                    </a>
+                    <div class="username">Dresses && Jumpsuits
+                    </div>
+                </div>
+                <div class="user">
+                    <a href="<?= Url::to(['site/store-top-hoodies-sweaters-woman']) ?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/back-logo-printed-unisex-hoodie-3990-458592_360x.jpg?v=1631649731"
                             alt="" class="user-img">
                     </a>
                     <div class="username">Hoodies && Sweaters
                     </div>
+
                 </div>
                 <div class="user">
-                    <a href="<?= Url::to(['site/store-accessories-hat-man']) ?>">
-                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/floral-men-short-sleeve-shirt-1450-504907_360x.jpg?v=1631650576"
+                    <a href="<?= Url::to(['site/store-top-shirts-tops-woman']) ?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/puff-sleeve-lady-short-sleeve-shirt-1750-974588_360x.jpg?v=1631651656"
                             alt="" class="user-img">
                     </a>
-                    <div class="username">Shirts Short Sleeves
+                    <div class="username">Shirts & Tops
                     </div>
 
                 </div>
                 <div class="user">
-                    <a href="<?= Url::to(['site/store-accessories-hat-man']) ?>">
-                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/logo-embroidered-men-long-sleeve-shirt-2250-moi-outfit-880921_360x.jpg?v=1658997179"
+                    <a href="<?= Url::to(['site/store-top-jackets-raincoats-woman']) ?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/basic-lady-icon-denim-jacket-1890-361255_360x.jpg?v=1631649793"
                             alt="" class="user-img">
                     </a>
-                    <div class="username">Shirts Long Sleeves
-                    </div>
-
-                </div>
-                <div class="user">
-                    <a href="<?= Url::to(['site/store-accessories-hat-man']) ?>">
-                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/logo-printed-men-sport-tank-top-1150-moi-outfit-675663_360x.jpg?v=1638296613"
-                            alt="" class="user-img">
-                    </a>
-                    <div class="username">TANK TOPS
+                    <div class="username">Jackets & Raincoats
                     </div>
 
                 </div>

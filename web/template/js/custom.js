@@ -21,3 +21,8 @@ $(document).on("click", ".trigggerModal", function () {
 //       function() { $('.dropdown-menu', this).fadeOut("fast");
 //   });
 // });
+
+// Custom Favorite
+$( "#myFavbtn" ).click(function() {     
+  $('#myFav').toggleClass("d-none");
+});

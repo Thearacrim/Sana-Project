@@ -7,12 +7,17 @@ use yii\helpers\Url;
 use yii\widgets\ListView;
 use yii\bootstrap4\Html;
 
-$this->title = 'T-SHIRT';
+$this->title = 'MAN';
 $this->params['breadcrumbs'][] = $this->title;
 
 $base_url = Yii::getAlias("@web");
 ?>
 <style>
+.isFav:hover {
+    background-color: #000;
+    color: #fff;
+}
+
 .pager {
     bottom: 79px;
 }
@@ -58,42 +63,41 @@ $base_url = Yii::getAlias("@web");
         </div>
         <!-- cart-section -->
         <div class="col-lg-9">
-            <div class="title-man">MAN'S T-SHIRT</div>
+            <div class="title-man">MAN'S JOGGERS</div>
             <hr>
             <div class="side-wrapper stories">
                 <!-- <div class="side-title">STORIES</div> -->
                 <div class="user">
-                    <a href="<?= Url::to(['site/store-top-hoodies-man']) ?>">
-                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/casual-fit-men-hoodie-zip-2790-moi-outfit-697316_360x.jpg?v=1674615686"
+                    <a href="<?= Url::to(['site/store-bottoms-jean-man']) ?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/casual-slim-fit-men-jeans-2490-moi-outfit-654582_360x.jpg?v=1670634366"
                             alt="" class="user-img">
                     </a>
-                    <div class="username">Hoodies && Sweaters
+                    <div class="username">Jeans
                     </div>
                 </div>
                 <div class="user">
-                    <a href="<?= Url::to(['site/store-top-short-sleeves-man']) ?>">
-                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/floral-men-short-sleeve-shirt-1450-504907_360x.jpg?v=1631650576"
+                    <a href="<?= Url::to(['site/store-bottoms-pants-trousers-man']) ?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/ua-straight-leg-men-pants-2990-moi-outfit-106798_360x.jpg?v=1670359288"
                             alt="" class="user-img">
                     </a>
-                    <div class="username">Shirts Short Sleeves
+                    <div class="username">Pants & Trousers
+                    </div>
+                </div>
+                <div class="user">
+                    <a href="<?= Url::to(['site/store-bottoms-short-pants-man']) ?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/side-pocket-camo-over-printed-men-shorts-2990-moi-outfit-146632_360x.jpg?v=1676277254"
+                            alt="" class="user-img">
+                    </a>
+                    <div class="username">Short Pants
                     </div>
 
                 </div>
                 <div class="user">
-                    <a href="<?= Url::to(['site/store-top-long-sleeves-man']) ?>">
-                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/logo-embroidered-men-long-sleeve-shirt-2250-moi-outfit-880921_360x.jpg?v=1658997179"
+                    <a href="<?= Url::to(['site/store-bottoms-sports-man']) ?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/elastic-men-swimwear-trunk-1450-122109_360x.jpg?v=1631650424"
                             alt="" class="user-img">
                     </a>
-                    <div class="username">Shirts Long Sleeves
-                    </div>
-
-                </div>
-                <div class="user">
-                    <a href="<?= Url::to(['site/store-top-tanks-man']) ?>">
-                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/logo-printed-men-sport-tank-top-1150-moi-outfit-675663_360x.jpg?v=1638296613"
-                            alt="" class="user-img">
-                    </a>
-                    <div class="username">TANK TOPS
+                    <div class="username">Sport
                     </div>
 
                 </div>
@@ -116,7 +120,7 @@ $base_url = Yii::getAlias("@web");
             <!-- section-cart -->
             <?php echo ListView::widget([
                 'dataProvider' => $dataProvider,
-                'itemView' => 'product_cart',
+                'itemView' => '/site/stores/product_cart',
                 'itemOptions' => [
                     // 'tag' => false
                     'class' => "col-md-4 col-6 product-item"
@@ -130,13 +134,13 @@ $base_url = Yii::getAlias("@web");
                 'layout' => '
                     <div class="row">
                     <div class="col-lg-6">
-                       
+                        
                     </div>
                     <div class="col-lg-6 text-center pager">
                         {pager}
                     </div>
                         {items}
-                      
+                       
                     </div>
             
                 '

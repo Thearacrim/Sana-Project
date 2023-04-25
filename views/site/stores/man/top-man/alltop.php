@@ -58,7 +58,7 @@ $base_url = Yii::getAlias("@web");
             <div class="side-wrapper stories">
                 <!-- <div class="side-title">STORIES</div> -->
                 <div class="user">
-                    <a href="<?= Url::to(['site/store-all-top-man']) ?>">
+                    <a href="<?= Url::to(['site/store-top-tshirt-man']) ?>">
                         <img src="https://images.unsplash.com/photo-1618453292459-53424b66bb6a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80"
                             alt="" class="user-img">
                     </a>
@@ -66,7 +66,7 @@ $base_url = Yii::getAlias("@web");
                     </div>
                 </div>
                 <div class="user">
-                    <a href="<?= Url::to(['site/store-accessories-hat-man']) ?>">
+                    <a href="<?= Url::to(['site/store-top-hoodies-man']) ?>">
                         <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/casual-fit-men-hoodie-zip-2790-moi-outfit-697316_360x.jpg?v=1674615686"
                             alt="" class="user-img">
                     </a>
@@ -74,7 +74,7 @@ $base_url = Yii::getAlias("@web");
                     </div>
                 </div>
                 <div class="user">
-                    <a href="<?= Url::to(['site/store-accessories-hat-man']) ?>">
+                    <a href="<?= Url::to(['site/store-top-short-sleeves-man']) ?>">
                         <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/floral-men-short-sleeve-shirt-1450-504907_360x.jpg?v=1631650576"
                             alt="" class="user-img">
                     </a>
@@ -83,7 +83,7 @@ $base_url = Yii::getAlias("@web");
 
                 </div>
                 <div class="user">
-                    <a href="<?= Url::to(['site/store-accessories-hat-man']) ?>">
+                    <a href="<?= Url::to(['site/store-top-long-sleeves-man']) ?>">
                         <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/logo-embroidered-men-long-sleeve-shirt-2250-moi-outfit-880921_360x.jpg?v=1658997179"
                             alt="" class="user-img">
                     </a>
@@ -92,7 +92,7 @@ $base_url = Yii::getAlias("@web");
 
                 </div>
                 <div class="user">
-                    <a href="<?= Url::to(['site/store-accessories-hat-man']) ?>">
+                    <a href="<?= Url::to(['site/store-top-tanks-man']) ?>">
                         <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/logo-printed-men-sport-tank-top-1150-moi-outfit-675663_360x.jpg?v=1638296613"
                             alt="" class="user-img">
                     </a>

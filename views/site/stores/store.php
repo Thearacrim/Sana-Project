@@ -20,6 +20,9 @@ Yii::$app->params['og_description']['content'] = $model->description;
 Yii::$app->params['og_url']['content'] = '/new/url';
 Yii::$app->params['og_image']['content'] = $model->image_url;
 ?>
+<?php
+$payment = Yii::$app->session->hasFlash('success') ? 1 : 0;
+?>
 
 <!-- Start Content -->
 <?= $this->render("banner_men", ['base_url' => $base_url]) ?>
@@ -285,6 +288,24 @@ $script = <<<JS
                 }
             });
         })
+        if($payment)
+    {
+        const Toast = Swal.mixin({
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 6000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+        })
+        Toast.fire({
+        icon: 'success',
+        title: 'You purchas successfully'
+        })
+    }
 JS;
 
 $this->registerJs($script);

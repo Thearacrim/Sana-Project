@@ -6,7 +6,7 @@ use yii\bootstrap4\LinkPager;
 use yii\helpers\Url;
 use yii\widgets\ListView;
 
-$this->title = 'All TOP';
+$this->title = 'WOMAN';
 $this->params['breadcrumbs'][] = $this->title;
 
 $base_url = Yii::getAlias("@web");
@@ -53,38 +53,29 @@ $base_url = Yii::getAlias("@web");
         </div>
         <!-- cart-section -->
         <div class="col-lg-9">
-            <div class="title-man">ALL BOTTOME</div>
+            <div class="title-man">WOMAN JOGGERS</div>
             <hr>
             <div class="side-wrapper stories">
                 <!-- <div class="side-title">STORIES</div> -->
                 <div class="user">
-                    <a href="<?= Url::to(['site/store-all-top-man']) ?>">
-                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/casual-slim-fit-men-jeans-2490-moi-outfit-654582_360x.jpg?v=1670634366"
-                            alt="" class="user-img">
-                    </a>
-                    <div class="username">Jeans
-                    </div>
-                </div>
-                <div class="user">
-                    <a href="<?= Url::to(['site/store-accessories-hat-man']) ?>">
-                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/ua-straight-leg-men-pants-2990-moi-outfit-106798_360x.jpg?v=1670359288"
+                    <a href="<?= Url::to(['site/store-bottoms-pants-trousers-woman']) ?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/wide-leg-lady-pants-1590-moi-outfit-471213_360x.jpg?v=1679281288"
                             alt="" class="user-img">
                     </a>
                     <div class="username">Pants & Trousers
                     </div>
                 </div>
                 <div class="user">
-                    <a href="<?= Url::to(['site/store-accessories-hat-man']) ?>">
-                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/trefoil-vertical-logo-printed-men-joggers-1790-moi-outfit-637556_360x.jpg?v=1678116299"
+                    <a href="<?= Url::to(['site/store-bottoms-jeans-woman']) ?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/90s-lady-boyfriend-jean-1450-moi-outfit-139295_360x.jpg?v=1659703055"
                             alt="" class="user-img">
                     </a>
-                    <div class="username">Joggers
+                    <div class="username">Jeans
                     </div>
-
                 </div>
                 <div class="user">
-                    <a href="<?= Url::to(['site/store-accessories-hat-man']) ?>">
-                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/side-pocket-camo-over-printed-men-shorts-2990-moi-outfit-146632_360x.jpg?v=1676277254"
+                    <a href="<?= Url::to(['site/store-bottoms-short-pants-woman']) ?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/candy-color-lady-short-jeans-1390-moi-outfit-283955_360x.jpg?v=1634056652"
                             alt="" class="user-img">
                     </a>
                     <div class="username">Short Pants
@@ -92,11 +83,11 @@ $base_url = Yii::getAlias("@web");
 
                 </div>
                 <div class="user">
-                    <a href="<?= Url::to(['site/store-accessories-hat-man']) ?>">
-                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/elastic-men-swimwear-trunk-1450-122109_360x.jpg?v=1631650424"
+                    <a href="<?= Url::to(['site/store-bottoms-skirts-woman']) ?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/animal-print-lady-ruffle-skirts-1790-moi-outfit-351954_1512x.jpg?v=1662136554"
                             alt="" class="user-img">
                     </a>
-                    <div class="username">Sport
+                    <div class="username">Skirts
                     </div>
 
                 </div>
@@ -122,7 +113,7 @@ $base_url = Yii::getAlias("@web");
             <!-- section-cart -->
             <?php echo ListView::widget([
                 'dataProvider' => $dataProvider,
-                'itemView' => 'product_cart',
+                'itemView' => '/site/stores/product_cart',
                 'itemOptions' => [
                     // 'tag' => false
                     'class' => "col-md-4 col-6 product-item"
@@ -286,6 +277,7 @@ $base_url = Yii::getAlias("@web");
 <!--End Brands-->
 
 <?php
+$add_fav_url = Url::to(['site/favorites']);
 $add_cart_url = Url::to(['site/add-cart']);
 $script = <<<JS
     var base_url = "$base_url";
@@ -327,6 +319,39 @@ $script = <<<JS
                 }
             });
         })
+        $(".btn-add-to-fav").click(function(e){
+        e.preventDefault();
+        var id = $(this).data("id");
+        $.ajax({
+            url: "$add_fav_url",
+            method: 'POST',
+            data: {
+                action: 'btn-add-to-fav',
+                id: id,
+            },
+            success: function(res){
+                var data = JSON.parse(res);
+                console.log(data)
+                if(data['status'] == 'success'){
+
+                    $("#favortie-quantity").text(data['favoritestotal']);
+                    if (data['type'] == 'remove'){
+                        $(".btn-add-to-fav[data-id='"+id+"']").removeClass("isFav");
+                    }else {
+                        $(".btn-add-to-fav[data-id='"+id+"']").addClass("isFav");
+                    }
+                    
+                }else{
+                    alert(data['message']);
+                }
+            },
+            error: function(err){
+                console.log(err);
+            }
+        });
+    });
+
+    
 
 JS;
 

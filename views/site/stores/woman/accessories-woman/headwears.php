@@ -5,18 +5,13 @@
 use yii\bootstrap4\LinkPager;
 use yii\helpers\Url;
 use yii\widgets\ListView;
-use yii\bootstrap4\Html;
 
-$this->title = 'T-SHIRT';
+$this->title = 'WOMAN';
 $this->params['breadcrumbs'][] = $this->title;
 
 $base_url = Yii::getAlias("@web");
 ?>
-<style>
-.pager {
-    bottom: 79px;
-}
-</style>
+
 <!-- Start Content -->
 <div class="container py-5">
     <div class="row">
@@ -58,44 +53,25 @@ $base_url = Yii::getAlias("@web");
         </div>
         <!-- cart-section -->
         <div class="col-lg-9">
-            <div class="title-man">MAN'S T-SHIRT</div>
+            <div class="title-man">WOMAN HEADWEARS</div>
             <hr>
             <div class="side-wrapper stories">
                 <!-- <div class="side-title">STORIES</div> -->
                 <div class="user">
-                    <a href="<?= Url::to(['site/store-top-hoodies-man']) ?>">
-                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/casual-fit-men-hoodie-zip-2790-moi-outfit-697316_360x.jpg?v=1674615686"
+                    <a href="<?=Url::to(['site/store-all-top-woman'])?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/wavy-pattern-lady-crop-top-1590-moi-outfit-955269_1512x.jpg?v=1679281281"
                             alt="" class="user-img">
                     </a>
-                    <div class="username">Hoodies && Sweaters
+                    <div class="username">ALL TOPS
                     </div>
                 </div>
                 <div class="user">
-                    <a href="<?= Url::to(['site/store-top-short-sleeves-man']) ?>">
-                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/floral-men-short-sleeve-shirt-1450-504907_360x.jpg?v=1631650576"
+                    <a href="<?=Url::to(['site/store-all-bottoms-woman'])?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/r-elastic-waist-lady-pants-1990-moi-outfit-319398_1512x.jpg?v=1679369383"
                             alt="" class="user-img">
                     </a>
-                    <div class="username">Shirts Short Sleeves
+                    <div class="username">ALL BOTTOME
                     </div>
-
-                </div>
-                <div class="user">
-                    <a href="<?= Url::to(['site/store-top-long-sleeves-man']) ?>">
-                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/logo-embroidered-men-long-sleeve-shirt-2250-moi-outfit-880921_360x.jpg?v=1658997179"
-                            alt="" class="user-img">
-                    </a>
-                    <div class="username">Shirts Long Sleeves
-                    </div>
-
-                </div>
-                <div class="user">
-                    <a href="<?= Url::to(['site/store-top-tanks-man']) ?>">
-                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/logo-printed-men-sport-tank-top-1150-moi-outfit-675663_360x.jpg?v=1638296613"
-                            alt="" class="user-img">
-                    </a>
-                    <div class="username">TANK TOPS
-                    </div>
-
                 </div>
             </div>
             <div class="row Sort">
@@ -103,12 +79,15 @@ $base_url = Yii::getAlias("@web");
                     <div class="d-flex">
                         <span class="sort-item">Sort by</span>
 
-                        <?= Html::dropDownList(
-                'dateFilter',
-                $sort,
-                $drowdown,
-                ['class' => 'form-select dateFilter']
-            )?>
+                        <select class="form-select" aria-label=".form-select-lg example" style="border-radius: 0px;">
+                            <option>Featured</option>
+                            <option>Date,new to old</option>
+                            <option>Date,old to new</option>
+                            <option>A to Z</option>
+                            <option>Z to A</option>
+                            <option>Price low to high</option>
+                            <option>Price high to low</option>
+                        </select>
 
                     </div>
                 </div>
@@ -116,7 +95,7 @@ $base_url = Yii::getAlias("@web");
             <!-- section-cart -->
             <?php echo ListView::widget([
                 'dataProvider' => $dataProvider,
-                'itemView' => 'product_cart',
+                'itemView' => '/site/stores/product_cart',
                 'itemOptions' => [
                     // 'tag' => false
                     'class' => "col-md-4 col-6 product-item"
@@ -130,13 +109,13 @@ $base_url = Yii::getAlias("@web");
                 'layout' => '
                     <div class="row">
                     <div class="col-lg-6">
-                       
+                        {summary}
                     </div>
-                    <div class="col-lg-6 text-center pager">
+                    <div class="col-lg-6 text-center">
                         {pager}
                     </div>
                         {items}
-                      
+                        {pager}
                     </div>
             
                 '
@@ -308,11 +287,25 @@ $script = <<<JS
 
 
     });
-    $(".btn-add-to-fav").click(function(e){
+    $(document).ready(function () {
+            $(".block").slice(0, 12).show();
+            if ($(".block:hidden").length != 0) {
+                $("#load_more").show();    
+            }
+            $("#load_more").on("click", function (e) {
+                e.preventDefault();
+                $(".block:hidden").slice(0, 12).slideDown();
+                if ($(".block:hidden").length == 0) {
+                    $("#load_more").text("No More to view")
+                        .fadOut("slow");
+                }
+            });
+        })
+        $(".btn-add-to-fav").click(function(e){
         e.preventDefault();
         var id = $(this).data("id");
         $.ajax({
-            url: "http://localhost:8080$add_fav_url",
+            url: "$add_fav_url",
             method: 'POST',
             data: {
                 action: 'btn-add-to-fav',
@@ -339,26 +332,8 @@ $script = <<<JS
             }
         });
     });
-    $(document).ready(function () {
-      $(".block").slice(0, 12).show();
-      if ($(".block:hidden").length != 0) {
-          $("#load_more").show();    
-      }
-      $("#load_more").on("click", function (e) {
-          e.preventDefault();
-          $(".block:hidden").slice(0, 12).slideDown();
-          if ($(".block:hidden").length == 0) {
-              $("#load_more").text("No More to view")
-                  .fadOut("slow");
-          }
-      });
-    });
-    $("select[name='dateFilter']").change(function(){
-        var value = $(this).val();
-        var url = new URL(window.location.href);
-        url.searchParams.set('sort',value);
-        window.location.href = url.href;
-    });
+
+    
 
 JS;
 
