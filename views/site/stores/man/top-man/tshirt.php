@@ -100,7 +100,7 @@ $base_url = Yii::getAlias("@web");
             <!-- section-cart -->
             <?php echo ListView::widget([
                 'dataProvider' => $dataProvider,
-                'itemView' => 'product_cart',
+                'itemView' => '/site/stores/product_cart',
                 'itemOptions' => [
                     // 'tag' => false
                     'class' => "col-md-4 col-6 product-item"

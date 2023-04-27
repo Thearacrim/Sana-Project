@@ -22,6 +22,13 @@ $discountCal = $model->price * ($discount / 100);
 .isFav:hover {
   background-color: #000;
   color: #fff;
+  border-color: #000;
+}
+
+.isFav {
+  background-color: #000;
+  color: #fff;
+  border-color: #000;
 }
 </style>
 <!-- data-aos="zoom-in-down" data-aos-duration="2000" -->
