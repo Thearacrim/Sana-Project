@@ -184,7 +184,6 @@ if (Yii::$app->user->isGuest) {
             </a>
             <?php
             }else{
-                if($favorite){
                 ?>
             <a id="myFav" class="nav-icon position-relative text-decoration-none pl-3" value="login"
                 href="<?= Url::to(['/site/favorites']) ?>">
@@ -192,19 +191,6 @@ if (Yii::$app->user->isGuest) {
                 <span id="favortie-quantity"
                     class="position-absolute top-0 left-100 translate-middle badge rounded-pill badge badge-danger"><?= $favoritestotal?></span>
             </a>
-            <?php
-            }else{
-                ?>
-            <a id="myFav" class="nav-icon position-relative text-decoration-none pl-3" value="login"
-                href="<?= Url::to(['/site/favorites']) ?>">
-                <i class="fa-regular fa-heart text-color mr-1 font_icon" style="font-size: 1.5rem;"></i>
-                <span id="favortie-quantity"
-                    class="position-absolute top-0 left-100 translate-middle badge rounded-pill badge badge-danger"><?= $favoritestotal?></span>
-            </a>
-            <?php
-            }
-            ?>
-
             <?php
             }
         ?>
