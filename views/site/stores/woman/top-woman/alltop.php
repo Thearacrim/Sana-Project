@@ -11,7 +11,7 @@ $this->title = 'All TOP';
 $this->params['breadcrumbs'][] = $this->title;
 
 $minprice = Yii::$app->request->get('minprice') ?? 5;
-$maxprice = Yii::$app->request->get('maxprice') ?? 50;
+$maxprice = Yii::$app->request->get('maxprice') ?? 20;
 
 $base_url = Yii::getAlias("@web");
 ?>
@@ -51,8 +51,8 @@ $base_url = Yii::getAlias("@web");
                     <div class="progress"></div>
                 </div>
                 <div class="range-input">
-                    <input type="range" id="min" name="min_price" class="range-min" min="0" max="<?= $maxPriceProduct ?>" value="<?= $minprice ?>" step="1">
-                    <input type="range" id="max" name="max_price" class="range-min" min="0" max="<?= $maxPriceProduct ?>" value="<?= $maxprice ?>" step="1">
+                    <input type="range" id="min" name="min_price" class="range-min" min="0" max="50" value="<?= $minprice ?>" step="1">
+                    <input type="range" id="max" name="max_price" class="range-min" min="0" max="50" value="<?= $maxprice ?>" step="1">
                 </div>
             </div>
 
@@ -107,24 +107,8 @@ $base_url = Yii::getAlias("@web");
 
                 </div>
             </div>
+          
             <div class="row Sort">
-                <div class="col-md-6 Sort-section">
-                    <div class="d-flex">
-                        <span class="sort-item">Sort by</span>
-
-                        <select class="form-select" aria-label=".form-select-lg example" style="border-radius: 0px;">
-                            <option>Featured</option>
-                            <option>Date,new to old</option>
-                            <option>Date,old to new</option>
-                            <option>A to Z</option>
-                            <option>Z to A</option>
-                            <option>Price low to high</option>
-                            <option>Price high to low</option>
-                        </select>
-
-                    </div>
-                </div>
-            </div> <div class="row Sort">
                 <div class="col-md-6 Sort-section">
                     <div class="d-flex">
                         <span class="sort-item">Sort by</span>
@@ -141,7 +125,7 @@ $base_url = Yii::getAlias("@web");
             <!-- section-cart -->
             <?php echo ListView::widget([
                 'dataProvider' => $dataProvider,
-                'itemView' => 'product_cart',
+                'itemView' => '/site/stores/product_cart',
                 'itemOptions' => [
                     // 'tag' => false
                     'class' => "col-md-4 col-6 product-item"
@@ -350,6 +334,17 @@ $script = <<<JS
         var value = $(this).val();
         var url = new URL(window.location.href);
         url.searchParams.set('sort',value);
+        window.location.href = url.href;
+    });
+
+    $("input[name='min_price'], input[name='max_price']").change(function(){
+        var min = $("input[name='min_price']").val();
+        var max = $("input[name='max_price']").val();
+        // console.log(min, max);
+        // return;
+        var url = new URL(window.location.href);
+        url.searchParams.set('minprice',min);
+        url.searchParams.set('maxprice',max);
         window.location.href = url.href;
     });
 
