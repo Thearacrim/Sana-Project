@@ -1255,7 +1255,7 @@ class SiteController extends Controller
         }
         $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
-        $dataProvider->query->andwhere(['type_item' => [2, 3, 5, 7, 9, 10, 11, 13]]);
+        $dataProvider->query->andwhere(['type_item' => [1, 4, 6, 8, 14, 19, 20, 21,22,23,24,25,26,27]]);
         $drowdown = [
             'featured' => 'Featured',
             'date_new_to_old' => 'Date,new to old',
