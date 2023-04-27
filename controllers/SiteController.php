@@ -663,21 +663,21 @@ class SiteController extends Controller
             'price_low_to_high' => 'Price low to high',
             'price_high_to_low' => 'Price high to low',
         ];
-        $maxPriceProduct = Yii::$app->db->createCommand(
-            "
-                SELECT 
-                COALESCE(MAX(price),100) 
-                FROM product 
-                WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
-            "
-        )->queryScalar();
+        // $maxPriceProduct = Yii::$app->db->createCommand(
+        //     "
+        //         SELECT 
+        //         COALESCE(MAX(price),100) 
+        //         FROM product 
+        //         WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
+        //     "
+        // )->queryScalar();
         return $this->render('stores/store-man', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
             'sort' => $sort,
@@ -702,21 +702,21 @@ class SiteController extends Controller
             'price_low_to_high' => 'Price low to high',
             'price_high_to_low' => 'Price high to low',
         ];
-        $maxPriceProduct = Yii::$app->db->createCommand(
-            "
-                SELECT 
-                COALESCE(MAX(price),100) 
-                FROM product 
-                WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
-            "
-        )->queryScalar();
+        // $maxPriceProduct = Yii::$app->db->createCommand(
+        //     "
+        //         SELECT 
+        //         COALESCE(MAX(price),100) 
+        //         FROM product 
+        //         WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
+        //     "
+        // )->queryScalar();
         return $this->render('stores/man/top-man/alltop', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
             'sort' => $sort,
@@ -741,29 +741,29 @@ class SiteController extends Controller
             'price_low_to_high' => 'Price low to high',
             'price_high_to_low' => 'Price high to low',
         ];
-        $maxPriceProduct = Yii::$app->db->createCommand(
-            "
-                SELECT 
-                COALESCE(MAX(price),100) 
-                FROM product 
-                WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
-            "
-        )->queryScalar();
-        $maxPriceProduct = Yii::$app->db->createCommand(
-            "
-                SELECT 
-                COALESCE(MAX(price),100) 
-                FROM product 
-                WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
-            "
-        )->queryScalar();
+        // $maxPriceProduct = Yii::$app->db->createCommand(
+        //     "
+        //         SELECT 
+        //         COALESCE(MAX(price),100) 
+        //         FROM product 
+        //         WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
+        //     "
+        // )->queryScalar();
+        // $maxPriceProduct = Yii::$app->db->createCommand(
+        //     "
+        //         SELECT 
+        //         COALESCE(MAX(price),100) 
+        //         FROM product 
+        //         WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
+        //     "
+        // )->queryScalar();
         return $this->render('stores/man/top-man/tshirt', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
             'sort' => $sort,
@@ -785,21 +785,21 @@ class SiteController extends Controller
             'price_low_to_high' => 'Price low to high',
             'price_high_to_low' => 'Price high to low',
         ];
-        $maxPriceProduct = Yii::$app->db->createCommand(
-            "
-                SELECT 
-                COALESCE(MAX(price),100) 
-                FROM product 
-                WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
-            "
-        )->queryScalar();
+        // $maxPriceProduct = Yii::$app->db->createCommand(
+        //     "
+        //         SELECT 
+        //         COALESCE(MAX(price),100) 
+        //         FROM product 
+        //         WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
+        //     "
+        // )->queryScalar();
         return $this->render('stores/man/top-man/hoodies', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
             'sort' => $sort,
@@ -821,21 +821,21 @@ class SiteController extends Controller
             'price_low_to_high' => 'Price low to high',
             'price_high_to_low' => 'Price high to low',
         ];
-        $maxPriceProduct = Yii::$app->db->createCommand(
-            "
-                SELECT 
-                COALESCE(MAX(price),100) 
-                FROM product 
-                WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
-            "
-        )->queryScalar();
+        // $maxPriceProduct = Yii::$app->db->createCommand(
+        //     "
+        //         SELECT 
+        //         COALESCE(MAX(price),100) 
+        //         FROM product 
+        //         WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
+        //     "
+        // )->queryScalar();
         return $this->render('stores/man/top-man/shirts-short-sleeves', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
             'sort' => $sort,
@@ -857,21 +857,21 @@ class SiteController extends Controller
             'price_low_to_high' => 'Price low to high',
             'price_high_to_low' => 'Price high to low',
         ];
-        $maxPriceProduct = Yii::$app->db->createCommand(
-            "
-                SELECT 
-                COALESCE(MAX(price),100) 
-                FROM product 
-                WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
-            "
-        )->queryScalar();
+        // $maxPriceProduct = Yii::$app->db->createCommand(
+        //     "
+        //         SELECT 
+        //         COALESCE(MAX(price),100) 
+        //         FROM product 
+        //         WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
+        //     "
+        // )->queryScalar();
         return $this->render('stores/man/top-man/shirts-long-sleeves', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
             'sort' => $sort,
@@ -893,21 +893,21 @@ class SiteController extends Controller
             'price_low_to_high' => 'Price low to high',
             'price_high_to_low' => 'Price high to low',
         ];
-        $maxPriceProduct = Yii::$app->db->createCommand(
-            "
-                SELECT 
-                COALESCE(MAX(price),100) 
-                FROM product 
-                WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
-            "
-        )->queryScalar();
+        // $maxPriceProduct = Yii::$app->db->createCommand(
+        //     "
+        //         SELECT 
+        //         COALESCE(MAX(price),100) 
+        //         FROM product 
+        //         WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
+        //     "
+        // )->queryScalar();
         return $this->render('stores/man/top-man/tank', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
             'sort' => $sort,
@@ -933,21 +933,21 @@ class SiteController extends Controller
             'price_low_to_high' => 'Price low to high',
             'price_high_to_low' => 'Price high to low',
         ];
-        $maxPriceProduct = Yii::$app->db->createCommand(
-            "
-                SELECT 
-                COALESCE(MAX(price),100) 
-                FROM product 
-                WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
-            "
-        )->queryScalar();
+        // $maxPriceProduct = Yii::$app->db->createCommand(
+        //     "
+        //         SELECT 
+        //         COALESCE(MAX(price),100) 
+        //         FROM product 
+        //         WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
+        //     "
+        // )->queryScalar();
         return $this->render('stores/man/category-bottoms-man/allbottome', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
             'sort' => $sort,
@@ -971,21 +971,21 @@ class SiteController extends Controller
             'price_low_to_high' => 'Price low to high',
             'price_high_to_low' => 'Price high to low',
         ];
-        $maxPriceProduct = Yii::$app->db->createCommand(
-            "
-                SELECT 
-                COALESCE(MAX(price),100) 
-                FROM product 
-                WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
-            "
-        )->queryScalar();
+        // $maxPriceProduct = Yii::$app->db->createCommand(
+        //     "
+        //         SELECT 
+        //         COALESCE(MAX(price),100) 
+        //         FROM product 
+        //         WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
+        //     "
+        // )->queryScalar();
         return $this->render('stores/man/category-bottoms-man/jean', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
             'sort' => $sort,
@@ -1008,21 +1008,21 @@ class SiteController extends Controller
             'price_low_to_high' => 'Price low to high',
             'price_high_to_low' => 'Price high to low',
         ];
-        $maxPriceProduct = Yii::$app->db->createCommand(
-            "
-                SELECT 
-                COALESCE(MAX(price),100) 
-                FROM product 
-                WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
-            "
-        )->queryScalar();
+        // $maxPriceProduct = Yii::$app->db->createCommand(
+        //     "
+        //         SELECT 
+        //         COALESCE(MAX(price),100) 
+        //         FROM product 
+        //         WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
+        //     "
+        // )->queryScalar();
         return $this->render('stores/man/category-bottoms-man/pants-trousers', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
             'sort' => $sort,
@@ -1045,21 +1045,21 @@ class SiteController extends Controller
             'price_low_to_high' => 'Price low to high',
             'price_high_to_low' => 'Price high to low',
         ];
-        $maxPriceProduct = Yii::$app->db->createCommand(
-            "
-                SELECT 
-                COALESCE(MAX(price),100) 
-                FROM product 
-                WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
-            "
-        )->queryScalar();
+        // $maxPriceProduct = Yii::$app->db->createCommand(
+        //     "
+        //         SELECT 
+        //         COALESCE(MAX(price),100) 
+        //         FROM product 
+        //         WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
+        //     "
+        // )->queryScalar();
         return $this->render('stores/man/category-bottoms-man/joggers', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
             'sort' => $sort,
@@ -1083,21 +1083,21 @@ class SiteController extends Controller
             'price_low_to_high' => 'Price low to high',
             'price_high_to_low' => 'Price high to low',
         ];
-        $maxPriceProduct = Yii::$app->db->createCommand(
-            "
-                SELECT 
-                COALESCE(MAX(price),100) 
-                FROM product 
-                WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
-            "
-        )->queryScalar();
+        // $maxPriceProduct = Yii::$app->db->createCommand(
+        //     "
+        //         SELECT 
+        //         COALESCE(MAX(price),100) 
+        //         FROM product 
+        //         WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
+        //     "
+        // )->queryScalar();
         return $this->render('stores/man/category-bottoms-man/short-pants', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
             'sort' => $sort,
@@ -1120,21 +1120,21 @@ class SiteController extends Controller
             'price_low_to_high' => 'Price low to high',
             'price_high_to_low' => 'Price high to low',
         ];
-        $maxPriceProduct = Yii::$app->db->createCommand(
-            "
-                SELECT 
-                COALESCE(MAX(price),100) 
-                FROM product 
-                WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
-            "
-        )->queryScalar();
+        // $maxPriceProduct = Yii::$app->db->createCommand(
+        //     "
+        //         SELECT 
+        //         COALESCE(MAX(price),100) 
+        //         FROM product 
+        //         WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
+        //     "
+        // )->queryScalar();
         return $this->render('stores/man/category-bottoms-man/sports', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
             'sort' => $sort,
@@ -1160,21 +1160,21 @@ class SiteController extends Controller
             'price_low_to_high' => 'Price low to high',
             'price_high_to_low' => 'Price high to low',
         ];
-        $maxPriceProduct = Yii::$app->db->createCommand(
-            "
-                SELECT 
-                COALESCE(MAX(price),100) 
-                FROM product 
-                WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
-            "
-        )->queryScalar();
+        // $maxPriceProduct = Yii::$app->db->createCommand(
+        //     "
+        //         SELECT 
+        //         COALESCE(MAX(price),100) 
+        //         FROM product 
+        //         WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
+        //     "
+        // )->queryScalar();
         return $this->render('stores/man/accessories-man/allaccessaries', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
             'sort' => $sort,
@@ -1198,21 +1198,21 @@ class SiteController extends Controller
             'price_low_to_high' => 'Price low to high',
             'price_high_to_low' => 'Price high to low',
         ];
-        $maxPriceProduct = Yii::$app->db->createCommand(
-            "
-                SELECT 
-                COALESCE(MAX(price),100) 
-                FROM product 
-                WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
-            "
-        )->queryScalar();
+        // $maxPriceProduct = Yii::$app->db->createCommand(
+        //     "
+        //         SELECT 
+        //         COALESCE(MAX(price),100) 
+        //         FROM product 
+        //         WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
+        //     "
+        // )->queryScalar();
         return $this->render('stores/man/accessories-man/hat', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
             'sort' => $sort,
@@ -1265,22 +1265,22 @@ class SiteController extends Controller
             'price_low_to_high' => 'Price low to high',
             'price_high_to_low' => 'Price high to low',
         ];
-        $maxPriceProduct = Yii::$app->db->createCommand(
-            "
-                SELECT 
-                COALESCE(MAX(price),100) 
-                FROM product 
-                WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
-            "
-        )->queryScalar();
+        // $maxPriceProduct = Yii::$app->db->createCommand(
+        //     "
+        //         SELECT 
+        //         COALESCE(MAX(price),100) 
+        //         FROM product 
+        //         WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
+        //     "
+        // )->queryScalar();
 
         return $this->render('stores/store-women', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
             'sort' => $sort,
@@ -1308,21 +1308,21 @@ class SiteController extends Controller
             'price_low_to_high' => 'Price low to high',
             'price_high_to_low' => 'Price high to low',
         ];
-        $maxPriceProduct = Yii::$app->db->createCommand(
-            "
-                SELECT 
-                COALESCE(MAX(price),100) 
-                FROM product 
-                WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
-            "
-        )->queryScalar();
+        // $maxPriceProduct = Yii::$app->db->createCommand(
+        //     "
+        //         SELECT 
+        //         COALESCE(MAX(price),100) 
+        //         FROM product 
+        //         WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
+        //     "
+        // )->queryScalar();
         return $this->render('stores/woman/top-woman/alltop', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
             'sort' => $sort,
@@ -1346,21 +1346,21 @@ class SiteController extends Controller
             'price_low_to_high' => 'Price low to high',
             'price_high_to_low' => 'Price high to low',
         ];
-        $maxPriceProduct = Yii::$app->db->createCommand(
-            "
-                SELECT 
-                COALESCE(MAX(price),100) 
-                FROM product 
-                WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
-            "
-        )->queryScalar();
+        // $maxPriceProduct = Yii::$app->db->createCommand(
+        //     "
+        //         SELECT 
+        //         COALESCE(MAX(price),100) 
+        //         FROM product 
+        //         WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
+        //     "
+        // )->queryScalar();
         return $this->render('stores/woman/top-woman/tshirts', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
             'sort' => $sort,
@@ -1383,21 +1383,21 @@ class SiteController extends Controller
             'price_low_to_high' => 'Price low to high',
             'price_high_to_low' => 'Price high to low',
         ];
-        $maxPriceProduct = Yii::$app->db->createCommand(
-            "
-                SELECT 
-                COALESCE(MAX(price),100) 
-                FROM product 
-                WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
-            "
-        )->queryScalar();
+        // $maxPriceProduct = Yii::$app->db->createCommand(
+        //     "
+        //         SELECT 
+        //         COALESCE(MAX(price),100) 
+        //         FROM product 
+        //         WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
+        //     "
+        // )->queryScalar();
         return $this->render('stores/woman/top-woman/dresses-jumpsuits', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
             'sort' => $sort,
@@ -1420,21 +1420,21 @@ class SiteController extends Controller
             'price_low_to_high' => 'Price low to high',
             'price_high_to_low' => 'Price high to low',
         ];
-        $maxPriceProduct = Yii::$app->db->createCommand(
-            "
-                SELECT 
-                COALESCE(MAX(price),100) 
-                FROM product 
-                WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
-            "
-        )->queryScalar();
+        // $maxPriceProduct = Yii::$app->db->createCommand(
+        //     "
+        //         SELECT 
+        //         COALESCE(MAX(price),100) 
+        //         FROM product 
+        //         WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
+        //     "
+        // )->queryScalar();
         return $this->render('stores/woman/top-woman/hoodies-sweaters', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
             'sort' => $sort,
@@ -1457,21 +1457,21 @@ class SiteController extends Controller
             'price_low_to_high' => 'Price low to high',
             'price_high_to_low' => 'Price high to low',
         ];
-        $maxPriceProduct = Yii::$app->db->createCommand(
-            "
-                SELECT 
-                COALESCE(MAX(price),100) 
-                FROM product 
-                WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
-            "
-        )->queryScalar();
+        // $maxPriceProduct = Yii::$app->db->createCommand(
+        //     "
+        //         SELECT 
+        //         COALESCE(MAX(price),100) 
+        //         FROM product 
+        //         WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
+        //     "
+        // )->queryScalar();
         return $this->render('stores/woman/top-woman/shirts-tops', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
             'sort' => $sort,
@@ -1494,21 +1494,21 @@ class SiteController extends Controller
             'price_low_to_high' => 'Price low to high',
             'price_high_to_low' => 'Price high to low',
         ];
-        $maxPriceProduct = Yii::$app->db->createCommand(
-            "
-                SELECT 
-                COALESCE(MAX(price),100) 
-                FROM product 
-                WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
-            "
-        )->queryScalar();
+        // $maxPriceProduct = Yii::$app->db->createCommand(
+        //     "
+        //         SELECT 
+        //         COALESCE(MAX(price),100) 
+        //         FROM product 
+        //         WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
+        //     "
+        // )->queryScalar();
         return $this->render('stores/woman/top-woman/jackets-raincoats', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
             'sort' => $sort,
@@ -1534,21 +1534,21 @@ class SiteController extends Controller
             'price_low_to_high' => 'Price low to high',
             'price_high_to_low' => 'Price high to low',
         ];
-        $maxPriceProduct = Yii::$app->db->createCommand(
-            "
-                SELECT 
-                COALESCE(MAX(price),100) 
-                FROM product 
-                WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
-            "
-        )->queryScalar();
+        // $maxPriceProduct = Yii::$app->db->createCommand(
+        //     "
+        //         SELECT 
+        //         COALESCE(MAX(price),100) 
+        //         FROM product 
+        //         WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
+        //     "
+        // )->queryScalar();
         return $this->render('stores/woman/bottoms-woman/all-bottoms', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
             'sort' => $sort,
@@ -1577,21 +1577,21 @@ class SiteController extends Controller
             'price_low_to_high' => 'Price low to high',
             'price_high_to_low' => 'Price high to low',
         ];
-        $maxPriceProduct = Yii::$app->db->createCommand(
-            "
-                SELECT 
-                COALESCE(MAX(price),100) 
-                FROM product 
-                WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
-            "
-        )->queryScalar();
+        // $maxPriceProduct = Yii::$app->db->createCommand(
+        //     "
+        //         SELECT 
+        //         COALESCE(MAX(price),100) 
+        //         FROM product 
+        //         WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
+        //     "
+        // )->queryScalar();
         return $this->render('stores/woman/bottoms-woman/jeans', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
             'sort' => $sort,
@@ -1619,21 +1619,21 @@ class SiteController extends Controller
             'price_low_to_high' => 'Price low to high',
             'price_high_to_low' => 'Price high to low',
         ];
-        $maxPriceProduct = Yii::$app->db->createCommand(
-            "
-                SELECT 
-                COALESCE(MAX(price),100) 
-                FROM product 
-                WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
-            "
-        )->queryScalar();
+        // $maxPriceProduct = Yii::$app->db->createCommand(
+        //     "
+        //         SELECT 
+        //         COALESCE(MAX(price),100) 
+        //         FROM product 
+        //         WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
+        //     "
+        // )->queryScalar();
         return $this->render('stores/woman/bottoms-woman/joggers', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
             'sort' => $sort,
@@ -1662,21 +1662,21 @@ class SiteController extends Controller
             'price_low_to_high' => 'Price low to high',
             'price_high_to_low' => 'Price high to low',
         ];
-        $maxPriceProduct = Yii::$app->db->createCommand(
-            "
-                SELECT 
-                COALESCE(MAX(price),100) 
-                FROM product 
-                WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
-            "
-        )->queryScalar();
+        // $maxPriceProduct = Yii::$app->db->createCommand(
+        //     "
+        //         SELECT 
+        //         COALESCE(MAX(price),100) 
+        //         FROM product 
+        //         WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
+        //     "
+        // )->queryScalar();
         return $this->render('stores/woman/bottoms-woman/short-pants', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
             'sort' => $sort,
@@ -1705,21 +1705,21 @@ class SiteController extends Controller
             'price_low_to_high' => 'Price low to high',
             'price_high_to_low' => 'Price high to low',
         ];
-        $maxPriceProduct = Yii::$app->db->createCommand(
-            "
-                SELECT 
-                COALESCE(MAX(price),100) 
-                FROM product 
-                WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
-            "
-        )->queryScalar();
+        // $maxPriceProduct = Yii::$app->db->createCommand(
+        //     "
+        //         SELECT 
+        //         COALESCE(MAX(price),100) 
+        //         FROM product 
+        //         WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
+        //     "
+        // )->queryScalar();
         return $this->render('stores/woman/bottoms-woman/pants-trousers', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
             'sort' => $sort,
@@ -1747,21 +1747,21 @@ class SiteController extends Controller
             'price_low_to_high' => 'Price low to high',
             'price_high_to_low' => 'Price high to low',
         ];
-        $maxPriceProduct = Yii::$app->db->createCommand(
-            "
-                SELECT 
-                COALESCE(MAX(price),100) 
-                FROM product 
-                WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
-            "
-        )->queryScalar();
+        // $maxPriceProduct = Yii::$app->db->createCommand(
+        //     "
+        //         SELECT 
+        //         COALESCE(MAX(price),100) 
+        //         FROM product 
+        //         WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
+        //     "
+        // )->queryScalar();
         return $this->render('stores/woman/bottoms-woman/skirts', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
             'sort' => $sort,
@@ -1798,10 +1798,10 @@ class SiteController extends Controller
         return $this->render('stores/woman/accessories-woman/all-accessories', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
             'sort' => $sort,
@@ -1825,21 +1825,21 @@ class SiteController extends Controller
             'price_low_to_high' => 'Price low to high',
             'price_high_to_low' => 'Price high to low',
         ];
-        $maxPriceProduct = Yii::$app->db->createCommand(
-            "
-                SELECT 
-                COALESCE(MAX(price),100) 
-                FROM product 
-                WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
-            "
-        )->queryScalar();
+        // $maxPriceProduct = Yii::$app->db->createCommand(
+        //     "
+        //         SELECT 
+        //         COALESCE(MAX(price),100) 
+        //         FROM product 
+        //         WHERE type_item IN (2, 3, 5, 7, 9, 10, 11, 13)
+        //     "
+        // )->queryScalar();
         return $this->render('stores/woman/accessories-woman/headwears', [
             'dataProvider' => $dataProvider,
             'drowdown' => $drowdown,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
-            'maxPriceProduct' => $maxPriceProduct,
+            // 'maxPriceProduct' => $maxPriceProduct,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
             'sort' => $sort,
