@@ -78,6 +78,8 @@ class OrderController extends Controller
                 'SetKeywords' => 'Level Store, Yii2, Export, PDF, MPDF, Output, Privacy, Policy, yii2-mpdf',
             ]
         ]);
+        $pdf->WriteHTML('fileName'); //pdf is a name of view file responsible for this pdf document
+        $path = $pdf->Output('@web/pdf/fileName.pdf', 'S');
         return $pdf->render();
     }
 

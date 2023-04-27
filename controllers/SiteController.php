@@ -24,6 +24,7 @@ use app\modules\Admin\models\RelateImage;
 use Yii;
 use yii\base\InvalidArgumentException;
 use yii\data\ActiveDataProvider;
+use yii\data\ArrayDataProvider;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
@@ -595,16 +596,24 @@ class SiteController extends Controller
             return json_encode(['success' => true]);
         }
         $model = Product::find()->one();
-        $dataProvider = new ActiveDataProvider([
-            'query' => Product::find()->where(['type_item' => 1]),
+        $query = Product::find()->where(['type_item' => 1])->limit(9);
+        $dataProvider = new ArrayDataProvider([
+            'allModels' => $query->all(),
         ]);
-        $dataProvider1 = new ActiveDataProvider([
-            'query' => Product::find()->where(['type_item' => 2]),
+        $query1 = Product::find()->where(['type_item' => 2])->limit(9);
+        $dataProvider1 = new ArrayDataProvider([
+            'allModels' => $query1->all(),
+        ]);
+
+        $query2 = Product::find()->where(['type_item' => 3])->limit(9);
+        $dataProvider2 = new ArrayDataProvider([
+            'allModels' => $query2->all(),
         ]);
 
         return $this->render('stores/store', [
             'dataProvider' => $dataProvider,
             'dataProvider1' => $dataProvider1,
+            'dataProvider2'=>$dataProvider2,
             'model' => $model,
         ]);
 
@@ -951,7 +960,7 @@ class SiteController extends Controller
         $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
         $dataProvider->query->andwhere(['type_item' => 3]);
-        $dataProvider->pagination = ['pageSize' => 2];
+        $dataProvider->pagination = ['pageSize' => 9];
 
         $drowdown = [
             'featured' => 'Featured',
@@ -2056,6 +2065,11 @@ class SiteController extends Controller
             ]
         );
     }
+    public function actionInvoice(){
+        return $this->render(
+            'invoice'
+        );
+    }
     public function actionPayment()
     {
         if ($this->request->isAjax && $this->request->isPost) {
@@ -2104,13 +2118,15 @@ class SiteController extends Controller
                     $invoices->Type = "Invoices";
                     $invoices->status = "Paid";
                     if ($invoices->save()) {
-                        // Yii::$app->mailer->compose()
-                        // ->setFrom(['LevelStore@gmail.com'=>$model->name])
-                        // ->setTo($model->email)
-                        // ->setSubject($model->subject)
-                        // ->setTextBody($model->body)
-                        // ->setHtmlBody('<b>'.$model->body.'</b>')
-                        // ->send();
+                        $email = Yii::$app->user->identity->email;
+                        Yii::$app->mailer->compose()
+                        ->setFrom(['LevelStore@gmail.com'=>'Lavel Store'])
+                        ->setTo($email)
+                        ->setSubject('Your Invoice')
+                        ->setTextBody('Invoice')
+                        ->setHtmlBody($this->render('invoice'))
+                        ->attachContent('@web/uploads/-1650688185.jpg')
+                        ->send();
                         Cart::deleteAll(['id' => ArrayHelper::getColumn($carts, 'id')]);
                         Yii::$app->session->setFlash('success', 'Profile updated successfully');
                         return $this->redirect(['site/add-cart']);

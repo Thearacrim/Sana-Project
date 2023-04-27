@@ -41,10 +41,10 @@ $payment = Yii::$app->session->hasFlash('success') ? 1 : 0;
         </div>
     </div>
     <?php echo ListView::widget([
-                'dataProvider' => $dataProvider,
+                'dataProvider' => $dataProvider2,
                 'itemView' => 'product_cart',
                 'itemOptions' => [
-                    'class' => "col-lg-4 col-md-4 col-6 product-item block"
+                    'class' => "col-lg-4 col-md-4 col-6 product-item"
                 ],
                 'layout' => '
                     <div class="row">
@@ -104,6 +104,18 @@ $payment = Yii::$app->session->hasFlash('success') ? 1 : 0;
 
 
     <?= $this->render("banner_women", ['base_url' => $base_url]) ?>
+    <?php echo ListView::widget([
+                'dataProvider' => $dataProvider,
+                'itemView' => 'product_cart',
+                'itemOptions' => [
+                    'class' => "col-lg-4 col-md-4 col-6 product-item block"
+                ],
+                'layout' => '
+                    <div class="row">
+                        {items}
+                    </div>
+                '
+            ]) ?>
 </div>
 <!-- End Cart -->
 <!-- End Content -->
