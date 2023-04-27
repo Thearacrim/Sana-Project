@@ -6,7 +6,7 @@ use app\modules\Admin\models\Coupon;
 use yii\helpers\Html;
 
 $base_url = Yii::getAlias("@web");
-$isFav = !empty($model->favorite)?'isFav':'';
+$isFav = !empty($model->favorite) ? 'isFav' : '';
 ?>
 <?php $discount = Yii::$app->db->createCommand("SELECT
         discount
@@ -19,9 +19,16 @@ $isFav = !empty($model->favorite)?'isFav':'';
 $discountCal = $model->price * ($discount / 100);
 ?>
 <style>
+.isFav:hover {
+    background-color: #000;
+    color: #fff;
+    border-color: #000;
+}
+
 .isFav {
     background-color: #000;
     color: #fff;
+    border-color: #000;
 }
 </style>
 <!-- data-aos="zoom-in-down" data-aos-duration="2000" -->
@@ -42,8 +49,8 @@ $discountCal = $model->price * ($discount / 100);
         <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
             <ul class="list-unstyled">
                 <li>
-                    <a class="btn btn-danger text-white btn-add-to-fav product-item  <?= $isFav?>" href="#"
-                        data-id="<?=$model->id?>"><i class="far fa-heart"></i></a>
+                    <a class="btn btn-danger text-white btn-add-to-fav product-item  <?= $isFav ?>" href="#"
+                        data-id="<?= $model->id ?>"><i class="far fa-heart"></i></a>
                 </li>
                 <li>
                     <a class="btn btn-danger text-white mt-2"
@@ -61,7 +68,7 @@ $discountCal = $model->price * ($discount / 100);
         <span class="" style="font-size:1.5rem; font-weight:700;">$<?= $model->price - $discountCal ?></span>
         <?php
         } else {
-            ?>
+        ?>
         <span class="" style="font-size:1.2rem; font-weight:700">$<?= $model->price ?></span><br>
         <?php
         } ?>
@@ -69,3 +76,43 @@ $discountCal = $model->price * ($discount / 100);
 
 
 </div>
+<?php
+$add_fav_url = Url::to(['site/favorites']);
+$add_cart_url = Url::to(['site/add-cart']);
+
+$script = <<<JS
+    var base_url = "$base_url";
+    
+    $(".btn-add-to-fav").click(function(e){
+        e.preventDefault();
+        var id = $(this).data("id");
+        $.ajax({
+            url: "$add_fav_url",
+            method: 'POST',
+            data: {
+                action: 'btn-add-to-fav',
+                id: id,
+            },
+            success: function(res){
+                var data = JSON.parse(res);
+                console.log(data)
+                if(data['status'] == 'success'){
+                    $("#favortie-quantity").text(data['favoritestotal']);
+                    if (data['type'] == 'remove'){
+                        $(".btn-add-to-fav[data-id='"+id+"']").removeClass("isFav");
+                    }else {
+                        $(".btn-add-to-fav[data-id='"+id+"']").addClass("isFav");
+                    }
+                }else{
+                    alert(data['message']);
+                }
+            },
+            error: function(err){
+                console.log(err);
+            }
+        });
+    });
+JS;
+$this->registerJs($script);
+
+?>

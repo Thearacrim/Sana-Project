@@ -37,13 +37,15 @@ $discount = Yii::$app->db->createCommand("SELECT
 }
 
 .isFav:hover {
-    background-color: #000;
-    color: #fff;
+  background-color: #000;
+  color: #fff;
+  border-color: #000;
 }
 
 .isFav {
-    background-color: #000;
-    color: #fff;
+  background-color: #000;
+  color: #fff;
+  border-color: #000;
 }
 </style>
 
