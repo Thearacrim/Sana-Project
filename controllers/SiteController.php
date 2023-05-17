@@ -27,6 +27,7 @@ use yii\data\ActiveDataProvider;
 use yii\data\ArrayDataProvider;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Inflector;
 use yii\web\BadRequestHttpException;
@@ -2073,6 +2074,25 @@ class SiteController extends Controller
     public function actionPayment()
     {
         if ($this->request->isAjax && $this->request->isPost) {
+            $dataProvider = new ActiveDataProvider([
+                'query' => OrderItem::find()->where(['order_id' => 11]),
+            ]);
+            $order_item = Yii::$app->db->createCommand("SELECT SUM(total) as total_price FROM `order_item` 
+                where order_id = 11")
+                // ->bindParam("id", $id)
+                ->queryOne();
+            $order = Order::find()->one();
+            $customer = Yii::$app->db->createCommand("SELECT 
+             customer.name,
+             customer.address 
+             FROM `zay_store`.invoices
+                INNER JOIN customer on invoices.Customer = customer.id  
+                where invoices.id = 11")
+                // ->bindParam("id", $id)
+                ->queryOne();
+            $invoice = Invoices::find()->one();
+            $base_url = Yii::getAlias("@web");
+            ///////////////////////////////////
             $userId = Yii::$app->user->id;
             $profile = Yii::$app->user->identity->username;
             $payer_id = $this->request->post('payer_id');
@@ -2124,152 +2144,261 @@ class SiteController extends Controller
                         ->setTo($email)
                         ->setSubject('Your Invoice')
                         ->setTextBody('Invoice')
-                        ->setHtmlBody($this->render('invoice'))
-                        ->attachContent('@web/uploads/-1650688185.jpg')
-                        ->send();
-                        Cart::deleteAll(['id' => ArrayHelper::getColumn($carts, 'id')]);
-                        Yii::$app->session->setFlash('success', 'Profile updated successfully');
-                        return $this->redirect(['site/add-cart']);
-                    }
-                }
-            }
-        }
-    }
+                        ->setHtmlBody('
+                        <div style="border:solid rgba(0,0,0,0.3) 1px; padding:30px;width:650px;hiegh:600px">
+                        <div>
+                        <img src="https://z-p3-scontent.fpnh18-3.fna.fbcdn.net/v/t39.30808-6/344227183_200977542697022_7550721318122889996_n.jpg?stp=dst-jpg_p180x540&_nc_cat=103&ccb=1-7&_nc_sid=730e14&_nc_eui2=AeG7uVJmau72z7omc_UE8ssHvdv9A7lZlp292_0DuVmWnWCkciDnLi5fnstjXuyv4RPz4nA_d7Q2Kmq4pPkY68UE&_nc_ohc=K4CBFH3kWsIAX_hUikg&_nc_zt=23&_nc_ht=z-p3-scontent.fpnh18-3.fna&oh=00_AfDa5vPQgd_BlposmXDUHVUR8BpVFu-10fFUetZyIyzCKg&oe=6453439E" 
+                        style="width:5rem" ;height="3.5rem;
+                        margin-left: auto;
+                        margin-right: auto;">
+                        <div>
+                            <h3 style="background-color:#4e73df;padding:15px">Invoices</h3>
+                            <h4>Invoice Date : '. $invoice->Issue_date .'</h4>
+                        </div>
+                        <div>
+                        <p lang="kh">Customer : '. $customer["name"] .'</p>
+                        <p>Client Address : '.$customer['address'].'</p>
+                        <p>Invoices ID : '. $order->code .'</p>
+                        </div>
+                        </div>
+                        <div>
+                        <div>
+                    </div>
+                    </div>
+                    <div​ style="padding:30px">
+                        '.
+                        GridView::widget([
+                        'dataProvider' => $dataProvider,
+                        'tableOptions' => [
+                        'class' => 'table table-hover text-color',
+                        'headerOptions' => ['style' => 'background-color:rgba(0,0,0,0.3)'],
+                        'cellspacing' => '0',
+                        'width' => '100%',
+                        ],
+                        'pager' => [
+                        'firstPageLabel' => 'First',
+                        'lastPageLabel' => 'Last',
+                        'class' => LinkPager::class,
+                        ],
+                        'layout' => "
+                        <div class='table-responsive'>
+                            {items}
+                        </div>
+                        <hr>
+                        ",
+                        'columns' => [
+                        ['class' => 'yii\grid\SerialColumn'],
+                        [
+                        'attribute' => 'product_id',
+                        'value' => 'product.status',
+                        'contentOptions'=>['style'=>'text-align:center' ]
+                        ],
 
-    public function actionProfile()
-    {
+                        [
+                        'attribute' => 'size',
+                        'format' => 'html',
+                        'contentOptions'=>['style'=>'text-align:center' ],
+                        'value' => function ($model) {
+                        return $model->getSize();
+                        }
+                        ],
+                        [
+                        'attribute' => 'qty',
+                        'contentOptions'=>['style'=>'text-align:center' ],
+                        'value' => function ($model) {
+                        if ($model->qty > 1) {
+                        return 'x' . $model->qty;
+                        } else {
+                        return $model->qty;
+                        }
+                        }
+                        ],
+                        [
+                        'attribute' => 'price',
+                        'value' => function ($model) {
+                        return '$ ' . $model->price;
+                        },
+                        'contentOptions' => [
+                        'style' => 'width:100px;text-align:center'
+                        ]
+                        ],
+                        [
+                        'attribute' => 'total',
+                        'value' => function ($model) {
+                        return '$ ' . $model->price;
+                        },
+                        'contentOptions' => [
+                        'style' => 'width:100px;text-align:center;'
+                        ]
+                        ],
+                        ],
+                        ]).'
+                        
+                    </div>
+                    <div class="row pb-5">
+                            <div class="col-lg-6">
+                            </div>
+                            <div style="background-color:rgba(86,61,124,.15);padding:5px">
+                                <h3>Sub Total</h3>
+
+                                <h2>$'.$order_item["total_price"] .'</h2>
+                            </div>
+                        </div>
+                        <div class="row pt-5 pb-5 text-color">
+                            <div class="col-lg-6">
+                                <h5>Notes</h5>
+                                <p>Thanks for your business.</p>
+                                <h5>Term & Conditions</h5>
+                                <p>Your company terms and Conditions will be displayed.</p>
+                            </div>
+                        </div>
+                    </div>
+        ')
+        ->send();
+        Cart::deleteAll(['id' => ArrayHelper::getColumn($carts, 'id')]);
+        Yii::$app->session->setFlash('success', 'Profile updated successfully');
+        return $this->redirect(['site/add-cart']);
+        }
+        }
+        }
+        }
+        }
+
+        public function actionProfile()
+        {
         if (Yii::$app->user->isGuest) {
-            return $this->redirect(['site/login']);
+        return $this->redirect(['site/login']);
         }
         $model = User::findOne(Yii::$app->user->id);
         if ($model->load(Yii::$app->request->post())) {
 
-            if (!empty(UploadedFile::getInstance($model, 'image_url'))) {
-                $imagename = Inflector::slug($model->status) . '-' . time();
-                $model->image_url = UploadedFile::getInstance($model, 'image_url');
+        if (!empty(UploadedFile::getInstance($model, 'image_url'))) {
+        $imagename = Inflector::slug($model->status) . '-' . time();
+        $model->image_url = UploadedFile::getInstance($model, 'image_url');
 
-                // upload ptofile
-                $upload_path = ("profile/uploads/");
-                if (!is_dir($upload_path)) {
-                    mkdir($upload_path, 0777, true);
-                }
+        // upload ptofile
+        $upload_path = ("profile/uploads/");
+        if (!is_dir($upload_path)) {
+        mkdir($upload_path, 0777, true);
+        }
 
-                $model->image_url->saveAs($upload_path . $imagename . '.' . $model->image_url->extension);
-                $model->image_url = $imagename . '.' . $model->image_url->extension;
-            }
+        $model->image_url->saveAs($upload_path . $imagename . '.' . $model->image_url->extension);
+        $model->image_url = $imagename . '.' . $model->image_url->extension;
+        }
 
-            if ($model->save()) {
-                Yii::$app->session->setFlash('success', 'Profile updated successfully');
-            } else {
-                Yii::$app->session->setFlash('error', 'Failed to update profile');
-            }
+        if ($model->save()) {
+        Yii::$app->session->setFlash('success', 'Profile updated successfully');
+        } else {
+        Yii::$app->session->setFlash('error', 'Failed to update profile');
+        }
         }
         return $this->render(
-            'profile',
-            [
-                'model' => $model,
-            ]
+        'profile',
+        [
+        'model' => $model,
+        ]
         );
-    }
+        }
 
-    /**
-     * Requests password reset.
-     *
-     * @return mixed
-     */
-    public function actionRequestPasswordReset()
-    {
+        /**
+        * Requests password reset.
+        *
+        * @return mixed
+        */
+        public function actionRequestPasswordReset()
+        {
         $model = new PasswordResetRequestForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail()) {
-                Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
+        if ($model->sendEmail()) {
+        Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
 
-                return $this->goHome();
-            }
+        return $this->goHome();
+        }
 
-            Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for the provided email address.');
+        Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for the provided email address.');
         }
 
         return $this->render('requestPasswordResetToken', [
-            'model' => $model,
+        'model' => $model,
         ]);
-    }
+        }
 
-    /**
-     * Resets password.
-     *
-     * @param string $token
-     * @return mixed
-     * @throws BadRequestHttpException
-     */
-    public function actionResetPassword($token)
-    {
+        /**
+        * Resets password.
+        *
+        * @param string $token
+        * @return mixed
+        * @throws BadRequestHttpException
+        */
+        public function actionResetPassword($token)
+        {
         try {
-            $model = new ResetPasswordForm($token);
+        $model = new ResetPasswordForm($token);
         } catch (InvalidArgumentException $e) {
-            throw new BadRequestHttpException($e->getMessage());
+        throw new BadRequestHttpException($e->getMessage());
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
-            Yii::$app->session->setFlash('success', 'New password saved.');
+        Yii::$app->session->setFlash('success', 'New password saved.');
 
-            return $this->goHome();
+        return $this->goHome();
         }
 
         return $this->render('resetPassword', [
-            'model' => $model,
+        'model' => $model,
         ]);
-    }
+        }
 
-    /**
-     * Verify email address
-     *
-     * @param string $token
-     * @throws BadRequestHttpException
-     * @return yii\web\Response
-     */
-    public function actionVerifyEmail($token)
-    {
+        /**
+        * Verify email address
+        *
+        * @param string $token
+        * @throws BadRequestHttpException
+        * @return yii\web\Response
+        */
+        public function actionVerifyEmail($token)
+        {
         try {
-            $model = new VerifyEmailForm($token);
+        $model = new VerifyEmailForm($token);
         } catch (InvalidArgumentException $e) {
-            throw new BadRequestHttpException($e->getMessage());
+        throw new BadRequestHttpException($e->getMessage());
         }
         if (($user = $model->verifyEmail()) && Yii::$app->user->login($user)) {
-            Yii::$app->session->setFlash('success', 'Your email has been confirmed!');
-            return $this->goHome();
+        Yii::$app->session->setFlash('success', 'Your email has been confirmed!');
+        return $this->goHome();
         }
 
         Yii::$app->session->setFlash('error', 'Sorry, we are unable to verify your account with provided token.');
         return $this->goHome();
-    }
+        }
 
-    /**
-     * Resend verification email
-     *
-     * @return mixed
-     */
-    public function actionResendVerificationEmail()
-    {
+        /**
+        * Resend verification email
+        *
+        * @return mixed
+        */
+        public function actionResendVerificationEmail()
+        {
         $model = new ResendVerificationEmailForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail()) {
-                Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
-                return $this->goHome();
-            }
-            Yii::$app->session->setFlash('error', 'Sorry, we are unable to resend verification email for the provided email address.');
+        if ($model->sendEmail()) {
+        Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
+        return $this->goHome();
+        }
+        Yii::$app->session->setFlash('error', 'Sorry, we are unable to resend verification email for the provided email
+        address.');
         }
 
         return $this->render('resendVerificationEmail', [
-            'model' => $model,
+        'model' => $model,
         ]);
-    }
-    protected function findModel($id)
-    {
+        }
+        protected function findModel($id)
+        {
         if (($model = User::findOne(['id' => $id])) !== null) {
-            return $model;
+        return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
-    }
-}
+        }
+        }
