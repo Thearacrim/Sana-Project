@@ -2075,6 +2075,25 @@ class SiteController extends Controller
     public function actionPayment()
     {
         if ($this->request->isAjax && $this->request->isPost) {
+            $dataProvider = new ActiveDataProvider([
+                'query' => OrderItem::find()->where(['order_id' => 11]),
+            ]);
+            $order_item = Yii::$app->db->createCommand("SELECT SUM(total) as total_price FROM `order_item` 
+                where order_id = 11")
+                // ->bindParam("id", $id)
+                ->queryOne();
+            $order = Order::find()->one();
+            $customer = Yii::$app->db->createCommand("SELECT 
+             customer.name,
+             customer.address 
+             FROM `zay_store`.invoices
+                INNER JOIN customer on invoices.Customer = customer.id  
+                where invoices.id = 11")
+                // ->bindParam("id", $id)
+                ->queryOne();
+            $invoice = Invoices::find()->one();
+            $base_url = Yii::getAlias("@web");
+            ///////////////////////////////////
             $userId = Yii::$app->user->id;
             $profile = Yii::$app->user->identity->username;
             $payer_id = $this->request->post('payer_id');
@@ -2135,86 +2154,86 @@ class SiteController extends Controller
                         margin-right: auto;">
                         <div>
                             <h3 style="background-color:#4e73df;padding:15px">Invoices</h3>
-                            <h4>Invoice Date : '. $invoice->Issue_date .'</h4>
+                            <h4>Invoice Date : ' . $invoice->Issue_date . '</h4>
                         </div>
                         <div>
-                        <p lang="kh">Customer : '. $customer["name"] .'</p>
-                        <p>Client Address : '.$customer['address'].'</p>
-                        <p>Invoices ID : '. $order->code .'</p>
-                            </div>
+                        <p lang="kh">Customer : ' . $customer["name"] . '</p>
+                        <p>Client Address : ' . $customer['address'] . '</p>
+                        <p>Invoices ID : ' . $order->code . '</p>
+                        </div>
                         </div>
                         <div>
                         <div>
                     </div>
                     </div>
                     <div​ style="padding:30px">
-                        '.
-                        GridView::widget([
-                        'dataProvider' => $dataProvider,
-                        'tableOptions' => [
-                        'class' => 'table table-hover text-color',
-                        'headerOptions' => ['style' => 'background-color:rgba(0,0,0,0.3)'],
-                        'cellspacing' => '0',
-                        'width' => '100%',
-                        ],
-                        'pager' => [
-                        'firstPageLabel' => 'First',
-                        'lastPageLabel' => 'Last',
-                        'class' => LinkPager::class,
-                        ],
-                        'layout' => "
+                        ' .
+                                GridView::widget([
+                                    'dataProvider' => $dataProvider,
+                                    'tableOptions' => [
+                                        'class' => 'table table-hover text-color',
+                                        'headerOptions' => ['style' => 'background-color:rgba(0,0,0,0.3)'],
+                                        'cellspacing' => '0',
+                                        'width' => '100%',
+                                    ],
+                                    'pager' => [
+                                        'firstPageLabel' => 'First',
+                                        'lastPageLabel' => 'Last',
+                                        'class' => LinkPager::class,
+                                    ],
+                                    'layout' => "
                         <div class='table-responsive'>
                             {items}
                         </div>
                         <hr>
                         ",
-                        'columns' => [
-                        ['class' => 'yii\grid\SerialColumn'],
-                        [
-                        'attribute' => 'product_id',
-                        'value' => 'product.status',
-                        'contentOptions'=>['style'=>'text-align:center' ]
-                        ],
+                                    'columns' => [
+                                        ['class' => 'yii\grid\SerialColumn'],
+                                        [
+                                            'attribute' => 'product_id',
+                                            'value' => 'product.status',
+                                            'contentOptions' => ['style' => 'text-align:center']
+                                        ],
 
-                        [
-                        'attribute' => 'size',
-                        'format' => 'html',
-                        'contentOptions'=>['style'=>'text-align:center' ],
-                        'value' => function ($model) {
-                        return $model->getSize();
-                        }
-                        ],
-                        [
-                        'attribute' => 'qty',
-                        'contentOptions'=>['style'=>'text-align:center' ],
-                        'value' => function ($model) {
-                        if ($model->qty > 1) {
-                        return 'x' . $model->qty;
-                        } else {
-                        return $model->qty;
-                        }
-                        }
-                        ],
-                        [
-                        'attribute' => 'price',
-                        'value' => function ($model) {
-                        return '$ ' . $model->price;
-                        },
-                        'contentOptions' => [
-                        'style' => 'width:100px;text-align:center'
-                        ]
-                        ],
-                        [
-                        'attribute' => 'total',
-                        'value' => function ($model) {
-                        return '$ ' . $model->price;
-                        },
-                        'contentOptions' => [
-                        'style' => 'width:100px;text-align:center;'
-                        ]
-                        ],
-                        ],
-                        ]).'
+                                        [
+                                            'attribute' => 'size',
+                                            'format' => 'html',
+                                            'contentOptions' => ['style' => 'text-align:center'],
+                                            'value' => function ($model) {
+                                                return $model->getSize();
+                                            }
+                                        ],
+                                        [
+                                            'attribute' => 'qty',
+                                            'contentOptions' => ['style' => 'text-align:center'],
+                                            'value' => function ($model) {
+                                                if ($model->qty > 1) {
+                                                    return 'x' . $model->qty;
+                                                } else {
+                                                    return $model->qty;
+                                                }
+                                            }
+                                        ],
+                                        [
+                                            'attribute' => 'price',
+                                            'value' => function ($model) {
+                                                return '$ ' . $model->price;
+                                            },
+                                            'contentOptions' => [
+                                                'style' => 'width:100px;text-align:center'
+                                            ]
+                                        ],
+                                        [
+                                            'attribute' => 'total',
+                                            'value' => function ($model) {
+                                                return '$ ' . $model->price;
+                                            },
+                                            'contentOptions' => [
+                                                'style' => 'width:100px;text-align:center;'
+                                            ]
+                                        ],
+                                    ],
+                                ]) . '
                         
                     </div>
                     <div class="row pb-5">
@@ -2223,7 +2242,7 @@ class SiteController extends Controller
                             <div style="background-color:rgba(86,61,124,.15);padding:5px">
                                 <h3>Sub Total</h3>
 
-                                <h2>$'.$order_item["total_price"] .'</h2>
+                                <h2>$' . $order_item["total_price"] . '</h2>
                             </div>
                         </div>
                         <div class="row pt-5 pb-5 text-color">
@@ -2236,13 +2255,13 @@ class SiteController extends Controller
                         </div>
                     </div>
         ')
-            ->send();
-        Cart::deleteAll(['id' => ArrayHelper::getColumn($carts, 'id')]);
-        Yii::$app->session->setFlash('success', 'Profile updated successfully');
-        return $this->redirect(['site/add-cart']);
-        }
-        }
-        }
+                            ->send();
+                        Cart::deleteAll(['id' => ArrayHelper::getColumn($carts, 'id')]);
+                        Yii::$app->session->setFlash('success', 'Profile updated successfully');
+                        return $this->redirect(['site/add-cart']);
+                    }
+                }
+            }
         }
     }
 
@@ -2367,7 +2386,8 @@ class SiteController extends Controller
                 Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
                 return $this->goHome();
             }
-            Yii::$app->session->setFlash('error', 'Sorry, we are unable to resend verification email for the provided email address.');
+            Yii::$app->session->setFlash('error', 'Sorry, we are unable to resend verification email for the provided email
+        address.');
         }
 
         return $this->render('resendVerificationEmail', [
@@ -2382,5 +2402,4 @@ class SiteController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-    
 }
