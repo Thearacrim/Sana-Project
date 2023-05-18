@@ -613,7 +613,7 @@ class SiteController extends Controller
         return $this->render('stores/store', [
             'dataProvider' => $dataProvider,
             'dataProvider1' => $dataProvider1,
-            'dataProvider2'=>$dataProvider2,
+            'dataProvider2' => $dataProvider2,
             'model' => $model,
         ]);
 
@@ -1255,7 +1255,7 @@ class SiteController extends Controller
         }
         $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
-        $dataProvider->query->andwhere(['type_item' => [1, 4, 6, 8, 14, 19, 20, 21,22,23,24,25,26,27]]);
+        $dataProvider->query->andwhere(['type_item' => [1, 4, 6, 8, 14, 19, 20, 21, 22, 23, 24, 25, 26, 27]]);
         $drowdown = [
             'featured' => 'Featured',
             'date_new_to_old' => 'Date,new to old',
@@ -2065,7 +2065,8 @@ class SiteController extends Controller
             ]
         );
     }
-    public function actionInvoice(){
+    public function actionInvoice()
+    {
         return $this->render(
             'invoice'
         );
@@ -2120,13 +2121,13 @@ class SiteController extends Controller
                     if ($invoices->save()) {
                         $email = Yii::$app->user->identity->email;
                         Yii::$app->mailer->compose()
-                        ->setFrom(['LevelStore@gmail.com'=>'Lavel Store'])
-                        ->setTo($email)
-                        ->setSubject('Your Invoice')
-                        ->setTextBody('Invoice')
-                        ->setHtmlBody($this->render('invoice'))
-                        ->attachContent('@web/uploads/-1650688185.jpg')
-                        ->send();
+                            ->setFrom(['LevelStore@gmail.com' => 'Lavel Store'])
+                            ->setTo($email)
+                            ->setSubject('Your Invoice')
+                            ->setTextBody('Invoice')
+                            ->setHtmlBody($this->render('invoice'))
+                            ->attachContent('@web/uploads/-1650688185.jpg')
+                            ->send();
                         Cart::deleteAll(['id' => ArrayHelper::getColumn($carts, 'id')]);
                         Yii::$app->session->setFlash('success', 'Profile updated successfully');
                         return $this->redirect(['site/add-cart']);
@@ -2271,5 +2272,32 @@ class SiteController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+    public function actionBooking()
+    {
+        $model = User::findOne(Yii::$app->user->id);
+        // if ($model->load(Yii::$app->request->post())) {
+
+        //     $model->save();
+        // }
+        $mybooking = Yii::$app->db->createCommand(
+            "
+            SELECT `order`.`code`, `order`.customer_id, `order`.grand_total, `order`.sub_total
+            FROM `order`
+            INNER JOIN order_item
+            ON `order`.id = order_item.id
+            WHERE order.customer_id = :userId"
+        )
+        ->bindParam('userId', $userId)
+        ->queryAll();
+
+           
+        return $this->render(
+            'history-booking',
+            [
+                'model' => $model,
+                'mybooking' => $mybooking
+            ]
+        );
     }
 }

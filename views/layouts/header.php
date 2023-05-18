@@ -274,7 +274,7 @@ if (Yii::$app->user->isGuest) {
                             </div>
                         </a>
                         <hr class="dropdown-divider">
-                        <a class="dropdown-item text-dark" href="#">Another action</a>
+                        <a class="dropdown-item text-dark" href="<?php Url::to(['/site/booking'])?>">My Booking</a>
                         <a class="dropdown-item text-dark" href="#">Cart</a>
                         <a class="dropdown-item text-dark" href="#">New Order</a>
                         <a class="dropdown-item text-dark" href="#">Payment</a>
