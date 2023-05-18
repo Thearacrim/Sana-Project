@@ -306,7 +306,7 @@ $script = <<<JS
         toast: true,
         position: 'top',
         showConfirmButton: false,
-        timer: 6000,
+        timer: 9000,
         timerProgressBar: true,
         didOpen: (toast) => {
             toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -315,7 +315,7 @@ $script = <<<JS
         })
         Toast.fire({
         icon: 'success',
-        title: 'You purchas successfully'
+        title: 'You purchas successfully please check your email'
         })
     }
 JS;

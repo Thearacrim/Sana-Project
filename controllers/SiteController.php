@@ -27,6 +27,7 @@ use yii\data\ActiveDataProvider;
 use yii\data\ArrayDataProvider;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Inflector;
 use yii\web\BadRequestHttpException;
@@ -2125,15 +2126,123 @@ class SiteController extends Controller
                             ->setTo($email)
                             ->setSubject('Your Invoice')
                             ->setTextBody('Invoice')
-                            ->setHtmlBody($this->render('invoice'))
-                            ->attachContent('@web/uploads/-1650688185.jpg')
-                            ->send();
-                        Cart::deleteAll(['id' => ArrayHelper::getColumn($carts, 'id')]);
-                        Yii::$app->session->setFlash('success', 'Profile updated successfully');
-                        return $this->redirect(['site/add-cart']);
-                    }
-                }
-            }
+                            ->setHtmlBody('
+                        <div style="border:solid rgba(0,0,0,0.3) 1px; padding:30px;width:650px;hiegh:600px">
+                        <div>
+                        <img src="https://z-p3-scontent.fpnh18-3.fna.fbcdn.net/v/t39.30808-6/344227183_200977542697022_7550721318122889996_n.jpg?stp=dst-jpg_p180x540&_nc_cat=103&ccb=1-7&_nc_sid=730e14&_nc_eui2=AeG7uVJmau72z7omc_UE8ssHvdv9A7lZlp292_0DuVmWnWCkciDnLi5fnstjXuyv4RPz4nA_d7Q2Kmq4pPkY68UE&_nc_ohc=K4CBFH3kWsIAX_hUikg&_nc_zt=23&_nc_ht=z-p3-scontent.fpnh18-3.fna&oh=00_AfDa5vPQgd_BlposmXDUHVUR8BpVFu-10fFUetZyIyzCKg&oe=6453439E" 
+                        style="width:5rem" ;height="3.5rem;
+                        margin-left: auto;
+                        margin-right: auto;">
+                        <div>
+                            <h3 style="background-color:#4e73df;padding:15px">Invoices</h3>
+                            <h4>Invoice Date : '. $invoice->Issue_date .'</h4>
+                        </div>
+                        <div>
+                        <p lang="kh">Customer : '. $customer["name"] .'</p>
+                        <p>Client Address : '.$customer['address'].'</p>
+                        <p>Invoices ID : '. $order->code .'</p>
+                            </div>
+                        </div>
+                        <div>
+                        <div>
+                    </div>
+                    </div>
+                    <div​ style="padding:30px">
+                        '.
+                        GridView::widget([
+                        'dataProvider' => $dataProvider,
+                        'tableOptions' => [
+                        'class' => 'table table-hover text-color',
+                        'headerOptions' => ['style' => 'background-color:rgba(0,0,0,0.3)'],
+                        'cellspacing' => '0',
+                        'width' => '100%',
+                        ],
+                        'pager' => [
+                        'firstPageLabel' => 'First',
+                        'lastPageLabel' => 'Last',
+                        'class' => LinkPager::class,
+                        ],
+                        'layout' => "
+                        <div class='table-responsive'>
+                            {items}
+                        </div>
+                        <hr>
+                        ",
+                        'columns' => [
+                        ['class' => 'yii\grid\SerialColumn'],
+                        [
+                        'attribute' => 'product_id',
+                        'value' => 'product.status',
+                        'contentOptions'=>['style'=>'text-align:center' ]
+                        ],
+
+                        [
+                        'attribute' => 'size',
+                        'format' => 'html',
+                        'contentOptions'=>['style'=>'text-align:center' ],
+                        'value' => function ($model) {
+                        return $model->getSize();
+                        }
+                        ],
+                        [
+                        'attribute' => 'qty',
+                        'contentOptions'=>['style'=>'text-align:center' ],
+                        'value' => function ($model) {
+                        if ($model->qty > 1) {
+                        return 'x' . $model->qty;
+                        } else {
+                        return $model->qty;
+                        }
+                        }
+                        ],
+                        [
+                        'attribute' => 'price',
+                        'value' => function ($model) {
+                        return '$ ' . $model->price;
+                        },
+                        'contentOptions' => [
+                        'style' => 'width:100px;text-align:center'
+                        ]
+                        ],
+                        [
+                        'attribute' => 'total',
+                        'value' => function ($model) {
+                        return '$ ' . $model->price;
+                        },
+                        'contentOptions' => [
+                        'style' => 'width:100px;text-align:center;'
+                        ]
+                        ],
+                        ],
+                        ]).'
+                        
+                    </div>
+                    <div class="row pb-5">
+                            <div class="col-lg-6">
+                            </div>
+                            <div style="background-color:rgba(86,61,124,.15);padding:5px">
+                                <h3>Sub Total</h3>
+
+                                <h2>$'.$order_item["total_price"] .'</h2>
+                            </div>
+                        </div>
+                        <div class="row pt-5 pb-5 text-color">
+                            <div class="col-lg-6">
+                                <h5>Notes</h5>
+                                <p>Thanks for your business.</p>
+                                <h5>Term & Conditions</h5>
+                                <p>Your company terms and Conditions will be displayed.</p>
+                            </div>
+                        </div>
+                    </div>
+        ')
+            ->send();
+        Cart::deleteAll(['id' => ArrayHelper::getColumn($carts, 'id')]);
+        Yii::$app->session->setFlash('success', 'Profile updated successfully');
+        return $this->redirect(['site/add-cart']);
+        }
+        }
+        }
         }
     }
 
@@ -2273,31 +2382,5 @@ class SiteController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-    public function actionBooking()
-    {
-        $model = User::findOne(Yii::$app->user->id);
-        // if ($model->load(Yii::$app->request->post())) {
-
-        //     $model->save();
-        // }
-        $mybooking = Yii::$app->db->createCommand(
-            "
-            SELECT `order`.`code`, `order`.customer_id, `order`.grand_total, `order`.sub_total
-            FROM `order`
-            INNER JOIN order_item
-            ON `order`.id = order_item.id
-            WHERE order.customer_id = :userId"
-        )
-        ->bindParam('userId', $userId)
-        ->queryAll();
-
-           
-        return $this->render(
-            'history-booking',
-            [
-                'model' => $model,
-                'mybooking' => $mybooking
-            ]
-        );
-    }
+    
 }

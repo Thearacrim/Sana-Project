@@ -136,12 +136,12 @@ Yii::$app->params['og_image']['content'] = $products->image_url;
                             ?>
                             <h6 class="price-single h2"
                                 style="text-decoration: line-through; font-size:1.2rem; font-weight:700;">
-                                $<?= $products->price ?>.00</h6>
+                                $<?= $products->price ?></h6>
                             <?php
                             } else {
                             ?>
                             <h6 class="price-single h2" style="font-size:1.2rem; font-weight:700;">
-                                $<?= $products->price ?>.00</h6>
+                                $<?= $products->price ?></h6>
                             <?php
                             }
                             ?>
