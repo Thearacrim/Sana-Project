@@ -21,13 +21,13 @@ use app\models\SignupForm;
 use app\models\User;
 use app\models\VerifyEmailForm;
 use app\modules\Admin\models\RelateImage;
+use yii\grid\GridView;
 use Yii;
 use yii\base\InvalidArgumentException;
 use yii\data\ActiveDataProvider;
 use yii\data\ArrayDataProvider;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
-use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Inflector;
 use yii\web\BadRequestHttpException;
@@ -522,6 +522,7 @@ class SiteController extends Controller
         }
         $products = Product::find()->limit(12)->all();
         $userId = Yii::$app->user->id;
+        
         $product_id = $this->request->post('id');
 
         $model = new Favorite();
@@ -1848,10 +1849,6 @@ class SiteController extends Controller
         ]);
     }
 
-
-
-
-
     public function actionStoreSingle($id)
     {
         $dataProvider = new ActiveDataProvider([
@@ -2075,30 +2072,12 @@ class SiteController extends Controller
     public function actionPayment()
     {
         if ($this->request->isAjax && $this->request->isPost) {
-            $dataProvider = new ActiveDataProvider([
-                'query' => OrderItem::find()->where(['order_id' => 11]),
-            ]);
-            $order_item = Yii::$app->db->createCommand("SELECT SUM(total) as total_price FROM `order_item` 
-                where order_id = 11")
-                // ->bindParam("id", $id)
-                ->queryOne();
-            $order = Order::find()->one();
-            $customer = Yii::$app->db->createCommand("SELECT 
-             customer.name,
-             customer.address 
-             FROM `zay_store`.invoices
-                INNER JOIN customer on invoices.Customer = customer.id  
-                where invoices.id = 11")
-                // ->bindParam("id", $id)
-                ->queryOne();
-            $invoice = Invoices::find()->one();
-            $base_url = Yii::getAlias("@web");
-            ///////////////////////////////////
             $userId = Yii::$app->user->id;
             $profile = Yii::$app->user->identity->username;
             $payer_id = $this->request->post('payer_id');
             $carts = Cart::find()->where(['user_id' => $userId])->all();
             $customer = Customer::find()->where(['name' => $profile])->one();
+            $totalPrice = (float) $this->getCartTotalPrice();
             $product = Yii::$app->db->createCommand("SELECT
                 SUM( product.price * cart.quantity ) AS sub_total
             FROM
@@ -2114,8 +2093,10 @@ class SiteController extends Controller
                 $customer = new Customer();
                 $customer->name = $profile;
                 $customer->address = Yii::$app->user->identity->email;
+                $customer->phone_number;
                 $customer->save();
             }
+
             $order = new Order();
             $order->code = $payer_id;
             $order->customer_id = $customer->id;
@@ -2123,16 +2104,40 @@ class SiteController extends Controller
             $order->grand_total = $product['sub_total'] - $order->discount;
             $order->created_date = date('Y-m-d H:i:s');
             $order->created_by = Yii::$app->user->identity->id;
+
             if ($order->save()) {
                 $order_item_values = [];
+                $itemsHtml = "";
                 foreach ($carts as $cart) {
-                    array_push($order_item_values, [$order->id, $cart->product_id, $cart->color_id, $cart->size_id, $cart->quantity, $cart->product->price, $cart->product->price * $cart->quantity, date('Y-m-d H:i:s')]);
+                    array_push($order_item_values, [
+                        $order->id,
+                        $cart->product_id,
+                        $cart->color_id,
+                        $cart->size_id,
+                        $cart->quantity,
+                        $cart->product->price,
+                        $cart->product->price * $cart->quantity,
+                        date('Y-m-d H:i:s') 
+                    ]);
+                    $itemsHtml.= "
+                    <tr style=\"border-bottom: 1px solid #ddd;\">
+                    <td style=\"font-size: 12; text-align: left;padding-top: 20px;color: #88c0ad;\">".$cart->product->status ."</td>
+                    <td style=\"font-size: 12; text-align: `center`;padding-top: 20px;\">".$cart->variantColor->color
+                    ."</td>
+                    <td style=\"font-size: 12; text-align: `center`;padding-top: 20px;\">".$cart->variantSize->size."</td>
+                    <td style=\"font-size: 12; text-align: `center`;padding-top: 20px;\">".$cart->quantity."</td>
+                    <td style=\"font-size: 12; text-align: `center`;padding-top: 20px;\">$".$cart->product->price ."</td>
+                    <td style=\"font-size: 12; text-align: `center`;padding-top: 20px;\">$".$cart->product->price * $cart->quantity ."</td>
+                    </tr>
+                    ";
                 }
+
                 $query = Yii::$app->db->createCommand()->batchInsert(
                     'order_item',
                     ['order_id', 'product_id', 'color', 'size', 'qty', 'price', 'total', 'created_date'],
                     $order_item_values
                 );
+
                 if ($query->execute()) {
                     $invoices = new Invoices();
                     $invoices->Customer = $customer->id;
@@ -2146,116 +2151,328 @@ class SiteController extends Controller
                             ->setSubject('Your Invoice')
                             ->setTextBody('Invoice')
                             ->setHtmlBody('
-                        <div style="border:solid rgba(0,0,0,0.3) 1px; padding:30px;width:650px;hiegh:600px">
-                        <div>
-                        <img src="https://z-p3-scontent.fpnh18-3.fna.fbcdn.net/v/t39.30808-6/344227183_200977542697022_7550721318122889996_n.jpg?stp=dst-jpg_p180x540&_nc_cat=103&ccb=1-7&_nc_sid=730e14&_nc_eui2=AeG7uVJmau72z7omc_UE8ssHvdv9A7lZlp292_0DuVmWnWCkciDnLi5fnstjXuyv4RPz4nA_d7Q2Kmq4pPkY68UE&_nc_ohc=K4CBFH3kWsIAX_hUikg&_nc_zt=23&_nc_ht=z-p3-scontent.fpnh18-3.fna&oh=00_AfDa5vPQgd_BlposmXDUHVUR8BpVFu-10fFUetZyIyzCKg&oe=6453439E" 
-                        style="width:5rem" ;height="3.5rem;
-                        margin-left: auto;
-                        margin-right: auto;">
-                        <div>
-                            <h3 style="background-color:#4e73df;padding:15px">Invoices</h3>
-                            <h4>Invoice Date : ' . $invoice->Issue_date . '</h4>
-                        </div>
-                        <div>
-                        <p lang="kh">Customer : ' . $customer["name"] . '</p>
-                        <p>Client Address : ' . $customer['address'] . '</p>
-                        <p>Invoices ID : ' . $order->code . '</p>
-                        </div>
-                        </div>
-                        <div>
-                        <div>
-                    </div>
-                    </div>
-                    <div​ style="padding:30px">
-                        ' .
-                                GridView::widget([
-                                    'dataProvider' => $dataProvider,
-                                    'tableOptions' => [
-                                        'class' => 'table table-hover text-color',
-                                        'headerOptions' => ['style' => 'background-color:rgba(0,0,0,0.3)'],
-                                        'cellspacing' => '0',
-                                        'width' => '100%',
-                                    ],
-                                    'pager' => [
-                                        'firstPageLabel' => 'First',
-                                        'lastPageLabel' => 'Last',
-                                        'class' => LinkPager::class,
-                                    ],
-                                    'layout' => "
-                        <div class='table-responsive'>
-                            {items}
-                        </div>
-                        <hr>
-                        ",
-                                    'columns' => [
-                                        ['class' => 'yii\grid\SerialColumn'],
-                                        [
-                                            'attribute' => 'product_id',
-                                            'value' => 'product.status',
-                                            'contentOptions' => ['style' => 'text-align:center']
-                                        ],
+                            <!-- Header -->
+                            <table
+                              width="100%"
+                              border="0"
+                              cellpadding="0"
+                              cellspacing="0"
+                              align="center"
+                              bgcolor="#e1e1e1"
+                            >
+                              <tr>
+                                <td height="20"></td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <table
+                                    width="600"
+                                    border="0"
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    align="center"
+                                    bgcolor="#ffffff"
+                                    style="border-radius: 10px 10px 0 0"
+                                  >
+                                    <tr>
+                                      <td height="40"></td>
+                                    </tr>
+                                    <tr>
+                                      <td height="30"></td>
+                                    </tr>
+                            
+                                    <tr>
+                                      <td>
+                                        <table
+                                          width="480"
+                                          border="0"
+                                          cellpadding="0"
+                                          cellspacing="0"
+                                          align="center"
+                                        >
+                                          <tbody>
+                                            <tr>
+                                              <td>
+                                                <table
+                                                  sty
+                                                  width="220"
+                                                  border="0"
+                                                  cellpadding="0"
+                                                  cellspacing="0"
+                                                  align="left"
+                                                >
+                                                  <tbody>
+                                                    <tr>
+                                                      <td align="left">
+                                                        <img
+                                                          src="https://res.cloudinary.com/dgwtjrknb/image/upload/v1684744351/LOGO_HAK_SMOKER-removebg-preview_gynpx2.png"
+                                                          width="45% "
+                                                          alt="logo"
+                                                          border="0"
+                                                        />
+                                                      </td>
+                                                    </tr>
+                                                    <tr>
+                                                      <td height="40"></td>
+                                                    </tr>
+                                                    <tr>
+                                                      <td height="20"></td>
+                                                    </tr>
+                                                    <tr>
+                                                      <td
+                                                        style="
+                                                          font-size: 12px;
+                                                          color: #5b5b5b;
+                                                          line-height: 18px;
+                                                          vertical-align: top;
+                                                          text-align: left;
+                                                        "
+                                                      >
+                                                        Hello, '.$profile .'.
+                                                        <br />
+                                                        Thank you for shopping from our store and for your
+                                                        order.
+                                                      </td>
+                                                    </tr>
+                                                  </tbody>
+                                                </table>
+                                                <table
+                                                  width="220"
+                                                  border="0"
+                                                  cellpadding="0"
+                                                  cellspacing="0"
+                                                  align="right"
+                                                >
+                                                  <tbody>
+                                                    <tr>
+                                                      <td height="20"></td>
+                                                    </tr>
+                                                    <tr>
+                                                      <td height="5"></td>
+                                                    </tr>
+                                                    <tr>
+                                                      <td
+                                                        style="
+                                                          font-size: 21px;
+                                                          color: #88c0ad;
+                                                          letter-spacing: -1px;
+                                                          line-height: 1;
+                                                          vertical-align: top;
+                                                          text-align: right;
+                                                        "
+                                                      >
+                                                        Invoice
+                                                      </td>
+                                                    </tr>
+                                                    <tr></tr>
+                                                    <tr>
+                                                      <td height="50"></td>
+                                                    </tr>
+                                                    <tr>
+                                                      <td height="20"></td>
+                                                    </tr>
+                                                    <tr>
+                                                      <td
+                                                        style="
+                                                          font-size: 12px;
+                                                          color: #5b5b5b;
+                                                          line-height: 18px;
+                                                          vertical-align: top;
+                                                          text-align: right;
+                                                        "
+                                                      >
+                                                        <small>ORDER</small> :'.$order->code.'<br />
+                                                        <small>Date:'. $invoices->Issue_date .'</small>
+                                                      </td>
+                                                    </tr>
+                                                  </tbody>
+                                                </table>
+                                              </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </td>
+                              </tr>
+                            </table>
+                            <!-- /Header -->
+                            <!-- Order Details -->
+                            <table
+                              width="100%"
+                              border="0"
+                              cellpadding="0"
+                              cellspacing="0"
+                              align="center"
+                              class="fullTable"
+                              bgcolor="#e1e1e1"
+                            >
+                              <tbody>
+                                <tr>
+                                  <td>
+                                    <table
+                                      width="600"
+                                      border="0"
+                                      cellpadding="0"
+                                      cellspacing="0"
+                                      align="center"
+                                      class="fullTable"
+                                      bgcolor="#ffffff"
+                                    >
+                                      <tbody>
+                                        <tr></tr>
+                                        <tr>
+                                          <td height="40"></td>
+                                        </tr>
+                                        <tr>
+                                          <td>
+                                            <table style="border-collapse: collapse;width: 80%; margin-left: 59px;">
+                                              <tr style="border-bottom: 1px solid #ddd;">
+                                                <th style="font-size: 12; text-align: left;">Item</th>
+                                                <th style="font-size: 12; text-align: center;">Color</th>
+                                                <th style="font-size: 12; text-align: center;">Size</th>
+                                                <th style="font-size: 12; text-align: center;">Qty</th>
+                                                <th style="font-size: 12; text-align: center;">Price</th>
+                                                <th style="font-size: 12; text-align: center;">Amount</th>
 
-                                        [
-                                            'attribute' => 'size',
-                                            'format' => 'html',
-                                            'contentOptions' => ['style' => 'text-align:center'],
-                                            'value' => function ($model) {
-                                                return $model->getSize();
-                                            }
-                                        ],
-                                        [
-                                            'attribute' => 'qty',
-                                            'contentOptions' => ['style' => 'text-align:center'],
-                                            'value' => function ($model) {
-                                                if ($model->qty > 1) {
-                                                    return 'x' . $model->qty;
-                                                } else {
-                                                    return $model->qty;
-                                                }
-                                            }
-                                        ],
-                                        [
-                                            'attribute' => 'price',
-                                            'value' => function ($model) {
-                                                return '$ ' . $model->price;
-                                            },
-                                            'contentOptions' => [
-                                                'style' => 'width:100px;text-align:center'
-                                            ]
-                                        ],
-                                        [
-                                            'attribute' => 'total',
-                                            'value' => function ($model) {
-                                                return '$ ' . $model->price;
-                                            },
-                                            'contentOptions' => [
-                                                'style' => 'width:100px;text-align:center;'
-                                            ]
-                                        ],
-                                    ],
-                                ]) . '
-                        
-                    </div>
-                    <div class="row pb-5">
-                            <div class="col-lg-6">
-                            </div>
-                            <div style="background-color:rgba(86,61,124,.15);padding:5px">
-                                <h3>Sub Total</h3>
-
-                                <h2>$' . $order_item["total_price"] . '</h2>
-                            </div>
-                        </div>
-                        <div class="row pt-5 pb-5 text-color">
-                            <div class="col-lg-6">
-                                <h5>Notes</h5>
-                                <p>Thanks for your business.</p>
-                                <h5>Term & Conditions</h5>
-                                <p>Your company terms and Conditions will be displayed.</p>
-                            </div>
-                        </div>
-                    </div>
-        ')
-                            ->send();
+                                              </tr>
+                                              '.$itemsHtml.'
+                                            </table>
+                                            <br>
+                                            <div style="width: 430px; height: 40px;margin-left: 94px;">
+                                            <p style="text-align: right;font-size: 17px;font-style: italic;">Total: $'.$totalPrice.'</p>
+                                            </div>
+                                          </td>
+                                        </tr>
+                                        
+                                      </tbody>
+                                    </table>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                            <table
+                              width="100%"
+                              border="0"
+                              cellpadding="0"
+                              cellspacing="0"
+                              align="center"
+                              class="fullTable"
+                              bgcolor="#e1e1e1"
+                            >
+                              <tbody>
+                                <tr>
+                                  <td>
+                                    <table
+                                      width="600"
+                                      border="0"
+                                      cellpadding="0"
+                                      cellspacing="0"
+                                      align="center"
+                                      class="fullTable"
+                                      bgcolor="#ffffff"
+                                    >
+                                      <tbody>
+                                        <tr>
+                                          <td>
+                                            <table
+                                              width="480"
+                                              border="0"
+                                              cellpadding="0"
+                                              cellspacing="0"
+                                              align="center"
+                                              
+                                            >
+                                              <tbody>
+                                                <tr>
+                                                  <td>
+                                                    <table
+                                                      width="220"
+                                                      border="0"
+                                                      cellpadding="0"
+                                                      cellspacing="0"
+                                                      align="left"
+                                                    >
+                                                      <tbody>
+                                                        <tr>
+                                                          <td
+                                                            style="
+                                                              font-size: 11px;
+                                                              color: #5b5b5b;
+                                                              line-height: 1;
+                                                              vertical-align: top;
+                                                            "
+                                                          >
+                                                            <strong>BILLING INFORMATION</strong>
+                                                          </td>
+                                                        </tr>
+                                                        <tr>
+                                                          <td width="100%" height="10"></td>
+                                                        </tr>
+                                                        <tr>
+                                                          <td
+                                                            style="
+                                                              font-size: 12px;
+                                                              color: #5b5b5b;
+                                                              line-height: 20px;
+                                                              vertical-align: top;
+                                                            "
+                                                          >
+                                                            '.$profile.'<br>
+                                                            '.$customer['city'].'<br>
+                                                            '.$customer->address = Yii::$app->user->identity->email.'<br> 
+                                                            Tel:'.$customer->phone_number.'
+                                                          </td>
+                                                        </tr>
+                                                      </tbody>
+                                                    </table>
+                                                  </td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                            <!-- /Information -->
+                            <table
+                              width="100%"
+                              border="0"
+                              cellpadding="0"
+                              cellspacing="0"
+                              align="center"
+                              class="fullTable"
+                              bgcolor="#e1e1e1"
+                            >
+                              <tr>
+                                <td>
+                                  <table
+                                    width="600"
+                                    border="0"
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    align="center"
+                                    class="fullTable"
+                                    bgcolor="#ffffff"
+                                    style="border-radius: 0 0 10px 10px"
+                                  >
+                                    <tr class="spacer">
+                                      <td height="50"></td>
+                                    </tr>
+                                  </table>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td height="20"></td>
+                              </tr>
+                            </table>
+                            
+                                    ')->send();
                         Cart::deleteAll(['id' => ArrayHelper::getColumn($carts, 'id')]);
                         Yii::$app->session->setFlash('success', 'Profile updated successfully');
                         return $this->redirect(['site/add-cart']);
@@ -2386,8 +2603,7 @@ class SiteController extends Controller
                 Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
                 return $this->goHome();
             }
-            Yii::$app->session->setFlash('error', 'Sorry, we are unable to resend verification email for the provided email
-        address.');
+            Yii::$app->session->setFlash('error', 'Sorry, we are unable to resend verification email for the provided email address.');
         }
 
         return $this->render('resendVerificationEmail', [
@@ -2401,5 +2617,38 @@ class SiteController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    private function getCartTotalPrice()
+    {
+        $current_user = Yii::$app->user->identity->id;
+        return Yii::$app->db->createCommand("SELECT
+                SUM(cart.quantity * product.price) as total_price
+                FROM cart
+                INNER JOIN product ON product.id = cart.product_id
+                WHERE user_id = :userId
+        ")->bindParam("userId", $current_user)->queryScalar();
+    }
+
+
+    /**
+     * TODO: create history booking
+     *
+     */
+
+    public function actionHistoryBooking()
+    {
+
+        $user = Yii::$app->user->identity->id;
+        $mybooking = Yii::$app->db->createCommand("SELECT product.`status`,order_item.product_id,variant_color.color,variant_size.size,product.created_date,product.image_url,order_item.qty,order_item.price
+        FROM order_item
+        INNER JOIN product ON product.id= order_item.product_id
+        INNER JOIN variant_color ON variant_color.id= order_item.color
+        INNER JOIN variant_size ON variant_size.id= order_item.size
+        ")
+            ->queryAll();
+        return $this->render('history-booking', [
+            'mybooking' => $mybooking,
+        ]);
     }
 }

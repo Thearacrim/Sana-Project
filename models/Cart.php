@@ -47,4 +47,14 @@ class Cart extends \yii\db\ActiveRecord
   {
     return $this->hasOne(Product::class, ['id' => 'product_id']);
   }
+
+  public function getVariantColor()
+  {
+    return $this->hasOne(VariantColor::class, ['id' => 'color_id']);
+  }
+
+  public function getVariantSize()
+  {
+    return $this->hasOne(VariantSize::class, ['id' => 'size_id']);
+  }
 }

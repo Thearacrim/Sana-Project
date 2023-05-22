@@ -2,44 +2,50 @@
 
 /* @var $this yii\web\View */
 
+use app\models\OrderItem;
 use yii\helpers\Html;
 
 $this->title = 'Booking Histroy';
 $base_url = Yii::getAlias("@web");
 $this->params['breadcrumbs'][] = $this->title;
+
+if (Yii::$app->user->isGuest) {
+    $userId = Yii::$app->user->id;
+  };
 ?>
+
 <style>
-    .table {
-        margin-top: 20%;
-        margin-bottom: 20%;
+    
+    .title {
+        font-style: italic;
     }
 </style>
-<div class="container ">
+<div class="container">
+    <h2 class="title">My Booking</h2>
     <table class="table table-hover ">
-
         <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Code</th>
+                <th scope="col">Image</th>
                 <th scope="col">Name</th>
-                <th scope="col">Date</th>
-                <th scope="col">Status</th>
-                <th scope="col">Action</th>
+                <th scope="col">Color</th>
+                <th scope="col">Size</th>
+                <th scope="col">Qty</th>
+                <th scope="col">Price</th>
             </tr>
         </thead>
-        <?php foreach ($mybooking as $key => $value) { ?>
-            <tbody>
+        <tbody>
+            <?php foreach ($mybooking as $key => $value) : ?>
                 <tr>
-                    <th scope="row"><?= $value['code'] ?></th>
-                    <td><?= $value['customer_id'] ?></td>
-                    <td><?= $value['grand_total'] ?></td>
-                    <td><?= $value['sub_total'] ?></td>
-                    <td><?= $value['code'] ?></td>
-                    <td><a href="" class="btn-sm btn-dark">View Detail</a></td>
+                    <th><img src="<?= $base_url . '' . $value['image_url'] ?>"style="width:100px"></th>
+                    <td><?= $value['status'] ?></td>
+                    <td><?= $value['color'] ?></td>
+                    <td><?= $value['size'] ?></td>
+                    <td><?= $value['qty'] ?></td>
+                    <td><?= $value['price'] ?></td>
                 </tr>
-            </tbody>
-        <?php } ?>
+            <?php endforeach; ?>
+
+            <!-- <button type="button" class="btn btn-dark">Dark</button> -->
+        </tbody>
     </table>
-
-
 </div>
