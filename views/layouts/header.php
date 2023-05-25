@@ -33,6 +33,12 @@ if (Yii::$app->user->isGuest) {
 .not_user {
     font-size: 1.5rem;
 }
+.icon-search{
+    margin: 3px ;
+}
+.icon-heart{
+    margin: 3px ;
+}
 </style>
 <!-- Header -->
 <nav class="navbar navbar-expand-lg back-light shadow">
@@ -168,7 +174,7 @@ if (Yii::$app->user->isGuest) {
             </div>
         </div>
         <div class="navbar1 align-self-center d-flex pt-3">
-            <a class="nav-icon d-lg-inline icon-menu" href="#" data-bs-toggle="modal"
+            <a class="nav-icon d-lg-inline icon-menu icon-search" href="#" data-bs-toggle="modal"
                 data-bs-target="#templatemo_search">
                 <i class="fa fa-fw fa-search mr-2 text-color"></i>
             </a>
@@ -176,7 +182,7 @@ if (Yii::$app->user->isGuest) {
 
             if(Yii::$app->user->isGuest){
                 ?>
-            <a class="nav-icon position-relative text-decoration-none pl-3" value="login"
+            <a class="nav-icon position-relative text-decoration-none pl-3 icon-heart" value="login"
                 href="<?= Url::to(['site/login']) ?>">
                 <i class="fa-regular fa-heart text-color mr-1 font_icon" style="font-size: 1.5rem;"></i>
                 <span id="favortie-quantity"
@@ -185,7 +191,7 @@ if (Yii::$app->user->isGuest) {
             <?php
             }else{
                 ?>
-            <a id="myFav" class="nav-icon position-relative text-decoration-none pl-3" value="login"
+            <a id="myFav" class="nav-icon position-relative text-decoration-none pl-3 icon-heart" value="login"
                 href="<?= Url::to(['/site/favorites']) ?>">
                 <i class="fa-regular fa-heart text-color mr-1 font_icon" style="font-size: 1.5rem;"></i>
                 <span id="favortie-quantity"

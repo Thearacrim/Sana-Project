@@ -11,7 +11,7 @@ $this->title = 'WOMAN';
 $this->params['breadcrumbs'][] = $this->title;
 
 $minprice = Yii::$app->request->get('minprice') ?? 5;
-$maxprice = Yii::$app->request->get('maxprice') ?? 20;
+$maxprice = Yii::$app->request->get('maxprice') ?? 50;
 
 $base_url = Yii::getAlias("@web");
 ?>
@@ -50,8 +50,8 @@ $base_url = Yii::getAlias("@web");
                     <div class="progress"></div>
                 </div>
                 <div class="range-input">
-                    <input type="range" id="min" name="min_price" class="range-min" min="0" max="50" value="<?= $minprice ?>" step="1">
-                    <input type="range" id="max" name="max_price" class="range-min" min="0" max="50" value="<?= $maxprice ?>" step="1">
+                    <input type="range" id="min" name="min_price" class="range-min" min="0" max="100" value="<?= $minprice ?>" step="1">
+                    <input type="range" id="max" name="max_price" class="range-min" min="0" max="100" value="<?= $maxprice ?>" step="1">
                 </div>
             </div>
 
