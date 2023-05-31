@@ -47,4 +47,16 @@ class RelateImage extends \yii\db\ActiveRecord
             'create_at' => 'Create At',
         ];
     }
+    public function getImageUrl()
+    {
+        return str_replace("app", '', Yii::$app->request->baseUrl) . "/" . $this->image_relate;
+    }
+    public function getThumbUploadUrl()
+    {
+        $base_url = str_replace("app", '', Yii::$app->request->baseUrl);
+        if (!$this->image_relate) {
+            return $base_url . '/uploads/placeholder.jpg';
+        }
+        return $base_url . '/' . $this->image_relate;
+    }
 }

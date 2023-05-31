@@ -38,7 +38,24 @@ use yii\helpers\Html;
                 <label for="image_upload"><i class="fas fa-image"></i> Upload Image</label>
                 <?= $form->field($model, 'image_url')->fileInput(['multiple' => true,'accept' => 'image/*', 'id' => 'image_upload'])->label(false) ?>
             </div>
-            <?= $form->field($relateImage, 'image_relate[]')->fileInput(['multiple' => true,'placeholder' => 'Images','class'=>'form-control'])->label('Choose Image for Relate Image (choose 2)') ?>
+
+            <div class="form-upload-image_Update">
+                <?php 
+            
+            foreach ($relateImage as $key => $image) {
+                ?>
+                <div class="preview" style="display: flex;
+    align-items: baseline;
+    justify-content: space-around;">
+                    <?=Html::img($image->getThumbUploadUrl('image_banner'), ['class' => 'img-thumbnail', 'id' => 'image_upload-preview'])?>
+                </div>
+                <?= $form->field($image, 'image_relate')->fileInput(['multiple' => true,'accept' => 'image/*', 'id' => 'image_upload'])->label(false) ?>
+                <?php
+            }    
+            ?>
+                <label for="image_upload"><i class="fas fa-image"></i> Upload Image</label>
+            </div>
+
             <?= $form->field($model, 'type_item')->dropDownList(['1' => 'T-Shirt Women', '2' => 'T-Shirt Man',
              '3' => 'Jeans Man', '4' => 'Jeans Woman', '5' => 'Hoodies & Sweeter Man', '6' => 'Hoodies & Sweeter Woman','7'=>'Shirts Short Sleeves Man'
             ,'8'=>'Dresses

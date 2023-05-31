@@ -114,7 +114,7 @@ class OrderController extends Controller
         $customer = Yii::$app->db->createCommand("SELECT 
          customer.name,
          customer.address 
-         FROM `zay-store`.invoices
+         FROM `zay_store`.invoices
             INNER JOIN customer on invoices.Customer = customer.id  
             where invoices.id = :id")
             ->bindParam("id", $id)

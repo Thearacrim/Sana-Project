@@ -1,5 +1,5 @@
 .form-upload-image {
-  width: 100%;
+  width: 80%;
   padding: 20px;
   background: #fff;
   border-radius: 5px;
@@ -35,6 +35,47 @@
   margin-bottom: 30px;
 }
 .form-upload-image img.img-sm {
+  width: 50%;
+  margin-bottom: 30px;
+}
+
+/* //////////////////////////////////////////////////////////////////////////////// */
+
+.form-upload-image_Update {
+  width: 80%;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: -3px -3px 7px rgba(94, 104, 121, 0.377),
+    3px 3px 7px rgba(94, 104, 121, 0.377);
+  margin-bottom: 15px;
+}
+
+.form-upload-image_Update input {
+  display: none;
+}
+
+.form-upload-image_Update label {
+  display: block;
+  width: 80%;
+  height: 35px;
+  margin-left: 10%;
+  line-height: 35px;
+  text-align: center;
+  background: #1172c2;
+  color: #fff;
+  font-size: 13px;
+  text-transform: Uppercase;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.form-upload-image_Update img {
+  width: 30%;
+  margin-bottom: 5px;
+}
+.form-upload-image_Update img.img-sm {
   width: 50%;
   margin-bottom: 30px;
 }

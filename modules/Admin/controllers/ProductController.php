@@ -156,21 +156,20 @@ class ProductController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $relateImage = RelateImage::find()->select('image_relate')->where(['product_id'=>$id])->all();
+        
         if ($this->request->isPost && $model->load($this->request->post())) {
             $imagename = Inflector::slug($model->status) . '-' . time();
             $model->image_url = UploadedFile::getInstance($model, 'image_url');
+            
             $upload_path = Yii::getAlias("uploads/");
             if (!empty($model->image_url)) {
                 if (!is_dir($upload_path)) {
                     mkdir($upload_path, 0777, true);
                 }
                 $model->image_url->saveAs($upload_path . $imagename . '.' . $model->image_url->extension);
-                // echo $model->image_url;
-                // exit;sdfa
-                //save file uploaded to db
                 $model->image_url = 'uploads/' . $imagename . '.' . $model->image_url->extension;
-                // print_r($model->image_url);
+
             }
             if ($model->save()) {
                 Yii::$app->session->setFlash('success', 'Updated successfully');
@@ -183,6 +182,7 @@ class ProductController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+            'relateImage' => $relateImage
         ]);
     }
 
