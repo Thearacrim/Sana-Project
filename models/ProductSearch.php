@@ -76,7 +76,7 @@ class ProductSearch extends Product
             ->andFilterWhere(['like', 'type_item', $this->type_item]);
 
             $minprice = Yii::$app->request->get('minprice') ?? 5;
-            $maxprice = Yii::$app->request->get('maxprice') ?? 20;
+            $maxprice = Yii::$app->request->get('maxprice') ?? 50;
             if (!empty($minprice) && !empty($maxprice)) {
                 $minprice = floatval($minprice);
                 $maxprice = floatval($maxprice);
