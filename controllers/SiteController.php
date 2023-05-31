@@ -999,7 +999,7 @@ class SiteController extends Controller
         $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
         $dataProvider->query->andwhere(['type_item' => 3]);
-        $dataProvider->pagination = ['pageSize' => 2];
+        $dataProvider->pagination = ['pageSize' => 9];
 
         $drowdown = [
             'featured' => 'Featured',
@@ -1036,7 +1036,7 @@ class SiteController extends Controller
         $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
         $dataProvider->query->andwhere(['type_item' => 13]);
-        $dataProvider->pagination = ['pageSize' => 2];
+        $dataProvider->pagination = ['pageSize' => 9];
 
         $drowdown = [
             'featured' => 'Featured',
@@ -1074,7 +1074,7 @@ class SiteController extends Controller
         $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
         $dataProvider->query->andwhere(['type_item' => 18]);
-        $dataProvider->pagination = ['pageSize' => 2];
+        $dataProvider->pagination = ['pageSize' => 9];
 
         $drowdown = [
             'featured' => 'Featured',
@@ -1111,7 +1111,7 @@ class SiteController extends Controller
         $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
         $dataProvider->query->andwhere(['type_item' => 19]);
-        $dataProvider->pagination = ['pageSize' => 2];
+        $dataProvider->pagination = ['pageSize' => 9];
 
         $drowdown = [
             'featured' => 'Featured',
@@ -1151,7 +1151,7 @@ class SiteController extends Controller
         $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
         $dataProvider->query->andwhere(['type_item' => 12]);
-        $dataProvider->pagination = ['pageSize' => 2];
+        $dataProvider->pagination = ['pageSize' => 9];
 
         $drowdown = [
             'featured' => 'Featured',
@@ -1189,7 +1189,7 @@ class SiteController extends Controller
         $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
         $dataProvider->query->andwhere(['type_item' => 12]);
-        $dataProvider->pagination = ['pageSize' => 2];
+        $dataProvider->pagination = ['pageSize' => 9];
 
         $drowdown = [
             'featured' => 'Featured',
