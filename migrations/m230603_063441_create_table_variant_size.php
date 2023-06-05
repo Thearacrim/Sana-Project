@@ -3,18 +3,18 @@
 use yii\db\Migration;
 
 /**
- * Class m230603_060445_create_table_coupon
+ * Class m230603_063441_create_table_variant_size
  */
-class m230603_060445_create_table_coupon extends Migration
+class m230603_063441_create_table_variant_size extends Migration
 {
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
-        $this->createTable('{{%banner}}', [
-           
-            
+        $this->createTable('{{%variant_size}}', [
+            'id' => $this->primaryKey(),
+            'size' => $this->string(),
         ]);
 
     }
@@ -24,7 +24,7 @@ class m230603_060445_create_table_coupon extends Migration
      */
     public function safeDown()
     {
-        echo "m230603_060445_create_table_coupon cannot be reverted.\n";
+        echo "m230603_063441_create_table_variant_size cannot be reverted.\n";
 
         return false;
     }
@@ -38,7 +38,7 @@ class m230603_060445_create_table_coupon extends Migration
 
     public function down()
     {
-        echo "m230603_060445_create_table_coupon cannot be reverted.\n";
+        echo "m230603_063441_create_table_variant_size cannot be reverted.\n";
 
         return false;
     }

@@ -333,37 +333,7 @@ $script = <<<JS
                 }
             });
         })
-        $(".btn-add-to-fav").click(function(e){
-        e.preventDefault();
-        var id = $(this).data("id");
-        $.ajax({
-            url: "$add_fav_url",
-            method: 'POST',
-            data: {
-                action: 'btn-add-to-fav',
-                id: id,
-            },
-            success: function(res){
-                var data = JSON.parse(res);
-                console.log(data)
-                if(data['status'] == 'success'){
-
-                    $("#favortie-quantity").text(data['favoritestotal']);
-                    if (data['type'] == 'remove'){
-                        $(".btn-add-to-fav[data-id='"+id+"']").removeClass("isFav");
-                    }else {
-                        $(".btn-add-to-fav[data-id='"+id+"']").addClass("isFav");
-                    }
-                    
-                }else{
-                    alert(data['message']);
-                }
-            },
-            error: function(err){
-                console.log(err);
-            }
-        });
-    });
+        
     $("select[name='dateFilter']").change(function(){
         var value = $(this).val();
         var url = new URL(window.location.href);

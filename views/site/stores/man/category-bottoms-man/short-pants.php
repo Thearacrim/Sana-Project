@@ -16,11 +16,6 @@ $maxprice = Yii::$app->request->get('maxprice') ?? 50;
 $base_url = Yii::getAlias("@web");
 ?>
 <style>
-    .isFav:hover {
-        background-color: #000;
-        color: #fff;
-    }
-
     .pager {
         bottom: 79px;
     }
@@ -300,37 +295,7 @@ $script = <<<JS
 
 
     });
-    $(".btn-add-to-fav").click(function(e){
-        e.preventDefault();
-        var id = $(this).data("id");
-        $.ajax({
-            url: "http://localhost:8080$add_fav_url",
-            method: 'POST',
-            data: {
-                action: 'btn-add-to-fav',
-                id: id,
-            },
-            success: function(res){
-                var data = JSON.parse(res);
-                console.log(data)
-                if(data['status'] == 'success'){
-
-                    $("#favortie-quantity").text(data['favoritestotal']);
-                    if (data['type'] == 'remove'){
-                        $(".btn-add-to-fav[data-id='"+id+"']").removeClass("isFav");
-                    }else {
-                        $(".btn-add-to-fav[data-id='"+id+"']").addClass("isFav");
-                    }
-                    
-                }else{
-                    alert(data['message']);
-                }
-            },
-            error: function(err){
-                console.log(err);
-            }
-        });
-    });
+    
     $(document).ready(function () {
       $(".block").slice(0, 12).show();
       if ($(".block:hidden").length != 0) {
