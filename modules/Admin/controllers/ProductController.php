@@ -161,15 +161,15 @@ class ProductController extends Controller
         if ($this->request->isPost && $model->load($this->request->post())) {
             $imagename = Inflector::slug($model->status) . '-' . time();
             $model->image_url = UploadedFile::getInstance($model, 'image_url');
-            
             $upload_path = Yii::getAlias("uploads/");
+            print_r($relateImage);
+            exit;
             if (!empty($model->image_url)) {
                 if (!is_dir($upload_path)) {
                     mkdir($upload_path, 0777, true);
                 }
                 $model->image_url->saveAs($upload_path . $imagename . '.' . $model->image_url->extension);
                 $model->image_url = 'uploads/' . $imagename . '.' . $model->image_url->extension;
-
             }
             if ($model->save()) {
                 Yii::$app->session->setFlash('success', 'Updated successfully');

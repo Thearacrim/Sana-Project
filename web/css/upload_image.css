@@ -42,7 +42,7 @@
 /* //////////////////////////////////////////////////////////////////////////////// */
 
 .form-upload-image_Update {
-  width: 80%;
+  width: 30%;
   padding: 20px;
   background: #fff;
   border-radius: 5px;
@@ -72,7 +72,7 @@
 }
 
 .form-upload-image_Update img {
-  width: 30%;
+  width: 100%;
   margin-bottom: 5px;
 }
 .form-upload-image_Update img.img-sm {

@@ -36,21 +36,24 @@ $payment = Yii::$app->session->hasFlash('success') ? 1 : 0;
     <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-12 p-5 mt-3">
             <div class="text-center">
-                <a href="<?= Url::to(['site/store-watch']) ?>"><img src="<?= $base_url ?>/<?// $watch->image_url ?>" class="rounded-circle border categories_img"></a>
+                <a href="<?= Url::to(['site/store-watch']) ?>"><img src="<?= $base_url ?>/<?// $watch->image_url ?>"
+                        class="rounded-circle border categories_img"></a>
             </div>
             <h5 class="text-center mt-3 mb-3 text-color"><?= \Yii::t('app', 'watches') ?></h5>
-            <p class="text-center"><a href="<?// Url::to(['site/store-watch']) ?>" class=" btn btn-success">Go Shop</a></p>
+            <p class="text-center"><a href="<?// Url::to(['site/store-watch']) ?>" class=" btn btn-success">Go Shop</a>
+            </p>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12 p-5 mt-3">
             <div class="text-center">
-                <a href="<?= Url::to(['site/store-shoes']) ?>"><img src="<?= $base_url ?>/<?= $shoes->image_url ?>" class="rounded-circle border categories_img"></a>
             </div>
             <h2 class="h5 text-center mt-3 mb-3 text-color"><?= \Yii::t('app', 'shoes') ?></h2>
-            <p class="text-center"><a href="<?= Url::to(['site/store-shoes']) ?>" class=" btn btn-success">Go Shop</a></p>
+            <p class="text-center"><a href="<?= Url::to(['site/store-shoes']) ?>" class=" btn btn-success">Go Shop</a>
+            </p>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12 p-5 mt-3">s
             <h2 class="h5 text-center mt-3 mb-3 text-color"><?= \Yii::t('app', 'accessories') ?></h2>
-            <p class="text-center"><a href="<?= Url::to(['site/store-glasses']) ?>" class="btn btn-success">Go Shop</a></p>
+            <p class="text-center"><a href="<?= Url::to(['site/store-glasses']) ?>" class="btn btn-success">Go Shop</a>
+            </p>
         </div>
     </div>
 </section>
@@ -86,9 +89,11 @@ $payment = Yii::$app->session->hasFlash('success') ? 1 : 0;
                             </li>
                             <li class="text-muted text-right text-color">$240.00</li>
                         </ul>
-                        <a href="<?= Url::to(['site/store']) ?>" class="h2 text-decoration-none text-color">Gym Weight</a>
+                        <a href="<?= Url::to(['site/store']) ?>" class="h2 text-decoration-none text-color">Gym
+                            Weight</a>
                         <p class="card-text text-color">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt in culpa qui officia deserunt.
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt in culpa qui officia
+                            deserunt.
                         </p>
                         <p class="text-muted text-color">Reviews (24)</p>
                     </div>
@@ -110,9 +115,11 @@ $payment = Yii::$app->session->hasFlash('success') ? 1 : 0;
                             </li>
                             <li class="text-muted text-right text-color">$480.00</li>
                         </ul>
-                        <a href="<?= Url::to(['site/store']) ?>" class="h2 text-decoration-none text-color">Cloud Nike Shoes</a>
+                        <a href="<?= Url::to(['site/store']) ?>" class="h2 text-decoration-none text-color">Cloud Nike
+                            Shoes</a>
                         <p class="card-text text-color">
-                            Aenean gravida dignissim finibus. Nullam ipsum diam, posuere vitae pharetra sed, commodo ullamcorper.
+                            Aenean gravida dignissim finibus. Nullam ipsum diam, posuere vitae pharetra sed, commodo
+                            ullamcorper.
                         </p>
                         <p class="text-muted text-color">Reviews (48)</p>
                     </div>
@@ -134,9 +141,11 @@ $payment = Yii::$app->session->hasFlash('success') ? 1 : 0;
                             </li>
                             <li class="text-muted text-right text-color">$360.00</li>
                         </ul>
-                        <a href="<?= Url::to(['site/store']) ?>" class="h2 text-decoration-none text-color">Summer Addides Shoes</a>
+                        <a href="<?= Url::to(['site/store']) ?>" class="h2 text-decoration-none text-color">Summer
+                            Addides Shoes</a>
                         <p class="card-text text-color">
-                            Curabitur ac mi sit amet diam luctus porta. Phasellus pulvinar sagittis diam, et scelerisque ipsum lobortis nec.
+                            Curabitur ac mi sit amet diam luctus porta. Phasellus pulvinar sagittis diam, et scelerisque
+                            ipsum lobortis nec.
                         </p>
                         <p class="text-muted text-color">Reviews (74)</p>
                     </div>

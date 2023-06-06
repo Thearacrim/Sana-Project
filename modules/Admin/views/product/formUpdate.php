@@ -39,22 +39,14 @@ use yii\helpers\Html;
                 <?= $form->field($model, 'image_url')->fileInput(['multiple' => true,'accept' => 'image/*', 'id' => 'image_upload'])->label(false) ?>
             </div>
 
-            <div class="form-upload-image_Update">
-                <?php 
+            <?php 
             
-            foreach ($relateImage as $key => $image) {
+            foreach ($relateImage as $image) {
                 ?>
-                <div class="preview" style="display: flex;
-    align-items: baseline;
-    justify-content: space-around;">
-                    <?=Html::img($image->getThumbUploadUrl('image_banner'), ['class' => 'img-thumbnail', 'id' => 'image_upload-preview'])?>
-                </div>
-                <?= $form->field($image, 'image_relate')->fileInput(['multiple' => true,'accept' => 'image/*', 'id' => 'image_upload'])->label(false) ?>
-                <?php
+            <?= $form->field($image, 'image_relate')->fileInput(['placeholder' => 'Images','class'=>'form-control'])->label('Choose relate image for update.') ?>
+            <?php
             }    
             ?>
-                <label for="image_upload"><i class="fas fa-image"></i> Upload Image</label>
-            </div>
 
             <?= $form->field($model, 'type_item')->dropDownList(['1' => 'T-Shirt Women', '2' => 'T-Shirt Man',
              '3' => 'Jeans Man', '4' => 'Jeans Woman', '5' => 'Hoodies & Sweeter Man', '6' => 'Hoodies & Sweeter Woman','7'=>'Shirts Short Sleeves Man'
@@ -68,7 +60,7 @@ use yii\helpers\Html;
             Trousers Woman','23'=>'Short
             Pants Woman','24'=>'Skirts Woman','25'=>'Shirts &Tops','26'=>'Jackets
             &
-            Raincoats','27'=>'Headwear'], ['placeholder' => 'Type Item'])->label(false) ?>
+            Raincoats','27'=>'Headwear'], ['placeholder' => 'Type Item'])->label('Type Item') ?>
             <div class="text-center">
                 <?=Html::submitButton('Save', ['class' => 'btn btn-primary w-50 rounded-0', 'id' => "btn_save"])?>
             </div>

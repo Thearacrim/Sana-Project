@@ -33,11 +33,13 @@ if (Yii::$app->user->isGuest) {
 .not_user {
     font-size: 1.5rem;
 }
-.icon-search{
-    margin: 3px ;
+
+.icon-search {
+    margin: 3px;
 }
-.icon-heart{
-    margin: 3px ;
+
+.icon-heart {
+    margin: 3px;
 }
 </style>
 <!-- Header -->
@@ -60,7 +62,8 @@ if (Yii::$app->user->isGuest) {
                 <ul id="menu" class="nav navbar-nav d-flex justify-content-start mx-lg-auto">
                     <li class="dropdown">
                         <input id="check01" type="checkbox" name="menu" />
-                        <a href="<?= Url::to(['site/store-man']) ?>" class="dropdown-toggle a-title" data-toggle="">MAN
+                        <a href="<?= Url::to(['site/store-man']) ?>" class="dropdown-toggle a-title"
+                            data-toggle=""><?= \Yii::t('app', 'MAN') ?>
                             <b class="caret"></b></a>
 
                         <ul class="dropdown-menu mega-menu submenu" style="background-color: #edf2fc;">
@@ -113,7 +116,7 @@ if (Yii::$app->user->isGuest) {
                     <li class="dropdown">
                         <input id="check01" type="checkbox" name="menu" />
                         <a href="<?= Url::to(['site/store-women']) ?>" class="dropdown-toggle a-title"
-                            data-toggle="">WOMEN <b class="caret"></b></a>
+                            data-toggle=""><?= \Yii::t('app', 'WOMEN') ?> <b class="caret"></b></a>
 
                         <ul class="dropdown-menu mega-menu submenu" style="background-color: #edf2fc;">
                             <li class="mega-menu-column">
@@ -228,9 +231,32 @@ if (Yii::$app->user->isGuest) {
             </a>
             <?php
         }
-        $language = Yii::$app->language;
         
         ?>
+            <div class="languages">
+                <?php
+      $language = Yii::$app->language;
+      if ($language == 'en-US') { ?>
+                <form id="lang-form" action="/Zay/admin/default/language" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="_csrf"
+                        value="V53vWUVNd-NefwfinKxGFU3IetycNr1mfZv2msWI25sa8JsOdBcbgTwSctHM9QpQHbsf6utX9ioYyJncitCjrw==">
+                    <select class="select-lang" name="language" id="lang">
+                        <option value="en-US" selected>English</option>
+                        <option value="kh-KM">Khmer</option>
+                    </select>
+                </form>
+                <?php } else { ?>
+                <form id="lang-form" action="/Zay/admin/default/language" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="_csrf"
+                        value="V53vWUVNd-NefwfinKxGFU3IetycNr1mfZv2msWI25sa8JsOdBcbgTwSctHM9QpQHbsf6utX9ioYyJncitCjrw==">
+                    <select class="select-lang" name="language">
+                        <option value="en-US">English</option>
+                        <option value="kh-KM" selected>Khmer</option>
+                    </select>
+                </form>
+                <?php }
+      ?>
+            </div>
             <?php
         if (Yii::$app->user->isGuest) {
         ?>

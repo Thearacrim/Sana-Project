@@ -34,7 +34,7 @@ $payment = Yii::$app->session->hasFlash('success') ? 1 : 0;
             <hr>
         </div>
         <div class="col-lg-4 text-center" style="padding = 1rem">
-            <h3 class="Collection-brand">New Collection</h3>
+            <h3 class="Collection-brand"><?= \Yii::t('app', 'NEW COLLECTION') ?></h3>
         </div>
         <div class="col-lg-4" style="margin: auto">
             <hr>
@@ -60,7 +60,8 @@ $payment = Yii::$app->session->hasFlash('success') ? 1 : 0;
             <hr>
         </div>
         <div class="col-lg-6 text-center" style="padding=1rem">
-            <h3 class="Collection-brand">THIS WEEK'S HIGHLIGHTS</h3>
+            <h3 class="Collection-brand"><?= \Yii::t('app', 'NEW') ?> <?= \Yii::t('app', 'THIS WEEK') ?>
+                <?= \Yii::t('app', 'HIGHLIGNTS') ?></h3>
         </div>
         <div class="col-lg-3" style="margin:auto">
             <hr>
@@ -83,7 +84,7 @@ $payment = Yii::$app->session->hasFlash('success') ? 1 : 0;
             <hr>
         </div>
         <div class="col-lg-4 text-center" style="padding=1rem">
-            <h3 class="Collection-brand">BEST SELLERS</h3>
+            <h3 class="Collection-brand"><?= \Yii::t('app', 'BEST SELLERS') ?></h3>
         </div>
         <div class="col-lg-4" style="margin: auto">
             <hr>
@@ -124,7 +125,7 @@ $payment = Yii::$app->session->hasFlash('success') ? 1 : 0;
     <div class="container my-4">
         <div class="row text-center py-3">
             <div class="col-lg-6 m-auto">
-                <h1 class="text-color">Our Brands</h1>
+                <h1 class="text-color"><?= \Yii::t('app', 'OUR BRANDS') ?></h1>
                 <?php
                 Modal::begin([
                     'title' => 'Login',

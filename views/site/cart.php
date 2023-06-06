@@ -14,6 +14,9 @@ $discount = Yii::$app->db->createCommand("SELECT
     ->queryScalar();
 ?>
 <?php
+$payment = Yii::$app->session->hasFlash('success') ? 1 : 0;
+?>
+<?php
 Yii::$app->params['og_title']['content'] = 'Set title';
 Yii::$app->params['og_description']['content'] = 'custom desc';
 Yii::$app->params['og_url']['content'] = '/new/url';

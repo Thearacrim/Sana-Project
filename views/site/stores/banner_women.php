@@ -13,9 +13,12 @@ use yii\helpers\Url;
                     <div class="row">
                         <div class="col-lg-6 mb-0 d-flex align-items-center">
                             <div class="shopping_now">
-                                <h1 class="h1 text-success"><b>NEW</b> IN</h1>
-                                <h3 class="h2 text-color mb-5">MEN COLLECTION</h3>
-                                <a href="<?= Url::to(['site/store-man']) ?>" class="btn-shopnow">SHOP NOW</a>
+                                <h1 class="h1 text-success"><b><?= \Yii::t('app', 'NEW') ?></b>
+                                    <?= \Yii::t('app', 'IN') ?></h1>
+                                <h3 class="h2 text-color mb-5"><?= \Yii::t('app', 'WOMEN') ?>
+                                    <?= \Yii::t('app', 'COLLECTION') ?></h3>
+                                <a href="<?= Url::to(['site/store-man']) ?>"
+                                    class="btn-shopnow"><?= \Yii::t('app', 'SHOP') ?> <?= \Yii::t('app', 'NOW') ?></a>
                             </div>
                         </div>
                         <div class="mx-auto col-md-8 col-lg-6 order-lg-last columnBanner" id="zoomIn">
@@ -31,9 +34,12 @@ use yii\helpers\Url;
                     <div class="row">
                         <div class="col-lg-6 mb-0 d-flex align-items-center">
                             <div class="shopping_now">
-                                <h1 class="h1 text-success"><b>NEW</b> IN</h1>
-                                <h3 class="h2 text-color mb-5">WOMEN COLLECTION</h3>
-                                <a href="<?= Url::to(['site/store-man']) ?>" class="btn-shopnow">SHOP NOW</a>
+                                <h1 class="h1 text-success"><b><?= \Yii::t('app', 'NEW') ?></b>
+                                    <?= \Yii::t('app', 'IN') ?></h1>
+                                <h3 class="h2 text-color mb-5"><?= \Yii::t('app', 'WOMEN') ?>
+                                    <?= \Yii::t('app', 'COLLECTION') ?></h3>
+                                <a href="<?= Url::to(['site/store-man']) ?>"
+                                    class="btn-shopnow"><?= \Yii::t('app', 'SHOP') ?> <?= \Yii::t('app', 'NOW') ?></a>
                             </div>
                         </div>
                         <div class="mx-auto col-md-8 col-lg-6 order-lg-last columnBanner" id="zoomIn">
