@@ -328,8 +328,6 @@ if (Yii::$app->user->isGuest) {
 $add_cart_url = Url::to(['site/change-quantity']);
 $base_url = Url::to(['language']);
 $script = <<< JS
-
-
             // $("#main").change(function () {
               $("form#lang-form").change(function () {
             var form = $(this);

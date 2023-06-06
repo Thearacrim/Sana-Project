@@ -289,6 +289,7 @@ $base_url = Yii::getAlias("@web");
 <!--End Brands-->
 
 <?php
+$add_fav_url = Url::to(['site/favorites']);
 $add_cart_url = Url::to(['site/add-cart']);
 $script = <<<JS
     var base_url = "$base_url";
