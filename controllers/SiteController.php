@@ -522,7 +522,7 @@ class SiteController extends Controller
         }
         $products = Product::find()->limit(12)->all();
         $userId = Yii::$app->user->id;
-        
+
         $product_id = $this->request->post('id');
 
         $model = new Favorite();
@@ -2017,51 +2017,73 @@ class SiteController extends Controller
     }
     public function actionCheckoutAddress()
     {
-        $model = new Customer();
-        $customerID = Customer::find()->where(['name' => Yii::$app->user->identity->username])->select('id')->one();
-        $modelValue = Customer::findOne($customerID);
-        $userId = Yii::$app->user->id;
-        $customer = Customer::find()->where(['name' => Yii::$app->user->identity->username])->one();
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post())) {
-                $model->name = Yii::$app->user->identity->username;
-            }
-
-            if ($customer) {
-                if ($modelValue->load($this->request->post())) {
-                }
-                if ($modelValue->save()) {
-                    return $this->redirect(['checkout']);
-                }
-            } else {
-                if ($model->save()) {
-                    return $this->redirect(['checkout']);
-                } else {
-                    print_r($model->getErrors());
-                    exit;
-                }
-            }
-        } else {
-            $model->loadDefaultValues();
-        }
+        /** @var \app\models\User $identity */
+        $identity = Yii::$app->user->identity;
+        $id = $identity->getId();
+        $customer = Customer::findOne(['user_id' => $id]);
         $relatedProduct = Yii::$app->db->createCommand(
             "SELECT product.*,cart.color_id, cart.size_id, cart.quantity, cart.id AS cart_id, variant_size.size, variant_color.color  FROM cart
-        INNER JOIN product ON product.id = cart.product_id
-        INNER JOIN variant_size ON variant_size.id = cart.size_id
-        INNER JOIN variant_color ON variant_color.id = cart.color_id
-        WHERE cart.user_id = :userId"
-        )
-            ->bindParam('userId', $userId)
-            ->queryAll();
+            INNER JOIN product ON product.id = cart.product_id
+            INNER JOIN variant_size ON variant_size.id = cart.size_id
+            INNER JOIN variant_color ON variant_color.id = cart.color_id
+            WHERE cart.user_id = :userId"
+        )->bindParam('userId', $userId)->queryAll();
+
+        if ($customer) {
+            if ($customer->load(Yii::$app->request->post()) && $customer->save()) {
+                return $this->redirect(['checkout']);
+            }
+
+            return $this->render(
+                'checkout_address',
+                [
+                    'customer' => $customer,
+                    'relatedProduct' => $relatedProduct
+                ]
+            );
+        }
+        $model = new Customer();
+        $model->user_id = $id;
+        $model->name = $identity->first_name . ' ' . $identity->last_name;
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['checkout']);
+        }
+
         return $this->render(
             'checkout_address',
             [
                 'model' => $model,
                 'relatedProduct' => $relatedProduct,
-                'modelValue' => $modelValue,
-                'customer' => $customer
+                'customer' => null,
             ]
         );
+        // $customerID = Customer::find()->where(['name' => Yii::$app->user->identity->username])->select('id')->one();
+        // $modelValue = Customer::findOne($customerID);
+        // $userId = Yii::$app->user->id;
+        // $customer = Customer::find()->where(['name' => Yii::$app->user->identity->username])->one();
+        // if ($this->request->isPost) {
+        //     if ($model->load($this->request->post())) {
+        //         $model->name = Yii::$app->user->identity->username;
+        //     }
+
+        //     if ($customer) {
+        //         if ($modelValue->load($this->request->post())) {
+        //         }
+        //         if ($modelValue->save()) {
+        //             return $this->redirect(['checkout']);
+        //         }
+        //     } else {
+        //         if ($model->save()) {
+        //             return $this->redirect(['checkout']);
+        //         } else {
+
+        //             print_r($model->getErrors());
+        //             exit;
+        //         }
+        //     }
+        // } else {
+        //     $model->loadDefaultValues();
+        // }
     }
     public function actionInvoice()
     {
@@ -2117,17 +2139,17 @@ class SiteController extends Controller
                         $cart->quantity,
                         $cart->product->price,
                         $cart->product->price * $cart->quantity,
-                        date('Y-m-d H:i:s') 
+                        date('Y-m-d H:i:s')
                     ]);
-                    $itemsHtml.= "
+                    $itemsHtml .= "
                     <tr style=\"border-bottom: 1px solid #ddd;\">
-                    <td style=\"font-size: 12; text-align: left;padding-top: 20px;color: #88c0ad;\">".$cart->product->status ."</td>
-                    <td style=\"font-size: 12; text-align: `center`;padding-top: 20px;\">".$cart->variantColor->color
-                    ."</td>
-                    <td style=\"font-size: 12; text-align: `center`;padding-top: 20px;\">".$cart->variantSize->size."</td>
-                    <td style=\"font-size: 12; text-align: `center`;padding-top: 20px;\">".$cart->quantity."</td>
-                    <td style=\"font-size: 12; text-align: `center`;padding-top: 20px;\">$".$cart->product->price ."</td>
-                    <td style=\"font-size: 12; text-align: `center`;padding-top: 20px;\">$".$cart->product->price * $cart->quantity ."</td>
+                    <td style=\"font-size: 12; text-align: left;padding-top: 20px;color: #88c0ad;\">" . $cart->product->status . "</td>
+                    <td style=\"font-size: 12; text-align: `center`;padding-top: 20px;\">" . $cart->variantColor->color
+                        . "</td>
+                    <td style=\"font-size: 12; text-align: `center`;padding-top: 20px;\">" . $cart->variantSize->size . "</td>
+                    <td style=\"font-size: 12; text-align: `center`;padding-top: 20px;\">" . $cart->quantity . "</td>
+                    <td style=\"font-size: 12; text-align: `center`;padding-top: 20px;\">$" . $cart->product->price . "</td>
+                    <td style=\"font-size: 12; text-align: `center`;padding-top: 20px;\">$" . $cart->product->price * $cart->quantity . "</td>
                     </tr>
                     ";
                 }
@@ -2228,7 +2250,7 @@ class SiteController extends Controller
                                                           text-align: left;
                                                         "
                                                       >
-                                                        Hello, '.$profile .'.
+                                                        Hello, ' . $profile . '.
                                                         <br />
                                                         Thank you for shopping from our store and for your
                                                         order.
@@ -2281,8 +2303,8 @@ class SiteController extends Controller
                                                           text-align: right;
                                                         "
                                                       >
-                                                        <small>ORDER</small> :'.$order->code.'<br />
-                                                        <small>Date:'. $invoices->Issue_date .'</small>
+                                                        <small>ORDER</small> :' . $order->code . '<br />
+                                                        <small>Date:' . $invoices->Issue_date . '</small>
                                                       </td>
                                                     </tr>
                                                   </tbody>
@@ -2337,11 +2359,11 @@ class SiteController extends Controller
                                                 <th style="font-size: 12; text-align: center;">Amount</th>
 
                                               </tr>
-                                              '.$itemsHtml.'
+                                              ' . $itemsHtml . '
                                             </table>
                                             <br>
                                             <div style="width: 430px; height: 40px;margin-left: 94px;">
-                                            <p style="text-align: right;font-size: 17px;font-style: italic;">Total: $'.$totalPrice.'</p>
+                                            <p style="text-align: right;font-size: 17px;font-style: italic;">Total: $' . $totalPrice . '</p>
                                             </div>
                                           </td>
                                         </tr>
@@ -2419,10 +2441,10 @@ class SiteController extends Controller
                                                               vertical-align: top;
                                                             "
                                                           >
-                                                            '.$profile.'<br>
-                                                            '.$customer['city'].'<br>
-                                                            '.$customer->address = Yii::$app->user->identity->email.'<br> 
-                                                            Tel:'.$customer->phone_number.'
+                                                            ' . $profile . '<br>
+                                                            ' . $customer['city'] . '<br>
+                                                            ' . $customer->address = Yii::$app->user->identity->email . '<br> 
+                                                            Tel:' . $customer->phone_number . '
                                                           </td>
                                                         </tr>
                                                       </tbody>
@@ -2629,26 +2651,58 @@ class SiteController extends Controller
                 WHERE user_id = :userId
         ")->bindParam("userId", $current_user)->queryScalar();
     }
-
-
     /**
      * TODO: create history booking
      *
      */
 
-    public function actionHistoryBooking()
+    public function actionDetailBookingHistory($id)
     {
-
-        $user = Yii::$app->user->identity->id;
-        $mybooking = Yii::$app->db->createCommand("SELECT product.`status`,order_item.product_id,variant_color.color,variant_size.size,product.created_date,product.image_url,order_item.qty,order_item.price
-        FROM order_item
-        INNER JOIN product ON product.id= order_item.product_id
-        INNER JOIN variant_color ON variant_color.id= order_item.color
-        INNER JOIN variant_size ON variant_size.id= order_item.size
+        $identity = Yii::$app->user->identity->id;
+        $mybooking = Yii::$app->db->createCommand("SELECT
+        product.`status`,
+        order_item.product_id,
+        variant_color.color,
+        variant_size.size,
+        product.created_date,
+        product.image_url,
+        order_item.qty,
+        order_item.price,
+        ORDER.customer_id 
+        FROM
+        order_item
+        INNER JOIN product ON product.id = order_item.product_id
+        INNER JOIN variant_color ON variant_color.id = order_item.color
+        INNER JOIN variant_size ON variant_size.id = order_item.size
+        INNER JOIN `order` ON `order`.id = order_item.order_id 
+        WHERE
+            order_id = :orderId
         ")
+            ->bindParam('orderId', $id)
             ->queryAll();
-        return $this->render('history-booking', [
+        $customer = Yii::$app->db->createCommand("SELECT customer.`name`, customer.address, customer.city, customer.phone_number
+        FROM `customer`
+        INNER JOIN `user` 
+        ON user.id= customer.user_id
+        WHERE user_id = :userId
+        ")
+            ->bindParam('userId', $id)
+            ->queryAll();
+        return $this->render('booking/detail_booking_history', [
             'mybooking' => $mybooking,
+            'customer' => $customer,
+
+        ]);
+    }
+    public function actionViewBookingHistory()
+    {
+        /** @var \app\models\User $identity */
+        $identity = Yii::$app->user->identity;
+        $customer = Customer::findOne(['user_id' => $identity->id]);
+        $view_order = Order::find()->where(['customer_id' => $customer->id])->asArray()->all();
+        return $this->render("booking/view_booking_history", [
+            'view_order' => $view_order,
+
         ]);
     }
 }
