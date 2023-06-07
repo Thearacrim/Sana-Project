@@ -2098,7 +2098,7 @@ class SiteController extends Controller
             $profile = Yii::$app->user->identity->username;
             $payer_id = $this->request->post('payer_id');
             $carts = Cart::find()->where(['user_id' => $userId])->all();
-            $customer = Customer::find()->where(['name' => $profile])->one();
+            $customer = Customer::find()->where(['user_id' => $userId])->one();
             $totalPrice = (float) $this->getCartTotalPrice();
             $product = Yii::$app->db->createCommand("SELECT
                 SUM( product.price * cart.quantity ) AS sub_total
@@ -2111,13 +2111,13 @@ class SiteController extends Controller
                 ->bindParam('userId', $userId)
                 ->queryOne();
 
-            if (!$customer) {
-                $customer = new Customer();
-                $customer->name = $profile;
-                $customer->address = Yii::$app->user->identity->email;
-                $customer->phone_number;
-                $customer->save();
-            }
+            // if (!$customer) {
+            //     $customer = new Customer();
+            //     $customer->name = $profile;
+            //     $customer->address = Yii::$app->user->identity->email;
+            //     $customer->phone_number;
+            //     $customer->save();
+            // }
 
             $order = new Order();
             $order->code = $payer_id;
