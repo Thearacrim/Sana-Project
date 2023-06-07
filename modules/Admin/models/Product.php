@@ -18,6 +18,7 @@ use Yii;
 class Product extends \yii\db\ActiveRecord
 
 {
+    public $thumb;
     /**
      * {@inheritdoc}
      */
@@ -34,7 +35,7 @@ class Product extends \yii\db\ActiveRecord
         return [
             [['category_id', 'description', 'price', 'status'], 'required'],
             [['category_id'], 'integer'],
-            [['image_url'], 'file', 'extensions' => 'png, jpg, gif'],
+            [['thumb'], 'file', 'extensions' => 'png, jpg, gif'],
             // [['image'], 'file', 'extensions' => ['png', 'jpg', 'gif'], 'maxFiles' => 0],
 
             // [['image_url'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],

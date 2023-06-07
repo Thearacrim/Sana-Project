@@ -70,7 +70,7 @@ class ReportController extends Controller
         FROM order_item
         INNER JOIN `order` ON `order`.id = order_item.order_id
         INNER JOIN customer ON customer.id = `order`.customer_id
-        where order.created_date between :fromDate and :toDate
+        where DATE(order.created_date) between :fromDate and :toDate
         GROUP BY customer_id
         ",[':fromDate' => $fromDate, ':toDate'=>$toDate])
         ->queryAll();
@@ -104,8 +104,7 @@ class ReportController extends Controller
         INNER JOIN product ON product.id = order_item.product_id
         INNER JOIN `order` ON `order`.id = order_item.order_id
         INNER JOIN `customer` ON `customer`.id = order.customer_id
-        where order.created_date between :fromDate and :toDate
-        
+        where DATE(order.created_date) between :fromDate and :toDate
         ",[':fromDate' => $fromDate, ':toDate'=>$toDate])
         ->queryAll();
         return $this->render('product_performance_report',[
@@ -145,7 +144,7 @@ class ReportController extends Controller
         INNER JOIN variant_size ON variant_size.id = order_item.size
         INNER JOIN `order` ON `order`.id = order_item.order_id
 		INNER JOIN customer ON customer.id = `order`.customer_id
-        where order.created_date between :fromDate and :toDate
+        where DATE(order.created_date) between :fromDate and :toDate
         ",[':fromDate' => $fromDate, ':toDate'=>$toDate])
         ->queryAll();
         return $this->render('sale_report', [
