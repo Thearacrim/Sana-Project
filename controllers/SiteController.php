@@ -2667,6 +2667,7 @@ class SiteController extends Controller
         product.created_date,
         product.image_url,
         order_item.qty,
+        order_item.total,
         order_item.price,
         ORDER.customer_id 
         FROM
@@ -2686,7 +2687,7 @@ class SiteController extends Controller
         ON user.id= customer.user_id
         WHERE user_id = :userId
         ")
-            ->bindParam('userId', $id)
+            ->bindParam('userId', $identity)
             ->queryAll();
         return $this->render('booking/detail_booking_history', [
             'mybooking' => $mybooking,

@@ -55,11 +55,23 @@ if (Yii::$app->user->isGuest) {
                                         <label for="">Price :</label>
                                         <strong>$<?= $value['price'] ?></strong>
                                     </p>
+                                    <p class="text-start">
+                                        <label for="">Amount :</label>
+                                        <strong>$<?= $value['total'] ?></strong>
+                                    </p>
                                 </div>
                                 <hr class="my-4" />
                             </div>
                         </div>
                     <?php endforeach; ?>
+                    <div class="row mb-0">
+                                <div class="col-lg-8">
+                                    <h3 style="margin-left: 20px;">Total:</h3>
+                                </div>
+                                <div class="col-lg-4">
+                                    $
+                                </div>
+                            </div>
                 </div>
             </div>
             <div class="col-md-4">
