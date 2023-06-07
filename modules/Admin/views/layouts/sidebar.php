@@ -26,8 +26,7 @@ Yii::$app->setHomeUrl(Yii::getAlias("@web/index.php?r=admin/default"));
             <span>Dashboard</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsed" aria-expanded="false"
-            aria-controls="collapseTwo">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsed" aria-expanded="false" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-cog"></i>
             <span><?= \Yii::t('app', 'home') ?></span>
         </a>
@@ -48,26 +47,29 @@ Yii::$app->setHomeUrl(Yii::getAlias("@web/index.php?r=admin/default"));
             <i class="fas fa-book"></i>
             <span><?= \Yii::t('app', 'order') ?></span></a>
     </li>
-    <!-- <li class="nav-item active">
-    <a class="nav-link" href="<?= Url::to(['/admin/order-item']) ?>">
-      <i class="fas fa-credit-card"></i>
-      <span><?= \Yii::t('app', 'order item') ?></span></a>
-  </li> -->
+    <li class="nav-item">
+        <a class="nav-link" href="<?= Url::to(['/admin/top-rank']) ?>">
+            <i class="fas fa-star"></i>
+            <span><?= \Yii::t('app', 'top rank') ?></span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="<?= Url::to(['/admin/coupon']) ?>">
+        <i class="fas fa-percent"></i>
+            <span><?= \Yii::t('app', 'coupon') ?></span></a>
+    </li>
 
     <!-- Divider -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-            aria-expanded="false" aria-controls="collapseTwo">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="false" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-cog"></i>
             <span><?= \Yii::t('app', 'report') ?></span>
         </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar"
-            style="">
+        <div id="collapseUtilities" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Managements:</h6>
-                <a class="collapse-item"
-                    href="<?= Url::to(['/admin/report']) ?>"><?= \Yii::t('app', 'product rank') ?></a>
-                <a class="collapse-item" href="<?= Url::to(['/admin/coupon']) ?>"><?= \Yii::t('app', 'coupon') ?></a>
+                <a class="collapse-item" href="<?= Url::to(['/admin/report/sale-report']) ?>"><?= \Yii::t('app', 'Sale Report') ?></a>
+                <a class="collapse-item" href="<?= Url::to(['/admin/report/customer-revenue-report']) ?>"><?= \Yii::t('app', 'Customer Revenue Report') ?></a>
+                <a class="collapse-item" href="<?= Url::to(['/admin/top-rank/index']) ?>"><?= \Yii::t('app', 'Top Sale') ?></a>
             </div>
         </div>
     </li>
@@ -77,6 +79,5 @@ Yii::$app->setHomeUrl(Yii::getAlias("@web/index.php?r=admin/default"));
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
-
 
 </ul>

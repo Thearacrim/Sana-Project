@@ -14,6 +14,8 @@ use Yii;
  */
 class RelateImage extends \yii\db\ActiveRecord
 {
+    /** @var \yii\web\UploadedFile[] $images */
+    // public $images;
     /**
      * {@inheritdoc}
      */
@@ -30,7 +32,7 @@ class RelateImage extends \yii\db\ActiveRecord
         return [
             [['product_id'], 'integer'],
             [['create_at'], 'safe'],
-            [['image_relate'], 'file', 'extensions' => 'png, jpg, gif','maxFiles'=>5],
+            [['image_relate'], 'file', 'extensions' => 'png, jpg, gif', 'maxFiles' => 5],
             // [['image_relate'], 'file', 'extensions' => 'png, jpg, gif','maxFiles'=>5,'skipOnEmpty'=>false],
         ];
     }
@@ -58,5 +60,45 @@ class RelateImage extends \yii\db\ActiveRecord
             return $base_url . '/uploads/placeholder.jpg';
         }
         return $base_url . '/' . $this->image_relate;
+    }
+
+    /**
+     * @param \yii\web\UploadedFile[] $images
+     * @param number $productId
+     * @param RelateImage|null $relateImage 
+     */
+    public static function uploads($images, $productId, $relateImage = null)
+    {
+        $upload_path = Yii::getAlias("uploads/");
+        if (count($images) > 0) {
+            $baseGallaryPath = $upload_path . 'products/' . $productId;
+
+            if (!is_dir($baseGallaryPath)) {
+                mkdir($baseGallaryPath, 0777, true);
+            }
+
+            if($relateImage){
+                RelateImage::deleteAll(['product_id' => $productId]);
+                foreach ($relateImage as $image) {
+                    $baseUrl = Yii::getAlias('@web');
+                    $deletePath = $baseUrl . $image->image_relate;
+                    if (file_exists($deletePath)) {
+                        unlink($deletePath);
+                    }
+                }
+            }
+
+            foreach ($images as $value) {
+                $randomName = Yii::$app->security->generateRandomString(15);
+                $fileName = $baseGallaryPath . '/' . $randomName . '.' . $value->extension;
+                if ($value->saveAs($fileName)) {
+                    $modelRelateImage = new RelateImage();
+                    $modelRelateImage->image_relate = $fileName;
+                    $modelRelateImage->product_id = $productId;
+                    $modelRelateImage->create_at = date('Y-m-d h:m:s');
+                    $modelRelateImage->save();
+                }
+            }
+        }
     }
 }
