@@ -64,14 +64,6 @@ if (Yii::$app->user->isGuest) {
                             </div>
                         </div>
                     <?php endforeach; ?>
-                    <div class="row mb-0">
-                                <div class="col-lg-8">
-                                    <h3 style="margin-left: 20px;">Total:</h3>
-                                </div>
-                                <div class="col-lg-4">
-                                    $
-                                </div>
-                            </div>
                 </div>
             </div>
             <div class="col-md-4">
