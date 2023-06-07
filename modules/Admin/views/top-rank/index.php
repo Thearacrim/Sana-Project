@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="table-me mr-5 ml-5 mb-5">
     <h1 class="text-color"><?= Html::encode($this->title) ?></h1>
     <div class="card">
-        <div class="card-body back-light">
+        <div class="card-body back-light" style="box-shadow: 0 0.125rem 0.5rem 0 rgb(0 0 0 / 16%);">
             <!-- <p>
             <?= Html::a('Create Order', ['create'], ['class' => 'btn btn-success']) ?>
         </p> -->
