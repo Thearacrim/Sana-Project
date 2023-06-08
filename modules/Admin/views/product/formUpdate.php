@@ -23,7 +23,6 @@ $baseUrl = Yii::getAlias('@web');
         <div class="col-lg-8">
             <?=$form->field($model, 'status')->textInput(['maxlength' => true, 'placeholder' => 'Blog Title'])->label(false)?>
 
-            <?=$form->field($model, 'category_id')->textInput(['placeholder' => 'Category Id'])->label(false)?>
 
             <?=$form->field($model, 'price')->textInput(['maxlength' => true, 'placeholder' => 'Price'])->label(false)?>
 
@@ -34,7 +33,7 @@ $baseUrl = Yii::getAlias('@web');
 
             <div>
                 <h4>Upload Gallery</h5>
-                <input type="file" name="imageRelate[]" accept=".png,.jpg,.gif" <?= $model->isNewRecord ? "required" : null ?> multiple>
+                <input type="file" class="img-thumbnail" name="imageRelate[]" accept=".png,.jpg,.gif" <?= $model->isNewRecord ? "required" : null ?> multiple>
                 <div class="row">
                     <?php foreach ($relateImage as $image): ?>
                         <div class="col-sm-4">
@@ -53,8 +52,6 @@ $baseUrl = Yii::getAlias('@web');
                 <label for="image_upload"><i class="fas fa-image"></i> Upload Image</label>
                 <?= $form->field($model, 'thumb')->fileInput(['multiple' => true,'accept' => 'image/*', 'id' => 'image_upload'])->label(false) ?>
             </div>
-
-            
 
             <pre>
                 <?php

@@ -19,11 +19,7 @@ use yii\helpers\Html;
     <div class="row">
         <div class="col-lg-8">
             <?=$form->field($model, 'status')->textInput(['maxlength' => true, 'placeholder' => 'Blog Title'])->label(false)?>
-
-            <?=$form->field($model, 'category_id')->textInput(['placeholder' => 'Category Id'])->label(false)?>
-
             <?=$form->field($model, 'price')->textInput(['maxlength' => true, 'placeholder' => 'Price'])->label(false)?>
-
             <?=$form->field($model, 'description')->widget(CKEditor::className(), [
     'options' => ['rows' => 6],
     'preset' => 'basic',
