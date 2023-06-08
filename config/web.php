@@ -92,6 +92,19 @@ $config = [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        // 'mailer' => [
+        //     'class' => 'yii\swiftmailer\Mailer',
+        //     'useFileTransport' => true,
+
+            // 'transport' => [
+            //     'class' => 'Swift_SmtpTransport',
+            //     'host' => 'smtp.hostinger.com',
+            //     'username' => 'penghak@dernham.app',
+            //     'password' => '3Kt3RzXF9vJPDqG@',
+            //     'port' => '587',
+            //     'encryption' => 'tls',
+            // ],
+        // ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             'viewPath' => '@app/mail',
@@ -105,28 +118,6 @@ $config = [
                 'encryption' => 'tls',
                 ],
         ],
-
-        // 'mailer' => [
-        //     'class' => 'yii\swiftmailer\Mailer',
-        //     'useFileTransport' => false,
-        //     'transport' => [
-        //         'class' => 'Swift_SmtpTransport',
-        //         'host' => 'smtp.gmail.com',
-        //         'username' => 'Thearacrim@gmail.com',
-        //         'password' => 'rlyjakqosktpfftq',
-        //         'port' => '465',
-        //         'encryption' => 'ssl',
-        //     ],
-        //     'class' => 'yii\swiftmailer\Mailer',
-        // 'transport' => [
-        //     'class' => 'Swift_SmtpTransport',
-        //     'host' => 'sandbox.smtp.mailtrap.io',
-        //     'username' => '3abe185b76fc56',
-        //     'password' => '468884befbb193',
-        //     'port' => '2525',
-        //     'encryption' => 'tls',
-        // ],
-        // ],
 
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,

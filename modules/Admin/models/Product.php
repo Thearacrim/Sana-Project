@@ -33,8 +33,8 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_id', 'description', 'price', 'status'], 'required'],
-            [['category_id'], 'integer'],
+            [['description', 'price', 'status'], 'required'],
+            // [['category_id'], 'integer'],
             [['thumb'], 'file', 'extensions' => 'png, jpg, gif'],
             // [['image'], 'file', 'extensions' => ['png', 'jpg', 'gif'], 'maxFiles' => 0],
 
