@@ -2,7 +2,7 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=zay-store',
+    'dsn' => 'mysql:host=localhost;dbname=sana_project',
     'username' => 'root',
     'password' => '',
     'charset' => 'utf8',
