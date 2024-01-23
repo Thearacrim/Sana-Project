@@ -15,7 +15,7 @@
         <div class="carousel-item active">
           <div class="container">
             <div class="row p-5">
-              <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+              <div class="mx-auto col-md-8 col-lg-6 order-lg-last " id = "zoomOut">
                 <img class="img-fluid" src="<?= $base_url ?>/template/img/banner_img_01.png" alt="">
               </div>
               <div class="col-lg-6 mb-0 d-flex align-items-center">

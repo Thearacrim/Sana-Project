@@ -81,9 +81,9 @@ class BannerController extends Controller
                 if (!empty($model->image)) {
                     if (!is_dir($upload_path)) {
                         mkdir($upload_path, 0777, true);
-                    }
+                    }   
                     $filename = 'banner/' . $imagename . '.' . $model->image->extension;
-                    $model->image->saveAs($upload_path . $filename);
+                    $model->image->saveAs($upload_path . $imagename . '.' . $model->image->extension);
                     //save file uploaded to db
                     $model->image_banner = $filename;
                 }

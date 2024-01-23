@@ -6,7 +6,7 @@ $db = require __DIR__ . '/test_db.php';
  * Application configuration shared by all test types
  */
 return [
-    'id' => 'zay-web',
+    'id' => 'Level-Store',
     'basePath' => dirname(__DIR__),
     'aliases' => [
         '@bower' => '@vendor/bower-asset',

@@ -2,8 +2,10 @@
 
 namespace app\modules\Admin\controllers;
 
+use app\modules\Admin\models\Banner;
 use app\modules\Admin\models\Product;
 use app\modules\Admin\models\ProductSearch;
+use app\modules\Admin\models\RelateImage;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
@@ -100,20 +102,35 @@ class ProductController extends Controller
     public function actionCreate()
     {
         $model = new Product();
+        $relateImage = new RelateImage();
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
                 $imagename = Inflector::slug($model->status) . '-' . time();
                 $model->image_url = UploadedFile::getInstance($model, 'image_url');
+                // $relateImage->image_relate = UploadedFile::getInstances($relateImage, 'image_relate');
+                $images = UploadedFile::getInstancesByName('imageRelate');
                 $upload_path = Yii::getAlias("uploads/");
                 if (!empty($model->image_url)) {
                     if (!is_dir($upload_path)) {
                         mkdir($upload_path, 0777, true);
                     }
+
                     $model->image_url->saveAs($upload_path . $imagename . '.' . $model->image_url->extension);
                     //save file uploaded to db
                     $model->image_url = 'uploads/' . $imagename . '.' . $model->image_url->extension;
                 }
                 if ($model->save()) {
+                    RelateImage::uploads($images, $model->id);
+                    // foreach ($images as $imageRelate) {
+                    //     $RelateImage = new RelateImage();
+                    //     $RelateImage->product_id = $model->id;
+                    //     $RelateImage->create_at = date("Y-m-d h:i:s");
+                    //     $RelateImage->image_relate = 'uploads/' . $imageRelate->name . '.' . $imageRelate->extension;
+                    //     if ($RelateImage->save(false)) {
+                    //         $imageRelate->saveAs($upload_path . $imageRelate->name . '.' . $imageRelate->extension);
+                    //     }
+                    // }
+
                     return $this->redirect(['view', 'id' => $model->id]);
                 } else {
                     print_r($model->getErrors());
@@ -126,6 +143,7 @@ class ProductController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'relateImage' => $relateImage
         ]);
     }
 
@@ -139,25 +157,28 @@ class ProductController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $relateImage = RelateImage::find()->select('image_relate')->where(['product_id' => $id])->all();
 
+    
         if ($this->request->isPost && $model->load($this->request->post())) {
             $imagename = Inflector::slug($model->status) . '-' . time();
-            $model->image_url = UploadedFile::getInstance($model, 'image_url');
+            $image_url = UploadedFile::getInstance($model, 'thumb');
+            $images = UploadedFile::getInstancesByName('imageRelate');
             $upload_path = Yii::getAlias("uploads/");
-            if (!empty($model->image_url)) {
+            
+            if (!empty($image_url)) {
                 if (!is_dir($upload_path)) {
                     mkdir($upload_path, 0777, true);
                 }
+                $model->image_url = $image_url;
                 $model->image_url->saveAs($upload_path . $imagename . '.' . $model->image_url->extension);
-                // echo $model->image_url;
-                // exit;sdfa
-                //save file uploaded to db
                 $model->image_url = 'uploads/' . $imagename . '.' . $model->image_url->extension;
-                // print_r($model->image_url);
             }
+
             if ($model->save()) {
+                RelateImage::uploads($images, $model->id, $relateImage);
                 Yii::$app->session->setFlash('success', 'Updated successfully');
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(Yii::$app->request->referrer);
             } else {
                 print_r($model->getErrors());
                 exit;
@@ -166,6 +187,7 @@ class ProductController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+            'relateImage' => $relateImage
         ]);
     }
 

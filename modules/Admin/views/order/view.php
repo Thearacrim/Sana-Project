@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="row pt-5 pb-5">
             <div class="col-lg-6 pl-5 fw-bold text-color">
-                <p lang="kh"><ins>ឈ្មោះអតិថជន </ins>: <?= $customer["name"] ?></p>
+                <p lang="kh"><ins>Customer </ins>: <?= $customer["name"] ?></p>
                 <p><ins>Client Address </ins>: <?= $customer['address'] ?></p>
                 <p><ins>Invoices ID </ins>: <?= $order->code ?></p>
                 <p><ins>Date of Issue </ins>: <?= $invoice->Issue_date ?></p>

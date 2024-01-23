@@ -70,14 +70,16 @@ class OrderController extends Controller
                 // any mpdf options you wish to set
             ],
             'methods' => [
-                'SetTitle' => 'Zay Online Invoices',
-                'SetHeader' => ['Zay Online Invoices||Generated On: ' . date("r")],
+                'SetTitle' => 'Level Store Online Invoices',
+                'SetHeader' => ['Level Store Online Invoices||Generated On: ' . date("r")],
                 'SetFooter' => ['|Page {PAGENO}|'],
                 'SetAuthor' => 'Kartik Visweswaran',
                 'SetCreator' => 'Kartik Visweswaran',
-                'SetKeywords' => 'Zay, Yii2, Export, PDF, MPDF, Output, Privacy, Policy, yii2-mpdf',
+                'SetKeywords' => 'Level Store, Yii2, Export, PDF, MPDF, Output, Privacy, Policy, yii2-mpdf',
             ]
         ]);
+        $pdf->WriteHTML('fileName'); //pdf is a name of view file responsible for this pdf document
+        $path = $pdf->Output('@web/pdf/fileName.pdf', 'S');
         return $pdf->render();
     }
 

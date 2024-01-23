@@ -8,6 +8,7 @@ use Yii;
  * admin module definition class
  */
 class Admin extends \yii\base\Module
+
 {
     /**
      * {@inheritdoc}
@@ -24,11 +25,12 @@ class Admin extends \yii\base\Module
         parent::init();
         Yii::$app->user->loginUrl = ['admin/default/login'];
         Yii::$app->errorHandler->errorAction = 'admin/default/error';
+        Yii::$app->user->identityCookie = ['name' => 'admin_cookie', 'httpOnly' => true];
 
         // custom initialization code goes here
         Yii::$app->set('session', [
             'class' => 'yii\web\Session',
-            'name' => '_zayAdminSessionId',
+            'name' => '_adminSessionId',
         ]);
     }
 }

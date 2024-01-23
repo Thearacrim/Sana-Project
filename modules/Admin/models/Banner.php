@@ -31,7 +31,7 @@ class Banner extends \yii\db\ActiveRecord
     {
         return [
             ['image', 'image', 'extensions' => 'jpg, jpeg, gif, png', 'on' => ['insert', 'update']],
-            [['title', 'sort_description'], 'string', 'max' => 100],
+            [['title', 'sort_description','banner_type'], 'string', 'max' => 100],
             [['description'], 'string', 'max' => 255],
             [['image_banner'], 'string']
         ];
@@ -57,6 +57,7 @@ class Banner extends \yii\db\ActiveRecord
             'sort_description' => 'Sort Description',
             'description' => 'Description',
             'image_banner' => 'Image Banner',
+            'banner_type' => 'Banner Type'
         ];
     }
 }

@@ -1,5 +1,4 @@
 <?php
-
 use backend\models\Cart;
 use yii\bootstrap4\Html;
 use yii\helpers\Url;
@@ -8,11 +7,14 @@ $base_url = Yii::getAlias("@web");
 $discount = Yii::$app->db->createCommand("SELECT
         discount
     FROM
-        `coupon` 
+        `coupon`
     WHERE
     CURDATE() < expire_date
             ")
     ->queryScalar();
+?>
+<?php
+$payment = Yii::$app->session->hasFlash('success') ? 1 : 0;
 ?>
 <?php
 Yii::$app->params['og_title']['content'] = 'Set title';
@@ -23,19 +25,19 @@ Yii::$app->params['og_image']['content'] = 'image.jpg';
 <div class="container">
     <div class="cart-main">
         <?php
-        if (Yii::$app->session->hasFlash('success')) : ?>
-            <div class="alert alert-success" role="alert">
-                <?= Yii::$app->session->getFlash('success') ?>
-            </div>
-        <?php elseif (Yii::$app->session->hasFlash('Error')) : ?>
-            <div class="alert alert-danger" role="alert">
-                <?= Yii::$app->session->getFlash('alert') ?>
-            </div>
-        <?php elseif (Yii::$app->session->hasFlash('error')) : ?>
-            <div class="alert alert-danger" role="alert">
-                <?= Yii::$app->session->getFlash('error') ?>
-            </div>
-        <?php endif; ?>
+if (Yii::$app->session->hasFlash('success')): ?>
+        <div class="alert alert-success" role="alert">
+            <?=Yii::$app->session->getFlash('success')?>
+        </div>
+        <?php elseif (Yii::$app->session->hasFlash('Error')): ?>
+        <div class="alert alert-danger" role="alert">
+            <?=Yii::$app->session->getFlash('alert')?>
+        </div>
+        <?php elseif (Yii::$app->session->hasFlash('error')): ?>
+        <div class="alert alert-danger" role="alert">
+            <?=Yii::$app->session->getFlash('error')?>
+        </div>
+        <?php endif;?>
         <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-12">
                 <!-- <div class="loader">
@@ -46,110 +48,130 @@ Yii::$app->params['og_image']['content'] = 'image.jpg';
                     </div>
                     <div class="card-body border">
                         <?php
-                        if (!$totalCart) {
-                            echo "<span id ='available_item'>There are no items available</span>";
-                        } else {
-                            echo "<span id ='available_item'></span>";
-                        }
-                        ?>
-                        <?php foreach ($relatedProduct as $key => $product) { ?>
-                            <div class="sec-border row_item_<?= $product['cart_id'] ?> rounded-0 hover p-3">
-                                <div class="row ">
-                                    <div class="col-md-3 col-sm-3">
-                                        <a href="<?= Url::to(['site/store-single?id=' . $product['id']]) ?>"><img src="<?= $base_url . '/' . $product['image_url'] ?>" style="width:110px"></a>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <span class="status text-color"> <?= $product['status'] ?>
-                                        </span><br>
-                                        <div class="d-flex justify-content-start">
-                                            <span class="price text-color" style="padding-top:10px;padding-right:10px"> $<?= $product['price'] ?></span>
-                                            <?php if ($product['color'] == 'Blue') { ?>
-                                                <div id="variant-color" class="swatch clearfix" data-option-index="1">
-                                                    <div data-value="1" class="swatch-element color blue available">
-                                                        <div class="tooltip">Blue</div>
-                                                        <input quickbeam="color" id="swatch-1-blue" name="option-1" value="1" checked />
-                                                        <label for="swatch-1-blue" style="border-color: blue;">
-                                                            <img class="crossed-out" src="//cdn.shopify.com/s/files/1/1047/6452/t/1/assets/soldout.png?10994296540668815886" />
-                                                            <span style="background-color: blue;"></span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            <?php } else if ($product['color'] == 'Yellow') { ?>
-                                                <div id="variant-color" class="swatch clearfix" data-option-index="1">
-                                                    <div data-value="3" class="swatch-element color yellow available">
-                                                        <div class="tooltip">Yellow</div>
-                                                        <input quickbeam="color" id="swatch-1-yellow" name="option-1" value="3" />
-                                                        <label for="swatch-1-yellow" style="border-color: yellow;">
-                                                            <img class="crossed-out" src="//cdn.shopify.com/s/files/1/1047/6452/t/1/assets/soldout.png?10994296540668815886" />
-                                                            <span style="background-color: yellow;"></span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            <?php } else { ?>
-                                                <div id="variant-color" class="swatch clearfix" data-option-index="1">
-                                                    <div data-value="2" class="swatch-element color red available">
-                                                        <div class="tooltip">Red</div>
-                                                        <input quickbeam="color" id="swatch-1-red" name="option-1" value="2" />
-                                                        <label for="swatch-1-red" style="border-color: red;">
-                                                            <img class="crossed-out" src="//cdn.shopify.com/s/files/1/1047/6452/t/1/assets/soldout.png?10994296540668815886" />
-                                                            <span style="background-color: red;"></span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            <?php } ?>
+if (!$totalCart) {
+    echo "<span id ='available_item'>There are no items available</span>";
+} else {
+    echo "<span id ='available_item'></span>";
+}
+?>
+                        <?php foreach ($relatedProduct as $key => $product) {?>
+                        <div class="sec-border row_item_<?=$product['cart_id']?> rounded-0 hover p-3">
+                            <div class="row ">
+                                <div class="col-md-3 col-sm-3">
+                                    <a href="<?=Url::to(['site/store-single?id=' . $product['id']])?>"><img
+                                            src="<?=$base_url . '/' . $product['image_url']?>" style="width:110px"></a>
+                                </div>
+                                <div class="col-lg-6">
+                                    <span class="status text-color"> <?=$product['status']?>
+                                    </span><br>
+                                    <div class="d-flex justify-content-start">
+                                        <span class="price text-color" style="padding-top:10px;padding-right:10px">
+                                            $<?=$product['price']?></span>
+                                        <?php if ($product['color'] == 'Blue') {?>
+                                        <div id="variant-color" class="swatch clearfix" data-option-index="1">
+                                            <div data-value="1" class="swatch-element color blue available">
+                                                <div class="tooltip">Blue</div>
+                                                <input quickbeam="color" id="swatch-1-blue" name="option-1" value="1"
+                                                    checked />
+                                                <label for="swatch-1-blue" style="border-color: blue;">
+                                                    <img class="crossed-out"
+                                                        src="//cdn.shopify.com/s/files/1/1047/6452/t/1/assets/soldout.png?10994296540668815886" />
+                                                    <span style="background-color: blue;"></span>
+                                                </label>
+                                            </div>
                                         </div>
-                                        <span class="price">
-                                            <ul class="list-inline">
-                                                <li class="list-inline-item text-color">Size :
-                                                    <input type="hidden" name="product-size" id="product-size" value="S">
+                                        <?php } else if ($product['color'] == 'Yellow') {?>
+                                        <div id="variant-color" class="swatch clearfix" data-option-index="1">
+                                            <div data-value="3" class="swatch-element color yellow available">
+                                                <div class="tooltip">Yellow</div>
+                                                <input quickbeam="color" id="swatch-1-yellow" name="option-1"
+                                                    value="3" />
+                                                <label for="swatch-1-yellow" style="border-color: yellow;">
+                                                    <img class="crossed-out"
+                                                        src="//cdn.shopify.com/s/files/1/1047/6452/t/1/assets/soldout.png?10994296540668815886" />
+                                                    <span style="background-color: yellow;"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <?php } else {?>
+                                        <div id="variant-color" class="swatch clearfix" data-option-index="1">
+                                            <div data-value="2" class="swatch-element color red available">
+                                                <div class="tooltip">Red</div>
+                                                <input quickbeam="color" id="swatch-1-red" name="option-1" value="2" />
+                                                <label for="swatch-1-red" style="border-color: red;">
+                                                    <img class="crossed-out"
+                                                        src="//cdn.shopify.com/s/files/1/1047/6452/t/1/assets/soldout.png?10994296540668815886" />
+                                                    <span style="background-color: red;"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <?php }?>
+                                    </div>
+                                    <span class="price">
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item text-color">Size :
+                                                <input type="hidden" name="product-size" id="product-size" value="S">
 
-                                                </li>
-                                                <li class="list-inline-item"><span class="btn btn-dark btn-sm rounded-circle text-color"> <?= $product['size'] ?></span></li>
-                                            </ul>
-                                        </span>
-                                        <a data-id=<?= $product['cart_id'] ?> data-save=<?= $product['id'] ?> href="<?= Url::to(['store-single', 'id' => $product['cart_id']]) ?>" class="btn btn-outline-warning btn-sm rounded-0 btn-save-for-later">Save for later</a>
-                                        <?php echo Html::a(
-                                            'Remove',
-                                            ['remove', 'id' => $product['cart_id']],
-                                            [
-                                                'class' => 'btn btn-outline-danger rounded-0 btn-sm btn-remove-item warning',
-                                                'date-method' => 'POST', 'data-id' => $product['cart_id']
-                                            ]
-                                        ) ?>
-                                    </div>
-                                    <div class="qty col-lg-3 col-md-8 col-sm-12 center d-inline py-5">
-                                        <span class="minus bg-dark spinner item-quantity" data-product_id="<?= $product['id'] ?>" data-id=<?= $product['cart_id'] ?>>-</span>
-                                        <input type="number" min='1' id="item-quantity_<?= $product['cart_id'] ?>" class="count item-quantity" name="qty" value="<?= $product['quantity'] ?>">
-                                        <span class="plus bg-dark spinner item-quantity" data-product_id="<?= $product['id'] ?>" data-id=<?= $product['cart_id'] ?>>+</span>
-                                    </div>
+                                            </li>
+                                            <li class="list-inline-item"><span
+                                                    class="btn btn-dark btn-sm rounded-circle text-color">
+                                                    <?=$product['size']?></span></li>
+                                        </ul>
+                                    </span>
+                                    <a data-id=<?=$product['cart_id']?> data-save=<?=$product['id']?>
+                                        href="<?=Url::to(['store-single', 'id' => $product['cart_id']])?>"
+                                        class="btn btn-outline-warning btn-sm rounded-0 btn-save-for-later">Save for
+                                        later</a>
+                                    <?php echo Html::a(
+                      'Remove',
+                      ['remove', 'id' => $product['cart_id']],
+                      [
+                          'class' => 'btn btn-outline-danger rounded-0 btn-sm btn-remove-item warning',
+                          'date-method' => 'POST', 'data-id' => $product['cart_id'],
+                      ]
+                  ) ?>
+                                </div>
+                                <div class="qty col-lg-3 col-md-8 col-sm-12 center d-inline py-5">
+                                    <span class="minus bg-dark spinner item-quantity"
+                                        data-product_id="<?=$product['id']?>" data-id=<?=$product['cart_id']?>>-</span>
+                                    <input type="number" min='1' id="item-quantity_<?=$product['cart_id']?>"
+                                        class="count item-quantity" name="qty" value="<?=$product['quantity']?>">
+                                    <span class="plus bg-dark spinner item-quantity"
+                                        data-product_id="<?=$product['id']?>" data-id=<?=$product['cart_id']?>>+</span>
                                 </div>
                             </div>
-                        <?php } ?>
+                        </div>
+                        <?php }?>
                     </div>
                     <br>
                     <div class="card-header border">
                         <h2 class="text-color">Save for later</h2>
                     </div>
                     <div class="card-body border" id="Save_later_list">
-                        <?php foreach ($product_save_later as $key => $product) { ?>
-                            <div class="sec-border rounded-0 hover p-3 row_item_<?= $product['id'] ?>">
-                                <div class="row ">
-                                    <div class="col-2">
-                                        <a href="<?= Url::to(['site/store-single?id=' . $product['id']]) ?>"><img src="<?= $base_url . '/' . $product['image_url'] ?>" style="width:50px"></a>
-                                    </div>
-                                    <div class="col-6">
-                                        <span class="status text-color"> <?= $product['status'] ?>
-                                        </span><br>
-                                        <div class="d-flex justify-content-start">
-                                            <span class="price text-color" style="padding-top:10px;padding-right:10px"> $<?= $product['price'] ?></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <a class="btn btn-outline-secondary btn-sm rounded-0 btn-move-to-cart" data-save="<?= $product['id'] ?>" href="<?= Url::to(['site/store-single', 'id' => $product['id']]) ?>">Move to cart</a>
+                        <?php foreach ($product_save_later as $key => $product) {?>
+                        <div class="sec-border rounded-0 hover p-3 row_item_<?=$product['id']?>">
+                            <div class="row ">
+                                <div class="col-2">
+                                    <a href="<?=Url::to(['site/store-single?id=' . $product['id']])?>"><img
+                                            src="<?=$base_url . '/' . $product['image_url']?>" style="width:50px"></a>
+                                </div>
+                                <div class="col-6">
+                                    <span class="status text-color"> <?=$product['status']?>
+                                    </span><br>
+                                    <div class="d-flex justify-content-start">
+                                        <span class="price text-color" style="padding-top:10px;padding-right:10px">
+                                            $<?=$product['price']?></span>
                                     </div>
                                 </div>
+                                <div class="col-4">
+                                    <a class="btn btn-outline-secondary btn-sm rounded-0 btn-move-to-cart"
+                                        data-save="<?=$product['id']?>"
+                                        href="<?=Url::to(['site/store-single', 'id' => $product['id']])?>">Move to
+                                        cart</a>
+                                </div>
                             </div>
-                        <?php } ?>
+                        </div>
+                        <?php }?>
                     </div>
                 </div>
             </div>
@@ -158,63 +180,69 @@ Yii::$app->params['og_image']['content'] = 'image.jpg';
                     <h2 class="text-color">Price Detail</h2>
                 </div>
                 <div class="card-body border">
-                    <h4 class="text-color">Subtotal(<span id="amount-item"><?= $totalCart ?></span>): </h4>
-                    <h4 class="text-color"><span style="font-size:2.5rem">$</span> <span id='amount-price' style="font-size:2.5rem"><?= $totalPrice ?></span></h4>
+                    <h4 class="text-color">Subtotal(<span id="amount-item"><?=$totalCart?></span>): </h4>
+                    <h4 class="text-color"><span style="font-size:2.5rem">$</span> <span id='amount-price'
+                            style="font-size:2.5rem"><?=$totalPrice?></span></h4>
                     <hr>
-                    <a href="<?= Url::to(['site/checkout']) ?>"><button class="btn btn-primary rounded-0 btn-lg w-100 mt-3">CheckOut</button></a>
+                    <a href="<?=Url::to(['site/checkout-address'])?>"><button
+                            class="btn btn-primary rounded-0 btn-lg w-100 mt-3">CheckOut</button></a>
                 </div>
             </div><br>
         </div>
     </div>
     <div class="row text-left p-2 pb-3 d-flex justify-content-between">
         <h4>You might also like</h4>
-        <a class="nav-link text-right link-danger" href="<?= Url::to(['site/add-cart']) ?>"><i class=" fas fa-plus"></i> More</a>
+        <a class="nav-link text-right link-danger" href="<?=Url::to(['site/add-cart'])?>"><i class=" fas fa-plus"></i>
+            More</a>
     </div>
 
     <!--Start Carousel Wrapper-->
     <!-- <div class=" item"> -->
     <div class="owl-carousel owl-theme">
         <?php
-        foreach ($products as $key => $model) {
+foreach ($products as $key => $model) {
+    ?>
+        <?php
+
+    // $base_url = Yii::getAlias("@web");
+    /*@var \yii\data\ActiveDataProvider $dataProvider*/
+
+    ?>
+
+        <div class="card mb-4 product-wap rounded-0">
+            <div class="card rounded-0">
+                <?php if ($discount) {
         ?>
-            <?php
-
-            // $base_url = Yii::getAlias("@web");
-            /*@var \yii\data\ActiveDataProvider $dataProvider*/
-
-            ?>
-
-            <div class="card mb-4 product-wap rounded-0">
-                <div class="card rounded-0">
-                    <?php if ($discount) {
-                    ?>
-                        <div class="ribbon-wrapper">
-                            <div class="ribbon-tag">Hot Deals</div>
-                        </div>
-                    <?php
-                    } else {
-                    } ?>
-                    <img class="card-img rounded-0 image-size" src="<?= $base_url . '/' . $model->image_url ?>" />
-                    <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                        <ul class="list-unstyled">
-                            <li>
-                                <a class="btn btn-success text-white" href="<?= Url::to('store-single') ?>"><i class="far fa-heart"></i></a>
-                            </li>
-                            <li>
-                                <a class="btn btn-success text-white mt-2" href="<?= Url::to(['store-single', 'id' => $model->id]) ?>"><i class="far fa-eye"></i></a>
-                            </li>
-                        </ul>
-                    </div>
+                <div class="ribbon-wrapper">
+                    <div class="ribbon-tag">Hot Deals</div>
                 </div>
-                <div class="card-body">
-                    <a href="<?= Url::to('store-single') ?>" class="h3 text-decoration-none"><?= $model->status ?></a>
-                    <p class="text-center mb-0">$<?= $model->price ?></p>
+                <?php
+} else {
+    }?>
+                <img class="card-img rounded-0 image-size" src="<?=$base_url . '/' . $model->image_url?>" />
+                <div
+                    class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+                    <ul class="list-unstyled">
+                        <li>
+                            <a class="btn btn-success text-white" href="<?=Url::to('store-single')?>"><i
+                                    class="far fa-heart"></i></a>
+                        </li>
+                        <li>
+                            <a class="btn btn-success text-white mt-2"
+                                href="<?=Url::to(['store-single', 'id' => $model->id])?>"><i class="far fa-eye"></i></a>
+                        </li>
+                    </ul>
                 </div>
             </div>
+            <div class="card-body">
+                <a href="<?=Url::to('store-single')?>" class="h3 text-decoration-none"><?=$model->status?></a>
+                <p class="text-center mb-0">$<?=$model->price?></p>
+            </div>
+        </div>
         <?php
-        }
+}
 
-        ?>
+?>
         <!-- </div> -->
     </div>
 </div>
@@ -388,7 +416,7 @@ $script = <<< JS
                     var section = '';
                     for(var i = 0; i < parseData.product_save_later.length; i++) {
                         var data = parseData.product_save_later[i];
-                       
+
                         section += `<div class="sec-border rounded-0 hover p-3 row_item_\${data.id}">
                             <div class="row ">
                                 <div class="col-2">
@@ -433,17 +461,17 @@ $script = <<< JS
                         },
                         success: function(res){
                             var parseData = JSON.parse(res);
-                            
+
                             // $.each(data.product_save_later, function(index,data){
-                                
+
                             // })
-                           
+
                              console.log(section)
-                            
+
                             if(parseData['status'] == 'success'){
                                 $(".row_item_"+id).remove();
                             }
-                           
+
 
                         },
                         error: function(err){
@@ -463,6 +491,5 @@ $script = <<< JS
 
     JS;
 $this->registerJs($script);
-
 
 ?>

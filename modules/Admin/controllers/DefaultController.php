@@ -3,6 +3,7 @@
 namespace app\modules\Admin\controllers;
 
 use app\modules\Admin\models\LoginForm;
+use app\modules\Admin\models\SignupForm;
 use app\modules\Admin\models\User;
 use Yii;
 use yii\filters\AccessControl;
@@ -42,6 +43,7 @@ class DefaultController extends Controller
             ],
         ];
     }
+
     public function actionLanguage()
     {
         $language = Yii::$app->request->post('language');
@@ -71,10 +73,10 @@ class DefaultController extends Controller
 
     private function GetMonth($month)
     {
-        $total =  Yii::$app->db->createCommand("SELECT
+        $total = Yii::$app->db->createCommand("SELECT
             sum( qty * price ) AS Total
         FROM
-            order_item 
+            order_item
         WHERE
             MONTH ( created_date ) = $month
         GROUP BY
@@ -90,7 +92,7 @@ class DefaultController extends Controller
             Yii::$app->db->createCommand("SELECT
             COUNT(id) as totalUser
             FROM user
-            
+
             ")
             ->queryOne();
 
@@ -98,7 +100,7 @@ class DefaultController extends Controller
             Yii::$app->db->createCommand("SELECT
             COUNT(id) as totalProduct
             FROM product
-            
+
             ")
             ->queryOne();
         $totalCustomer =
@@ -117,7 +119,7 @@ class DefaultController extends Controller
             Yii::$app->db->createCommand("SELECT
                 SUM(qty * price) as TotalAnnual
             FROM
-                order_item 
+                order_item
             ")
             ->queryScalar();
         return $this->render('index', [
@@ -132,6 +134,7 @@ class DefaultController extends Controller
             'totalCustomer' => $totalCustomer,
         ]);
     }
+
     public function beforeAction($action)
     {
         Yii::$app->setHomeUrl(Yii::getAlias("@web/index.php?r=admin/default"));
@@ -140,20 +143,19 @@ class DefaultController extends Controller
         }
         return parent::beforeAction($action);
     }
+
     public function actionLogin()
     {
         // set this to use default
-        Yii::$app->setHomeUrl(Yii::getAlias("@web/index.php?r=admin/default"));
         $this->layout = 'login';
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
-
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $model->login();
             return $this->goBack();
         }
-
         $model->password = '';
 
         return $this->render('login', [
@@ -161,6 +163,18 @@ class DefaultController extends Controller
         ]);
     }
 
+    public function actionSignUp()
+    {
+        $model = new SignupForm();
+        if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->signup()) {
+                Yii::$app->setHomeUrl(Yii::getAlias("@web/index.php?r=admin/default/login"));
+            }
+        }
+        return $this->render('signup', [
+            'model' => $model,
+        ]);
+    }
     /**
      * Logout action.
      *
@@ -170,6 +184,7 @@ class DefaultController extends Controller
     public function actionLogout()
     {
         // Set to default url
+        Yii::$app->session->setFlash('logout', "Logout in Successfully");
         Yii::$app->setHomeUrl(Yii::getAlias("@web/index.php?r=admin/default/login"));
         Yii::$app->user->logout();
         return $this->goHome();

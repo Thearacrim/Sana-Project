@@ -1,17 +1,18 @@
 <div class="container">
+
     <?php
     if (Yii::$app->session->hasFlash('success')) : ?>
-        <div class="alert alert-success" role="alert">
-            <?= Yii::$app->session->getFlash('success') ?>
-        </div>
-    <?php elseif (Yii::$app->session->hasFlash('alert')) : ?>
-        <div class="alert alert-danger" role="alert">
-            <?= Yii::$app->session->getFlash('alert') ?>
-        </div>
+    <div class="alert alert-success" role="alert">
+        <?= Yii::$app->session->getFlash('success') ?>
+    </div>
+    <?php elseif (Yii::$app->session->hasFlash('fill_up')) : ?>
+    <div class="alert alert-danger" role="alert">
+        <?= Yii::$app->session->getFlash('fill_up') ?>
+    </div>
     <?php elseif (Yii::$app->session->hasFlash('error')) : ?>
-        <div class="alert alert-danger" role="alert">
-            <?= Yii::$app->session->getFlash('error') ?>
-        </div>
+    <div class="alert alert-danger" role="alert">
+        <?= Yii::$app->session->getFlash('error') ?>
+    </div>
     <?php endif; ?>
     <?php
 
@@ -19,15 +20,28 @@
     use yii\bootstrap4\Html;
 
     $base_url = Yii::getAlias("@web");
-
-    $form = ActiveForm::begin([
+    
+    ?>
+    <?php $form = ActiveForm::begin([
         'options' => ['enctype' => 'multipart/form-data'],
     ]); ?>
+    <?php //$form = ActiveForm::begin(); ?>
     <div class="row m-3">
         <div class="col-lg-2 col-md-12 col-sm-12 border border-dark">
             <div class="text-center p-3">
                 <div class="profile_user border rounded-circle text-center">
+                    <?php 
+                    if($model->image_url == null){
+                        ?>
+                    <img id=img src="<?= $base_url ?>/uploads/orionthemes-placeholder-image-1.png ?>"
+                        class="image-profile">
+                    <?php
+                    }else{
+                        ?>
                     <img id=img src="<?= $base_url ?>/profile/uploads/<?= $model->image_url ?>" class="image-profile">
+                    <?php
+                    }
+                    ?>
                     <?= $form->field($model, 'image_url')->label('image_url', ['class' => 'form-control iput_upload', 'id' => 'input'])
                         ->fileInput(['onchange' => 'file_changed()', 'class' => 'sr-only']) ?>
                     <i class=" icon-upload fas fa-camera"></i>
@@ -56,11 +70,3 @@
         </div>
     </div>
 </div>
-
-<?php
-$script = <<< JS
-    
-    JS;
-$this->registerJS($script);
-
-?>

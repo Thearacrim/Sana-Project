@@ -2,15 +2,18 @@
 
 /* @var $this yii\web\View */
 
+use yii\bootstrap4\Html;
 use yii\bootstrap4\LinkPager;
 use yii\helpers\Url;
 use yii\widgets\ListView;
 
-$this->title = 'About';
+$this->title = 'WOMAN';
 $this->params['breadcrumbs'][] = $this->title;
 
-$base_url = Yii::getAlias("@web");
+$minprice = Yii::$app->request->get('minprice') ?? 5;
+$maxprice = Yii::$app->request->get('maxprice') ?? 50;
 
+$base_url = Yii::getAlias("@web");
 ?>
 
 <!-- Start Content -->
@@ -18,72 +21,84 @@ $base_url = Yii::getAlias("@web");
     <div class="row">
         <?php
         if (Yii::$app->session->hasFlash('success')) : ?>
-            <div class="alert alert-success" role="alert">
-                <?= Yii::$app->session->getFlash('success') ?>
-            </div>
+        <div class="alert alert-success" role="alert">
+            <?= Yii::$app->session->getFlash('success') ?>
+        </div>
         <?php elseif (Yii::$app->session->hasFlash('error')) : ?>
-            <div class="alert alert-danger" role="alert">
-                <?= Yii::$app->session->getFlash('error') ?>
-            </div>
+        <div class="alert alert-danger" role="alert">
+            <?= Yii::$app->session->getFlash('error') ?>
+        </div>
         <?php endif; ?>
 
         <div class="col-lg-3">
-            <h1 class="h2 pb-4">Categories</h1>
-            <ul class="list-unstyled templatemo-accordion">
-                <li class="pb-3">
-                    <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-                        Gender
-                        <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
-                    </a>
-                    <ul class="collapse show list-unstyled pl-3">
-                        <li><a class="text-decoration-none" href="<?= Url::to(['site/store-man']) ?>">Men</a></li>
-                        <li><a class="text-decoration-none" href="<?= Url::to(['site/store-women']) ?>">Women</a></li>
-                    </ul>
-                </li>
-                <li class="pb-3">
-                    <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-                        Sale
-                        <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
-                    </a>
-                    <ul id="collapseTwo" class="collapse list-unstyled pl-3">
-                        <li><a class="text-decoration-none" href="<?= Url::to(['site/store-sport']) ?>">Sport</a></li>
-                        <li><a class="text-decoration-none" href="<?= Url::to(['site/store-gym']) ?>">Gym</a></li>
-                    </ul>
-                </li>
-                <li class="pb-3">
-                    <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-                        Product
-                        <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
-                    </a>
-                    <ul id="collapseThree" class="collapse list-unstyled pl-3">
-                        <li><a class="text-decoration-none" href="<?= Url::to(['site/store-watch']) ?>">Watch</a></li>
-                        <li><a class="text-decoration-none" href="<?= Url::to(['site/store-shoes']) ?>">Shoes</a></li>
-                        <li><a class="text-decoration-none" href="<?= Url::to(['site/store-glasses']) ?>">Sunglass</a></li>
-                    </ul>
+            <div class="wrapper">
+                <header>
+                    <h2>Price Range</h2>
+                </header>
+                <div class="price-input">
+                    <div class="field">
+                        <span>$</span>
+                        <input type="number" class="input-min" value="<?= $minprice ?>">
+                    </div>
+                    <div class="separator">To</div>
+                    <div class="field">
+                        <span>$</span>
+                        <input type="number" class="input-max" value="<?= $maxprice ?>">
+                    </div>
+                </div>
+                <div class="slider">
+                    <div class="progress"></div>
+                </div>
+                <div class="range-input">
+                    <input type="range" id="min" name="min_price" class="range-min" min="0" max="100" value="<?= $minprice ?>" step="1">
+                    <input type="range" id="max" name="max_price" class="range-min" min="0" max="100" value="<?= $maxprice ?>" step="1">
+                </div>
+            </div>
+
         </div>
         <!-- cart-section -->
         <div class="col-lg-9">
-            <div class="row">
-                <div class="col-md-6">
-                    <ul class="list-inline shop-top-menu pb-3 pt-1">
-                        <li class="list-inline-item">
-                            <a class="h3 text-dark text-decoration-none mr-3" href="<?= Url::to(['site/add-cart']) ?>">All</a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a class="h3 text-dark text-decoration-none mr-3" href="<?= Url::to(['site/store-man']) ?>">Men's</a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a class="h3 text-dark text-decoration-none" href="<?= Url::to(['site/store-women']) ?>">Women's</a>
-                        </li>
-                    </ul>
+            <div class="title-man">WOMAN</div>
+            <hr>
+            <div class="side-wrapper stories">
+                <!-- <div class="side-title">STORIES</div> -->
+                <div class="user">
+                    <a href="<?=Url::to(['site/store-all-top-woman'])?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/wavy-pattern-lady-crop-top-1590-moi-outfit-955269_1512x.jpg?v=1679281281"
+                            alt="" class="user-img">
+                    </a>
+                    <div class="username">ALL TOPS
+                    </div>
                 </div>
-                <div class="col-md-6 pb-4">
+                <div class="user">
+                    <a href="<?=Url::to(['site/store-all-bottoms-woman'])?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/r-elastic-waist-lady-pants-1990-moi-outfit-319398_1512x.jpg?v=1679369383"
+                            alt="" class="user-img">
+                    </a>
+                    <div class="username">ALL BOTTOME
+                    </div>
+                </div>
+                <div class="user">
+                    <a href="<?=Url::to(['site/store-all-accessories-woman'])?>">
+                        <img src="https://cdn.shopify.com/s/files/1/0082/0356/7215/products/low-cut-comfort-sock-180-247028_960x.jpg?v=1631651243"
+                            alt="" class="user-img">
+                    </a>
+                    <div class="username">ALL ACCESSORIES
+                    </div>
+
+                </div>
+            </div>
+            <div class="row Sort">
+                <div class="col-md-6 Sort-section">
                     <div class="d-flex">
-                        <select class="form-control">
-                            <option>Featured</option>
-                            <option>A to Z</option>
-                            <option>Item</option>
-                        </select>
+                        <span class="sort-item">Sort by</span>
+
+                        <?= Html::dropDownList(
+                            'dateFilter',
+                            $sort,
+                            $drowdown,
+                            ['class' => 'form-select dateFilter']
+                        ) ?>
                     </div>
                 </div>
             </div>
@@ -93,23 +108,31 @@ $base_url = Yii::getAlias("@web");
                 'itemView' => 'product_cart',
                 'itemOptions' => [
                     // 'tag' => false
-                    'class' => "col-md-4 col-6 product-item block"
+                    'class' => "col-md-4 col-6 product-item"
                 ],
-                // 'pager' => [
-                //     'firstPageLabel' => 'First',
-                //     'lastPageLabel'  => 'Last',
-                //     'class' => LinkPager::class,
-                // ],
+                'pager' => [
+                    'firstPageLabel' => 'Frist',
+                    'lastPageLabel' => 'Last',
+                    'maxButtonCount' => 3,
+                    'class' => LinkPager::class,
+                ],
                 'layout' => '
                     <div class="row">
+                    <div class="col-lg-6">
+                        {summary}
+                    </div>
+                    <div class="col-lg-6 text-center">
+                        {pager}
+                    </div>
                         {items}
+                        {pager}
                     </div>
             
                 '
             ]) ?>
-            <div class="text-center">
-                <button id="load_more" class="btn btn-outline-primary rounded-0">Load More</button>
-            </div>
+            <!-- <div class="text-center">
+                <button id="load_more" class="btn btn-outline-primary rounded-0 text-color">Load More</button>
+            </div> -->
         </div>
         <!-- End Cart -->
     </div>
@@ -117,12 +140,12 @@ $base_url = Yii::getAlias("@web");
 
 </div>
 <!-- Start Brands -->
-<section class="bg-light py-5">
+<section class="back-light py-5">
     <div class="container my-4">
         <div class="row text-center py-3">
             <div class="col-lg-6 m-auto">
-                <h1 class="h1">Our Brands</h1>
-                <p>
+                <h1 class="h1 text-color">Our Brands</h1>
+                <p class="text-color">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                     Lorem ipsum dolor sit amet.
                 </p>
@@ -136,10 +159,10 @@ $base_url = Yii::getAlias("@web");
                         </a>
                     </div>
                     <!--End Controls-->
-
                     <!--Carousel Wrapper-->
                     <div class="col">
-                        <div class="carousel slide carousel-multi-item pt-2 pt-md-0" id="multi-item-example" data-bs-ride="carousel">
+                        <div class="carousel slide carousel-multi-item pt-2 pt-md-0" id="multi-item-example"
+                            data-bs-ride="carousel">
                             <!--Slides-->
                             <div class="carousel-inner product-links-wap" role="listbox">
 
@@ -147,16 +170,24 @@ $base_url = Yii::getAlias("@web");
                                 <div class="carousel-item active">
                                     <div class="row">
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_01.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_01.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_02.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_02.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_03.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_03.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_04.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_04.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                     </div>
                                 </div>
@@ -167,16 +198,24 @@ $base_url = Yii::getAlias("@web");
                                 <div class="carousel-item">
                                     <div class="row">
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_01.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_01.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_02.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_02.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_03.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_03.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_04.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_04.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                     </div>
                                 </div>
@@ -186,16 +225,24 @@ $base_url = Yii::getAlias("@web");
                                 <div class="carousel-item">
                                     <div class="row">
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_01.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_01.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_02.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_02.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_03.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_03.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="<?= $base_url ?>/template/img/brand_04.png" alt="Brand Logo"></a>
+                                            <a href="#"><img class="img-fluid brand-img"
+                                                    src="<?= $base_url ?>/template/img/brand_04.png"
+                                                    alt="Brand Logo"></a>
                                         </div>
                                     </div>
                                 </div>
@@ -222,6 +269,7 @@ $base_url = Yii::getAlias("@web");
 <!--End Brands-->
 
 <?php
+$add_fav_url = Url::to(['site/favorites']);
 $add_cart_url = Url::to(['site/add-cart']);
 $script = <<<JS
     var base_url = "$base_url";
@@ -263,6 +311,56 @@ $script = <<<JS
                 }
             });
         })
+        $(".btn-add-to-fav").click(function(e){
+        e.preventDefault();
+        var id = $(this).data("id");
+        $.ajax({
+            url: "$add_fav_url",
+            method: 'POST',
+            data: {
+                action: 'btn-add-to-fav',
+                id: id,
+            },
+            success: function(res){
+                var data = JSON.parse(res);
+                console.log(data)
+                if(data['status'] == 'success'){
+
+                    $("#favortie-quantity").text(data['favoritestotal']);
+                    if (data['type'] == 'remove'){
+                        $(".btn-add-to-fav[data-id='"+id+"']").removeClass("isFav");
+                    }else {
+                        $(".btn-add-to-fav[data-id='"+id+"']").addClass("isFav");
+                    }
+                    
+                }else{
+                    alert(data['message']);
+                }
+            },
+            error: function(err){
+                console.log(err);
+            }
+        });
+    });
+    $("select[name='dateFilter']").change(function(){
+        var value = $(this).val();
+        var url = new URL(window.location.href);
+        url.searchParams.set('sort',value);
+        window.location.href = url.href;
+    });
+
+    $("input[name='min_price'], input[name='max_price']").change(function(){
+        var min = $("input[name='min_price']").val();
+        var max = $("input[name='max_price']").val();
+        // console.log(min, max);
+        // return;
+        var url = new URL(window.location.href);
+        url.searchParams.set('minprice',min);
+        url.searchParams.set('maxprice',max);
+        window.location.href = url.href;
+    });
+
+    
 
 JS;
 

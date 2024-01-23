@@ -38,13 +38,14 @@ Yii::$app->params['og_image']['content'] = $products->image_url;
                     <div class="card mb-3">
                         <?php if ($discount) {
                         ?>
-                            <div class="ribbon-wrapper">
-                                <div class="ribbon-tag">Hot Deals</div>
-                            </div>
+                        <div class="ribbon-wrapper">
+                            <div class="ribbon-tag">Hot Deals</div>
+                        </div>
                         <?php
                         } else {
                         } ?>
-                        <img class="card-img" src="<?= $base_url ?>/<?= $products->image_url ?>" alt="Card image cap" id="product-detail">
+                        <img class="card-img" src="<?= $base_url ?>/<?= $products->image_url ?>" alt="Card image cap"
+                            id="product-detail">
                     </div>
                     <div class="row">
                         <!--Start Controls-->
@@ -56,28 +57,24 @@ Yii::$app->params['og_image']['content'] = $products->image_url;
                         </div>
                         <!--End Controls-->
                         <!--Start Carousel Wrapper-->
-                        <div id="multi-item-example" class="col-10 carousel slide carousel-multi-item" data-bs-ride="carousel">
+                        <div id="multi-item-example" class="col-10 carousel slide carousel-multi-item"
+                            data-bs-ride="carousel">
                             <!--Start Slides-->
                             <div class="carousel-inner product-links-wap" role="listbox">
 
                                 <!--First slide-->
                                 <div class="carousel-item active">
                                     <div class="row">
+                                        <?php foreach ($relateImage as $key => $modelImage) {?>
                                         <div class="col-4">
+
                                             <a href="#">
-                                                <img class="card-img" src="<?= $base_url ?>/template/img/product_single_01.jpg" alt="Product Image 1">
+                                                <img class="card-img"
+                                                    src="<?= $base_url."/".$modelImage->image_relate?>"
+                                                    alt="Product Image 1">
                                             </a>
                                         </div>
-                                        <div class="col-4">
-                                            <a href="#">
-                                                <img class="card-img" src="<?= $base_url ?>/template/img/product_single_02.jpg" alt="Product Image 2">
-                                            </a>
-                                        </div>
-                                        <div class="col-4">
-                                            <a href="#">
-                                                <img class="card-img" src="<?= $base_url ?>/template/img/product_single_03.jpg" alt="Product Image 3">
-                                            </a>
-                                        </div>
+                                        <?php }?>
                                     </div>
                                 </div>
                                 <!--/.First slide-->
@@ -85,21 +82,16 @@ Yii::$app->params['og_image']['content'] = $products->image_url;
                                 <!--Second slide-->
                                 <div class="carousel-item">
                                     <div class="row">
+                                        <?php foreach ($relateImage as $key => $modelImage) {?>
                                         <div class="col-4">
+
                                             <a href="#">
-                                                <img class="card-img" src="<?= $base_url ?>/template/img/product_single_04.jpg" alt="Product Image 4">
+                                                <img class="card-img"
+                                                    src="<?= $base_url."/".$modelImage->image_relate?>"
+                                                    alt="Product Image 1">
                                             </a>
                                         </div>
-                                        <div class="col-4">
-                                            <a href="#">
-                                                <img class="card-img" src="<?= $base_url ?>/template/img/product_single_05.jpg" alt="Product Image 5">
-                                            </a>
-                                        </div>
-                                        <div class="col-4">
-                                            <a href="#">
-                                                <img class="card-img" src="<?= $base_url ?>/template/img/product_single_06.jpg" alt="Product Image 6">
-                                            </a>
-                                        </div>
+                                        <?php }?>
                                     </div>
                                 </div>
                                 <!--/.Second slide-->
@@ -107,21 +99,16 @@ Yii::$app->params['og_image']['content'] = $products->image_url;
                                 <!--Third slide-->
                                 <div class="carousel-item">
                                     <div class="row">
+                                        <?php foreach ($relateImage as $key => $modelImage) {?>
                                         <div class="col-4">
+
                                             <a href="#">
-                                                <img class="card-img" src="<?= $base_url ?>/template/img/product_single_07.jpg" alt="Product Image 7">
+                                                <img class="card-img"
+                                                    src="<?= $base_url."/".$modelImage->image_relate?>"
+                                                    alt="Product Image 1">
                                             </a>
                                         </div>
-                                        <div class="col-4">
-                                            <a href="#">
-                                                <img class="card-img" src="<?= $base_url ?>/template/img/product_single_08.jpg" alt="Product Image 8">
-                                            </a>
-                                        </div>
-                                        <div class="col-4">
-                                            <a href="#">
-                                                <img class="card-img" src="<?= $base_url ?>/template/img/product_single_09.jpg" alt="Product Image 9">
-                                            </a>
-                                        </div>
+                                        <?php }?>
                                     </div>
                                 </div>
                                 <!--/.Third slide-->
@@ -147,17 +134,21 @@ Yii::$app->params['og_image']['content'] = $products->image_url;
                             <?php
                             if ($discount) {
                             ?>
-                                <h6 class="price-single h2" style="text-decoration: line-through; font-size:1.2rem; font-weight:700;">$<?= $products->price ?>.00</h6>
+                            <h6 class="price-single h2"
+                                style="text-decoration: line-through; font-size:1.2rem; font-weight:700;">
+                                $<?= $products->price ?></h6>
                             <?php
                             } else {
                             ?>
-                                <h6 class="price-single h2" style="font-size:1.2rem; font-weight:700;">$<?= $products->price ?>.00</h6>
+                            <h6 class="price-single h2" style="font-size:1.2rem; font-weight:700;">
+                                $<?= $products->price ?></h6>
                             <?php
                             }
                             ?>
                             <?php if ($discount) {
                             ?>
-                                <span style="font-size:3rem; font-weight:700;">$<?= $products->price - $discountCal ?></span>
+                            <span
+                                style="font-size:3rem; font-weight:700;">$<?= $products->price - $discountCal ?></span>
                             <?php
                             } else {
                             } ?>
@@ -189,28 +180,32 @@ Yii::$app->params['og_image']['content'] = $products->image_url;
                                     <input id="swatch-0-m" type="radio" name="option-0" value="M" checked />
                                     <label for="swatch-0-m">
                                         M
-                                        <img class="crossed-out" src="//cdn.shopify.com/s/files/1/1047/6452/t/1/assets/soldout.png?10994296540668815886" />
+                                        <img class="crossed-out"
+                                            src="//cdn.shopify.com/s/files/1/1047/6452/t/1/assets/soldout.png?10994296540668815886" />
                                     </label>
                                 </div>
                                 <div data-value="2" class="swatch-element plain l available">
                                     <input id="swatch-0-l" type="radio" name="option-0" value="L" />
                                     <label for="swatch-0-l">
                                         L
-                                        <img class="crossed-out" src="//cdn.shopify.com/s/files/1/1047/6452/t/1/assets/soldout.png?10994296540668815886" />
+                                        <img class="crossed-out"
+                                            src="//cdn.shopify.com/s/files/1/1047/6452/t/1/assets/soldout.png?10994296540668815886" />
                                     </label>
                                 </div>
                                 <div data-value="3" class="swatch-element plain xl available">
                                     <input id="swatch-0-xl" type="radio" name="option-0" value="XL" />
                                     <label for="swatch-0-xl">
                                         XL
-                                        <img class="crossed-out" src="//cdn.shopify.com/s/files/1/1047/6452/t/1/assets/soldout.png?10994296540668815886" />
+                                        <img class="crossed-out"
+                                            src="//cdn.shopify.com/s/files/1/1047/6452/t/1/assets/soldout.png?10994296540668815886" />
                                     </label>
                                 </div>
                                 <div data-value="4" class="swatch-element plain xxl available">
                                     <input id="swatch-0-xxl" type="radio" name="option-0" value="XXL" />
                                     <label for="swatch-0-xxl">
                                         XXL
-                                        <img class="crossed-out" src="//cdn.shopify.com/s/files/1/1047/6452/t/1/assets/soldout.png?10994296540668815886" />
+                                        <img class="crossed-out"
+                                            src="//cdn.shopify.com/s/files/1/1047/6452/t/1/assets/soldout.png?10994296540668815886" />
                                     </label>
                                 </div>
                             </div>
@@ -219,9 +214,11 @@ Yii::$app->params['og_image']['content'] = $products->image_url;
                                 <div class="header">Color</div>
                                 <div data-value="1" class="swatch-element color blue available">
                                     <div class="tooltip">Blue</div>
-                                    <input quickbeam="color" id="swatch-1-blue" type="radio" name="option-1" value="1" checked />
+                                    <input quickbeam="color" id="swatch-1-blue" type="radio" name="option-1" value="1"
+                                        checked />
                                     <label for="swatch-1-blue" style="border-color: blue;">
-                                        <img class="crossed-out" src="//cdn.shopify.com/s/files/1/1047/6452/t/1/assets/soldout.png?10994296540668815886" />
+                                        <img class="crossed-out"
+                                            src="//cdn.shopify.com/s/files/1/1047/6452/t/1/assets/soldout.png?10994296540668815886" />
                                         <span style="background-color: blue;"></span>
                                     </label>
                                 </div>
@@ -229,15 +226,18 @@ Yii::$app->params['og_image']['content'] = $products->image_url;
                                     <div class="tooltip">Red</div>
                                     <input quickbeam="color" id="swatch-1-red" type="radio" name="option-1" value="2" />
                                     <label for="swatch-1-red" style="border-color: red;">
-                                        <img class="crossed-out" src="//cdn.shopify.com/s/files/1/1047/6452/t/1/assets/soldout.png?10994296540668815886" />
+                                        <img class="crossed-out"
+                                            src="//cdn.shopify.com/s/files/1/1047/6452/t/1/assets/soldout.png?10994296540668815886" />
                                         <span style="background-color: red;"></span>
                                     </label>
                                 </div>
                                 <div data-value="3" class="swatch-element color yellow available">
                                     <div class="tooltip">Yellow</div>
-                                    <input quickbeam="color" id="swatch-1-yellow" type="radio" name="option-1" value="3" />
+                                    <input quickbeam="color" id="swatch-1-yellow" type="radio" name="option-1"
+                                        value="3" />
                                     <label for="swatch-1-yellow" style="border-color: yellow;">
-                                        <img class="crossed-out" src="//cdn.shopify.com/s/files/1/1047/6452/t/1/assets/soldout.png?10994296540668815886" />
+                                        <img class="crossed-out"
+                                            src="//cdn.shopify.com/s/files/1/1047/6452/t/1/assets/soldout.png?10994296540668815886" />
                                         <span style="background-color: yellow;"></span>
                                     </label>
                                 </div>
@@ -245,17 +245,24 @@ Yii::$app->params['og_image']['content'] = $products->image_url;
                         </div>
                         <div class="btn-qty pr-5 pl-5 pb-5">
                             <?php if (Yii::$app->user->isGuest) { ?>
-                                <a href="#" class="btn btn-primary btn-sm btn-buy-now rounded-0 trigggerModal" value="<?= Url::to(['/site/login']) ?>"><i class="fa-solid fa-cart-shopping"></i> Buy Now</a>
-                                <a class="btn btn-primary btn-sm btn-add-to-cart rounded-0 trigggerModal" value="<?= Url::to(['/site/login']) ?>"><i class="fa-solid fa-cart-shopping"></i> Add To Cart</a>
+                            <a class="btn btn-primary btn-sm btn-buy-now rounded-0"
+                                href="<?= Url::to(['/site/login']) ?>" value="<?= Url::to(['/site/login']) ?>"><i
+                                    class="fa-solid fa-cart-shopping"></i> Buy
+                                Now</a>
+                            <a class="btn btn-primary btn-sm btn-buy-now rounded-0"
+                                href="<?= Url::to(['/site/login']) ?>" value="<?= Url::to(['/site/login']) ?>"><i
+                                    class="fa-solid fa-cart-shopping"></i> Add To Cart</a>
                             <?php } else { ?>
-                                <div class="row">
-                                    <div class="col-lg-6 col ">
-                                        <a href="#" class="btn btn-primary btn-sm btn-buy-now rounded-0"><i class="fa-solid fa-cart-shopping"></i> Buy Now</a>
-                                    </div>
-                                    <div class="col-lg-6 col text-right">
-                                        <a class="btn btn-primary btn-sm btn-add-to-cart rounded-0"><i class="fa-solid fa-cart-shopping"></i> Add To Cart</a>
-                                    </div>
+                            <div class="row">
+                                <div class="col-lg-6 col ">
+                                    <a href="#" class="btn btn-primary btn-sm btn-buy-now rounded-0"><i
+                                            class="fa-solid fa-cart-shopping"></i> Buy Now</a>
                                 </div>
+                                <div class="col-lg-6 col text-right">
+                                    <a class="btn btn-primary btn-sm btn-add-to-cart rounded-0"><i
+                                            class="fa-solid fa-cart-shopping"></i> Add To Cart</a>
+                                </div>
+                            </div>
                             <?php } ?>
                         </div>
                     </div>
@@ -277,36 +284,39 @@ Yii::$app->params['og_image']['content'] = $products->image_url;
                 <?php
                 foreach ($relatedProduct as $key => $model) {
                 ?>
-                    <?php
+                <?php
 
                     $base_url = Yii::getAlias("@web");
                     /*@var \yii\data\ActiveDataProvider $dataProvider*/
 
                     ?>
 
-                    <div class="card mb-4 product-wap rounded-0">
-                        <div class="card rounded-0">
-                            <?php if ($discount) {
+                <div class="card mb-4 product-wap rounded-0">
+                    <div class="card rounded-0">
+                        <?php if ($discount) {
                             ?>
-                                <div class="ribbon-wrapper">
-                                    <div class="ribbon-tag">Hot Deals</div>
-                                </div>
-                            <?php
+                        <div class="ribbon-wrapper">
+                            <div class="ribbon-tag">Hot Deals</div>
+                        </div>
+                        <?php
                             } else {
                             } ?>
-                            <img class="card-img rounded-0 image-size" src="<?= $base_url . '/' . $model->image_url ?>" />
-                            <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                                <ul class="list-unstyled">
-                                    <li>
-                                        <a class="btn btn-success text-white" href="#"><i class="far fa-heart"></i></a>
-                                    </li>
-                                    <li>
-                                        <a class="btn btn-success text-white mt-2" href="<?= Url::to(['store-single', 'id' => $model->id]) ?>"><i class="far fa-eye"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
+                        <img class="card-img rounded-0 image-size" src="<?= $base_url . '/' . $model->image_url ?>" />
+                        <div
+                            class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a class="btn btn-success text-white" href="#"><i class="far fa-heart"></i></a>
+                                </li>
+                                <li>
+                                    <a class="btn btn-success text-white mt-2"
+                                        href="<?= Url::to(['store-single', 'id' => $model->id]) ?>"><i
+                                            class="far fa-eye"></i></a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
+                </div>
                 <?php
                 }
 

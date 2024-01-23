@@ -12,8 +12,6 @@ use yii\helpers\Url;
     <div class="w-100 pt-1 mb-5 text-right">
       <button type="button" class="btn-close btn btn-outline-none" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
-    <form id="frmSearch" action="<?= Url::to(['site/search', 'title' => $products->id]) ?>" method="get" class="modal-content modal-body border-0 p-0">
-      <?= $this->render('search') ?>
-    </form>
+
   </div>
 </div>

@@ -13,22 +13,16 @@ $(document).on("click", ".trigggerModal", function () {
   $("#modal").modal("show").find("#modalContent").load($(this).attr("value"));
 });
 
-// $("#themeMode").toggleClass(localStorage.toggled);
+// Dropdown Menu Fade    
+// jQuery(document).ready(function(){
+//   $(".dropdown").hover(
+//       function() { $('.dropdown-menu', this).fadeIn("fast");
+//       },
+//       function() { $('.dropdown-menu', this).fadeOut("fast");
+//   });
+// });
 
-// // });
-// function darkLight() {
-//   /*DARK CLASS*/
-//   if (localStorage.toggled != "back-dark") {
-//     $("#themeMode, body, h1").toggleClass("back-dark", true);
-//     localStorage.toggled = "back-dark";
-//   } else {
-//     $("#themeMode, body").toggleClass("back-dark", false);
-//     localStorage.toggled = "";
-//   }
-// }
-
-// if ($("#themeMode").hasClass("back-dark")) {
-//   $("#chk").prop("checked", true);
-// } else {
-//   $("#chk").prop("checked", false);
-// }
+// Custom Favorite
+$( "#myFavbtn" ).click(function() {     
+  $('#myFav').toggleClass("d-none");
+});

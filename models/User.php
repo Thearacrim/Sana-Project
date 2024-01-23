@@ -55,13 +55,16 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * {@inheritdoc}
      */
-    // public function rules()
-    // {
-    //     return [
-    //         ['status', 'default', 'value' => self::STATUS_INACTIVE],
-    //         ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
-    //     ];
-    // }
+    public function rules()
+    {
+        return [
+            [['first_name', 'last_name', 'email','username'], 'required'],
+            ['username', 'unique', 'targetClass' => '\app\models\User', 'message' => 'This username has already been taken.'],
+            ['username', 'string', 'min' => 2, 'max' => 255],
+            ['email', 'email'],
+            ['email', 'string', 'max' => 255],
+        ];
+    }
 
     /**
      * {@inheritdoc}
@@ -85,9 +88,9 @@ class User extends ActiveRecord implements IdentityInterface
      * @param string $username
      * @return static|null
      */
-    public static function findByUsername($username)
+    public static function findByUsername($email)
     {
-        return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
+        return static::findOne(['email' => $email, 'status' => self::STATUS_ACTIVE]);
     }
 
     /**
